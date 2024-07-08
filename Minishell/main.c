@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/08 14:46:04 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:29:50 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	write(1, "\nHelloWorld\n\n", 14);
+	ft_printf("\nHelloWorld\n\n");
 }
