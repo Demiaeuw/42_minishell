@@ -6,14 +6,14 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/08 16:47:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:50:09 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <unistd.h>
+# include <unistd.h>	// write
 # include <stdlib.h>    // malloc, free, exit, getenv
 # include <stdio.h>     // printf
 # include <unistd.h>    // write, access, read, close, fork, execve, dup, dup2, pipe, getcwd, chdir, isatty
@@ -37,7 +37,5 @@ int		main(void);
 
 //00
 void	main_error(void (*f)());
-
-
 
 #endif
