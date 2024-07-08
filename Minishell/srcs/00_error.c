@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   00_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/08 16:41:32 by acabarba         ###   ########.fr       */
+/*   Created: 2024/07/08 16:38:11 by acabarba          #+#    #+#             */
+/*   Updated: 2024/07/08 16:40:54 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"
 
-int	main(void)
+void	main_error(void (*f)())
 {
-	ft_printf("\nHelloWorld\n\n");
-	return (0);
+	f();
+	exit(EXIT_FAILURE);
 }

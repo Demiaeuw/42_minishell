@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/08 16:05:57 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:47:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@
 # include "../utils/libft/libft.h"
 # include "../utils/ft_printf/includes/ft_printf.h"
 # include "../utils/gnl/get_next_line.h"
+
+int		main(void);
+
+//00
+void	main_error(void (*f)());
+
 
 
 #endif
