@@ -1,0 +1,55 @@
+Plan de travail pour réaliser le projet Minishell
+
+    Préparation
+        Lire attentivement le sujet et la correction.
+        Configurer l'environnement de développement.
+        Créer la structure initiale du projet avec un Makefile basique.
+
+    Implémentation des fonctionnalités de base
+        Affichage du prompt :
+            Créer une fonction pour afficher le prompt et lire les entrées utilisateur.
+        Historique des commandes :
+            Utiliser readline et add_history pour gérer l'historique.
+        Exécution des commandes :
+            Implémenter la recherche et l'exécution des commandes basées sur PATH.
+        Gestion des signaux :
+            Implémenter une gestion simple des signaux avec une variable globale.
+        Gestion des citations :
+            Gérer les citations simples et doubles dans les commandes.
+        Redirections et pipes :
+            Implémenter les redirections d'entrée et de sortie.
+            Implémenter la gestion des pipes.
+
+    Implémentation des builtins
+        echo :
+            Implémenter echo avec option -n.
+        cd :
+            Gérer les changements de répertoires avec des chemins relatifs et absolus.
+        pwd :
+            Implémenter pwd pour afficher le répertoire courant.
+        export et unset :
+            Gérer les variables d'environnement.
+        env :
+            Afficher les variables d'environnement.
+        exit :
+            Implémenter la sortie du shell.
+
+    Gestion des cas spéciaux
+        Gestion des touches ctrl-C, ctrl-D, et ctrl-\ :
+            Implémenter le comportement correct en mode interactif.
+        Expansion des variables d'environnement :
+            Gérer l'expansion des variables avec $.
+
+    Tests et validation
+        Tests unitaires :
+            Créer des tests pour chaque fonctionnalité implémentée.
+        Débogage et validation :
+            Utiliser des outils comme valgrind pour vérifier l'absence de fuites de mémoire.
+        Évaluation par les pairs :
+            Préparer la documentation et les scripts de test pour l'évaluation.
+
+    Bonus (si applicable)
+        Opérateurs && et || :
+            Implémenter la gestion des opérateurs logiques.
+        Wildcards :
+            Implémenter la gestion des wildcards dans le répertoire courant.
