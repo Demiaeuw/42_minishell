@@ -1,0 +1,224 @@
+echo
+
+    Utilisation : Affiche un message à l'écran.
+    Exemple : echo "Hello, World!"
+
+cd
+
+    Utilisation : Change le répertoire de travail courant.
+    Exemple : cd /home/user
+
+pwd
+
+    Utilisation : Affiche le répertoire de travail courant.
+    Exemple : pwd
+
+export
+
+    Utilisation : Définit une variable d'environnement.
+    Exemple : export PATH=$PATH:/new/path
+
+unset
+
+    Utilisation : Supprime une variable d'environnement.
+    Exemple : unset PATH
+
+env
+
+    Utilisation : Affiche les variables d'environnement.
+    Exemple : env
+
+exit
+
+    Utilisation : Quitte le shell.
+    Exemple : exit
+
+ls
+
+    Utilisation : Liste les fichiers et répertoires.
+    Exemple : ls -la
+
+cat
+
+    Utilisation : Affiche le contenu d'un fichier.
+    Exemple : cat file.txt
+
+grep
+
+    Utilisation : Recherche une chaîne de caractères dans un fichier.
+    Exemple : grep "search_term" file.txt
+
+chmod
+
+    Utilisation : Change les permissions d'un fichier.
+    Exemple : chmod 755 script.sh
+
+chown
+
+    Utilisation : Change le propriétaire d'un fichier.
+    Exemple : chown user:group file.txt
+
+mkdir
+
+    Utilisation : Crée un nouveau répertoire.
+    Exemple : mkdir new_directory
+
+rm
+
+    Utilisation : Supprime des fichiers ou des répertoires.
+    Exemple : rm file.txt
+
+rmdir
+
+    Utilisation : Supprime des répertoires vides.
+    Exemple : rmdir empty_directory
+
+touch
+
+    Utilisation : Crée un fichier vide ou met à jour l'horodatage d'un fichier.
+    Exemple : touch newfile.txt
+
+cp
+
+    Utilisation : Copie des fichiers ou des répertoires.
+    Exemple : cp source.txt destination.txt
+
+mv
+
+    Utilisation : Déplace ou renomme des fichiers ou des répertoires.
+    Exemple : mv oldname.txt newname.txt
+
+head
+
+    Utilisation : Affiche les premières lignes d'un fichier.
+    Exemple : head -n 10 file.txt
+
+tail
+
+    Utilisation : Affiche les dernières lignes d'un fichier.
+    Exemple : tail -n 10 file.txt
+
+wc
+
+    Utilisation : Compte les lignes, les mots et les caractères dans un fichier.
+    Exemple : wc file.txt
+
+sort
+
+    Utilisation : Trie les lignes d'un fichier texte.
+    Exemple : sort file.txt
+
+uniq
+
+    Utilisation : Supprime les lignes en double d'un fichier trié.
+    Exemple : uniq file.txt
+
+diff
+
+    Utilisation : Compare le contenu de deux fichiers ligne par ligne.
+    Exemple : diff file1.txt file2.txt
+
+find
+
+    Utilisation : Recherche des fichiers et des répertoires dans un chemin spécifié.
+    Exemple : find /path -name filename.txt
+
+grep
+
+    Utilisation : Recherche des motifs dans les fichiers.
+    Exemple : grep "pattern" file.txt
+
+ps
+
+    Utilisation : Affiche les processus en cours d'exécution.
+    Exemple : ps aux
+
+kill
+
+    Utilisation : Envoie un signal à un processus (généralement pour le terminer).
+    Exemple : kill 1234
+
+xargs
+
+    Utilisation : Transforme les entrées d'une commande en arguments pour une autre commande.
+    Exemple : echo "file1 file2 file3" | xargs rm
+
+tar
+
+    Utilisation : Archive plusieurs fichiers en un seul fichier (tarball).
+    Exemple : tar -cvf archive.tar file1 file2 file3
+
+basename
+
+    Utilisation : Retire le chemin d'accès des noms de fichiers.
+    Exemple : basename /usr/bin/sort renvoie sort.
+
+dirname
+
+    Utilisation : Supprime le nom de fichier d'un chemin d'accès.
+    Exemple : dirname /usr/bin/sort renvoie /usr/bin.
+
+du
+
+    Utilisation : Estime l'utilisation de l'espace disque.
+    Exemple : du -sh /home/user affiche l'utilisation de l'espace disque pour /home/user.
+
+df
+
+    Utilisation : Affiche l'utilisation de l'espace disque des systèmes de fichiers.
+    Exemple : df -h affiche l'utilisation de l'espace disque en format lisible par l'homme.
+
+ln
+
+    Utilisation : Crée des liens symboliques ou physiques.
+    Exemple : ln -s /path/to/file linkname crée un lien symbolique vers un fichier.
+
+sleep
+
+    Utilisation : Met en pause l'exécution pendant un nombre spécifié de secondes.
+    Exemple : sleep 5 met en pause l'exécution pendant 5 secondes.
+
+history
+
+    Utilisation : Affiche ou manipule l'historique des commandes.
+    Exemple : history affiche l'historique des commandes.
+
+jobs
+
+    Utilisation : Affiche l'état des travaux en arrière-plan.
+    Exemple : jobs affiche les travaux en arrière-plan.
+
+bg
+
+    Utilisation : Relance un travail en arrière-plan.
+    Exemple : bg %1 relance le travail n°1 en arrière-plan.
+
+fg
+
+    Utilisation : Ramène un travail en avant-plan.
+    Exemple : fg %1 ramène le travail n°1 en avant-plan.
+
+which
+
+    Utilisation : Affiche le chemin des commandes.
+    Exemple : which ls affiche le chemin complet de la commande ls.
+
+type
+
+    Utilisation : Indique comment une commande serait interprétée.
+    Exemple : type ls indique si ls est une commande interne ou un fichier exécutable.
+
+alias
+
+    Utilisation : Crée des alias pour des commandes.
+    Exemple : alias ll='ls -la' crée un alias ll pour ls -la.
+
+unalias
+
+    Utilisation : Supprime des alias.
+    Exemple : unalias ll supprime l'alias ll.
+
+uptime
+
+    Utilisation : Affiche depuis combien de temps le système est en marche.
+    Exemple : uptime affiche l'uptime du système.
