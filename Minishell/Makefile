@@ -2,15 +2,15 @@
 NAME = minishell
 
 # Dossiers des bibliothèques
-LIBFT_DIR = utils/libft/
+LIBFT_DIR = include/utils/libft/
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_INC = -I$(LIBFT_DIR)
 
-FT_PRINTF_DIR = utils/ft_printf/
+FT_PRINTF_DIR = include/utils/ft_printf/
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 FT_PRINTF_INC = -I$(FT_PRINTF_DIR)/includes
 
-GNL_DIR = utils/gnl/
+GNL_DIR = include/utils/gnl/
 GNL = $(GNL_DIR)/libgnl.a
 GNL_INC = -I$(GNL_DIR)
 
@@ -18,14 +18,14 @@ GNL_INC = -I$(GNL_DIR)
 OBJDIR = obj
 
 # Fichiers source
-SRCS = main.c
+SRCS = srcs/main.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # Flags de compilation
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror $(LIBFT_INC) $(FT_PRINTF_INC) $(GNL_INC)
+CFLAGS = -Wall -Wextra -Werror -g $(LIBFT_INC) $(FT_PRINTF_INC) $(GNL_INC)
 RM = rm -rf
 
 # Règle par défaut

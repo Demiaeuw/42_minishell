@@ -19,7 +19,7 @@ OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 # Commandes
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -Iincludes
 
 # Règle par défaut

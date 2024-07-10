@@ -6,11 +6,11 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:38:11 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/08 16:40:54 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:55:13 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	main_error(void (*f)())
 {
