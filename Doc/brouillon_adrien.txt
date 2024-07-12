@@ -11,6 +11,7 @@ Le parsing dans un shell consiste à analyser l'entrée de l'utilisateur, à div
 Étape 2 : Lire l'entrée de l'utilisateur
 
 Pour lire l'entrée, vous pouvez utiliser la fonction readline de la bibliothèque Readline, comme vu précédemment.
+
 Étape 3 : Tokenization
 
 Le tokenization est le processus de division de la chaîne d'entrée en morceaux significatifs appelés "tokens". Voici comment vous pouvez procéder :
@@ -97,3 +98,38 @@ Conseils pratiques
     Testez chaque étape avec des entrées simples avant de passer à des cas plus complexes.
 
 En suivant ces étapes, vous pouvez structurer votre projet de parsing dans Minishell de manière efficace.
+
+
+
+
+<------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+Pour la commande in (<) et heardoc (<<) : si pas d'argument c'est uniquement la  dernière redirection qui est pris en compte 
+ex : cat salut < blalbal << troue < du 				--> salut
+ex : cat < vlalv << dedef < trefzsdvc < hello 		--> hello
+
+
+pout les output (>) et append (>>) ils doivent tous etre géré dans l'ordre.
+
+<------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+faire de nombreux test pour la gestion des " et ' pour bien l'implémenter
+
+```
+acabarba@AdrienSurface:~$ echo $?
+0
+acabarba@AdrienSurface:~$ echo '$?'
+$?
+acabarba@AdrienSurface:~$ echo "$?"
+0
+```
+
+<------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+Quand parser finit : free tous les tokens
+
+
+
+https://excalidraw.com/#json=hRZyYLWPN4teAwVmhpqPS,4MUN8zVpbjeSSEQp0EfCGg
+

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/10 14:54:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:49:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int		main(void);
 
 //00
 void	main_error(void (*f)());
+void	argument_error(void);
 
 #endif
