@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/11 15:49:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:45:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,53 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
+/**
+ * Définition d'une énumération pour les types de tokens
+ * Permet d'augmenter la lisibilité du code 
+ * 
+ * TOKEN_COMMAND : Représente une commande (ex: "ls")
+ * TOKEN_ARGUMENT : Représente un argument de commande (ex: "-l")
+ * TOKEN_PIPE : Représente le caractère de pipe ('|')
+ * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>')
+ * TOKEN_STRING : Représente une chaîne de caractères entre guillemets
+ * TOKEN_VARIABLE : Représente une variable d'environnement (ex: "$PATH")
+ * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
+ */
+typedef enum 
+{
+	TOKEN_COMMAND,
+	TOKEN_ARGUMENT,
+	TOKEN_PIPE,
+	TOKEN_REDIRECTION,
+	TOKEN_STRING,
+	TOKEN_VARIABLE,
+	TOKEN_UNKNOWN
+}	token_type;
+
+/**
+ * Liste chainé des tokens.
+ * Permet d'enregistrer une suite logique de Token.
+ */
+typedef struct s_token 
+{
+	token_type type;
+	char *value;
+	struct s_token *next;
+}	t_token;
+
+// Main
 int		main(void);
 
+// Parsing
 //00
 void	main_error(void (*f)());
 void	argument_error(void);
+//01
+t_token	*create_token(token_type type, char *value);
+//02
+void	free_token_value(void *value);
+void	free_token(t_token **lst, void (*del)(void*));
+
+// Execution
 
 #endif

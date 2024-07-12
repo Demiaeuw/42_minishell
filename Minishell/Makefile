@@ -18,7 +18,11 @@ GNL_INC = -I$(GNL_DIR)
 OBJDIR = obj
 
 # Fichiers source
-SRCS = srcs/main.c
+SRCS = 	srcs/main.c\
+		srcs/exec/00_error.c\
+		srcs/parsing/00_error.c\
+		srcs/parsing/01_init.c\
+		srcs/parsing/02_free.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
