@@ -16,7 +16,7 @@
  * Fonction de création de Noeud pour la liste TOKEN :
  * Necessite :
  * Le type de TOKEN
- * ce qu'il contient
+ * ce qu'il contient (la value correspond au contenue du TOKEN)
  */
 t_token	*create_token(token_type type, char *value)
 {
