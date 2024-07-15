@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/12 19:53:55 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/15 15:12:12 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@
  * Définition d'une énumération pour les types de tokens
  * Permet d'augmenter la lisibilité du code 
  * 
- * TOKEN_COMMAND : Représente une commande (ex: "ls")
+ * TOKEN_COMMAND : Représente une commande (ex: "ls", "cd" etc...)
  * TOKEN_ARGUMENT : Représente un argument de commande (ex: "-l")
  * TOKEN_PIPE : Représente le caractère de pipe ('|')
- * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>')
+ * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>' , '<<')
  * TOKEN_STRING : Représente une chaîne de caractères entre guillemets 
  * TOKEN_VARIABLE : Représente une variable d'environnement (ex: "$PATH")
  * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
  */
+
 typedef enum 
 {
 	TOKEN_COMMAND,
@@ -77,7 +78,7 @@ void	argument_error(void);
 t_token	*create_token(token_type type, char *value);
 //02
 void	free_token_value(void *value);
-void	free_token(t_token **lst, void (*del)(void*));
+void	free_token_list(t_token **lst, void (*del)(void*));
 
 // Execution
 
