@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/12 19:45:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:53:55 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
  * TOKEN_ARGUMENT : Représente un argument de commande (ex: "-l")
  * TOKEN_PIPE : Représente le caractère de pipe ('|')
  * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>')
- * TOKEN_STRING : Représente une chaîne de caractères entre guillemets
+ * TOKEN_STRING : Représente une chaîne de caractères entre guillemets 
  * TOKEN_VARIABLE : Représente une variable d'environnement (ex: "$PATH")
  * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
  */
