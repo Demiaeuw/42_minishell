@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/15 15:13:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:40:22 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	main(void)
 { 
-	// Creation de l'environement.
-	ft_printf("\n\nHelloWorld\n\n");
+	// 1 - Creation de l'environement.
+	// 2 - Initialisation de l environement
+	// 3 - Environement cree / While en boucle en attente de commande
+	// 3 - Parsing de la commande saisie par l utilisateur
+	// 4 - Execution de la commande saisie par l utilisateur
+	// 5 - Rendre la main a l utilisateur pour prochaine commande
 	return (0);
 }

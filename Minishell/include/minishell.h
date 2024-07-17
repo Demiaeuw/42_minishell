@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/15 15:12:12 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:22:13 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,19 @@ typedef struct s_token
 	struct s_token *next;
 }	t_token;
 
-// Main
-int		main(void);
-
 // Parsing
 //00
 void	main_error(void (*f)());
 void	argument_error(void);
+void	ft_error(int index);
 //01
 t_token	*create_token(token_type type, char *value);
 //02
+void    *safe_malloc(size_t bytes);
 void	free_token_value(void *value);
 void	free_token_list(t_token **lst, void (*del)(void*));
-
+//03
+char    *get_absolute_path(const char *relative_path);
 // Execution
 
 #endif
