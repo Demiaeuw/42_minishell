@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/15 15:12:32 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:34:35 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ t_token	*create_token(token_type type, char *value)
 {
 	t_token *token;
 
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
+	token = safe_malloc(sizeof(t_token));
 	token->type = type;
 	token->value = ft_strdup(value);
 	token->next = NULL;

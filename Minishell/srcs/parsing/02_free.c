@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   02_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/15 15:12:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:22:07 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void    *safe_malloc(size_t bytes)
+{
+    void *ptr;
+
+    ptr = malloc(bytes);
+    if (ptr == NULL)
+    {
+        printf("\033[33m🚨Erreur d allocation de memoire🚨\n");
+        ft_error(6);
+    }
+    return(ptr);
+}
 
 void	free_token_value(void *value)
 {
