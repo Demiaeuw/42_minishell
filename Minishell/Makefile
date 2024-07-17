@@ -22,7 +22,8 @@ SRCS = 	srcs/main.c\
 		srcs/exec/00_error.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
-		srcs/parsing/02_free.c
+		srcs/parsing/02_free.c\
+		srcs/parsing/03_relativ_to_absolute.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
@@ -44,7 +45,7 @@ $(NAME): $(OBJS)
 
 # Compilation des fichiers objets
 $(OBJDIR)/%.o: %.c
-	@mkdir -p $(OBJDIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Compilation de la libft

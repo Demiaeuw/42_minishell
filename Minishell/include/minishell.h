@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/17 16:22:13 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/07/17 23:04:16 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <sys/wait.h>  // wait, waitpid, wait3, wait4
 # include <unistd.h>    // ttyname, ttyslot
 # include <term.h>      // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
+# include <limits.h>	// max et min
+# include <linux/limits.h>
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
@@ -69,7 +71,7 @@ typedef struct s_token
 
 // Parsing
 //00
-void	main_error(void (*f)());
+void	main_error(void (*f)(), int index);
 void	argument_error(void);
 void	ft_error(int index);
 //01

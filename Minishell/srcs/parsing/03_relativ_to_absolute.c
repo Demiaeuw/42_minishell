@@ -10,27 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char    *get_absolute_path(const char *relative_path)
 {
-    /*Recuperer avec getcwd le chemin courant*/
-    char courant_path[PATH_MAX];
-    int len;
-    if (getcwd(courant_path, sizeof(courant_path)) == NULL)
-    {
-        printf("\033[33m🚨Erreur fonction 'getcwd'🚨\n");
-        ft_error(6);
-    }
-    /*Allouer de la mémoire pour le chemin absolu*/
-    len = strlen(courant_path) + strlen(relative_path) + 2;
-    char *absolute_path = safe_malloc(len);
-    /*'2' pour le séparateur '/' et le caractère nul */
+	/*Recuperer avec getcwd le chemin courant*/
+	char	courant_path[PATH_MAX];
+	int		len;
+	char	*absolute_path;
 
-    /*Construire le chemin absolu*/
-    strcpy(absolute_path, courant_path);
-    strcat(absolute_path, "/");
-    strcat(absolute_path, relative_path);
+	if (getcwd(courant_path, sizeof(courant_path)) == NULL)
+		main_error(ft_error, 2);
+	/*Allouer de la mémoire pour le chemin absolu*/
+	len = ft_strlen(courant_path) + ft_strlen(relative_path) + 2;
+	absolute_path = safe_malloc(len);
+	/*'2' pour le séparateur '/' et le caractère nul */
 
-    return absolute_path;
+	/*Construire le chemin absolu*/
+	ft_strcpy(absolute_path, courant_path);
+	ft_strcat(absolute_path, "/");
+	ft_strcat(absolute_path, relative_path);
+
+	return (absolute_path);
 }
