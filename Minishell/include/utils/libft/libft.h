@@ -24,7 +24,10 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *c);
 size_t	ft_strlcat(char *dest, const char *src, size_t count);
+char	*ft_strcat(char *dest, const char *src);
+char	*ft_strcpy(char *dest, const char *src);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 /*				TRANSFORM				*/
 int		ft_atoi(const char *str);

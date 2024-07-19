@@ -3,34 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   02_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/17 15:22:07 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/07/19 17:28:46 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void    *safe_malloc(size_t bytes)
-{
-    void *ptr;
-
-    ptr = malloc(bytes);
-    if (ptr == NULL)
-    {
-        printf("\033[33m🚨Erreur d allocation de memoire🚨\n");
-        ft_error(6);
-    }
-    return(ptr);
-}
 
 void	free_token_value(void *value)
 {
 	free(value);
 }
 
-//exemple d'appel de cette fonction : free_token(&token, free_token_value)
+/**
+ * exemple d'appel de cette fonction : free_token(&token, free_token_value)
+ */
 
 void	free_token_list(t_token **lst, void (*del)(void*))
 {
@@ -48,4 +37,22 @@ void	free_token_list(t_token **lst, void (*del)(void*))
 		current = next;
 	}
 	*lst = (NULL);
+}
+
+/**
+ * Fonction pour libérer un tableau de chaînes de caractères
+ */
+void	free_split_result(char **result)
+{
+	int	i;
+
+	if (result == NULL)
+		return;
+	i = 0;
+	while (result[i])
+	{
+		free(result[i]);
+		i++;
+	}
+	free(result);
 }

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/17 23:04:16 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:15:27 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,21 @@ typedef struct s_token
 // Parsing
 //00
 void	main_error(void (*f)(), int index);
-void	argument_error(void);
 void	ft_error(int index);
 //01
 t_token	*create_token(token_type type, char *value);
-//02
 void    *safe_malloc(size_t bytes);
+//02
 void	free_token_value(void *value);
 void	free_token_list(t_token **lst, void (*del)(void*));
+void	free_split_result(char **result);
 //03
 char    *get_absolute_path(const char *relative_path);
+//10
+char	*main_argument(int ac, char **av);
+char	*step01(int ac, char **av);
+// char	**step02(char *str);
+void	print_split_args(char **array);
 // Execution
 
 #endif

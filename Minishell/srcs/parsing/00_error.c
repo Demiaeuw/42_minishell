@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:38:11 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/17 23:02:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:07:35 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	main_error(void (*f)(), int index)
 	exit(EXIT_FAILURE);
 }
 
-void ft_error(int index)
+void	ft_error(int index)
 {
 	if (index == 1)
 		printf("\033[33m\n🚨Error !🚨\n\nArgument issue\n\n\033[0m");
 	if (index == 2)
 		printf("\033[33m\n🚨Error !🚨\n\n'getcwd' fonction issue\n\n\033[0m");
 	if (index == 3)
-		printf("\033[33m\n🚨Error !🚨\n\n????\n\n\033[0m");
+		printf("\033[33m\n🚨Error !🚨\n\nMalloc allocation issue\n\n\033[0m");
 	if (index == 4)
 		printf("\033[33m\n🚨Error !🚨\n\n????\n\n\033[0m");
 	if (index == 5)
