@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 18:15:27 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:32:48 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ void	free_split_result(char **result);
 //03
 char    *get_absolute_path(const char *relative_path);
 //10
-char	*main_argument(int ac, char **av);
-char	*step01(int ac, char **av);
-// char	**step02(char *str);
-void	print_split_args(char **array);
+char	**main_argument(int ac, char **av);
+char	**step01(int ac, char **av);
+
 // Execution
 
 #endif

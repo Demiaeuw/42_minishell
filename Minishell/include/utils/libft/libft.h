@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdio.h>
 
 /*				VERIF					*/
 int		ft_isalpha(int c);
@@ -46,6 +47,7 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
+void	ft_print_array(char **array);
 
 /*				COMP					*/
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
