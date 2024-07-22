@@ -34,7 +34,7 @@ ou si le deuxième caractère n'est pas 'n', retourne 1.*/
 int exe_echo(char **av)
 {
     int i;
-/* i = 1 = pas d option, i = 0 option saut de ligne*/
+/* i = 1 = pas d option = saut de ligne, i = 0 = option '-n' = pas de saut*/
     i = 1;
 /*ignore premier argument (./minishell)*/
     av++;
@@ -54,7 +54,7 @@ int exe_echo(char **av)
         if (*av)
             printf(" ");
     }
-    if (i)
+    if (i == 1)
         printf("\n");
         return (0);
 }
