@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   10.parsing.c                                       :+:      :+:    :+:   */
+/*   10_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 18:42:25 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:20:55 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,12 @@ char	**step01(int ac, char **av)
  */ 
 void	*step02(char **array)
 {
+	t_token	*token_list;
+	t_token	*nex_token;
+	token_type 
 	// création du noeud
 	// comparaison pour savoir quel type de token c'est
 	// ajout du type de Token 
 	// ajout de la value du token 
 	// passe au suivant
-}
-
-void	token_compare(????)
-{
-	// compare le text a tout les token possible :
-	
-	// * TOKEN_COMMAND : Représente une commande (ex: "ls", "cd" etc...)
- 	// * TOKEN_ARGUMENT : Représente un argument de commande (ex: "-l")
- 	// * TOKEN_PIPE : Représente le caractère de pipe ('|')
- 	// * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>' , '<<')
- 	// * TOKEN_STRING : Représente une chaîne de caractères entre guillemets 
- 	// * TOKEN_VARIABLE : Représente une variable d'environnement (ex: "$PATH")
- 	// * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
 }

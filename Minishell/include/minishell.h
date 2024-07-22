@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/22 12:59:57 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/07/22 14:20:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
  * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
  */
 
-typedef enum 
+typedef enum
 {
 	TOKEN_COMMAND,
 	TOKEN_ARGUMENT,
@@ -75,7 +75,7 @@ void	main_error(void (*f)(), int index);
 void	ft_error(int index);
 //01
 t_token	*create_token(token_type type, char *value);
-void    *safe_malloc(size_t bytes);
+void	*safe_malloc(size_t bytes);
 //02
 void	free_token_value(void *value);
 void	free_token_list(t_token **lst, void (*del)(void*));
@@ -85,6 +85,8 @@ char    *get_absolute_path(const char *relative_path);
 //10
 char	**main_argument(int ac, char **av);
 char	**step01(int ac, char **av);
+void	token_compare(char *arg);
+
 
 // Execution
 //05

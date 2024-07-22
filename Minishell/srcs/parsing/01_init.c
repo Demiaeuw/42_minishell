@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 17:08:02 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:11:37 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,27 @@ t_token	*create_token(token_type type, char *value)
 	token->value = ft_strdup(value);
 	token->next = NULL;
 	return (token);
+}
+
+/**
+ * Fonction pour ajouter un token a la liste chainé
+ * Créer un nouveau si la liste est vide
+ */
+void	add_token(t_token **token_list, t_token *new_token)
+{
+	t_token *current;
+
+	if (*token_list == NULL)
+	{
+		*token_list = new_token;
+	}
+	else
+	{
+		current = *token_list;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new_token;
+	}
 }
 
 /**
