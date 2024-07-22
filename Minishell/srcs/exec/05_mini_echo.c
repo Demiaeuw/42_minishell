@@ -18,12 +18,12 @@
 /* ************************************************************************** */
 static int  check_option(char *av)
 {
-/*Si le premier caractère n'est pas '-', 
-ou si le deuxième caractère n'est pas 'n', retourne 1.*/
+// Si le premier caractère n'est pas '-', 
+// ou si le deuxième caractère n'est pas 'n', retourne 1.
     if (*av != '-' || *av++ != 'n')
         return (1);
     av++;
-/*gestion si plusieurs 'n'*/
+// gestion si plusieurs 'n'
     while (*av == 'n')
         av++;
     if (*av == '\0')
@@ -34,9 +34,9 @@ ou si le deuxième caractère n'est pas 'n', retourne 1.*/
 int exe_echo(char **av)
 {
     int i;
-/* i = 1 = pas d option = saut de ligne, i = 0 = option '-n' = pas de saut*/
+//i = 1 = pas d option = saut de ligne, i = 0 = option '-n' = pas de saut
     i = 1;
-/*ignore premier argument (./minishell)*/
+// ignore premier argument (./minishell)
     av++;
 /*verif si option*/
     while (*av)
@@ -46,7 +46,7 @@ int exe_echo(char **av)
         i = 0;
         av++;
     }
-/*afficher les arguments restants*/
+// afficher les arguments restants
     while (*av)
     {
         printf("%s", *av);
