@@ -38,7 +38,7 @@ int exe_echo(char **av)
     i = 1;
 // ignore premier argument (./minishell)
     av++;
-/*verif si option*/
+//verif si option
     while (*av)
     {
         if(check_option(*av))
@@ -58,3 +58,22 @@ int exe_echo(char **av)
         printf("\n");
         return (0);
 }
+
+// ------------------------------------------- Idée de echo ------------------------------------------ //
+// void    echo(t_token *token)
+// {
+//     int test = 0;
+//     t_token current_token = *token;
+
+//     if (token->next->type == TOKEN_ARGUMENT && token ->next->value == "-n")
+//     {
+//         test = 1;
+//         current_token = token->next;
+//     }
+//     if (token->next->type == TOKEN_STRING)
+//     {
+//         printf("%s", token->next->value);
+//         if (test == 0)
+//             printf("\n");
+//     }
+// }
