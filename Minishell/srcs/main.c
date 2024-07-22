@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 18:48:56 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/22 09:42:23 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	// 3 - Parsing de la commande saisie par l'utilisateur
 	
 		// Appel de main_argument pour gérer les arguments
-	args = main_argument(ac, av);
+	args = main_argument(ac, av); 
 
 	// 4 - Exécution de la commande saisie par l'utilisateur
 	// 5 - Rendre la main à l'utilisateur pour prochaine commande

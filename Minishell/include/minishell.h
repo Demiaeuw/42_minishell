@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 18:32:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:59:57 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ char	**main_argument(int ac, char **av);
 char	**step01(int ac, char **av);
 
 // Execution
+//05
+int		exe_cd(int ac, char **av);
+int		exe_echo(char **av);
 
 #endif
