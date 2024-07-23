@@ -51,7 +51,9 @@ SRCS =	ft_atoi.c\
 	ft_lstclear_bonus.c\
 	ft_lstiter_bonus.c\
 	ft_lstmap_bonus.c\
-	ft_print_array.c
+	ft_print_array.c\
+	ft_dup.c\
+	ft_dup2.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
@@ -75,7 +77,7 @@ $(OBJDIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Nettoyage des fichiers objets
-clean: 
+clean:
 	@$(RM) $(OBJDIR)
 
 # Nettoyage complet

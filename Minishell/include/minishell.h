@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/22 14:20:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:14:58 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@
 
 /**
  * Définition d'une énumération pour les types de tokens
- * Permet d'augmenter la lisibilité du code 
- * 
+ * Permet d'augmenter la lisibilité du code
+ *
  * TOKEN_COMMAND : Représente une commande (ex: "ls", "cd" etc...)
  * TOKEN_ARGUMENT : Représente un argument de commande (ex: "-l")
  * TOKEN_PIPE : Représente le caractère de pipe ('|')
  * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>' , '<<')
- * TOKEN_STRING : Représente une chaîne de caractères entre guillemets 
+ * TOKEN_STRING : Représente une chaîne de caractères entre guillemets
  * TOKEN_VARIABLE : Représente une variable d'environnement (ex: "$PATH")
  * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
  */
@@ -62,7 +62,7 @@ typedef enum
  * Liste chainé des tokens.
  * Permet d'enregistrer une suite logique de Token.
  */
-typedef struct s_token 
+typedef struct s_token
 {
 	token_type type;
 	char *value;
