@@ -25,7 +25,10 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/02_free.c\
 		srcs/parsing/03_relativ_to_absolute.c\
 		srcs/parsing/10_parsing.c\
-		srcs/parsing/11_token_comp.c
+		srcs/parsing/11_token_comp.c\
+		srcs/envp/envp.c\
+		srcs/envp/envp_utils.c\
+		srcs/envp/envp_utils2.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
@@ -83,7 +86,7 @@ re: fclean all
 #----------------------------------------------------------------------------
 
 # Règle d'affichage
-printhader: 
+printhader:
 	@sleep 0.1
 	@echo "                                                   "
 	@sleep 0.1
