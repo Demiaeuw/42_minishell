@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:52:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/24 15:42:39 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:55:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "envp.h"
 
 //simple str_cat rien de special
-char	*ft_strcat(char *dest, char *src)
-{
-	char	*temp;
+// char	*ft_strcat(char *dest, char *src)
+// {
+// 	char	*temp;
 
-	if (!src)
-		return (dest);
-	temp = dest;
-	while (*dest)
-		dest++;
-	while (*src)
-	{
-		*dest = *src;
-		dest++;
-		src++;
-	}
-	*dest = 0;
-	return (temp);
-}
+// 	if (!src)
+// 		return (dest);
+// 	temp = dest;
+// 	while (*dest)
+// 		dest++;
+// 	while (*src)
+// 	{
+// 		*dest = *src;
+// 		dest++;
+// 		src++;
+// 	}
+// 	*dest = 0;
+// 	return (temp);
+// }
 
 //Concatene 3 string de char grace a strcat au dessus
 char	*str3join(char *str1, char *str2, char *str3)
@@ -59,7 +59,7 @@ de caracteres (envpstr).
 On parcout la liste et on utilise str3join juste au dessus pour creer les
 elements du tableau.
 */
-char	**envp_convert(t_list *envp_list)
+char	**envp_convert(t_envlist *envp_list)
 {
 	size_t	i;
 	size_t	envplen;
@@ -84,7 +84,7 @@ char	**envp_convert(t_list *envp_list)
 
 //juste une fonction pour verif si la var d env avec la key existe dans notre
 //liste (envp_list).
-int	envp_exist(t_list *envp_list, char *key)
+int	envp_exist(t_envlist *envp_list, char *key)
 {
 	t_node	*node;
 

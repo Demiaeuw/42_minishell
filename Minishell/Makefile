@@ -23,6 +23,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
 		srcs/parsing/02_free.c\
+		srcs/parsing/03_printing.c\
 		srcs/parsing/10_parsing.c\
 		srcs/parsing/11_token_comp.c\
 		srcs/parsing/20_expanser.c\

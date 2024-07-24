@@ -1,0 +1,8 @@
+	
+	
+	
+	
+	else if (ft_strcmp(arg, "-l") == 0 || ft_strcmp(arg, "-a") == 0
+		|| ft_strcmp(arg, "-n") == 0 || ft_strcmp(arg, "-p") == 0
+		|| ft_strcmp(arg, "-i") == 0 || ft_strcmp(arg, "-v") == 0
+		|| ft_strcmp(arg, "-r") == 0 || ft_strcmp(arg, "-f") == 0)

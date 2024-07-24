@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:48:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/24 15:42:31 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:56:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ des qu on trouve la correspondance, on retourne sa valeur associee a la cle.
 
 ca serait pour afficher le chemin de recherche des execs par exemple
 */
-char	*envp_find(t_list *envp_list, char *key)
+char	*envp_find(t_envlist *envp_list, char *key)
 {
 	t_node *node;
 
@@ -41,7 +41,7 @@ sinon ca fait comme envp_add juste en dessous :)
 par exemple si on veut ajouter un nouveau repertoire au PATH
 ou si on doit stocker des infos de configuration ou changer le repertoire
 */
-void	envp_edit(t_list *envp_list, char *key, char *value)
+void	envp_edit(t_envlist *envp_list, char *key, char *value)
 {
 	t_node *node;
 
@@ -62,7 +62,7 @@ Si la cle existe ( on verifie ca avec envp exist) on apelle envp_edit.
 sinon on free pour une nouvelle var d env, on definit sa cle et sa valeur, puis
 on l ajoute a la liste chainee.
 */
-void	envp_add(t_list *envp_list, char *key, char *value)
+void	envp_add(t_envlist *envp_list, char *key, char *value)
 {
 	t_envp	*e_node;
 
@@ -85,7 +85,7 @@ on apelle envp_add pour y ajouter ou mettre a jour la var d env correspondante.
 En gros au demarrage du programme on appelle cette fonction pour creer
 la structure contenant les variables de l environnement.
 */
-void	envp_init(t_list *envp_list, char **envp)
+void	envp_init(t_envlist *envp_list, char **envp)
 {
 	int	i;
 	size_t	end_key;
@@ -116,7 +116,7 @@ free la memoire.
 utile si on a une variable temporaire pour un truc specifique on peut la supp
 quand on en a plus besoin
 */
-void	envp_delete(t_list *envp_list, char *key)
+void	envp_delete(t_envlist *envp_list, char *key)
 {
 	t_node *node;
 

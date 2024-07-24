@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:40:48 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/24 15:42:27 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:54:49 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,28 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-typedef struct s_list
+typedef struct s_envlist
 {
 	int			size;
-	t_node *head;
+	t_node	*head;
 	t_node	*tail;
-}	t_list;
+}	t_envlist;
 
 /*			MAIN FUNCTIONS			*/
-void	envp_init(t_list *envp_list, char **envp);
-void	envp_add(t_list *envp_list, char *key, char *value);
-int		envp_exist(t_list *envp_list, char *key);
-char	*envp_find(t_list *envp_list, char *key);
-void	envp_edit(t_list *envp_list, char *key, char *value);
+void	envp_init(t_envlist *envp_list, char **envp);
+void	envp_add(t_envlist *envp_list, char *key, char *value);
+int		envp_exist(t_envlist *envp_list, char *key);
+char	*envp_find(t_envlist *envp_list, char *key);
+void	envp_edit(t_envlist *envp_list, char *key, char *value);
 
 /*			UTILS FUNCTIONS			*/
-void	envp_delete(t_list *envp_list, char *key);
-char	**envp_convert(t_list *envp_list);
+void	envp_delete(t_envlist *envp_list, char *key);
+char	**envp_convert(t_envlist *envp_list);
 char	*str3join(char *str1, char *str2, char *str3);
-char	*ft_strcat(char *dest, char *src);
-void	list_init(t_list *list);
-int		list_size(t_list *list);
-void	list_append(t_list *list, t_node *new_node);
-t_node	*list_peek_first_node(t_list *list);
+// char	*ft_strcat(char *dest, char *src);
+void	list_init(t_envlist *list);
+int		list_size(t_envlist *list);
+void	list_append(t_envlist *list, t_node *new_node);
+t_node	*list_peek_first_node(t_envlist *list);
 
 #endif

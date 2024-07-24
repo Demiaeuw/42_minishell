@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 14:49:32 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:35:12 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 { 
-	// char	**args;
+	t_token	*token_list;
 
 	// // 1 - Création de l'environnement.
 	// // 2 - Initialisation de l'environnement
@@ -28,21 +28,16 @@ int	main(int ac, char **av)
 	// // 5 - Rendre la main à l'utilisateur pour prochaine commande
 	
 
-	// // test
-	// ft_print_array(args);
-	// free_split_result(args);
-	// // fin test
-
-
-	t_token	*token_list;
+	// test 
 
 	// Appel de main_argument pour gérer les arguments
 	token_list = main_argument(ac, av);
 
 	// Afficher les tokens
-	print_token_list(token_list);
+	print_tokens(token_list);
 
 	// Libérer la mémoire allouée pour la liste de tokens
-	free_token_list(token_list, free_token_value);
+	free_token_list(&token_list, free_token_value);
+	// fin test
 	return (0);
 }

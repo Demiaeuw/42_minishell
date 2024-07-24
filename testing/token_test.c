@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/12 19:02:47 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:00:50 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ t_token *tokenize(char *input) {
 }
 
 // Fonction pour afficher les tokens
-void print_tokens(t_token *tokens) {
-    while (tokens != NULL) {
-        printf("Token: %s\n", tokens->value);
+void    print_tokens(t_token *tokens)
+{
+    while (tokens != NULL)
+    {
+        printf("TOKEN_TYPE : %s\n", token->)
+        printf("Token value : %s\n", tokens->value);
         tokens = tokens->next;
     }
 }

@@ -1,13 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_error.c                                         :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 15:37:47 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 17:06:54 by acabarba         ###   ########.fr       */
+/*   Created: 2024/07/24 17:11:19 by acabarba          #+#    #+#             */
+/*   Updated: 2024/07/24 17:12:09 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "libft.h"
+
+/**
+ * Compare deux chaînes de caractères.
+ * Renvoie un entier inférieur, égal ou supérieur à zéro si s1 est respectivement
+ * inférieure, égale ou supérieure à s2.
+ */
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (s1 - s2);
+}

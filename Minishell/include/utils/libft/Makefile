@@ -53,7 +53,8 @@ SRCS =	ft_atoi.c\
 	ft_lstmap_bonus.c\
 	ft_print_array.c\
 	ft_dup.c\
-	ft_dup2.c
+	ft_dup2.c\
+	ft_strcmp.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

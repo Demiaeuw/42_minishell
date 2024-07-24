@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 15:44:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:09:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,24 @@ void	main_error(void (*f)(), int index);
 void	ft_error(int index);
 //01
 t_token	*create_token(token_type type, char *value);
+void	add_token(t_token **token_list, t_token *new_token);
 void	*safe_malloc(size_t bytes);
 //02
 void	free_token_value(void *value);
 void	free_token_list(t_token **lst, void (*del)(void*));
 void	free_split_result(char **result);
 //03
-char    *get_absolute_path(const char *relative_path);
+char	*get_token_type_name(token_type type);
+void	print_tokens(t_token *token);
 //10
-char	**main_argument(int ac, char **av);
+t_token	*main_argument(int ac, char **av);
 char	**step01(int ac, char **av);
-void	*step02(char **array);
+t_token	*step02(char **array);
 //11
 token_type	token_compare(char *arg);
-
+//20
+//21
+char    *get_absolute_path(const char *relative_path);
 
 // Execution
 //05
