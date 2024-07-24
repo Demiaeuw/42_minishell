@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 15:14:02 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:44:03 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
+# include "../srcs/envp/envp.h"
 
 /**
  * Définition d'une énumération pour les types de tokens
@@ -87,7 +88,7 @@ char	**main_argument(int ac, char **av);
 char	**step01(int ac, char **av);
 void	*step02(char **array);
 //11
-token_type	token_compare(char *arg);  
+token_type	token_compare(char *arg);
 
 
 // Execution

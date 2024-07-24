@@ -1,9 +1,0 @@
-# Ignorer les fichiers objets
-*.o
-
-# Ignorer le dossier obj
-obj/
-
-# Ignorer les fichiers compilés
-minishell
-    
