@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/22 14:20:55 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:48:00 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 char	**main_argument(int ac, char **av)
 {
 	char	**args;
+	t_token	*token_list;
 
 	args = step01(ac, av);
 	if (!args)
 		return (NULL);
-	// step 2
-	// free args
-	return (args);
+	token_list = step02(args);
+	free_split_result(args);
+	return (token_list);
 }
 
 
@@ -56,19 +57,28 @@ char	**step01(int ac, char **av)
 	return (args);
 }
 
-
-
 /**
  * creation de tokken + ajout du type en fonction de ce qu'il y a ecrit et retourne la liste chainé
  */ 
 void	*step02(char **array)
 {
-	t_token	*token_list;
-	t_token	*nex_token;
-	token_type 
-	// création du noeud
-	// comparaison pour savoir quel type de token c'est
-	// ajout du type de Token 
-	// ajout de la value du token 
-	// passe au suivant
+	t_token		*token_list;
+	t_token		*new_token;
+	token_type	type;
+	int			i;
+	
+	token_list = NULL;
+	i = 0;
+	while (array[i])
+	{
+		// Déterminer le type de token
+		type = token_compare(array[i]);
+		// Créer le nouveau token
+		new_token = create_token(type, array[i]);
+		// Ajouter le token à la liste chaînée
+		add_token(&token_list, new_token);
+		// Passer à l'élément suivant
+		i++;
+	}
+	return (token_list);
 }

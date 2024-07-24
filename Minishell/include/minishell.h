@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/23 15:14:58 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:50:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ char    *get_absolute_path(const char *relative_path);
 //10
 char	**main_argument(int ac, char **av);
 char	**step01(int ac, char **av);
-void	token_compare(char *arg);
+void	*step02(char **array);
+//11
+token_type	token_compare(char *arg);
 
 
 // Execution

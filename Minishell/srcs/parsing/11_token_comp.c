@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:43:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/22 14:51:58 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:05:43 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	token_compare(char *arg)
+token_type	token_compare(char *arg)
 {
 	// compare le text a tout les token possible :
 	
