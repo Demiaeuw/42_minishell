@@ -27,21 +27,20 @@ static  int	home(void)
 	return (0);
 }
 /* ************************************************************************** */
-int	exe_cd(int ac, char **av)
+int	exe_cd(char *args)
 {
 	char	old_pwd[PATH_MAX];
 	char	new_pwd[PATH_MAX];
 	char	*dest;
-/*Si aucun argument n'est passé, appelle la fonction home()
-puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
-	if (ac == 1 && home())
-		return(1)
-/*Si un seul argument est passé, définit dest comme le répertoire HOME*/
-	if (ac == 1)
+	if (args == NULL && home() == -1)
+		return(1);
+/*Si aucun args , on recupere juste la variable HOME*/
+/*puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
+	if (args == NULL)
 		dest = get_env("HOME");
 /*Sinon, utilise le second argument comme répertoire de destination.*/
 	else
-		dest = av[1];
+		dest = args;
 	old_pwd[0] = '\0';
 	getcwd(old_pwd, PATH_MAX);
 /*Tente de changer de répertoire vers dest avec 'chdir' (ft incluse en C)*/
@@ -55,14 +54,14 @@ puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
 		printf("\033[33m\n🚨Error !🚨\n\n'getcwd' fonction issue\n\n\033[0m")
 		return(1);
 	}
-	/* Si old_pwd est vide mais que PWD est définie, 
-	copie la valeur de PWD dans old_pwd.*/
+	/* Si old_pwd est vide mais que PWD est définie,*/ 
+	/*copie la valeur de PWD dans old_pwd.*/
 	if (!ft_strlen(old_pwd) && get_env("PWD"))
-		ft_strlcpy(old_pwd, get_env("PWD", PATH_MAX));
+		ft_strlcpy(old_pwd, get_env("PWD"));
 	/*maj des variables OLD_PWD et PWD*/
 	if (set_env("OLD_PWD", old_pwd) || set_env("PWD", new_pwd))
 	{
-		printf("🚨Error ! MAj environement fail !🚨\n");
+		printf("🚨Error ! Maj environement fail !🚨\n");
 		return (1);
 	}
 	return (0);
