@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 14:50:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:14:02 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**main_argument(int ac, char **av);
 char	**step01(int ac, char **av);
 void	*step02(char **array);
 //11
-token_type	token_compare(char *arg);
+token_type	token_compare(char *arg);  
 
 
 // Execution
