@@ -38,7 +38,7 @@ int	exe_cd(char *args)
 /*puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
 	if (args == NULL)
 		dest = get_env("HOME");
-/*Sinon, utilise le second argument comme répertoire de destination.*/
+/*Sinon, utilise l argument comme répertoire de destination.*/
 	else
 		dest = args;
 	old_pwd[0] = '\0';
