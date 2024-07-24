@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   00_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:37:47 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/12 19:23:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:04:45 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+asdasdasdasd
