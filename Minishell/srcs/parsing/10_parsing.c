@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 17:06:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:22:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_token	*step02(char **array)
 	token_type	type;
 	int			i;
 	
-	token_list = (NULL);
+	token_list = NULL;
 	i = 0;
 	while (array[i])
 	{

@@ -28,9 +28,9 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/11_token_comp.c\
 		srcs/parsing/20_expanser.c\
 		srcs/parsing/21_relativ_to_absolute.c\
-		srcs/envp/envp.c\
-		srcs/envp/envp_utils.c\
-		srcs/envp/envp_utils2.c
+		# srcs/envp/envp.c\
+		# srcs/envp/envp_utils.c\
+		# srcs/envp/envp_utils2.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
