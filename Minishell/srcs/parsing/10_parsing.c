@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 17:22:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:03:26 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**step01(int ac, char **av)
 }
 
 /**
- * creation de tokken + ajout du type en fonction de ce qu'il y a ecrit et retourne la liste chainé
+ * creation de tokken + ajout du type en fonction de ce qu'il y a ecrit et retourne la liste chainé 
  */ 
 t_token	*step02(char **array)
 {
