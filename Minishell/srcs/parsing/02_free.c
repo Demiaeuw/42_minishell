@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 17:28:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:33:24 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_token_list(t_token **lst, void (*del)(void*))
 		free(current);
 		current = next;
 	}
-	*lst = (NULL);
+	*lst = NULL;
 }
 
 /**

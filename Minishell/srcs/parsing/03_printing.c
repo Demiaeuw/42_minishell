@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:19:19 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 17:08:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:36:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 char	*get_token_type_name(token_type type)
 {
 	if (type == TOKEN_COMMAND)
-		return "COMMAND";
+		return ("COMMAND");
 	else if (type == TOKEN_ARGUMENT)
-		return "ARGUMENT";
+		return ("ARGUMENT");
 	else if (type == TOKEN_PIPE)
-		return "PIPE";
+		return ("PIPE");
 	else if (type == TOKEN_REDIRECTION)
-		return "REDIRECTION";
+		return ("REDIRECTION");
 	else if (type == TOKEN_VARIABLE)
-		return "VARIABLE";
+		return ("VARIABLE");
 	else
-		return "STRING";
+		return ("STRING");
 }
 
 /**
@@ -40,6 +40,8 @@ void	print_tokens(t_token *token)
 	{
 		printf("TOKEN_TYPE : %s\n", get_token_type_name(token->type));
 		printf("Token value : %s\n", token->value);
+		printf("Token builtin : %s\n", token->builtin);
+		printf("Token is_last_command : %s\n", token->builtin);
 		token = token->next;
 	}
 }
