@@ -6,19 +6,23 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:40:21 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/24 15:56:06 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:44:54 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "envp.h"
 
-//recup le premier noeud de la liste chainee et return un pointeur vers lui.
+/**
+ * recup le premier noeud de la liste chainee et return un pointeur vers lui.
+ */
 t_node	*list_peek_first_node(t_envlist *list)
 {
 	return (list->head->next);
 }
 
-//insere un nouveau noeud a la fin de la liste (list).
+/**
+ * insere un nouveau noeud a la fin de la liste (list).*
+ */
 void	list_append(t_envlist *list, t_node *new_node)
 {
 	t_node	*last_node;
@@ -31,7 +35,9 @@ void	list_append(t_envlist *list, t_node *new_node)
 	(list->size)++;
 }
 
-//pour creer une nouvelle liste vide.
+/**
+ * pour creer une nouvelle liste vide.
+ */
 void	list_init(t_envlist *list)
 {
 	list->head = (t_node *)ft_calloc(1, sizeof(t_node));

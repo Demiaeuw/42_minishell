@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:52:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/24 15:55:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:45:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@
 // 	return (temp);
 // }
 
-//Concatene 3 string de char grace a strcat au dessus
+/**
+ * Concatene 3 string de char grace a strcat au dessus
+ */
 char	*str3join(char *str1, char *str2, char *str3)
 {
 	size_t	str1len;
@@ -54,11 +56,11 @@ char	*str3join(char *str1, char *str2, char *str3)
 }
 
 /*
-Convertit la liste chainee (envp_list) en un tableau de pointeurs de chaines
-de caracteres (envpstr).
-On parcout la liste et on utilise str3join juste au dessus pour creer les
-elements du tableau.
-*/
+ * Convertit la liste chainee (envp_list) en un tableau de pointeurs de chaines
+ * de caracteres (envpstr).
+ * On parcout la liste et on utilise str3join juste au dessus pour creer les
+ * elements du tableau.
+ */
 char	**envp_convert(t_envlist *envp_list)
 {
 	size_t	i;
@@ -82,8 +84,9 @@ char	**envp_convert(t_envlist *envp_list)
 	return (envpstr);
 }
 
-//juste une fonction pour verif si la var d env avec la key existe dans notre
-//liste (envp_list).
+/**juste une fonction pour verif si la var d env avec la key existe dans notre
+ * liste (envp_list).
+ */
 int	envp_exist(t_envlist *envp_list, char *key)
 {
 	t_node	*node;

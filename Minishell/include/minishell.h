@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 12:07:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:34:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <term.h>      // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <limits.h>	// max et min
 # include <linux/limits.h>
+# include <stdbool.h>
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
@@ -66,9 +67,13 @@ typedef enum
 typedef struct s_token
 {
 	token_type type;
-	char *value;
+	char	*value;
+	bool	builtin;
+	bool	is_last_command;
 	struct s_token *next;
 }	t_token;
+
+
 
 // Parsing
 //00
