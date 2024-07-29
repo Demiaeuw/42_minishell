@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   00_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:38:11 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/19 17:07:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:10:12 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
 
 void	main_error(void (*f)(), int index)
 {
