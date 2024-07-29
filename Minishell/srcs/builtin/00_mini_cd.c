@@ -19,7 +19,7 @@ sinon elle retourne 1*/
 /* ************************************************************************** */
 static  int	home(void)
 {
-	if (!get_env("HOME"))
+	if (!envp_find(envp_list, "HOME"))
 	{
 		printf("\033[33m\n🚨No value for 'HOME'🚨\n[0m");
 		return (-1);
@@ -27,7 +27,7 @@ static  int	home(void)
 	return (0);
 }
 /* ************************************************************************** */
-int	exe_cd(char *args)
+int	exe_cd(char *args, t_list *envp_list)
 {
 	char	old_pwd[PATH_MAX];
 	char	new_pwd[PATH_MAX];
@@ -37,7 +37,7 @@ int	exe_cd(char *args)
 /*Si aucun args , on recupere juste la variable HOME*/
 /*puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
 	if (args == NULL)
-		dest = get_env("HOME");
+		dest = envp_find(envp_list, "HOME");
 /*Sinon, utilise l argument comme répertoire de destination.*/
 	else
 		dest = args;
@@ -59,10 +59,10 @@ int	exe_cd(char *args)
 	if (!ft_strlen(old_pwd) && get_env("PWD"))
 		ft_strlcpy(old_pwd, get_env("PWD"));
 	/*maj des variables OLD_PWD et PWD*/
-	if (set_env("OLD_PWD", old_pwd) || set_env("PWD", new_pwd))
+	if	(!envp_edit(envp_list, OLDPWD, old_pwd)) || (!envp_edit(envp_list, PWD, new_pwd))
 	{
 		printf("🚨Error ! Maj environement fail !🚨\n");
-		return (1);
+		return (1); 
 	}
 	return (0);
 }

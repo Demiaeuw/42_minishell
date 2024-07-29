@@ -16,64 +16,63 @@
   exe_echo : gère l'option -n pour ne pas ajouter de nouvelle ligne et affiche 
   les arguments avec des espaces entre eux. return 0 si ok.*/
 /* ************************************************************************** */
-static int  check_option(char *av)
+static int  check_option_echo(char *str)
 {
-// Si le premier caractère n'est pas '-', 
-// ou si le deuxième caractère n'est pas 'n', retourne 1.
-    if (*av != '-' || *av++ != 'n')
-        return (1);
-    av++;
+	int i;
+
+	i = 0;
+	while(str[i] != '-')
+	{
+		
+		if (str[i] == '-')
+		{
+			i++;
+			if (str[i] == 'n')
+				break;
+		}
+		i++;
+	}
 // gestion si plusieurs 'n'
-    while (*av == 'n')
-        av++;
-    if (*av == '\0')
-        return (0);
-    return (1);
+	while (str[i] == 'n')
+		str[i]++;
+	if (str[i] == '\0')
+		return (1);
+	return (0);
 }
 /* ************************************************************************** */
-int exe_echo(char **av)
+int exe_echo(char *str)
 {
-    int i;
-//i = 1 = pas d option = saut de ligne, i = 0 = option '-n' = pas de saut
-    i = 1;
-// ignore premier argument (./minishell)
-    av++;
-//verif si option
-    while (*av)
-    {
-        if(check_option(*av))
-            break;
-        i = 0;
-        av++;
-    }
-// afficher les arguments restants
-    while (*av)
-    {
-        printf("%s", *av);
-        av++;
-        if (*av)
-            printf(" ");
-    }
-    if (i == 1)
-        printf("\n");
-        return (0);
+	int option;
+	int i;
+
+	option = 0;
+	i = 0;
+	if(check_option_echo(str))
+		option = 1;
+	else 
+		option = 0;
+
+	while (str[i])
+	{
+		if (option == 0)
+		{
+			while (str[i] != "o")
+				i++;
+			i = i + 2;			
+			printf("%s", &str[i]);
+			printf("\n");
+		}
+		else if (option == 1)
+		{
+			while (str[i] != "n")
+			{
+				i++;
+				while(str[i] == 'n')
+					i++;
+			}
+			printf("%s", &str[i]);
+		}	
+		return (0);
+	}
+
 }
-
-// ------------------------------------------- Idée de echo ------------------------------------------ //
-// void    echo(t_token *token)
-// {
-//     int test = 0;
-//     t_token current_token = *token;
-
-//     if (token->next->type == TOKEN_ARGUMENT && token ->next->value == "-n")
-//     {
-//         test = 1;
-//         current_token = token->next;
-//     }
-//     if (token->next->type == TOKEN_STRING)
-//     {
-//         printf("%s", token->next->value);
-//         if (test == 0)
-//             printf("\n");
-//     }
-// }
