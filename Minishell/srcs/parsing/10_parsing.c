@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 12:13:53 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:42:04 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_token	*main_argument(int ac, char **av)
 	free_split_result(args);
 	simplified_list = simplify_list(token_list);
 	free_token_list(&token_list, free_token_value);
+	last_command(simplified_list);
 	return (simplified_list);
 }
 

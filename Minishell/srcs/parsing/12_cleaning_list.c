@@ -6,11 +6,9 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:38:46 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 12:12:13 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:48:12 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../include/minishell.h"
 
 #include "../../include/minishell.h"
 
@@ -20,41 +18,51 @@
  */
 t_token	*simplify_list(t_token *token)
 {
-	t_token	*new_list;
-	t_token	*current;
-	char	*combined_value;
-	size_t	total_length;
+	t_token	*simplified_list = NULL;
+	t_token	*current = token;
+	t_token	*new_token = NULL;
+	char	*combined_value = NULL;
+	size_t	combined_length = 0;
+	bool	first_command = true;
 
-	if (!token)
-		return (NULL);
-	total_length = 0;
-	current = token;
 	while (current)
 	{
-		if (current->type != TOKEN_PIPE)
-			total_length += ft_strlen(current->value) + 1;
-		current = current->next;
-	}
-	combined_value = (char *)safe_malloc(total_length * sizeof(char));
-	combined_value[0] = '\0';
-	current = token;
-	while (current)
-	{
-		if (current->type != TOKEN_PIPE)
+		if (current->type == TOKEN_COMMAND || current->type == TOKEN_ARGUMENT || current->type == TOKEN_STRING || current->type == TOKEN_VARIABLE)
 		{
-			ft_strcat(combined_value, current->value);
-			ft_strcat(combined_value, " ");
+			combined_length += strlen(current->value) + 1;
+			combined_value = (char *)realloc(combined_value, combined_length);
+			if (first_command)
+			{
+				strcpy(combined_value, current->value);
+				first_command = false;
+			}
+			else
+			{
+				strcat(combined_value, " ");
+				strcat(combined_value, current->value);
+			}
+		}
+		else if (current->type == TOKEN_PIPE)
+		{
+			new_token = create_token(TOKEN_COMMAND, combined_value);
+			add_token(&simplified_list, new_token);
+			free(combined_value);
+			combined_value = NULL;
+			combined_length = 0;
+			first_command = true;
+
+			new_token = create_token(TOKEN_PIPE, "|");
+			add_token(&simplified_list, new_token);
 		}
 		current = current->next;
 	}
-	new_list = create_token(TOKEN_COMMAND, combined_value);
-	free(combined_value);
-	current = token;
-	while (current)
+
+	if (combined_value)
 	{
-		if (current->type == TOKEN_PIPE)
-			add_token(&new_list, create_token(TOKEN_PIPE, current->value));
-		current = current->next;
+		new_token = create_token(TOKEN_COMMAND, combined_value);
+		add_token(&simplified_list, new_token);
+		free(combined_value);
 	}
-	return (new_list);
+
+	return simplified_list;
 }

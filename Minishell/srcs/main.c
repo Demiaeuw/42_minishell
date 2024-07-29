@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 12:40:49 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:43:06 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 { 
 	t_token	*token_list;
 
@@ -29,14 +29,10 @@ int	main(int ac, char **av, char **env)
 	
 
 	// test 
-
-	// Appel de main_argument pour gérer les arguments
 	token_list = main_argument(ac, av);
 
-	// Afficher les tokens
 	print_tokens(token_list);
 
-	// Libérer la mémoire allouée pour la liste de tokens
 	free_token_list(&token_list, free_token_value);
 	// fin test
 	return (0);

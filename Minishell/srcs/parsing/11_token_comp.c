@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:43:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/24 17:22:01 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:45:30 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,20 @@ token_type	token_compare(char *arg)
 	// * TOKEN_STRING : Représente une chaîne de caractères entre guillemets ou une string simple
 	else
 		return (TOKEN_STRING);
+}
+
+void	last_command(t_token *token)
+{
+	t_token	*current = token;
+
+	while (current)
+	{
+		if (current->type == TOKEN_COMMAND && (current->next == NULL))
+			current->is_last_command = true;
+		else
+			current->is_last_command = false;
+
+		current = current->next;
+	}
 }
 

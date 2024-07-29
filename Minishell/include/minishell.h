@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 12:34:59 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:26:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,11 @@ typedef struct s_token
 {
 	token_type type;
 	char	*value;
-	bool	builtin;
+	bool	is_builtin;
+	char	*builtin_info;
 	bool	is_last_command;
 	struct s_token *next;
 }	t_token;
-
-
 
 // Parsing
 //00
@@ -96,6 +95,7 @@ char	**step01(int ac, char **av);
 t_token	*step02(char **array);
 //11
 token_type	token_compare(char *arg);
+void	last_command(t_token *token);
 //12
 t_token	*simplify_list(t_token *token);
 //20
@@ -106,5 +106,6 @@ char    *get_absolute_path(const char *relative_path);
 //05
 int		exe_cd(int ac, char **av);
 int		exe_echo(char **av);
-
+//builtin
+//
 #endif

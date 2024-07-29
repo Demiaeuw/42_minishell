@@ -133,3 +133,11 @@ Quand parser finit : free tous les tokens
 
 https://excalidraw.com/#json=hRZyYLWPN4teAwVmhpqPS,4MUN8zVpbjeSSEQp0EfCGg
 
+
+
+
+<------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+verifier le token is_last_command !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

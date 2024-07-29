@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 14:33:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:52:03 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*create_token(token_type type, char *value)
 	token = safe_malloc(sizeof(t_token));
 	token->type = type;
 	token->value = ft_strdup(value);
-	token->builtin = false;
+	token->is_builtin = false;
 	token->is_last_command = false;
 	token->next = NULL;
 	return (token);

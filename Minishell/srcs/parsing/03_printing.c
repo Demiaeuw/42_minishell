@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:19:19 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 14:36:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:52:15 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	print_tokens(t_token *token)
 	{
 		printf("TOKEN_TYPE : %s\n", get_token_type_name(token->type));
 		printf("Token value : %s\n", token->value);
-		printf("Token builtin : %s\n", token->builtin);
-		printf("Token is_last_command : %s\n", token->builtin);
+		printf("Token builtin : %d\n", token->is_builtin);
+		printf("Token is_last_command : %d\n", token->is_last_command);
 		token = token->next;
 	}
 }
