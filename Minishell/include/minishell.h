@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 16:26:40 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:04:05 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,17 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 # include "../srcs/envp/envp.h"
-
+/*
+	macros pour la gestion d erreur des builtins
+*/
+typedef enum builtin_error
+{
+	NOT_HOME = 0,
+	MANY_ARG,
+	CANT_CD,
+	NOT_NUM_ARG,
+	INVALID_ARG
+}	builtin_error
 /**
  * Définition d'une énumération pour les types de tokens
  * Permet d'augmenter la lisibilité du code
@@ -106,6 +116,16 @@ char    *get_absolute_path(const char *relative_path);
 //05
 int		exe_cd(int ac, char **av);
 int		exe_echo(char **av);
+
 //builtin
-//
+//mini_env
+int	mini_env(char	**cmd_vector, t_list *envp_list);
+//export_1
+int	ft_findchr_i(char *str, char c);
+int	is_proper_env(char *env_name);
+int	check_word_sep(char *word, char **key, char **value, int *error_f);
+//utils
+int	check_word_count(char **cmd_list);
+int	get_env_len(char *line);
+void	gestion_erreur_bt(char *cmd, char *word, int status);
 #endif

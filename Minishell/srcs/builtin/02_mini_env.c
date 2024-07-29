@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_mini_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/29 16:35:18 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/07/29 17:04:48 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	mini_env(char	**cmd_vector, t_list *envp_list)
 	char	*key;
 	char	*value;
 
-	if (check_word_count(cmd_vector) != 1)
+	if  (check_word_count(cmd_list) != 1)
 	{
-		gestion_erreur_bt();//a voir comment faire ca bien.
-		return (EX_CNOT_EXEC);
+		gestion_erreur_bt("env", 0, MANY_ARG);
+		return (EXIT_FAILURE);
 	}
 	cur_node = list_peek_first_node(envp_list);
 	while (cur_node->next)
@@ -47,5 +47,5 @@ int	mini_env(char	**cmd_vector, t_list *envp_list)
 			printf("%s=%s\n", key, value);
 		cur_node = cur_node->next;
 	}
-	return(EX_SUCCESS);
+	return(EXIT_SUCCESS);
 }
