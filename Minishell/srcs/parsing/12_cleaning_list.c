@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:38:46 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 15:48:12 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:07:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ t_token	*simplify_list(t_token *token)
 		free(combined_value);
 	}
 
-	return simplified_list;
+	return (simplified_list);
 }
