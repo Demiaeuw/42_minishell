@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/25 14:03:26 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:13:53 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ t_token	*main_argument(int ac, char **av)
 {
 	char	**args;
 	t_token	*token_list;
+	t_token	*simplified_list;
 
 	args = step01(ac, av);
 	if (!args)
 		return (NULL);
 	token_list = step02(args);
 	free_split_result(args);
-	return (token_list);
+	simplified_list = simplify_list(token_list);
+	free_token_list(&token_list, free_token_value);
+	return (simplified_list);
 }
-
 
 /**
  *  Fonction pour split tous les arguments comme ils doivent etre split

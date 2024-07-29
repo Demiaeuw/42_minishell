@@ -26,6 +26,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/03_printing.c\
 		srcs/parsing/10_parsing.c\
 		srcs/parsing/11_token_comp.c\
+		srcs/parsing/12_cleaning_list.c\
 		srcs/parsing/20_expanser.c\
 		srcs/parsing/21_relativ_to_absolute.c\
 		# srcs/envp/envp.c\

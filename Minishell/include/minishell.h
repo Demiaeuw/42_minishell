@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/25 15:09:31 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:07:22 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	**step01(int ac, char **av);
 t_token	*step02(char **array);
 //11
 token_type	token_compare(char *arg);
+//12
+t_token	*simplify_list(t_token *token);
 //20
 //21
 char    *get_absolute_path(const char *relative_path);
