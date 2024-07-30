@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 17:04:05 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:17:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 # include "../srcs/envp/envp.h"
+
 /*
-	macros pour la gestion d erreur des builtins
-*/
+ * macros pour la gestion d erreur des builtins
+ */
 typedef enum builtin_error
 {
 	NOT_HOME = 0,
@@ -45,7 +46,7 @@ typedef enum builtin_error
 	CANT_CD,
 	NOT_NUM_ARG,
 	INVALID_ARG
-}	builtin_error
+}	builtin_error;
 /**
  * Définition d'une énumération pour les types de tokens
  * Permet d'augmenter la lisibilité du code
