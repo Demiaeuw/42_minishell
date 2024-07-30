@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:30:02 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:34:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,17 +121,22 @@ char    *get_absolute_path(const char *relative_path);
 
 //-------------------------------------------------------------//
 //builtin
+//00
 int		exe_cd(char *str, t_list *envp_list);
+//01
 int		exe_echo(char *str, t_list *envp_list);
-int		exe_pwd(char *str, t_list *envp_list);
-//mini_env
+//02
 int	mini_env(char	**cmd_vector, t_list *envp_list);
-//export_1
+//03
 int	ft_findchr_i(char *str, char c);
 int	is_proper_env(char *env_name);
 int	check_word_sep(char *word, char **key, char **value, int *error_f);
-//utils
+//04
+//05
+int		exe_pwd(char *str, t_list *envp_list);
+//10
 int	check_word_count(char **cmd_list);
 int	get_env_len(char *line);
 void	gestion_erreur_bt(char *cmd, char *word, int status);
+
 #endif
