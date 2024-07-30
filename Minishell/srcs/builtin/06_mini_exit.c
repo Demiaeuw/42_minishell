@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void    exe_exit(char *str, t_list *envp_list, s_shell *t_shell_level)
+void    exe_exit(char *str, t_list *envp_list, t_shell_level *shell)
 {
 	char space_pos[1024];
 	int	exit_code = 0;
@@ -22,9 +22,9 @@ void    exe_exit(char *str, t_list *envp_list, s_shell *t_shell_level)
 		str++;
 	if (*str  == '\0')
 	{
-		if (t_shell_level->level > 0)
+		if (shell->level > 0)
 		{
-			t_shell_level->level--;
+			shell->level--;
 			return; // Retourne sans fermer le shell si le niveau est > 0
 		}
 		else
@@ -47,9 +47,9 @@ void    exe_exit(char *str, t_list *envp_list, s_shell *t_shell_level)
 		if (exit_code < 0 || exit_code > 255)
 			exit_code = 1;
 	}
-	if (t_shell_level->level > 0)
+	if (shell->level > 0)
 	{
-		t_shell_level->level--;
+		shell->level--;
 		return;
 	}
 	//FREEEEEEEEEEE

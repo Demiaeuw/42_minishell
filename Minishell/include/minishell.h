@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 13:05:30 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/07/30 13:15:31 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int				check_word_sep(char *word, char **key,
 //05
 int				exe_pwd(char *str, t_list *envp_list);
 //06
-void			exe_exit(char *str, t_list *envp_list, s_shell *t_shell_level);
+void			exe_exit(char *str, t_list *envp_list, t_shell_level *shell);
 //10
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);

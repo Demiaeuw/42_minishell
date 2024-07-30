@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 10:11:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:16:33 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	main(int ac, char **av)
 { 
 	t_token	*token_list;
-
+	printf("Mini_Shell 42 [version 10.0.22631.3958]\n");
+	printf("(c) Gardiens de Phare [GDP]. Tous droits réservés.\n\n\n");
 	// // 1 - Création de l'environnement.
 	// // 2 - Initialisation de l'environnement
 	// // 3 - Environnement créé / While en boucle en attente de commande
