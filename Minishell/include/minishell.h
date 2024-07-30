@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 17:17:19 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:25:27 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,11 @@ t_token	*simplify_list(t_token *token);
 char    *get_absolute_path(const char *relative_path);
 
 // Execution
-//05
-int		exe_cd(int ac, char **av);
-int		exe_echo(char **av);
 
 //builtin
+int		exe_cd(char *str, t_list *envp_list);
+int		exe_echo(char *str, t_list *envp_list);
+int		exe_pwd(char *str, t_list *envp_list);
 //mini_env
 int	mini_env(char	**cmd_vector, t_list *envp_list);
 //export_1

@@ -16,63 +16,50 @@
   exe_echo : gère l'option -n pour ne pas ajouter de nouvelle ligne et affiche 
   les arguments avec des espaces entre eux. return 0 si ok.*/
 /* ************************************************************************** */
-static int  check_option_echo(char *str)
+static int  check_option_echo(char *str, int *start_index)
 {
 	int i;
 
 	i = 0;
-	while(str[i] != '-')
-	{
-		
-		if (str[i] == '-')
-		{
-			i++;
-			if (str[i] == 'n')
-				break;
-		}
-		i++;
-	}
-// gestion si plusieurs 'n'
+	if(str[i] != '-')
+		return (0);
+	i++;
+	if (str[i] != 'n')
+		return (0);
+	// gestion si plusieurs 'n'
 	while (str[i] == 'n')
-		str[i]++;
-	if (str[i] == '\0')
+		i++;
+	if (str[i] == '\0' || str[i] == ' ')
+	{
+		*start_index = i;
 		return (1);
+	}
 	return (0);
 }
 /* ************************************************************************** */
-int exe_echo(char *str)
+int exe_echo(char *str, t_list *envp_list)
 {
 	int option;
 	int i;
+	int start_index;
 
 	option = 0;
 	i = 0;
-	if(check_option_echo(str))
+	start_index = 0;
+	while(str[i] == ' ')
+		i++;
+	i += 4;
+	while(str[i] == ' ')
+		i++;
+	if (check_option_echo(&str[i], &start_index))
 		option = 1;
-	else 
-		option = 0;
-
-	while (str[i])
-	{
-		if (option == 0)
-		{
-			while (str[i] != "o")
-				i++;
-			i = i + 2;			
-			printf("%s", &str[i]);
-			printf("\n");
-		}
-		else if (option == 1)
-		{
-			while (str[i] != "n")
-			{
-				i++;
-				while(str[i] == 'n')
-					i++;
-			}
-			printf("%s", &str[i]);
-		}	
-		return (0);
-	}
-
+	i = start_index;
+	while(str[i] == ' ')
+		i++;
+	if (str[i] == '\0')
+		return(0);
+	printf("%s", &str[i]);
+	if (!option)
+		printf("\n");
+	return (0);
 }

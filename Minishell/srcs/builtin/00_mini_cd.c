@@ -27,20 +27,20 @@ static  int	home(void)
 	return (0);
 }
 /* ************************************************************************** */
-int	exe_cd(char *args, t_list *envp_list)
+int	exe_cd(char *str, t_list *envp_list)
 {
 	char	old_pwd[PATH_MAX];
 	char	new_pwd[PATH_MAX];
 	char	*dest;
-	if (args == NULL && home() == -1)
+	if (str == NULL && home() == -1)
 		return(1);
-/*Si aucun args , on recupere juste la variable HOME*/
+/*Si aucun str , on recupere juste la variable HOME*/
 /*puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
-	if (args == NULL)
+	if (str == NULL)
 		dest = envp_find(envp_list, "HOME");
 /*Sinon, utilise l argument comme répertoire de destination.*/
 	else
-		dest = args;
+		dest = str;
 	old_pwd[0] = '\0';
 	getcwd(old_pwd, PATH_MAX);
 /*Tente de changer de répertoire vers dest avec 'chdir' (ft incluse en C)*/
