@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 14:19:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:51:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	main(int ac, char **av)
 { 
 	t_token	*token_list;
+	t_shell_level *shlvl;
 	
 	signature();
+	shlvl = init_shlvl();
 	// // 1 - Création de l'environnement.
 	// // 2 - Initialisation de l'environnement
 	// // 3 - Environnement créé / While en boucle en attente de commande
@@ -33,8 +35,9 @@ int	main(int ac, char **av)
 	token_list = main_parse(ac, av);
 
 	print_tokens(token_list);
-
+	printf("\n\nSHLVL=%d\n", shlvl->level);
 	free_token_list(&token_list, free_token_value);
+	free_shlvl(shlvl);
 	// fin test
 	return (0);
 }

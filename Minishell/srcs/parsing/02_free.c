@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:28:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:48:28 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,9 @@ void	free_split_result(char **result)
 		i++;
 	}
 	free(result);
+}
+
+void	free_shlvl(t_shell_level *shlvl)
+{
+	free (shlvl);
 }

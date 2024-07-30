@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 14:08:42 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:51:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,12 @@ void			ft_error(int index);
 t_token			*create_token(t_token_type type, char *value);
 void			add_token(t_token **token_list, t_token *new_token);
 void			*safe_malloc(size_t bytes);
+t_shell_level	*init_shlvl(void);
 //02
 void			free_token_value(void *value);
 void			free_token_list(t_token **lst, void (*del)(void*));
 void			free_split_result(char **result);
+void			free_shlvl(t_shell_level *shlvl);
 //03
 char			*get_token_type_name(t_token_type type);
 void			print_tokens(t_token *token);
