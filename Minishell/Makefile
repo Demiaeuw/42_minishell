@@ -19,14 +19,6 @@ OBJDIR = obj
 
 # Fichiers source
 SRCS = 	srcs/main.c\
-		srcs/builtin/00_mini_cd.c\
-		srcs/builtin/01_mini_echo.c\
-		srcs/builtin/02_mini_env.c\
-		srcs/builtin/03_export_1.c\
-		srcs/builtin/04_export_2.c\
-		srcs/builtin/05_mini_pwd.c\
-		srcs/builtin/10_bt_utils.c\
-		srcs/exec/00_error.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
 		srcs/parsing/02_free.c\
@@ -39,7 +31,15 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/21_relativ_to_absolute.c\
 		# srcs/envp/envp.c\
 		# srcs/envp/envp_utils.c\
-		# srcs/envp/envp_utils2.c
+		# srcs/envp/envp_utils2.c\
+		# srcs/builtin/00_mini_cd.c\
+		# srcs/builtin/01_mini_echo.c\
+		# srcs/builtin/02_mini_env.c\
+		# srcs/builtin/03_export_1.c\
+		# srcs/builtin/04_export_2.c\
+		# srcs/builtin/05_mini_pwd.c\
+		# srcs/builtin/10_bt_utils.c\
+		# srcs/exec/00_error.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
