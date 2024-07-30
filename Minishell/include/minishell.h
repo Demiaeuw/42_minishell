@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 14:51:14 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:05:43 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ typedef enum s_token_type
 /**
  * macros pour la gestion d erreur des builtins
  */
-typedef enum s_builtin_error
+typedef enum e_builtin_error
 {
-	NOT_HOME = 0,
 	MANY_ARG,
-	CANT_CD,
-	NOT_NUM_ARG,
 	INVALID_ARG
 }	t_builtin_error;
 
