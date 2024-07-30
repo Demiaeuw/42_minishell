@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:43:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:20:42 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:57:07 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-token_type	token_compare(char *arg)
+t_token_type	token_compare(char *arg)
 {
 	if (ft_strcmp(arg, "cd") == 0 || ft_strcmp(arg, "ls") == 0
 		|| ft_strcmp(arg, "echo") == 0 || ft_strcmp(arg, "export") == 0

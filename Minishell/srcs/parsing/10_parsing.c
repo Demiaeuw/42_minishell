@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:26:36 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:57:00 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_token	*step02(char **array)
 {
 	t_token		*token_list;
 	t_token		*new_token;
-	token_type	type;
+	t_token_type	type;
 	int			i;
 
 	token_list = NULL;

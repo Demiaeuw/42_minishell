@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:19:19 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:26:53 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:56:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Fonction pour obtenir le nom du type de token en tant que chaîne de caractères
  */
-char	*get_token_type_name(token_type type)
+char	*get_token_type_name(t_token_type type)
 {
 	if (type == TOKEN_COMMAND)
 		return ("COMMAND");

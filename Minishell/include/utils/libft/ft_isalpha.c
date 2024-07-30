@@ -27,4 +27,3 @@ int	ft_is_not_alpha(int c)
 	else
 		return (0);
 }
-

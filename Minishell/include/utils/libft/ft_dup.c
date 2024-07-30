@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:51:30 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/23 14:54:37 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:05:13 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ int	ft_dup(int fildes)
 		perror("dup error occurred");
 		exit(EXIT_FAILURE);
 	}
-	return(ret);
+	return (ret);
 }
