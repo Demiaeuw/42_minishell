@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 15:43:06 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:11:22 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	
 
 	// test 
-	token_list = main_argument(ac, av);
+	token_list = main_parse(ac, av);
 
 	print_tokens(token_list);
 

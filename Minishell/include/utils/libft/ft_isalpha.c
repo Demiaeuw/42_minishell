@@ -19,3 +19,12 @@ int	ft_isalpha(int c)
 	else
 		return (0);
 }
+
+int	ft_is_not_alpha(int c)
+{
+	if ((c < 65 || (c > 90 && c < 97) || c > 122))
+		return (1);
+	else
+		return (0);
+}
+

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 14:33:24 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:28:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	free_token_value(void *value)
 
 void	free_token_list(t_token **lst, void (*del)(void*))
 {
-	t_token *current;
-	t_token *next;
+	t_token	*current;
+	t_token	*next;
 
 	if (!del || !lst || !*lst)
 		return ;
@@ -33,6 +33,7 @@ void	free_token_list(t_token **lst, void (*del)(void*))
 	{
 		next = current->next;
 		del(current->value);
+		free(current->builtin_info);
 		free(current);
 		current = next;
 	}
@@ -47,7 +48,7 @@ void	free_split_result(char **result)
 	int	i;
 
 	if (result == NULL)
-		return;
+		return ;
 	i = 0;
 	while (result[i])
 	{

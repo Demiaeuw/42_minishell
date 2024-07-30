@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   00_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:38:11 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 17:10:12 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:24:58 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
 void	main_error(void (*f)(), int index)
 {
 	f(index);
-	//appel de clean up
 	exit(EXIT_FAILURE);
 }
 
@@ -32,7 +30,7 @@ void	ft_error(int index)
 		printf("\033[33m\n🚨Error !🚨\n\n????\n\n\033[0m");
 	if (index == 5)
 		printf("\033[33m\n🚨Error !🚨\n\n????\n\n\033[0m");
-	if (index == 6)/*message d erreur gere avant appel vous appellez le 6*/
+	if (index == 6)
 		return (exit(EXIT_FAILURE));
 	return (exit(EXIT_FAILURE));
 }

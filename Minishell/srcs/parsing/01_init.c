@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 15:52:03 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:22:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 t_token	*create_token(token_type type, char *value)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = safe_malloc(sizeof(t_token));
 	token->type = type;
@@ -37,7 +37,7 @@ t_token	*create_token(token_type type, char *value)
  */
 void	add_token(t_token **token_list, t_token *new_token)
 {
-	t_token *current;
+	t_token	*current;
 
 	if (*token_list == NULL)
 	{
@@ -57,10 +57,10 @@ void	add_token(t_token **token_list, t_token *new_token)
  */
 void	*safe_malloc(size_t bytes)
 {
-	void *ptr;
+	void	*ptr;
 
 	ptr = malloc(bytes);
 	if (ptr == NULL)
 		main_error(ft_error, 3);
-	return(ptr);
+	return (ptr);
 }

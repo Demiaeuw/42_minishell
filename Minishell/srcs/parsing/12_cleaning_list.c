@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:38:46 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/29 17:07:19 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:14:42 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@
  */
 t_token	*simplify_list(t_token *token)
 {
-	t_token	*simplified_list = NULL;
-	t_token	*current = token;
-	t_token	*new_token = NULL;
-	char	*combined_value = NULL;
-	size_t	combined_length = 0;
-	bool	first_command = true;
+	t_token	*simplified_list;
+	t_token	*current;
+	t_token	*new_token;
+	char	*combined_value;
+	size_t	combined_length;
+	bool	first_command;
 
+	simplified_list = NULL;
+	current = token;
+	new_token = NULL;
+	combined_value = NULL;
+	combined_length = 0;
+	first_command = true;
 	while (current)
 	{
-		if (current->type == TOKEN_COMMAND || current->type == TOKEN_ARGUMENT || current->type == TOKEN_STRING || current->type == TOKEN_VARIABLE)
+		if (current->type == TOKEN_COMMAND || current->type == TOKEN_ARGUMENT
+			|| current->type == TOKEN_STRING || current->type == TOKEN_VARIABLE)
 		{
 			combined_length += strlen(current->value) + 1;
 			combined_value = (char *)realloc(combined_value, combined_length);
@@ -56,13 +63,11 @@ t_token	*simplify_list(t_token *token)
 		}
 		current = current->next;
 	}
-
 	if (combined_value)
 	{
 		new_token = create_token(TOKEN_COMMAND, combined_value);
 		add_token(&simplified_list, new_token);
 		free(combined_value);
 	}
-
 	return (simplified_list);
 }

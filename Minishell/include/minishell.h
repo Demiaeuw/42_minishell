@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:25:27 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/07/30 11:30:02 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_token
 	bool	is_last_command;
 	struct s_token *next;
 }	t_token;
-
+//-------------------------------------------------------------//
 // Parsing
 //00
 void	main_error(void (*f)(), int index);
@@ -101,7 +101,7 @@ void	free_split_result(char **result);
 char	*get_token_type_name(token_type type);
 void	print_tokens(t_token *token);
 //10
-t_token	*main_argument(int ac, char **av);
+t_token	*main_parse(int ac, char **av);
 char	**step01(int ac, char **av);
 t_token	*step02(char **array);
 //11
@@ -109,12 +109,17 @@ token_type	token_compare(char *arg);
 void	last_command(t_token *token);
 //12
 t_token	*simplify_list(t_token *token);
+//13
+void	copy_com(const char *src, char *dest);
+bool	is_builtin_command(char *com);
+void	add_builtin(t_token *token);
 //20
 //21
 char    *get_absolute_path(const char *relative_path);
-
+//-------------------------------------------------------------//
 // Execution
 
+//-------------------------------------------------------------//
 //builtin
 int		exe_cd(char *str, t_list *envp_list);
 int		exe_echo(char *str, t_list *envp_list);
