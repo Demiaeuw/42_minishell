@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bt_utils.c                                         :+:      :+:    :+:   */
+/*   10_bt_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/29 16:59:23 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:18:03 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ int	get_env_len(char *line)
 			ft_isalpha(line[length]) || ft_isdigit(line[length]))
 		length++;
 	return (length);
+}
+
+int	is_proper_env(char *env_name)
+{
+	int	full_len;
+	int	env_len;
+
+	full_len = ft_strlen(env_name);
+	env_len = get_env_len(env_name);
+	if (full_len == env_len)
+		return(1);
+	else
+		return(0);
 }
 
 void	gestion_erreur_bt(char *cmd, char *word, int status)

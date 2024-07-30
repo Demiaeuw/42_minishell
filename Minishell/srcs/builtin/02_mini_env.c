@@ -6,11 +6,12 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/29 17:04:48 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:37:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
 //verifie d abord si le nombre d args est egal a 1, sinon ca genere une erreur
 //ensuite on parcout la liste des variables de l environnement(envp_list)
 //pour chaque variable, elle recupere la cle et la valeur.
@@ -27,7 +28,7 @@
 
 	getenv reste une fonction plus simple pour recup une var specifique.
 */
-int	mini_env(char	**cmd_vector, t_list *envp_list)
+int	mini_env(char	**cmd_vector, t_envlist *envp_list)
 {
 	t_node	*cur_node;
 	char	*key;

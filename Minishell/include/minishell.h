@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 16:05:43 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:19:55 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,24 +133,26 @@ char			*get_absolute_path(const char *relative_path);
 //---------------------------------------------------------------------------//
 //builtin
 //00
-int				exe_cd(char *str, t_list *envp_list);
+int				exe_cd(char *str, t_envlist *envp_list);
 //01
-int				exe_echo(char *str, t_list *envp_list);
+int				exe_echo(char *str, t_envlist *envp_list);
 //02
-int				mini_env(char	**cmd_vector, t_list *envp_list);
+int				mini_env(char	**cmd_vector, t_envlist *envp_list);
 //03
 int				ft_findchr_i(char *str, char c);
-int				is_proper_env(char *env_name);
 int				check_word_sep(char *word, char **key,
 					char **value, int *error_f);
 //04
 //05
-int				exe_pwd(char *str, t_list *envp_list);
+int				exe_pwd(char *str, t_envlist *envp_list);
 //06
-void			exe_exit(char *str, t_list *envp_list, t_shell_level *shell);
+void			exe_exit(char *str, t_envlist *envp_list, t_shell_level *shell);
+//07
+int				mini_unset(char **cmd_vector, t_envlist *envp_list);
 //10
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
+int				is_proper_env(char *env_name);
 void			gestion_erreur_bt(char *cmd, char *word, int status);
 
 #endif
