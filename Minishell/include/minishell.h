@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 12:06:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:05:30 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,14 @@ typedef struct s_token
 }	t_token;
 
 //---------------------------------------------------------------------------//
+/**
+ * Niveau du Shell
+ */
+typedef struct s_shell
+{
+	int				level;
+}	t_shell_level;
+//---------------------------------------------------------------------------//
 // Parsing
 //00
 void			main_error(void (*f)(), int index);
@@ -138,6 +146,8 @@ int				check_word_sep(char *word, char **key,
 //04
 //05
 int				exe_pwd(char *str, t_list *envp_list);
+//06
+void			exe_exit(char *str, t_list *envp_list, s_shell *t_shell_level);
 //10
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
