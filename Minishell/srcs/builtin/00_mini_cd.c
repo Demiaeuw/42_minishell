@@ -56,8 +56,8 @@ int	exe_cd(char *str, t_list *envp_list)
 	}
 	/* Si old_pwd est vide mais que PWD est définie,*/ 
 	/*copie la valeur de PWD dans old_pwd.*/
-	if (!ft_strlen(old_pwd) && get_env("PWD"))
-		ft_strlcpy(old_pwd, get_env("PWD"));
+	if (!ft_strlen(old_pwd) && envp_find(envp_list, "PWD"))
+		ft_strlcpy(old_pwd, envp_find(envp_list, "PWD"));
 	/*maj des variables OLD_PWD et PWD*/
 	if	(!envp_edit(envp_list, OLDPWD, old_pwd)) || (!envp_edit(envp_list, PWD, new_pwd))
 	{

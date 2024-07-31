@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 17:19:55 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:40:13 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,17 @@ void			copy_com(const char *src, char *dest);
 bool			is_builtin_command(char *com);
 void			add_builtin(t_token *token);
 //20
+void			expanser_commands(t_token token_list);
 //21
+bool			is_relativ_path(const char *path);
 char			*get_absolute_path(const char *relative_path);
-
+void			clean_path(char *path);
+//22
+char			*extend_result(char *result, size_t size, size_t add_size);
+char			*append_var(char *res, comst char *var, t_list *envp_list, size_t size);
+char			*process_var(const char *start, const char **end,
+								char *res, size_t size, 
+								char **res_ptr, t_list *envp_list);
 //---------------------------------------------------------------------------//
 // Execution
 

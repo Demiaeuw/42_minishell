@@ -11,7 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+/* ************************************************************************** */
+bool	is_relativ_path(const char *path)
+{
+	return (path[0] != '/');
+}
+/* ************************************************************************** */
 char	*get_absolute_path(const char *relative_path)
 {
 	char	courant_path[PATH_MAX];
@@ -27,3 +32,16 @@ char	*get_absolute_path(const char *relative_path)
 	ft_strcat(absolute_path, relative_path);
 	return (absolute_path);
 }
+/* ************************************************************************** */
+void	clean_path(char *path)
+{
+	char *absolute_path;
+
+	absolute_path = get_absolute_path(path);
+	if(absolute_path)
+	{
+		ft_strcpy(path, absolute_path);
+		free(absolute_path);
+	}
+}
+/* ************************************************************************** */     
