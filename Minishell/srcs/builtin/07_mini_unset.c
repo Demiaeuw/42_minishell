@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/30 17:20:02 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:41:00 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
  * si l arg est valide, on le stocke dans key.
  * et on apelle envp delete pour suppr la var d environnement qui correspond
  * de la liste envp_list
+ *
+ * on utilise continue ici pour les memes raisons que pour export
 */
-int	mini_unset(char **cmd_vector, t_envlist *envp_list)
+int	mini_unset(char **str, t_envlist *envp_list)
 {
 	int		error_flag;
 	int		i;
@@ -34,18 +36,18 @@ int	mini_unset(char **cmd_vector, t_envlist *envp_list)
 
 	error_flag = EXIT_SUCCESS;
 	i = 1;
-	while (cmd_vector[i])
+	while (str[i])
 	{
-		if (!is_proper_env(cmd_vector[i]))
+		if (!is_proper_env(str[i]))
 		{
 			error_flag = EXIT_FAILURE;
-			gestion_erreur_bt("unset", cmd_vector[i], INVALID_ARG);
+			gestion_erreur_bt("unset", str[i], INVALID_ARG);
 			i++;
 			continue ;
 		}
 		else
 		{
-			key = cmd_vector[i];
+			key = str[i];
 			envp_delete(envp_list, key);
 			i++;
 		}

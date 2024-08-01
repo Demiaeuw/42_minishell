@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/30 16:37:57 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:58:53 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@
 	value : la valeur associee a la cle.
 
 	getenv reste une fonction plus simple pour recup une var specifique.
+
+	cur_node est un pointeur sur le noeud actuel et nous permet de naviguer
+	dans tous les noeuds de la liste.
 */
-int	mini_env(char	**cmd_vector, t_envlist *envp_list)
+int	mini_env(char	**str, t_envlist *envp_list)
 {
 	t_node	*cur_node;
 	char	*key;
 	char	*value;
 
-	if  (check_word_count(cmd_list) != 1)
+	if  (check_word_count(str) != 1)
 	{
 		gestion_erreur_bt("env", 0, MANY_ARG);
 		return (EXIT_FAILURE);

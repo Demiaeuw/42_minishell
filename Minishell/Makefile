@@ -38,6 +38,8 @@ SRCS = 	srcs/main.c\
 		# srcs/builtin/03_export_1.c\
 		# srcs/builtin/04_export_2.c\
 		# srcs/builtin/05_mini_pwd.c\
+		# srcs/builtin/06_mini_exit.c\
+		# srcs/builtin/07_mini_unset.c\
 		# srcs/builtin/10_bt_utils.c\
 		# srcs/exec/00_error.c
 

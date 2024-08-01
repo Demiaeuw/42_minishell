@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/31 13:40:13 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/01 17:21:59 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void			clean_path(char *path);
 char			*extend_result(char *result, size_t size, size_t add_size);
 char			*append_var(char *res, comst char *var, t_list *envp_list, size_t size);
 char			*process_var(const char *start, const char **end,
-								char *res, size_t size, 
+								char *res, size_t size,
 								char **res_ptr, t_list *envp_list);
 //---------------------------------------------------------------------------//
 // Execution
@@ -145,18 +145,17 @@ int				exe_cd(char *str, t_envlist *envp_list);
 //01
 int				exe_echo(char *str, t_envlist *envp_list);
 //02
-int				mini_env(char	**cmd_vector, t_envlist *envp_list);
+int				mini_env(char	**str, t_envlist *envp_list);
 //03
-int				ft_findchr_i(char *str, char c);
-int				check_word_sep(char *word, char **key,
-					char **value, int *error_f);
+int				mini_export(char **str, t_envlist *envp_list);
 //04
+void			print_export(t_envlist *envplist);
 //05
 int				exe_pwd(char *str, t_envlist *envp_list);
 //06
 void			exe_exit(char *str, t_envlist *envp_list, t_shell_level *shell);
 //07
-int				mini_unset(char **cmd_vector, t_envlist *envp_list);
+int				mini_unset(char **str, t_envlist *envp_list);
 //10
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);

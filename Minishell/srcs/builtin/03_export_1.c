@@ -6,12 +6,28 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:06 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/30 17:18:12 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:07:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../envp/envp.h"
+
+/**
+ * BUT DE LA FONCTION : avec cette commande on peut ajouter ou modifier des var
+ * de l env dans la liste des var d env du shell.
+ *
+ * par exemple si on veut ajouter une nouvelle variable :
+ * export PATH=/usr/local/bin
+ * separe PATH et /usr/local/bin grace au =,
+ * check si PATH est valide,
+ * ajoute PATH a la liste de var d env avec la valeur /usr/local/bin.
+ * si on fait ensuite PATH=/usr/bin ca va modifier sa valeur avec la nouvelle
+ * qu on vient de lui donner.
+ * et y a encore d autres utilisations mais je vais pas faire un commentaire de
+ * 800 LIGNES MERDE
+ * quel enfeeeeer, premier degreeeeeeees
+*/
 
 /**
  * Cherche la premiere occurence du char c dans une string et return son index.
@@ -31,20 +47,11 @@ int	ft_findchr_i(char *str, char c)
 	return(-1);
 }
 /**
- * separe un mot en cle et valeur et verifie si la cle est valide.
+ * separe word en key et value avec le sep '=' et check si key est valide.
  *
- * si on trouve '=' on extrait la cle de word.
  * par exemple : "PATH=/usr/bin", *key sera "PATH".
- * si on trouve pas '=' la totalite de word sera la cle.
- * par exemple : si word est "PATH" et qu y a pas de =, *key sera PATH.
- * on passe plein de verifs et si tout est bon on retourne 0 pour dire que tout
- * s est bien passe.
- *
- * autre exemple:
- * si word est "USER=root", *key sera USER et la valeur sera root.
- *
  * en gros, on separe ce qu il y a avant et apres le = en cle et valeur.
- * s y a pas d egal, on considere que tout est la cle.
+ * si y a pas d egal, on considere que tout est la cle.
  *
  * Ca permet de gerer les situations ou une var d env est definie sans valeur et
  * les cas ou une cle et une valeur sont fournies.
@@ -75,4 +82,42 @@ int	check_word_sep(char *word, char **key, char **value, int *error_flag)
 	if (equal_i != -1)
 		*value = ft_substr(word, equal_i + 1, ft_strlen(word) - equal_i - 1);
 	return (0);
+}
+
+/**
+ * sert a ajouter ou modifier des variables d environnement.
+ *
+ * on parcourt les arg, on check si ils sont ok et on les ajoute a envp_list.
+ *
+ * on utilise continue pour ne pas utiliser envp_add et un free si checkwordsep
+ * detecte une erreur, ca nous permet d eviter des operations inutiles ou des
+ * free incorrect
+*/
+int	mini_export(char **str, t_envlist *envp_list)
+{
+	int		i;
+	int		error_flag;
+	char	*word;
+	char	*key;
+	char	*value;
+
+	error_flag = EXIT_SUCCESS;
+	i = 1;
+	if (check_word_count(str) == 1)
+		print_export(envp_list);
+	while (str[i])
+	{
+		key = NULL;
+		value = NULL;
+		word = str[i];
+		i++;
+		if (check_word_sep(word, &key, &value, &error_flag))
+			continue ;
+		envp_add(envp_list, key, value);
+		if (word != key)
+			free(key);
+		if (value)
+			free(value);
+	}
+	return (error_flag);
 }

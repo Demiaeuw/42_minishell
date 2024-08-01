@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:40:48 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/24 15:54:49 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:00:02 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_node
 typedef struct s_envlist
 {
 	int			size;
-	t_node	*head;
-	t_node	*tail;
+	t_node		*head;
+	t_node		*tail;
 }	t_envlist;
 
 /*			MAIN FUNCTIONS			*/
