@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/05 14:41:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:06:02 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define BUFFER_SIZE 1024
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -137,6 +139,9 @@ char			*process_var(const char *start, const char **end,
 								char **res_ptr, t_list *envp_list);
 //---------------------------------------------------------------------------//
 // Execution
+//10
+void			display_prompt(void);
+char			*read_input(void);
 
 //---------------------------------------------------------------------------//
 //builtin

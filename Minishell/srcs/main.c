@@ -3,22 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/05 15:08:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:26:46 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 { 
-	t_token	*token_list;
-	t_shell_level *shlvl;
+	//t_token	*token_list;
+	//t_shell_level *shlvl;
+	char **mini_env;
+	char *input;
+
+	env_clone = env;
+	
+	if (ac != 1)
+		exit(EXIT_FAILURE);
+	(void)av;
+
 	
 		// // 1 - Création de l'environnement.
-			// envp_init()
+			// main_init(mini_env, )
 
 
 			
@@ -34,7 +43,11 @@ int	main(int ac, char **av)
 		// // 3 - Parsing de la commande saisie par l'utilisateur (av de l'env)
 			// while (1)
 			// {
-			token_list = main_parse(ac, av); // potientiellement changer ac, av
+					display_prompt();
+        			input = read_input();
+					printf("%s", input);
+	
+					//token_list = main_parse(input); // potientiellement changer ac, av
 
 
 
@@ -57,10 +70,10 @@ int	main(int ac, char **av)
 	
 
 	// test 
-	print_tokens(token_list);
-	printf("\n\nSHLVL=%d\n", shlvl->level);
-	free_token_list(&token_list, free_token_value);
-	free_shlvl(shlvl);
+	//print_tokens(token_list);
+	//printf("\n\nSHLVL=%d\n", shlvl->level);
+	//free_token_list(&token_list, free_token_value);
+	//free_shlvl(shlvl);
 	// fin test
 	
 	return (0);
