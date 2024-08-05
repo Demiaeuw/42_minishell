@@ -29,7 +29,7 @@ char *extend_result(char *result, size_t size, size_t add_size)
 }
 /* ************************************************************************** */
 /* Fonction pour retourner la valeur d'une variable d'env à la char*          */
-char *append_var(char *res, comst char *var, t_list *envp_list, size_t size)
+char *append_var(char *res, const char *var, t_envlist *envp_list, size_t size)
 {
 	char *var_value;
 	size_t var_len;

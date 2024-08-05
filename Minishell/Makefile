@@ -28,8 +28,11 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/12_cleaning_list.c\
 		srcs/parsing/13_builtin_gestion.c\
 		srcs/parsing/20_expanser.c\
-		srcs/parsing/21_relativ_to_absolute.c\
-		# srcs/envp/envp.c\
+		srcs/parsing/21_expanser_utils.c
+
+# srcs/parsing/22_expand_variable.c
+		
+# srcs/envp/envp.c\
 		# srcs/envp/envp_utils.c\
 		# srcs/envp/envp_utils2.c\
 		# srcs/builtin/00_mini_cd.c\

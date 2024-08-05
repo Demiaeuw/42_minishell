@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/01 17:21:59 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:41:46 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
 char			*extend_result(char *result, size_t size, size_t add_size);
-char			*append_var(char *res, comst char *var, t_list *envp_list, size_t size);
+char			*append_var(char *res, const char *var, t_envlist *envp_list, size_t size);
 char			*process_var(const char *start, const char **end,
 								char *res, size_t size,
 								char **res_ptr, t_list *envp_list);
@@ -153,9 +153,9 @@ void			print_export(t_envlist *envplist);
 //05
 int				exe_pwd(char *str, t_envlist *envp_list);
 //06
-void			exe_exit(char *str, t_envlist *envp_list, t_shell_level *shell);
+void			mini_exit(char *str, t_envlist *envp_list, t_shell_level *shell);
 //07
-int				mini_unset(char **str, t_envlist *envp_list);
+void    		exe_exit(char *str, t_list *envp_list, t_shell_level *shell);
 //10
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);

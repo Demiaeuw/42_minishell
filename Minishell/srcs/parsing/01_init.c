@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 14:50:44 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:34:55 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ t_shell_level	*init_shlvl(void)
 	t_shell_level *shlvl;
 
 	shlvl = (t_shell_level *)safe_malloc(sizeof(t_shell_level));
-	shlvl->level = 2;
+	shlvl->level = 2; // metre le bon SHLVL +1
 	return (shlvl);
 }
