@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/05 16:06:02 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/06 01:06:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ char			*get_token_type_name(t_token_type type);
 void			print_tokens(t_token *token);
 void			signature(void);
 //10
-t_token			*main_parse(int ac, char **av);
-char			**step01(int ac, char **av);
+t_token			*main_parse(char *str);
+char			**step01(char *str);
 t_token			*step02(char **array);
 //11
 t_token_type	token_compare(char *arg);

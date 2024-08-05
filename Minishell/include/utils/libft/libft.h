@@ -20,6 +20,7 @@
 /*				VERIF					*/
 int		ft_isalpha(int c);
 int		ft_is_not_alpha(int c);
+int		ft_isspace(char c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);

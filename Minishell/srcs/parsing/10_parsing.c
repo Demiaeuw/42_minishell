@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/05 16:11:25 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/06 01:10:27 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
  * 3/ free le tab de char
  * 4/ retourne la liste chainé de tokken
  */
-t_token	*main_parse(int ac, char **av)
+t_token	*main_parse(char *str)
 {
 	char	**args;
 	t_token	*token_list;
 	t_token	*simplified_list;
 
-	args = step01(ac, av);
+	args = step01(str);
 	if (!args)
 		return (NULL);
 	token_list = step02(args);
@@ -40,24 +40,56 @@ t_token	*main_parse(int ac, char **av)
 /**
  *  Fonction pour split tous les arguments comme ils doivent etre split
  */
-char	**step01(int ac, char **av)
+char	**step01(char *str)
 {
 	int		i;
 	int		j;
+	int		k;
+	char	quote_char;
 	char	**args;
 
-	if (ac < 2)
+	if (!str)
 		return (NULL);
-	args = (char **)safe_malloc(ac * sizeof(char *));
-	i = 1;
-	j = 0;
-	while (i < ac)
+
+	// Allocation mémoire pour le pire cas (chaque caractère est un mot)
+	args = (char **)safe_malloc((ft_strlen(str) / 2 + 2) * sizeof(char *));
+	i = 0;
+	k = 0;
+	quote_char = 0;
+
+	while (str[i])
 	{
-		args[j] = ft_strdup(av[i]);
-		i++;
-		j++;
+		// Passer les espaces initiaux
+		while (str[i] && ft_isspace(str[i]))
+			i++;
+		if (str[i] == '\0')
+			break;
+
+		// Allocation mémoire pour le prochain argument
+		args[k] = (char *)safe_malloc((ft_strlen(str) - i + 1) * sizeof(char));
+		j = 0;
+
+		// Gérer les guillemets simples et doubles
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			quote_char = str[i++];
+			while (str[i] && str[i] != quote_char)
+				args[k][j++] = str[i++];
+			if (str[i] == quote_char)
+				i++; // Passer le guillemet fermant
+			quote_char = 0; // Réinitialiser la variable de guillemet
+		}
+		else
+		{
+			// Copier le mot jusqu'au prochain espace ou la fin de la chaîne
+			while (str[i] && !ft_isspace(str[i]) && str[i] != '"' && str[i] != '\'')
+				args[k][j++] = str[i++];
+		}
+		args[k][j] = '\0'; // Terminer l'argument actuel
+		k++;
 	}
-	args[j] = (NULL);
+	args[k] = NULL; // Terminer le tableau de tableaux
+
 	return (args);
 }
 

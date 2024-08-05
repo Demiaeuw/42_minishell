@@ -14,7 +14,7 @@
 
 void display_prompt(void)
 {
-    write(STDOUT_FILENO, "minishell>", 11);
+    write(STDOUT_FILENO, "minishell> ", 12);
 }
 
 

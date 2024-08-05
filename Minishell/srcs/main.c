@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/05 16:26:46 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/06 01:28:11 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	main(int ac, char **av, char **env)
 { 
-	//t_token	*token_list;
-	//t_shell_level *shlvl;
-	char **mini_env;
+	t_token	*token_list;
+	// char **mini_env;
 	char *input;
 
-	env_clone = env;
+	// env_clone = env;
 	
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
+	(void)env;
 
 	
 		// // 1 - Création de l'environnement.
@@ -33,7 +33,6 @@ int	main(int ac, char **av, char **env)
 			
 			
 		// // 2 - Initialisation de l'environnement
-			// shlvl = init_shlvl();
 	// signature(); //
 	
 
@@ -45,7 +44,8 @@ int	main(int ac, char **av, char **env)
 			// {
 					display_prompt();
         			input = read_input();
-					printf("%s", input);
+					token_list = main_parse(input);
+
 	
 					//token_list = main_parse(input); // potientiellement changer ac, av
 
@@ -62,19 +62,19 @@ int	main(int ac, char **av, char **env)
 			// //		go EXECV
 			
 		// free token list
-
+				// free_token_list(&token_list, free_token_value);
 
 		
 		// // 5 - Rendre la main à l'utilisateur pour prochaine commande
 		// }
 	
 
-	// test 
-	//print_tokens(token_list);
+	// test --------------------------------------------------------------------------------------------------------//
+	printf("\n\n%s\n\n", input);
+	print_tokens(token_list);
 	//printf("\n\nSHLVL=%d\n", shlvl->level);
-	//free_token_list(&token_list, free_token_value);
-	//free_shlvl(shlvl);
-	// fin test
+	free_token_list(&token_list, free_token_value);
+	// fin test ----------------------------------------------------------------------------------------------------//
 	
 	return (0);
 }
