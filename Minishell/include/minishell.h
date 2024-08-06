@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 15:30:27 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:33:47 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void			add_token(t_token **token_list, t_token *new_token);
 void			*safe_malloc(size_t bytes);
 t_shell_level	*init_shlvl(void);
 //02
+
+
+
 void			free_token_value(void *value);
 void			free_token_list(t_token **lst, void (*del)(void*));
 void			free_split_result(char **result);
