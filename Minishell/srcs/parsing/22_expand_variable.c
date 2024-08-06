@@ -13,19 +13,20 @@
 #include "../../include/minishell.h"
 /* ************************************************************************** */
 /* Fonction auxiliaire pour étendre la chaîne avec realoc*/
-char *extend_result(char *result, size_t size, size_t add_size)
+char	*extend_result(char *result, size_t *result_size, size_t add_size)
 {
-	char *new_result;
-	size_t new_size = *result_size + add_size;
+	char	*new_result;
+	size_t	new_size;
 
-	nem_result = realloc(result, new_size)
-	if(!new_result)
+	new_size = *result_size + add_size;
+	new_result = ft_realloc(result, *result_size, new_size);
+	if (!new_result)
 	{
 		free(result);
-		return NULL;
+		return (NULL);
 	}
 	*result_size = new_size;
-	return new_result;
+	return (new_result);
 }
 /* ************************************************************************** */
 /* Fonction pour retourner la valeur d'une variable d'env à la char*          */

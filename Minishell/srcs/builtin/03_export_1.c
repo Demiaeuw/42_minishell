@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_export_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:06 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:21:02 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:06:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_word_sep(char *word, char **key, char **value, int *error_flag)
 	if (!is_proper_env(*key))
 	{
 		*error_flag = EXIT_FAILURE;
-		gestin_erreur_bt("export", word, INVALID_ARG);
+		gestion_erreur_bt("export", word, INVALID_ARG);
 		if (equal_i != -1)
 			free(*key);
 		return(1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 15:19:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:50:53 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_env	envp_list;
+	t_env			envp_list;
 	t_token			*token_list;
 	// char **mini_env;
 	char 			*input;
@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
-	init_env_main(&envp_list, env);// c est cense remplir les conditions 1 et 2
+	main_init_envp(&envp_list, env);// c est cense remplir les conditions 1 et 2
 
 		// // 1 - Création de l'environnement.
 			// main_init(mini_env, )

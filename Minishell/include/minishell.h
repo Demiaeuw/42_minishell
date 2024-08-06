@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 15:33:47 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:06:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ char			*process_var(const char *start, const char **end,
 //---------------------------------------------------------------------------//
 // Execution
 //01
-void	init_env_main(t_env *envp_list, char **envp);
+void			main_init_envp(t_env *envp_list, char **envp);
 //10
 void			display_prompt(void);
 char			*read_input(void);
@@ -152,24 +152,23 @@ char			*read_input(void);
 //00
 int				exe_cd(char *str, t_env *envp_list);
 //01
-int 			exe_echo(char *str, t_env *envp_list);
+int 			exe_echo(char *str);
 //02
 int				mini_env(char	**str, t_env *envp_list);
 //03
 int				mini_export(char **str, t_env *envp_list);
-void			print_export(t_envlist *envplist);
+void			print_export(t_env *envplist);
 //04
 int				mini_unset(char **str, t_env *envp_list);
 
 //05
-int				exe_pwd(char *str, t_env *envp_list)
+int				exe_pwd(char *str, t_env *envp_list);
 //06
 void			exe_exit(char *str, t_env *envp_list, t_shell_level *shell);
 //10
 void			main_builtin(t_token *token);
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token);
-void			execute_execve(t_token *token);
 void			execute_execve(t_token *token);
 //20
 int				check_word_count(char **cmd_list);

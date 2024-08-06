@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	init_env_main(t_env *envp_list, char **envp)
+void	main_init_envp(t_env *envp_list, char **envp)
 {
 	envp_init(envp_list, envp);
 }

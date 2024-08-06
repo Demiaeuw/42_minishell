@@ -17,9 +17,9 @@
 sinon elle retourne 1*/
 /*Gerer sortie du programme + free si retourne 1, pas le messagge d erreur*/
 /* ************************************************************************** */
-static  int	home(void)
+static int	home(t_env *env)
 {
-	if (!envp_find(envp_list, "HOME"))
+	if (!envp_find(env, "HOME"))
 	{
 		printf("\033[33m\n🚨No value for 'HOME'🚨\n[0m");
 		return (-1);
@@ -32,7 +32,7 @@ int	exe_cd(char *str, t_env *envp_list)
 	char	old_pwd[PATH_MAX];
 	char	new_pwd[PATH_MAX];
 	char	*dest;
-	if (str == NULL && home() == -1)
+	if (str == NULL && home(envp_list) == -1)
 		return(1);
 /*Si aucun str , on recupere juste la variable HOME*/
 /*puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
@@ -51,19 +51,19 @@ int	exe_cd(char *str, t_env *envp_list)
 	}
 	if (!getcwd(new_pwd, PATH_MAX))
 	{
-		printf("\033[33m\n🚨Error !🚨\n\n'getcwd' fonction issue\n\n\033[0m")
+		printf("\033[33m\n🚨Error !🚨\n\n'getcwd' fonction issue\n\n\033[0m");
 		return(1);
 	}
 	/* Si old_pwd est vide mais que PWD est définie,*/
 	/*copie la valeur de PWD dans old_pwd.*/
 	if (!ft_strlen(old_pwd) && envp_find(envp_list, "PWD"))
-		ft_strlcpy(old_pwd, envp_find(envp_list, "PWD"));
+		ft_strcpy(old_pwd, envp_find(envp_list, "PWD"));
 	/*maj des variables OLD_PWD et PWD*/
-	if	(!envp_edit(envp_list, OLDPWD, old_pwd)) || (!envp_edit(envp_list, PWD, new_pwd))
-	{
-		printf("🚨Error ! Maj environement fail !🚨\n");
-		return (1);
-	}
+	// if	(!envp_edit(envp_list, "OLDPWD", old_pwd) || (!envp_edit(envp_list, PWD, new_pwd)))
+	// {
+	// 	printf("🚨Error ! Maj environement fail !🚨\n");
+	// 	return (1);
+	// }
 	return (0);
 }
 /* ************************************************************************** */

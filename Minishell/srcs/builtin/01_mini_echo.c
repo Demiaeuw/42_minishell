@@ -37,7 +37,7 @@ static int  check_option_echo(char *str, int *start_index)
 	return (0);
 }
 /* ************************************************************************** */
-int exe_echo(char *str, t_env *envp_list)
+int exe_echo(char *str)
 {
 	int option;
 	int i;
