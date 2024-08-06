@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_export_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:06 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/01 18:07:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:17:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
  * et y a encore d autres utilisations mais je vais pas faire un commentaire de
  * 800 LIGNES MERDE
  * quel enfeeeeer, premier degreeeeeeees
-*/
+ */
 
 /**
  * Cherche la premiere occurence du char c dans une string et return son index.
  * sinon return -1 pour signaler qu on a rien trouve.
-*/
+ */
 int	ft_findchr_i(char *str, char c)
 {
 	int	i;
@@ -55,7 +55,7 @@ int	ft_findchr_i(char *str, char c)
  *
  * Ca permet de gerer les situations ou une var d env est definie sans valeur et
  * les cas ou une cle et une valeur sont fournies.
-*/
+ */
 int	check_word_sep(char *word, char **key, char **value, int *error_flag)
 {
 	int	equal_i;
@@ -92,7 +92,7 @@ int	check_word_sep(char *word, char **key, char **value, int *error_flag)
  * on utilise continue pour ne pas utiliser envp_add et un free si checkwordsep
  * detecte une erreur, ca nous permet d eviter des operations inutiles ou des
  * free incorrect
-*/
+ */
 int	mini_export(char **str, t_envlist *envp_list)
 {
 	int		i;

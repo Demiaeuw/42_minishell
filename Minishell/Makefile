@@ -29,22 +29,23 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/13_builtin_gestion.c\
 		srcs/parsing/20_expanser.c\
 		srcs/parsing/21_expanser_utils.c\
-		srcs/exec/10_interface.c
+		srcs/parsing/22_expand_variable.c\
+		srcs/exec/10_interface.c\
+		srcs/builtin/00_mini_cd.c\
+		srcs/builtin/01_mini_echo.c\
+		srcs/builtin/02_mini_env.c\
+		srcs/builtin/03_export_1.c\
+		srcs/builtin/03_export_2.c\
+		srcs/builtin/04_mini_unset.c\
+		srcs/builtin/05_mini_pwd.c\
+		srcs/builtin/06_mini_exit.c\
+		srcs/builtin/10_builtinexe.c\
+		srcs/builtin/20_bt_utils.c
 
-# srcs/parsing/22_expand_variable.c
 		
 # srcs/envp/envp.c\
 		# srcs/envp/envp_utils.c\
 		# srcs/envp/envp_utils2.c\
-		# srcs/builtin/00_mini_cd.c\
-		# srcs/builtin/01_mini_echo.c\
-		# srcs/builtin/02_mini_env.c\
-		# srcs/builtin/03_export_1.c\
-		# srcs/builtin/04_export_2.c\
-		# srcs/builtin/05_mini_pwd.c\
-		# srcs/builtin/06_mini_exit.c\
-		# srcs/builtin/07_mini_unset.c\
-		# srcs/builtin/10_bt_utils.c\
 		# srcs/exec/00_error.c
 
 # Fichiers objets

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 01:06:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:36:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,22 +146,26 @@ char			*read_input(void);
 //---------------------------------------------------------------------------//
 //builtin
 //00
-int				exe_cd(char *str, t_envlist *envp_list);
+int				exe_cd(char *str, t_list *envp_list);
 //01
-int				exe_echo(char *str, t_envlist *envp_list);
+int 			exe_echo(char *str, t_envplist *envp_list);
 //02
 int				mini_env(char	**str, t_envlist *envp_list);
 //03
 int				mini_export(char **str, t_envlist *envp_list);
-//04
 void			print_export(t_envlist *envplist);
+//04
+int				mini_unset(char **str, t_envlist *envp_list);
+
 //05
-int				exe_pwd(char *str, t_envlist *envp_list);
+int				exe_pwd(char *str, t_list *envp_list)
 //06
-void			mini_exit(char *str, t_envlist *envp_list, t_shell_level *shell);
-//07
 void    		exe_exit(char *str, t_list *envp_list, t_shell_level *shell);
 //10
+void			main_builtin(t_token *token);
+int				builtin_check(t_token *token);
+void			builtin_selector(t_token *token);
+//20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
