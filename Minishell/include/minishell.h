@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 14:36:40 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:27:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,10 @@ char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
 char			*extend_result(char *result, size_t size, size_t add_size);
-char			*append_var(char *res, const char *var, t_envlist *envp_list, size_t size);
+char			*append_var(char *res, const char *var, t_envlist *envp_list,
+					size_t size);
 char			*process_var(const char *start, const char **end,
-								char *res, size_t size,
-								char **res_ptr, t_list *envp_list);
+					char *res, size_t size, char **res_ptr, t_list *envp_list);
 //---------------------------------------------------------------------------//
 // Execution
 //10
@@ -148,7 +148,7 @@ char			*read_input(void);
 //00
 int				exe_cd(char *str, t_list *envp_list);
 //01
-int 			exe_echo(char *str, t_envplist *envp_list);
+int				exe_echo(char *str, t_envplist *envp_list);
 //02
 int				mini_env(char	**str, t_envlist *envp_list);
 //03
@@ -165,6 +165,8 @@ void    		exe_exit(char *str, t_list *envp_list, t_shell_level *shell);
 void			main_builtin(t_token *token);
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token);
+void			execute_execve(t_token *token);
+void			execute_execve(t_token *token);
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);

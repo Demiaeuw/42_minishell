@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 15:08:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:19:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,9 @@ void	builtin_selector(t_token *token, t_env *env)
 		exe_pwd(token->value, env->???????);
 	else if (ft_strcmp("exit", token->builtin_info) == 0)
 		exe_exit(token->value, env->???????);
+}
+
+void	execute_execve(t_token *token)
+{
+	printf("ce n'est pas un builtin\n")
 }

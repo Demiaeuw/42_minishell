@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 01:31:13 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:26:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Main de gestion des arguments
  * 1/ split comme il faut le str
- * 2/ créer les tokens par type au fur et a meusure des arguments en liste chainé
+ * 2/ créer les tokens par type au fur et a meusure des arguments en lst chainé
  * 3/ free le tab de char
  * 4/ retourne la liste chainé de tokken
  */
