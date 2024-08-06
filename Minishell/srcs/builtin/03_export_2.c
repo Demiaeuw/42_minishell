@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:19 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:21:24 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:40:33 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,10 @@ void	print_export(t_env *envp_list)
 		key = keys_tab[i];
 		value = envp_find(envp_list, key);
 		if (value)
-			printf("", key, value);
+			printf("declare -x %s=\"%s\"\n", key, value);
 		else
-			printf("", key);
+			printf("declare -x %s\n", key);
 		i++;
 	}
 	free(keys_tab);
-
 }
