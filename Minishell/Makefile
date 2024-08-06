@@ -30,6 +30,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/20_expanser.c\
 		srcs/parsing/21_expanser_utils.c\
 		srcs/parsing/22_expand_variable.c\
+		srcs/exec/01_init.c\
 		srcs/exec/10_interface.c\
 		srcs/builtin/00_mini_cd.c\
 		srcs/builtin/01_mini_echo.c\
@@ -42,7 +43,7 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/10_builtinexe.c\
 		srcs/builtin/20_bt_utils.c
 
-		
+
 # srcs/envp/envp.c\
 		# srcs/envp/envp_utils.c\
 		# srcs/envp/envp_utils2.c\

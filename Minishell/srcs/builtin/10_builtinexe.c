@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_builtinexe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 15:19:14 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:30:21 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	builtin_selector(t_token *token, t_env *env)
 	else if (ft_strcmp("env", token->builtin_info) == 0)
 		mini_env(token->value, env->?????);
 	else if (ft_strcmp("export", token->builtin_info) == 0)
-		mini_export(token->value, env->?????) 
+		mini_export(token->value, env->?????)
 	else if (ft_strcmp("unset", token->builtin_info) == 0)
 		mini_unset(token->value, env->???????);
 	else if (ft_strcmp("pwd", token->builtin_info) == 0)

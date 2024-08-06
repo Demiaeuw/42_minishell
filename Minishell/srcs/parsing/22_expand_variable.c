@@ -29,7 +29,7 @@ char *extend_result(char *result, size_t size, size_t add_size)
 }
 /* ************************************************************************** */
 /* Fonction pour retourner la valeur d'une variable d'env à la char*          */
-char *append_var(char *res, const char *var, t_envlist *envp_list, size_t size)
+char *append_var(char *res, const char *var, t_env *envp_list, size_t size)
 {
 	char *var_value;
 	size_t var_len;
@@ -46,7 +46,7 @@ char *append_var(char *res, const char *var, t_envlist *envp_list, size_t size)
 		{
 			res = extend_result(res, size, var_len);
 			if(!res)
-				return (NULL); 
+				return (NULL);
 		}
 		ft_strcat(res, var_value);
 	}
@@ -55,8 +55,8 @@ char *append_var(char *res, const char *var, t_envlist *envp_list, size_t size)
 /* ************************************************************************** */
 /*Extrait le nom de la variable*/
 char *process_var(const char *start, const char **end,
-					char *res, size_t size, 
-					char **res_ptr, t_list *envp_list)
+					char *res, size_t size,
+					char **res_ptr, t_env *envp_list)
 {
 	char *var_name;
 
@@ -74,7 +74,7 @@ char *process_var(const char *start, const char **end,
 }
 /* ************************************************************************** */
 /* Fonction principale pour l'expansion des variables d'environnement */
-char *expend_variable(const char *input, t_list *envp_list)
+char *expend_variable(const char *input, t_env *envp_list)
 {
 	size_t input_len;
 	size_t res_size;

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:48:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/01 17:58:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:17:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  *
  * ca serait pour afficher le chemin de recherche des execs par exemple
 */
-char	*envp_find(t_envlist *envp_list, char *key)
+char	*envp_find(t_env *envp_list, char *key)
 {
 	t_node *node;
 
@@ -44,7 +44,7 @@ char	*envp_find(t_envlist *envp_list, char *key)
  * par exemple si on veut ajouter un nouveau repertoire au PATH
  * ou si on doit stocker des infos de configuration ou changer le repertoire
 */
-void	envp_edit(t_envlist *envp_list, char *key, char *value)
+void	envp_edit(t_env *envp_list, char *key, char *value)
 {
 	t_node *node;
 
@@ -66,7 +66,7 @@ void	envp_edit(t_envlist *envp_list, char *key, char *value)
  * on definit sa cle et sa valeur, puis
  * on l ajoute a la liste chainee.
 */
-void	envp_add(t_envlist *envp_list, char *key, char *value)
+void	envp_add(t_env *envp_list, char *key, char *value)
 {
 	t_envp	*e_node;
 
@@ -90,7 +90,7 @@ void	envp_add(t_envlist *envp_list, char *key, char *value)
  * En gros au demarrage du programme on appelle cette fonction pour creer
  * la structure contenant les variables de l environnement.
 */
-void	envp_init(t_envlist *envp_list, char **envp)
+void	envp_init(t_env *envp_list, char **envp)
 {
 	int	i;
 	size_t	end_key;
@@ -121,7 +121,7 @@ void	envp_init(t_envlist *envp_list, char **envp)
  * utile si on a une variable temporaire pour un truc specifique on peut la supp
  * quand on en a plus besoin
 */
-void	envp_delete(t_envlist *envp_list, char *key)
+void	envp_delete(t_env *envp_list, char *key)
 {
 	t_node *node;
 

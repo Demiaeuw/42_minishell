@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:40:21 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/29 12:44:54 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:18:17 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * recup le premier noeud de la liste chainee et return un pointeur vers lui.
  */
-t_node	*list_peek_first_node(t_envlist *list)
+t_node	*list_peek_first_node(t_env *list)
 {
 	return (list->head->next);
 }
@@ -23,7 +23,7 @@ t_node	*list_peek_first_node(t_envlist *list)
 /**
  * insere un nouveau noeud a la fin de la liste (list).*
  */
-void	list_append(t_envlist *list, t_node *new_node)
+void	list_append(t_env *list, t_node *new_node)
 {
 	t_node	*last_node;
 
@@ -38,7 +38,7 @@ void	list_append(t_envlist *list, t_node *new_node)
 /**
  * pour creer une nouvelle liste vide.
  */
-void	list_init(t_envlist *list)
+void	list_init(t_env *list)
 {
 	list->head = (t_node *)ft_calloc(1, sizeof(t_node));
 	list->tail = (t_node *)ft_calloc(1, sizeof(t_node));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_export_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:06 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 14:17:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:21:02 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	check_word_sep(char *word, char **key, char **value, int *error_flag)
  * detecte une erreur, ca nous permet d eviter des operations inutiles ou des
  * free incorrect
  */
-int	mini_export(char **str, t_envlist *envp_list)
+int	mini_export(char **str, t_env *envp_list)
 {
 	int		i;
 	int		error_flag;

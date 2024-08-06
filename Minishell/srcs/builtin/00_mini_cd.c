@@ -27,7 +27,7 @@ static  int	home(void)
 	return (0);
 }
 /* ************************************************************************** */
-int	exe_cd(char *str, t_list *envp_list)
+int	exe_cd(char *str, t_env *envp_list)
 {
 	char	old_pwd[PATH_MAX];
 	char	new_pwd[PATH_MAX];
@@ -54,7 +54,7 @@ int	exe_cd(char *str, t_list *envp_list)
 		printf("\033[33m\n🚨Error !🚨\n\n'getcwd' fonction issue\n\n\033[0m")
 		return(1);
 	}
-	/* Si old_pwd est vide mais que PWD est définie,*/ 
+	/* Si old_pwd est vide mais que PWD est définie,*/
 	/*copie la valeur de PWD dans old_pwd.*/
 	if (!ft_strlen(old_pwd) && envp_find(envp_list, "PWD"))
 		ft_strlcpy(old_pwd, envp_find(envp_list, "PWD"));
@@ -62,7 +62,7 @@ int	exe_cd(char *str, t_list *envp_list)
 	if	(!envp_edit(envp_list, OLDPWD, old_pwd)) || (!envp_edit(envp_list, PWD, new_pwd))
 	{
 		printf("🚨Error ! Maj environement fail !🚨\n");
-		return (1); 
+		return (1);
 	}
 	return (0);
 }

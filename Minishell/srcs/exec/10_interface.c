@@ -37,5 +37,3 @@ char *read_input(void)
     buffer[bytes_read] = '\0';
     return buffer;
 }
-
-

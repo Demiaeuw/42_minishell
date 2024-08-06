@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/01 17:58:53 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:20:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 	cur_node est un pointeur sur le noeud actuel et nous permet de naviguer
 	dans tous les noeuds de la liste.
 */
-int	mini_env(char	**str, t_envlist *envp_list)
+int	mini_env(char	**str, t_env *envp_list)
 {
 	t_node	*cur_node;
 	char	*key;

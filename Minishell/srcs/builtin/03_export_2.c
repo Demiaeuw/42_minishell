@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_export_2.c                                      :+:      :+:    :+:   */
+/*   03_export_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:19 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/01 17:58:46 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:21:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * cur_node est un pointeur sur le noeud actuel et nous permet de naviguer
  * dans tous les noeuds de la liste.
 */
-char	**extract_keys(t_envlist *envp_list)
+char	**extract_keys(t_env *envp_list)
 {
 	int		i;
 	t_node	*cur_node;
@@ -76,7 +76,7 @@ void	sort_keys(char **key_arr)
  * on creer et trie le tableau de keys avec nos fonctions juste au dessus, et
  * on parcourt keys_tab pour afficher toutes les var d env.
 */
-void	print_export(t_envlist *envp_list)
+void	print_export(t_env *envp_list)
 {
 	char	**keys_tab;
 	char	*key;

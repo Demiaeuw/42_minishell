@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void    exe_exit(char *str, t_list *envp_list, t_shell_level *shell)
+void    exe_exit(char *str, t_env *envp_list, t_shell_level *shell)
 {
 	char space_pos[1024];
 	int	exit_code = 0;

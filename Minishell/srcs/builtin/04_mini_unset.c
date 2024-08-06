@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_mini_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 14:35:16 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:21:31 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
  *
  * on utilise continue ici pour les memes raisons que pour export
 */
-int	mini_unset(char **str, t_envlist *envp_list)
+int	mini_unset(char **str, t_env *envp_list)
 {
 	int		error_flag;
 	int		i;
