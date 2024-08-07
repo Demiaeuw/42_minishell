@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:40:48 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:19:24 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:34:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ typedef struct s_node
 //pratique pour la gestion de la liste).
 typedef struct s_env
 {
-	int			size;
-	t_node		*head;
-	t_node		*tail;
+	int				size;
+	// char			*categorie;
+	// char			*value;
+	t_node			*head;
+	t_node			*tail;
+	// struct s_env	*next;
 }	t_env;
 
 /*			MAIN FUNCTIONS			*/
@@ -53,5 +56,8 @@ void	list_init(t_env *list);
 int		list_size(t_env *list);
 void	list_append(t_env *list, t_node *new_node);
 t_node	*list_peek_first_node(t_env *list);
+/*			Printenv				*/
+void	print_env_list(t_env *env);
+
 
 #endif

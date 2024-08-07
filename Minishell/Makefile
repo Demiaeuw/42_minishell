@@ -22,6 +22,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
 		srcs/parsing/02_free.c\
+		srcs/parsing/02_free2.c\
 		srcs/parsing/03_printing.c\
 		srcs/parsing/10_parsing.c\
 		srcs/parsing/11_token_comp.c\
@@ -44,6 +45,7 @@ SRCS = 	srcs/main.c\
 		srcs/envp/envp.c\
 		srcs/envp/envp_utils.c\
 		srcs/envp/envp_utils2.c\
+		srcs/envp/printenv.c\
 		srcs/exec/00_error.c
 
 

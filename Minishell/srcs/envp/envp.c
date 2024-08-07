@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:48:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:17:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:03:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,16 @@ void	envp_add(t_env *envp_list, char *key, char *value)
  * En gros au demarrage du programme on appelle cette fonction pour creer
  * la structure contenant les variables de l environnement.
 */
-void	envp_init(t_env *envp_list, char **envp)
+void	envp_init(t_env *env, char **envp)
 {
-	int	i;
+	int		i;
 	size_t	end_key;
 	char	*key;
 	char	*value;
 
-	list_init(envp_list);
+	env->head = NULL;
+	env->tail = NULL;
+	env->size = 0;
 	i = 0;
 	while (envp[i])
 	{
@@ -106,7 +108,7 @@ void	envp_init(t_env *envp_list, char **envp)
 			end_key++;
 		key = ft_substr(envp[i], 0, end_key);
 		value = ft_strdup(ft_strchr(envp[i], '=') + 1);
-		envp_add(envp_list, key, value);
+		envp_add(env, key, value);
 		free(key);
 		free(value);
 		i++;

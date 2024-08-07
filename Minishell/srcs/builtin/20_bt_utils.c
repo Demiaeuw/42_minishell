@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   10_bt_utils.c                                      :+:      :+:    :+:   */
+/*   20_bt_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/07/30 17:18:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:18:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_word_count(char **cmd_list)
 	int	i;
 
 	i = 0;
-	while (cmd_vector[i])
+	while (cmd_list[i])
 		i++;
 	return (i);
 }
