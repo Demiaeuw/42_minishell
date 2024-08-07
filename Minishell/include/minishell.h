@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 16:06:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:35:05 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void			print_export(t_env *envplist);
 int				mini_unset(char **str, t_env *envp_list);
 
 //05
-int				exe_pwd(char *str, t_env *envp_list);
+int				exe_pwd(void);
 //06
 void			exe_exit(char *str, t_env *envp_list, t_shell_level *shell);
 //10

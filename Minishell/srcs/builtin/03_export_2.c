@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_export_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:19 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:40:33 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:32:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	print_export(t_env *envp_list)
 	i = 0;
 	keys_tab = extract_keys(envp_list);
 	sort_keys(keys_tab);
-	while (key_arr[i])
+	while (keys_tab[i])
 	{
 		key = keys_tab[i];
 		value = envp_find(envp_list, key);

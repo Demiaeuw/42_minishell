@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_mini_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:21:31 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:33:02 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int	mini_unset(char **str, t_env *envp_list)
 			envp_delete(envp_list, key);
 			i++;
 		}
-		return (error_flag);
 	}
+	return (error_flag);
 }
