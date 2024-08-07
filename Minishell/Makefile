@@ -46,7 +46,8 @@ SRCS = 	srcs/main.c\
 		srcs/envp/envp_utils.c\
 		srcs/envp/envp_utils2.c\
 		srcs/envp/printenv.c\
-		srcs/exec/00_error.c
+		srcs/exec/00_error.c\
+		srcs/envp02/00_init.c
 
 
 # srcs/parsing/22_expand_variable.c\

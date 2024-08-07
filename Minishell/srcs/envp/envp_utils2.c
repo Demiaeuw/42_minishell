@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:40:21 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:18:17 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:57:04 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "envp.h"
+#include "../../include/minishell.h"
 
 /**
  * recup le premier noeud de la liste chainee et return un pointeur vers lui.
@@ -45,4 +45,18 @@ void	list_init(t_env *list)
 	list->head->next = list->tail;
 	list->tail->prev = list->head;
 	list->size = 0;
+}
+
+t_node	*new_node(void *content)
+{
+	t_node *new_node;
+
+	new_node = (t_node*)ft_calloc(1, sizeof(t_node));
+	new_node->content = content;
+	return(new_node);
+}
+
+int	list_size(t_env *list)
+{
+	return(list->size);
 }

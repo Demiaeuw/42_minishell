@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-/* ************************************************************************** */
-/* Fonction auxiliaire pour étendre la chaîne avec realoc*/
+
+// Fonction auxiliaire pour étendre la chaîne avec realoc
 char	*extend_result(char *result, size_t *result_size, size_t add_size)
 {
 	char	*new_result;
@@ -28,8 +28,7 @@ char	*extend_result(char *result, size_t *result_size, size_t add_size)
 	*result_size = new_size;
 	return (new_result);
 }
-/* ************************************************************************** */
-/* Fonction pour retourner la valeur d'une variable d'env à la char*          */
+// Fonction pour retourner la valeur d'une variable d'env à la char
 char *append_var(char *res, const char *var, t_env *envp_list, size_t size)
 {
 	char *var_value;
@@ -53,8 +52,7 @@ char *append_var(char *res, const char *var, t_env *envp_list, size_t size)
 	}
 	retrun (res);
 }
-/* ************************************************************************** */
-/*Extrait le nom de la variable*/
+// Extrait le nom de la variable
 char *process_var(const char *start, const char **end,
 					char *res, size_t size,
 					char **res_ptr, t_env *envp_list)
@@ -73,8 +71,8 @@ char *process_var(const char *start, const char **end,
 	*res_ptr = res + ft_strlen(res);
 	return (res);
 }
-/* ************************************************************************** */
-/* Fonction principale pour l'expansion des variables d'environnement */
+
+// Fonction principale pour l'expansion des variables d'environnement
 char *expend_variable(const char *input, t_env *envp_list)
 {
 	size_t input_len;

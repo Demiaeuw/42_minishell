@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:52:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:17:48 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:25:39 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "envp.h"
+#include "../../include/minishell.h"
 
 /**
  * Concatene 3 string de char grace a strcat au dessus
@@ -25,7 +25,7 @@ char	*str3join(char *str1, char *str2, char *str3)
 	str3len = ft_strlen(str3);
 	str1len = ft_strlen(str1);
 	str2len = ft_strlen(str2);
-	returnstr = (char *)ft_malloc(str1len + str2len + str3len + 1);
+	returnstr = (char *)malloc(str1len + str2len + str3len + 1);
 	if (!returnstr)
 		return (0);
 	returnstr[0] = 0;
@@ -50,7 +50,7 @@ char	**envp_convert(t_env *envp_list)
 	t_envp	*envp_node;
 
 	envplen = list_size(envp_list);
-	envpstr = (char **)ft_malloc(sizeof(char *) * (envplen + 1));
+	envpstr = (char **)malloc(sizeof(char *) * (envplen + 1));
 	node = list_peek_first_node(envp_list);
 	i = 0;
 	while (node->next != 0)

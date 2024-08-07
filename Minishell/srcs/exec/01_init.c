@@ -14,5 +14,7 @@
 
 void	main_init_envp(t_env *envp_list, char **envp)
 {
+	printf("test avant envpinit");
 	envp_init(envp_list, envp);
+	printf("test apres envpinit");
 }

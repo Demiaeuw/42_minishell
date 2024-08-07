@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_mini_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 15:20:57 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:18:30 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,31 @@
 	cur_node est un pointeur sur le noeud actuel et nous permet de naviguer
 	dans tous les noeuds de la liste.
 */
-int	mini_env(char	**str, t_env *envp_list)
-{
-	t_node	*cur_node;
-	char	*key;
-	char	*value;
+// int	mini_env(char	**str, t_env *envp_list)
+// {
+// 	t_node	*cur_node;
+// 	char	*key;
+// 	char	*value;
 
-	if  (check_word_count(str) != 1)
-	{
-		gestion_erreur_bt("env", 0, MANY_ARG);
-		return (EXIT_FAILURE);
-	}
-	cur_node = list_peek_first_node(envp_list);
-	while (cur_node->next)
-	{
-		key = ((t_envp *)cur_node->content)->key;
-		value = ((t_envp *)cur_node->content)->value;
-		if (value)
-			printf("%s=%s\n", key, value);
-		cur_node = cur_node->next;
-	}
-	return(EXIT_SUCCESS);
+// 	if  (check_word_count(str) != 1)
+// 	{
+// 		gestion_erreur_bt("env", 0, MANY_ARG);
+// 		return (EXIT_FAILURE);
+// 	}
+// 	cur_node = list_peek_first_node(envp_list);
+// 	while (cur_node->next)
+// 	{
+// 		key = ((t_envp *)cur_node->content)->key;
+// 		value = ((t_envp *)cur_node->content)->value;
+// 		if (value)
+// 			printf("%s=%s\n", key, value);
+// 		cur_node = cur_node->next;
+// 	}
+// 	return(EXIT_SUCCESS);
+// }
+
+void	mini_env(t_envfinal *envp)
+{
+	print_env_list2(envp);
+	
 }

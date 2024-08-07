@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 16:40:10 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:24:05 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
-# include "../srcs/envp/envp.h"
 
 /**
  * Définition d'une énumération pour les types de tokens
@@ -93,6 +92,40 @@ typedef struct s_shell
 {
 	int				level;
 }	t_shell_level;
+
+//---------------------------------------------------------------------------//
+typedef struct s_envp
+{
+	char	*key;
+	char	*value;
+}	t_envp;
+
+typedef struct s_node
+{
+	void			*content;
+	struct s_node	*prev;
+	struct s_node	*next;
+}	t_node;
+
+// head and tail = dummy nodes(noeuds qui contient rien, juste une facon
+// pratique pour la gestion de la liste).
+typedef struct s_env
+{
+	int				size;
+	// char			*categorie;
+	// char			*value;
+	t_node			*head;
+	t_node			*tail;
+	// struct s_env	*next;
+}	t_env;
+
+
+typedef struct s_envfinal
+{
+	char	*type;
+	char	*content;
+	struct s_envfinal *next;
+}	t_envfinal;
 //---------------------------------------------------------------------------//
 // Parsing
 //00
@@ -153,7 +186,8 @@ int				exe_cd(char *str, t_env *envp_list);
 //01
 int 			exe_echo(char *str);
 //02
-int				mini_env(char	**str, t_env *envp_list);
+// int				mini_env(char	**str, t_env *envp_list);
+void			mini_env(t_envfinal *envp);
 //03
 int				mini_export(char **str, t_env *envp_list);
 void			print_export(t_env *envplist);
@@ -165,14 +199,50 @@ int				exe_pwd(void);
 //06
 void			exe_exit(char *str, t_env *envp_list, t_shell_level *shell);
 //10
-void			main_builtin(t_token *token, t_env *envp);
+void			main_builtin(t_token *token, t_envfinal *env);
 int				builtin_check(t_token *token);
-void			builtin_selector(t_token *token, t_env *envp);
+void			builtin_selector(t_token *token, t_envfinal *env);
 void			execute_execve(t_token *token);
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
 void			gestion_erreur_bt(char *cmd, char *word, int status);
+
+
+
+//---------------------------------------------------------------------------//
+//                             env.h                                         //
+
+/*			MAIN FUNCTIONS			*/
+void	envp_init(t_env *envp_list, char **envp);
+void	envp_add(t_env *envp_list, char *key, char *value);
+int		envp_exist(t_env *envp_list, char *key);
+char	*envp_find(t_env *envp_list, char *key);
+void	envp_edit(t_env *envp_list, char *key, char *value);
+
+/*			UTILS FUNCTIONS			*/
+void	envp_delete(t_env *envp_list, char *key);
+char	**envp_convert(t_env *envp_list);
+char	*str3join(char *str1, char *str2, char *str3);
+void	list_init(t_env *list);
+int		list_size(t_env *list);
+void	list_append(t_env *list, t_node *new_node);
+t_node	*list_peek_first_node(t_env *list);
+t_node 	*new_node(void *content);
+/*			Printenv				*/
+void	print_env_list(t_env *env);
+
+
+
+
+
+//test
+void    		free_node2(t_envfinal *node);
+t_envfinal		*create_env_node2(const char *type, const char *content);
+void			add_env_node2(t_envfinal **env_list, t_envfinal *new_node);
+void			init_env_list2(t_envfinal **env_list, char **envp);
+void			print_env_list2(t_envfinal *env_list);
+void			free_env_list2(t_envfinal *env_list);
 
 #endif

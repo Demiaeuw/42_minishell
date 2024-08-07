@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 15:26:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:43:06 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**step01(char *str)
 		return (NULL);
 
 	// Allocation mémoire pour le pire cas (chaque caractère est un mot)
-	args = (char **)safe_malloc((ft_strlen(str) / 2 + 2) * sizeof(char *));
+	args = safe_malloc((ft_strlen(str) / 2 + 2) * sizeof(char *));
 	i = 0;
 	k = 0;
 	quote_char = 0;

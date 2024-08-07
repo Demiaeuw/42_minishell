@@ -6,11 +6,11 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 16:07:32 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 16:07:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:58:15 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "envp.h"
+#include "../../include/minishell.h"
 
 void	print_env_list(t_env *env)
 {

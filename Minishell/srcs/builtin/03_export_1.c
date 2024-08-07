@@ -6,12 +6,11 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:33:06 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/06 16:06:45 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:44:27 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "../envp/envp.h"
 
 /**
  * BUT DE LA FONCTION : avec cette commande on peut ajouter ou modifier des var

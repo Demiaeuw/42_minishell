@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:48:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/07 16:46:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:30:33 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // FICHIER RESPONSABLE DE LA GESTION DES VARIABLES D ENVIRONNEMENT.
 
-#include "envp.h"
+#include "../../include/minishell.h"
 
 /**
  * parcourt la liste chainee envp_list jusqu a
