@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 19:24:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:49:48 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,30 +94,30 @@ typedef struct s_shell
 }	t_shell_level;
 
 //---------------------------------------------------------------------------//
-typedef struct s_envp
-{
-	char	*key;
-	char	*value;
-}	t_envp;
+// typedef struct s_envp
+// {
+// 	char	*key;
+// 	char	*value;
+// }	t_envp;
 
-typedef struct s_node
-{
-	void			*content;
-	struct s_node	*prev;
-	struct s_node	*next;
-}	t_node;
+// typedef struct s_node
+// {
+// 	void			*content;
+// 	struct s_node	*prev;
+// 	struct s_node	*next;
+// }	t_node;
 
-// head and tail = dummy nodes(noeuds qui contient rien, juste une facon
-// pratique pour la gestion de la liste).
-typedef struct s_env
-{
-	int				size;
-	// char			*categorie;
-	// char			*value;
-	t_node			*head;
-	t_node			*tail;
-	// struct s_env	*next;
-}	t_env;
+// // head and tail = dummy nodes(noeuds qui contient rien, juste une facon
+// // pratique pour la gestion de la liste).
+// typedef struct s_env
+// {
+// 	int				size;
+// 	// char			*categorie;
+// 	// char			*value;
+// 	t_node			*head;
+// 	t_node			*tail;
+// 	// struct s_env	*next;
+// }	t_env;
 
 
 typedef struct s_envfinal
@@ -127,7 +127,7 @@ typedef struct s_envfinal
 	struct s_envfinal *next;
 }	t_envfinal;
 //---------------------------------------------------------------------------//
-// Parsing
+//                               Parsing                                     //
 //00
 void			main_error(void (*f)(), int index);
 void			ft_error(int index);
@@ -141,8 +141,8 @@ void			free_token_value(void *value);
 void			free_token_list(t_token **lst, void (*del)(void*));
 void			free_split_result(char **result);
 void			free_shlvl(t_shell_level *shlvl);
-void			free_envp_node(t_envp *envp);
-void			free_env_list(t_env *envp_list);
+// void			free_envp_node(t_envp *envp);
+// void			free_env_list(t_env *envp_list);
 //03
 char			*get_token_type_name(t_token_type type);
 void			print_tokens(t_token *token);
@@ -167,37 +167,37 @@ bool			is_relativ_path(const char *path);
 char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
-char			*extend_result(char *result, size_t size, size_t add_size);
-char			*append_var(char *res, const char *var, t_env *envp_list, size_t size);
-char			*process_var(const char *start, const char **end,
-					char *res, size_t size, char **res_ptr, t_list *envp_list);
+// char			*extend_result(char *result, size_t size, size_t add_size);
+// char			*append_var(char *res, const char *var, t_env *envp_list, size_t size);
+// char			*process_var(const char *start, const char **end,
+// 					char *res, size_t size, char **res_ptr, t_list *envp_list);
 //---------------------------------------------------------------------------//
-// Execution
+//                            Execution                                      //
 //01
-void			main_init_envp(t_env *envp_list, char **envp);
+// void			main_init_envp(t_env *envp_list, char **envp);
 //10
 void			display_prompt(void);
 char			*read_input(void);
 
 //---------------------------------------------------------------------------//
-//builtin
+//                            builtin                                        //
 //00
-int				exe_cd(char *str, t_env *envp_list);
+// int				exe_cd(char *str, t_env *envp_list);
 //01
 int 			exe_echo(char *str);
 //02
 // int				mini_env(char	**str, t_env *envp_list);
 void			mini_env(t_envfinal *envp);
 //03
-int				mini_export(char **str, t_env *envp_list);
-void			print_export(t_env *envplist);
+// int				mini_export(char **str, t_env *envp_list);
+// void			print_export(t_env *envplist);
 //04
-int				mini_unset(char **str, t_env *envp_list);
+// int				mini_unset(char **str, t_env *envp_list);
 
 //05
 int				exe_pwd(void);
 //06
-void			exe_exit(char *str, t_env *envp_list, t_shell_level *shell);
+// void			exe_exit(char *str, t_env *envp_list, t_shell_level *shell);
 //10
 void			main_builtin(t_token *token, t_envfinal *env);
 int				builtin_check(t_token *token);
@@ -212,37 +212,18 @@ void			gestion_erreur_bt(char *cmd, char *word, int status);
 
 
 //---------------------------------------------------------------------------//
-//                             env.h                                         //
-
-/*			MAIN FUNCTIONS			*/
-void	envp_init(t_env *envp_list, char **envp);
-void	envp_add(t_env *envp_list, char *key, char *value);
-int		envp_exist(t_env *envp_list, char *key);
-char	*envp_find(t_env *envp_list, char *key);
-void	envp_edit(t_env *envp_list, char *key, char *value);
-
-/*			UTILS FUNCTIONS			*/
-void	envp_delete(t_env *envp_list, char *key);
-char	**envp_convert(t_env *envp_list);
-char	*str3join(char *str1, char *str2, char *str3);
-void	list_init(t_env *list);
-int		list_size(t_env *list);
-void	list_append(t_env *list, t_node *new_node);
-t_node	*list_peek_first_node(t_env *list);
-t_node 	*new_node(void *content);
-/*			Printenv				*/
-void	print_env_list(t_env *env);
+//                              envp                                         //
+//00
+t_envfinal		*create_env_node(const char *type, const char *content);
+void			add_env_node(t_envfinal **env_list, t_envfinal *new_node);
+void			init_env_list(t_envfinal **env_list, char **envp);
+void			print_env_list(t_envfinal *env_list);
+//01
+void    		free_node(t_envfinal *node);
+void			free_env_list(t_envfinal *env_list);
 
 
 
 
-
-//test
-void    		free_node2(t_envfinal *node);
-t_envfinal		*create_env_node2(const char *type, const char *content);
-void			add_env_node2(t_envfinal **env_list, t_envfinal *new_node);
-void			init_env_list2(t_envfinal **env_list, char **envp);
-void			print_env_list2(t_envfinal *env_list);
-void			free_env_list2(t_envfinal *env_list);
 
 #endif

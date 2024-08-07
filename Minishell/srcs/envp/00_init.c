@@ -6,24 +6,14 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:37:43 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 18:23:15 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:54:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void    free_node2(t_envfinal *node)
-{
-	if (node)
-	{
-		free(node->type);
-		free(node->content);
-		free(node);
-	}
-}
-
 // Fonction pour créer un nouveau nœud
-t_envfinal	*create_env_node2(const char *type, const char *content)
+t_envfinal	*create_env_node(const char *type, const char *content)
 {
 	t_envfinal *node;
 
@@ -48,7 +38,7 @@ t_envfinal	*create_env_node2(const char *type, const char *content)
 }
 
 // Fonction pour ajouter un nœud à la liste chaînée
-void	add_env_node2(t_envfinal **env_list, t_envfinal *new_node)
+void	add_env_node(t_envfinal **env_list, t_envfinal *new_node)
 {
 	t_envfinal *current;
 
@@ -64,7 +54,7 @@ void	add_env_node2(t_envfinal **env_list, t_envfinal *new_node)
 }
 
 // Fonction pour initialiser la liste chaînée des variables d'environnement
-void	init_env_list2(t_envfinal **env_list, char **envp)
+void	init_env_list(t_envfinal **env_list, char **envp)
 {
 	int			i;
 	char		*key;
@@ -75,19 +65,19 @@ void	init_env_list2(t_envfinal **env_list, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		sep = strchr(envp[i], '=');
+		sep = ft_strchr(envp[i], '=');
 		if (sep)
 		{
 			*sep = '\0';
 			key = envp[i];
 			value = sep + 1;
-			new_node = create_env_node2(key, value);
+			new_node = create_env_node(key, value);
 			if (!new_node)
 			{
 				perror("Failed to create env node");
 				break;
 			}
-			add_env_node2(env_list, new_node);
+			add_env_node(env_list, new_node);
 			*sep = '=';
 		}
 		i++;
@@ -95,7 +85,7 @@ void	init_env_list2(t_envfinal **env_list, char **envp)
 }
 
 // Fonction pour afficher la liste chaînée des variables d'environnement
-void	print_env_list2(t_envfinal *env_list)
+void	print_env_list(t_envfinal *env_list)
 {
 	while (env_list)
 	{
@@ -104,17 +94,3 @@ void	print_env_list2(t_envfinal *env_list)
 	}
 }
 
-// Fonction pour libérer la mémoire de la liste chaînée des variables d'environnement
-void	free_env_list2(t_envfinal *env_list)
-{
-	t_envfinal *current;
-	t_envfinal *next;
-
-	current = env_list;
-	while (current)
-	{
-		next = current->next;
-		free_node2(current);
-		current = next;
-	}
-}

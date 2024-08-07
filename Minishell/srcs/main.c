@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 19:26:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:51:10 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int ac, char **av, char **env)
 
 	
 	//test
-	init_env_list2(&env_list, env);
+	init_env_list(&env_list, env);
 	// print_env_list2(env_list);
 	// fin de test 
 
@@ -142,7 +142,7 @@ int	main(int ac, char **av, char **env)
 		i++;
 		// fin test ----------------------------------------------------------------------------------------------------//
 	 }
-	free_env_list2(env_list);
+	free_env_list(env_list);
 
 	return (0);
 }

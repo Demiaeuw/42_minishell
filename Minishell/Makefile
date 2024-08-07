@@ -19,19 +19,6 @@ OBJDIR = obj
 
 # Fichiers source
 SRCS = 	srcs/main.c\
-		srcs/parsing/00_error.c\
-		srcs/parsing/01_init.c\
-		srcs/parsing/02_free.c\
-		srcs/parsing/02_free2.c\
-		srcs/parsing/03_printing.c\
-		srcs/parsing/10_parsing.c\
-		srcs/parsing/11_token_comp.c\
-		srcs/parsing/12_cleaning_list.c\
-		srcs/parsing/13_builtin_gestion.c\
-		srcs/parsing/20_expanser.c\
-		srcs/parsing/21_expanser_utils.c\
-		srcs/exec/01_init.c\
-		srcs/exec/10_interface.c\
 		srcs/builtin/00_mini_cd.c\
 		srcs/builtin/01_mini_echo.c\
 		srcs/builtin/02_mini_env.c\
@@ -42,12 +29,21 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/06_mini_exit.c\
 		srcs/builtin/10_builtinexe.c\
 		srcs/builtin/20_bt_utils.c\
-		srcs/envp/envp.c\
-		srcs/envp/envp_utils.c\
-		srcs/envp/envp_utils2.c\
-		srcs/envp/printenv.c\
+		srcs/envp/00_init.c\
+		srcs/envp/01_free.c\
+		srcs/exec/10_interface.c\
 		srcs/exec/00_error.c\
-		srcs/envp02/00_init.c
+		srcs/parsing/00_error.c\
+		srcs/parsing/01_init.c\
+		srcs/parsing/02_free.c\
+		srcs/parsing/02_free2.c\
+		srcs/parsing/03_printing.c\
+		srcs/parsing/10_parsing.c\
+		srcs/parsing/11_token_comp.c\
+		srcs/parsing/12_cleaning_list.c\
+		srcs/parsing/13_builtin_gestion.c\
+		srcs/parsing/20_expanser.c\
+		srcs/parsing/21_expanser_utils.c
 
 
 # srcs/parsing/22_expand_variable.c\
