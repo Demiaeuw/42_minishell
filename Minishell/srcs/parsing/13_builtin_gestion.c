@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:13:23 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:23:51 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:20:55 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	add_builtin(t_token *token)
 			copy_com(current->value, com);
 			if (is_builtin_command(com))
 				current->is_builtin = true;
-			current->builtin_info = ft_strdup(com);
+			ft_strcpy(current->builtin_info, com);
 		}
 		current = current->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:37:43 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 12:37:42 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:48:51 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_env_list(t_envfinal *env_list)
 {
 	while (env_list)
 	{
-		printf("%s %s\n", env_list->type, env_list->content);
+		printf("%s=%s\n", env_list->type, env_list->content);
 		env_list = env_list->next;
 	}
 }
@@ -41,7 +41,7 @@ void	increment_shlvl(t_envfinal *env)
 		if (new_content)
 		{
 			free(current->content);
-			current->content = new_content;
+			current->content = new_content; // free content ici peut etre
 		}
 	}
 	return ;

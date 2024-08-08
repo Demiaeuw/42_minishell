@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_free1.c                                         :+:      :+:    :+:   */
+/*   02_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 12:57:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:11:49 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	free_token_list(t_token **lst, void (*del)(void*))
 	{
 		next = current->next;
 		del(current->value);
-		free(current->builtin_info);
+		if (current->builtin_info)
+			free(current->builtin_info);
 		free(current);
 		current = next;
 	}

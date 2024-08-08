@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 12:51:49 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:34:01 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void    main_env(t_envfinal **env, char **envp)
 {
-    init_env_list(env, envp);
-    increment_shlvl(*env);
+	init_env_list(env, envp);
+	increment_shlvl(*env);
 }
 
 // Fonction pour créer un nouveau nœud

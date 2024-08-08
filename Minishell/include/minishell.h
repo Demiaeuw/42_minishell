@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 13:06:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:19:05 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,10 +175,12 @@ void			init_env_list(t_envfinal **env_list, char **envp);
 void			print_env_list(t_envfinal *env_list);
 void			increment_shlvl(t_envfinal *env);
 void			decrement_shlvl(t_envfinal *env);
-
 //01
 void    		free_node(t_envfinal *node);
 void			free_env_list(t_envfinal *env_list);
+//02
+void			increment_int(t_envfinal *env, char *str);
+void			decrement_int(t_envfinal *env, char *str);
 
 
 

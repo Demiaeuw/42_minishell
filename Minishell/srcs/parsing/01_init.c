@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 12:55:55 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:22:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_token	*create_token(t_token_type type, char *value)
 	token->type = type;
 	token->value = ft_strdup(value);
 	token->is_builtin = false;
+	token->builtin_info = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
 	token->is_last_command = false;
 	token->next = NULL;
 	return (token);
