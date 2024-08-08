@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 14:19:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:58:52 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ typedef struct s_token
 
 typedef struct s_envfinal
 {
-	char	*type;
-	char	*content;
-	struct s_envfinal *next;
+	char				*type;
+	char				*content;
+	struct s_envfinal	*next;
 }	t_envfinal;
-//---------------------------------------------------------------------------//
-//                               Parsing                                     //
+//--------------------------------------------------------------------------//
+//									Parsing									//
 //00
 void			main_error(void (*f)(), int index);
 void			ft_error(int index);
@@ -107,10 +107,11 @@ t_token			*step02(char **array);
 t_token_type	token_compare(char *arg);
 void			last_command(t_token *token);
 //12
-// t_token			*simplify_list(t_token *token);
-void			add_combined_token(t_token **simplst, char **combival, bool *firstcmd);
+void			add_combined_token(t_token **simplst, char **combival,
+					bool *firstcmd);
 void			add_pipe_token(t_token **simplified_list);
-void			combine_value(char **combival, char *current_value, bool *firstcmd);
+void			combine_value(char **combival, char *current_value,
+					bool *firstcmd);
 t_token			*simplify_list(t_token *token);
 //13
 void			copy_com(const char *src, char *dest);
@@ -124,23 +125,24 @@ char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
 // char			*extend_result(char *result, size_t size, size_t add_size);
-// char			*append_var(char *res, const char *var, t_env *envp_list, size_t size);
+// char			*append_var(char *res, const char *var, t_env *envp_list,
+//					size_t size);
 // char			*process_var(const char *start, const char **end,
 // 					char *res, size_t size, char **res_ptr, t_list *envp_list);
-//---------------------------------------------------------------------------//
-//                            Execution                                      //
+//--------------------------------------------------------------------------//
+//									Execution								//
 //01
 // void			main_init_envp(t_env *envp_list, char **envp);
 //10
 void			display_prompt(void);
 char			*read_input(void);
 
-//---------------------------------------------------------------------------//
-//                            builtin                                        //
+//--------------------------------------------------------------------------//
+//									builtin									//
 //00
 // int				exe_cd(char *str, t_env *envp_list);
 //01
-int 			exe_echo(char *str);
+int				exe_echo(char *str);
 //02
 // int				mini_env(char	**str, t_env *envp_list);
 void			mini_env(t_envfinal *envp);
@@ -153,7 +155,7 @@ void			mini_env(t_envfinal *envp);
 //05
 int				exe_pwd(void);
 //06
-// void			exe_exit(char *str, t_env *envp_list, t_shell_level *shell);
+void			exe_exit(char *str, t_envfinal *env, t_token *token);
 //10
 void			main_builtin(t_token *token, t_envfinal *env);
 int				builtin_check(t_token *token);
@@ -165,8 +167,8 @@ int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
 void			gestion_erreur_bt(char *cmd, char *word, int status);
 
-//---------------------------------------------------------------------------//
-//                              envp                                         //
+//--------------------------------------------------------------------------//
+//									envp									//
 //00
 void			main_env(t_envfinal **env, char **envp);
 t_envfinal		*create_env_node(const char *type, const char *content);
@@ -176,14 +178,11 @@ void			print_env_list(t_envfinal *env_list);
 void			increment_shlvl(t_envfinal *env);
 void			decrement_shlvl(t_envfinal *env);
 //01
-void    		free_node(t_envfinal *node);
+void			free_node(t_envfinal *node);
 void			free_env_list(t_envfinal *env_list);
 //02
 void			increment_int(t_envfinal *env, char *str);
 void			decrement_int(t_envfinal *env, char *str);
-
-
-
-
+void			modif_env(t_envfinal *env, char *type_env, char *new_content);
 
 #endif

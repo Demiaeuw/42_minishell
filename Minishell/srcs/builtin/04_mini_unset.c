@@ -12,45 +12,48 @@
 
 // #include "../../include/minishell.h"
 
-// /**
-//  * Utilisation : pour supprimer des variables d envrionnement d une liste.
-//  *
-//  * Exemple : si on fait unset VAR1, ca supprimera VAR1 de la liste des var
-//  * d environnement
-//  *
-//  * on utilise is proper env pour verifier que l arg actuel est un nom de var
-//  * d environnement valide.
-//  * si l arg n est pas valide on appelle notre gestion d erreur.
-//  *
-//  * si l arg est valide, on le stocke dans key.
-//  * et on apelle envp delete pour suppr la var d environnement qui correspond
-//  * de la liste envp_list
-//  *
-//  * on utilise continue ici pour les memes raisons que pour export
-// */
-// int	mini_unset(char **str, t_env *envp_list)
-// {
-// 	int		error_flag;
-// 	int		i;
-// 	char	*key;
+// Utilisation : pour supprimer des variables d envrionnement d une liste.
 
-// 	error_flag = EXIT_SUCCESS;
-// 	i = 1;
-// 	while (str[i])
-// 	{
-// 		if (!is_proper_env(str[i]))
-// 		{
-// 			error_flag = EXIT_FAILURE;
-// 			gestion_erreur_bt("unset", str[i], INVALID_ARG);
-// 			i++;
-// 			continue ;
-// 		}
-// 		else
-// 		{
-// 			key = str[i];
-// 			envp_delete(envp_list, key);
-// 			i++;
-// 		}
-// 	}
-// 	return (error_flag);
-// }
+/*
+// Supprime une variable de l env de la liste chainee.
+// on traverse la liste jusqu a ce qu on trouve la cle
+void	delete_env(t_envfinal **env, char *key)
+{
+	t_envfinal *current = *env;
+	t_envfinal *previous = NULL;
+
+	while (current != NULL && strcmp(current->type, key) != 0)
+	{
+		previous = current;
+		current = current->next;
+	}
+	if (current == NULL)
+		return ;
+	if (previous == NULL)
+		*env = current->next;
+	else
+		previous->next = current->next;
+	//ici on pourra free ce qu il faut je pense
+}
+
+int	mini_unset(char **cmd_str, t_envfinal **env)
+{
+	bool	error_flag = false;
+	int		i = 1;
+
+	while (cmd_str[i])
+	{
+		if (!is_proper_env(cmd_str[i]))
+		{
+			error_flag = true;
+			printf("unset: '%s' : invalid argument\n", cmd_str[i]);
+		}
+		else
+		{
+			delete_env(env, cmd_str[i]);
+		}
+		i++;
+	}
+	return (error_flag);
+}
+*/

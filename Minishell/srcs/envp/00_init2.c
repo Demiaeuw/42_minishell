@@ -6,13 +6,17 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:37:43 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 13:48:51 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:15:43 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// Fonction pour afficher la liste chaînée des variables d'environnement
+/**
+ * Fonction pour afficher la liste chaînée des variables d'environnement
+ * Argument : 
+ * 1. liste chainé de l'environement
+ */ 
 void	print_env_list(t_envfinal *env_list)
 {
 	while (env_list)
@@ -22,7 +26,12 @@ void	print_env_list(t_envfinal *env_list)
 	}
 }
 
-// Fonction pour +1 le SHLVL
+
+/**
+ * Fonction pour +1 un int
+ * Argument : 
+ * 1. liste chainé de l'environement
+ */
 void	increment_shlvl(t_envfinal *env)
 {
 	t_envfinal	*current;
@@ -32,7 +41,6 @@ void	increment_shlvl(t_envfinal *env)
 	current = env;
 	while (current && ft_strcmp(current->type, "SHLVL") != 0)
 		current = current->next;
-
 	if (current)
 	{
 		temp = ft_atoi(current->content);
@@ -47,7 +55,11 @@ void	increment_shlvl(t_envfinal *env)
 	return ;
 }
 
-// Fonction pour -1 le SHLVL
+/**
+ * Fonction pour -1 un int
+ * Argument : 
+ * 1. liste chainé de l'environement
+ */
 void	decrement_shlvl(t_envfinal *env)
 {
 	t_envfinal	*current;
