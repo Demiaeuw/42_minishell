@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_modification.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 16:41:31 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:34:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * Fonction pour +1 un int
- * Arguments : 
+ * Arguments :
  * 1. liste chainé de l'environement
  * 2. la nom de la variable a modifié (SHLVL=)
  */
@@ -44,7 +44,7 @@ void	increment_int(t_envfinal *env, char *str)
 
 /**
  * Fonction pour -1 un int
- * Arguments : 
+ * Arguments :
  * 1. liste chainé de l'environement
  * 2. la nom de la variable a modifié (SHLVL=)
  */
@@ -73,7 +73,7 @@ void	decrement_int(t_envfinal *env, char *str)
 
 /**
  * Fonction pour modifier un char dans l'environement
- * Arguments : 
+ * Arguments :
  * 1. liste chainé de l'environement
  * 2. la nom de la variable a modifié (SHLVL=)
  * 3. le nouveau contenue de cette variable (=1)
@@ -96,7 +96,7 @@ void	modif_env(t_envfinal *env, char *type_env, char *newcont)
 
 /**
  * Fonction pour recuperer un content dans l'environement
- * Arguments : 
+ * Arguments :
  * 1. liste chainé de l'environement
  * 2. la nom de la variable a chercher (SHLVL=)
  * Sortie :
@@ -107,10 +107,10 @@ char	*find_envcontent(t_envfinal *env, char *type_env)
 	char		*result;
 	t_envfinal	*current;
 
-	curent = env;
+	current = env;
 	while (current && ft_strcmp(current->type, type_env))
 		current = current->next;
-	result = safe_malloc(sizeof(char) * (ft_strlen(current->content) + 1))
+	result = safe_malloc(sizeof(char) * (ft_strlen(current->content) + 1));
 	ft_strcpy(result, current->content);
 	return (result);
 }

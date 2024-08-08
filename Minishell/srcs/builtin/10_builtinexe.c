@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_builtinexe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 16:23:37 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:53:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	builtin_check(t_token *token)
 
 void	builtin_selector(t_token *token, t_envfinal *env)
 {
-	(void)env;
 	// if (ft_strcmp("cd", token->builtin_info) == 0)
 	// 	exe_cd(token->value, env->???????);
 	if (ft_strcmp("echo", token->builtin_info) == 0)
@@ -46,8 +45,8 @@ void	builtin_selector(t_token *token, t_envfinal *env)
 		mini_env(env);
 	// else if (ft_strcmp("export", token->builtin_info) == 0)
 	// 	mini_export(token->value, env->?????)
-	// else if (ft_strcmp("unset", token->builtin_info) == 0)
-	// 	mini_unset(token->value, env->???????);
+	else if (ft_strcmp("unset", token->builtin_info) == 0)
+		mini_unset(token, env);
 	else if (ft_strcmp("pwd", token->builtin_info) == 0)
 		exe_pwd();
 	else if (ft_strcmp("exit", token->builtin_info) == 0)

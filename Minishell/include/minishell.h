@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 16:44:39 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:53:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define MINISHELL_H
 
 # define BUFFER_SIZE 1024
+
+#ifdef __linux__
+#include <linux/limits.h>
+#elif defined(__APPLE__)
+#include <sys/syslimits.h>
+#endif
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -31,7 +37,7 @@
 # include <unistd.h>
 # include <term.h>
 # include <limits.h>
-# include <linux/limits.h>
+//# include <linux/limits.h>
 # include <stdbool.h>
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
@@ -85,7 +91,7 @@ typedef struct s_envfinal
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
-void			main_error(void (*f)(), int index);
+void			main_error(void (*f)(int), int index);
 void			ft_error(int index);
 //01
 t_token			*create_token(t_token_type type, char *value);
@@ -149,7 +155,7 @@ void			mini_env(t_envfinal *envp);
 // int				mini_export(char **str, t_env *envp_list);
 // void			print_export(t_env *envplist);
 //04
-// int				mini_unset(char **str, t_env *envp_list);
+int				mini_unset(t_token *token, t_envfinal *env);
 
 //05
 int				exe_pwd(void);

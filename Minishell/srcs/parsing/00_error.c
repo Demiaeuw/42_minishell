@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   00_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:38:11 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 11:24:58 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:53:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	main_error(void (*f)(), int index)
+//                           vide normalement(test durant unset)
+void	main_error(void (*f)(int), int index)
 {
 	f(index);
 	exit(EXIT_FAILURE);

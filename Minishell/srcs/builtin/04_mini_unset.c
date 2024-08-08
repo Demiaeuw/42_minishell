@@ -1,22 +1,19 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   04_mini_unset.c                                    :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-// /*   Updated: 2024/08/07 14:33:02 by acabarba         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   04_mini_unset.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
+/*   Updated: 2024/08/08 19:53:15 by gaesteve         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "../../include/minishell.h"
+#include "../../include/minishell.h"
 
-// Utilisation : pour supprimer des variables d envrionnement d une liste.
+// Unset : Supprime une/des variable(s) d envrionnement d une liste.
 
-/*
-// Supprime une variable de l env de la liste chainee.
-// on traverse la liste jusqu a ce qu on trouve la cle
 void	delete_env(t_envfinal **env, char *key)
 {
 	t_envfinal *current = *env;
@@ -33,27 +30,30 @@ void	delete_env(t_envfinal **env, char *key)
 		*env = current->next;
 	else
 		previous->next = current->next;
-	//ici on pourra free ce qu il faut je pense
+	free(current->type);
+	free(current->content);
+	free(current);
 }
 
-int	mini_unset(char **cmd_str, t_envfinal **env)
+int	mini_unset(t_token *token, t_envfinal *env)
 {
-	bool	error_flag = false;
-	int		i = 1;
+	char	*str;
+	int		i = 0;
+	int		j = 0;
 
-	while (cmd_str[i])
-	{
-		if (!is_proper_env(cmd_str[i]))
-		{
-			error_flag = true;
-			printf("unset: '%s' : invalid argument\n", cmd_str[i]);
-		}
-		else
-		{
-			delete_env(env, cmd_str[i]);
-		}
+	str = safe_malloc(sizeof(char) * ft_strlen(token->value));
+	while (token->value[i] == ' ')
 		i++;
+	i += 5;
+	while (token->value[i] == ' ')
+		i++;
+	while (token->value[i])
+	{
+		str[j] = token->value[i];
+		i++;
+		j++;
 	}
-	return (error_flag);
+	delete_env(&env, str);
+	free(str);
+	return (0);
 }
-*/
