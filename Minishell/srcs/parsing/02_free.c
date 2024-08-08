@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_free.c                                          :+:      :+:    :+:   */
+/*   02_free1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:23:14 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/30 14:48:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:57:28 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	free_token_value(void *value)
 /**
  * exemple d'appel de cette fonction : free_token(&token, free_token_value)
  */
-
 void	free_token_list(t_token **lst, void (*del)(void*))
 {
 	t_token	*current;
@@ -56,9 +55,4 @@ void	free_split_result(char **result)
 		i++;
 	}
 	free(result);
-}
-
-void	free_shlvl(t_shell_level *shlvl)
-{
-	free (shlvl);
 }

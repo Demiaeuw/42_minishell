@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 19:49:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:06:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,12 @@ typedef enum s_token_type
 	TOKEN_UNKNOWN
 }	t_token_type;
 
-/**
- * macros pour la gestion d erreur des builtins
- */
 typedef enum e_builtin_error
 {
 	MANY_ARG,
 	INVALID_ARG
 }	t_builtin_error;
 
-//---------------------------------------------------------------------------//
-/**
- * Liste chainé des tokens.
- * Permet d'enregistrer une suite logique de Token.
- */
 typedef struct s_token
 {
 	t_token_type	type;
@@ -83,42 +75,6 @@ typedef struct s_token
 	bool			is_last_command;
 	struct s_token	*next;
 }	t_token;
-
-//---------------------------------------------------------------------------//
-/**
- * Niveau du Shell
- */
-typedef struct s_shell
-{
-	int				level;
-}	t_shell_level;
-
-//---------------------------------------------------------------------------//
-// typedef struct s_envp
-// {
-// 	char	*key;
-// 	char	*value;
-// }	t_envp;
-
-// typedef struct s_node
-// {
-// 	void			*content;
-// 	struct s_node	*prev;
-// 	struct s_node	*next;
-// }	t_node;
-
-// // head and tail = dummy nodes(noeuds qui contient rien, juste une facon
-// // pratique pour la gestion de la liste).
-// typedef struct s_env
-// {
-// 	int				size;
-// 	// char			*categorie;
-// 	// char			*value;
-// 	t_node			*head;
-// 	t_node			*tail;
-// 	// struct s_env	*next;
-// }	t_env;
-
 
 typedef struct s_envfinal
 {
@@ -135,14 +91,10 @@ void			ft_error(int index);
 t_token			*create_token(t_token_type type, char *value);
 void			add_token(t_token **token_list, t_token *new_token);
 void			*safe_malloc(size_t bytes);
-t_shell_level	*init_shlvl(void);
 //02
 void			free_token_value(void *value);
 void			free_token_list(t_token **lst, void (*del)(void*));
 void			free_split_result(char **result);
-void			free_shlvl(t_shell_level *shlvl);
-// void			free_envp_node(t_envp *envp);
-// void			free_env_list(t_env *envp_list);
 //03
 char			*get_token_type_name(t_token_type type);
 void			print_tokens(t_token *token);
@@ -155,6 +107,10 @@ t_token			*step02(char **array);
 t_token_type	token_compare(char *arg);
 void			last_command(t_token *token);
 //12
+// t_token			*simplify_list(t_token *token);
+void			add_combined_token(t_token **simplst, char **combival, bool *firstcmd);
+void			add_pipe_token(t_token **simplified_list);
+void			combine_value(char **combival, char *current_value, bool *firstcmd);
 t_token			*simplify_list(t_token *token);
 //13
 void			copy_com(const char *src, char *dest);
@@ -209,15 +165,17 @@ int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
 void			gestion_erreur_bt(char *cmd, char *word, int status);
 
-
-
 //---------------------------------------------------------------------------//
 //                              envp                                         //
 //00
+void			main_env(t_envfinal **env, char **envp);
 t_envfinal		*create_env_node(const char *type, const char *content);
 void			add_env_node(t_envfinal **env_list, t_envfinal *new_node);
 void			init_env_list(t_envfinal **env_list, char **envp);
 void			print_env_list(t_envfinal *env_list);
+void			increment_shlvl(t_envfinal *env);
+void			decrement_shlvl(t_envfinal *env);
+
 //01
 void    		free_node(t_envfinal *node);
 void			free_env_list(t_envfinal *env_list);

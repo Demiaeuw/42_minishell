@@ -29,14 +29,15 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/06_mini_exit.c\
 		srcs/builtin/10_builtinexe.c\
 		srcs/builtin/20_bt_utils.c\
-		srcs/envp/00_init.c\
+		srcs/envp/00_init1.c\
+		srcs/envp/00_init2.c\
 		srcs/envp/01_free.c\
+		srcs/envp/02_modification.c\
 		srcs/exec/10_interface.c\
 		srcs/exec/00_error.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
 		srcs/parsing/02_free.c\
-		srcs/parsing/02_free2.c\
 		srcs/parsing/03_printing.c\
 		srcs/parsing/10_parsing.c\
 		srcs/parsing/11_token_comp.c\

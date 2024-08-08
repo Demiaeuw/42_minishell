@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_init.c                                          :+:      :+:    :+:   */
+/*   00_init1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 17:37:43 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 19:54:38 by acabarba         ###   ########.fr       */
+/*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
+/*   Updated: 2024/08/08 12:51:49 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void    main_env(t_envfinal **env, char **envp)
+{
+    init_env_list(env, envp);
+    increment_shlvl(*env);
+}
 
 // Fonction pour créer un nouveau nœud
 t_envfinal	*create_env_node(const char *type, const char *content)
@@ -83,14 +89,3 @@ void	init_env_list(t_envfinal **env_list, char **envp)
 		i++;
 	}
 }
-
-// Fonction pour afficher la liste chaînée des variables d'environnement
-void	print_env_list(t_envfinal *env_list)
-{
-	while (env_list)
-	{
-		printf("%s %s\n", env_list->type, env_list->content);
-		env_list = env_list->next;
-	}
-}
-

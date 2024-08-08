@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:19:19 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/06 01:15:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:26:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	signature(void)
 {
 	printf("\nMini_Shell 42 [version 10.0.22631.3958]\n");
 	printf("by Yoan Onieva / Gauthier Esteve / Adrien Cabarbaye "
-			"/ (and sometime Kevin Pourcel)\n");
-	printf("(c) Gardiens de Phare [GDP]. Tous droits réservés.\n\n\n");	
+		"/ (and sometime Kevin Pourcel)\n");
+	printf("(c) Gardiens de Phare [GDP]. Tous droits réservés.\n\n\n");
 }
