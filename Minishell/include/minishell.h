@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 15:58:52 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:44:39 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ char			*read_input(void);
 //01
 int				exe_echo(char *str);
 //02
-// int				mini_env(char	**str, t_env *envp_list);
 void			mini_env(t_envfinal *envp);
 //03
 // int				mini_export(char **str, t_env *envp_list);
@@ -184,5 +183,7 @@ void			free_env_list(t_envfinal *env_list);
 void			increment_int(t_envfinal *env, char *str);
 void			decrement_int(t_envfinal *env, char *str);
 void			modif_env(t_envfinal *env, char *type_env, char *new_content);
+char			*find_envcontent(t_envfinal *env, char *type_env);
+
 
 #endif

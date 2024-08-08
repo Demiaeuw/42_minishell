@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 15:15:58 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:41:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,25 @@ void	modif_env(t_envfinal *env, char *type_env, char *newcont)
 		ft_strcpy(current->content, newcont);
 	}
 	return ;
+}
+
+/**
+ * Fonction pour recuperer un content dans l'environement
+ * Arguments : 
+ * 1. liste chainé de l'environement
+ * 2. la nom de la variable a chercher (SHLVL=)
+ * Sortie :
+ * char * du contenue trouvé qui a été malloc
+ */
+char	*find_envcontent(t_envfinal *env, char *type_env)
+{
+	char		*result;
+	t_envfinal	*current;
+
+	curent = env;
+	while (current && ft_strcmp(current->type, type_env))
+		current = current->next;
+	result = safe_malloc(sizeof(char) * (ft_strlen(current->content) + 1))
+	ft_strcpy(result, current->content);
+	return (result);
 }
