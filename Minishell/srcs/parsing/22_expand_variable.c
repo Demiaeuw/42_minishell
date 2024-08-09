@@ -73,7 +73,7 @@ char *process_var(const char *start, const char **end,
 }
 
 // Fonction principale pour l'expansion des variables d'environnement
-char *expend_variable(const char *input, t_env *envp_list)
+char *expend_variable(const char *input, t_envfinal *envp_list)
 {
 	size_t input_len;
 	size_t res_size;

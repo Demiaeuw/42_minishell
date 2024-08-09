@@ -12,21 +12,21 @@
 
 #include "../../include/minishell.h"
 
-void display_prompt(void)
+void	display_prompt(void)
 {
-    write(STDOUT_FILENO, "minishell> ", 12);
+	// printf("\033[1;34mM\033[1;31mi\033[1;32mn\033[1;33mi\033[1;34ms\033[1;35mh\033[1;36me\033[1;37ml\033[1;31ml\033[0m  🌟> ");
+	write(STDOUT_FILENO, "minishell> ", 12);
 }
 
-char *read_input(void)
+char	*read_input(void)
 {
-    //MALLOC A FREE
-    char *buffer = (char*)malloc(sizeof(char) * BUFFER_SIZE);
-    ssize_t bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1);
-    if (bytes_read < 0)
-    {
-        free(buffer);
-        return NULL;
-    }
-    buffer[bytes_read] = '\0';
-    return (buffer);
+	char *buffer = (char*)malloc(sizeof(char) * BUFFER_SIZE);
+	ssize_t bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1);
+	if (bytes_read < 0)
+	{
+		free(buffer);
+		return NULL;
+	}
+	buffer[bytes_read] = '\0';
+	return (buffer);
 }

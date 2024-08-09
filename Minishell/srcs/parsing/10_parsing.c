@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:53:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 18:43:06 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:10:07 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,56 +40,52 @@ t_token	*main_parse(char *str)
 /**
  *  Fonction pour split tous les arguments comme ils doivent etre split
  */
+static char	*extract_argument(char *str, int *i)
+{
+	char	*arg;
+	int		j;
+	char	quote_char;
+
+	arg = (char *)safe_malloc((ft_strlen(str) - *i + 1) * sizeof(char));
+	j = 0;
+	if (str[*i] == '"' || str[*i] == '\'')
+	{
+		quote_char = str[(*i)++];
+		while (str[*i] && str[*i] != quote_char)
+			arg[j++] = str[(*i)++];
+		if (str[*i] == quote_char)
+			(*i)++;
+	}
+	else
+	{
+		while (str[*i] && !ft_isspace(str[*i])
+			&& str[*i] != '"' && str[*i] != '\'')
+			arg[j++] = str[(*i)++];
+	}
+	arg[j] = '\0';
+	return (arg);
+}
+
 char	**step01(char *str)
 {
 	int		i;
-	int		j;
 	int		k;
-	char	quote_char;
 	char	**args;
 
 	if (!str)
 		return (NULL);
-
-	// Allocation mémoire pour le pire cas (chaque caractère est un mot)
 	args = safe_malloc((ft_strlen(str) / 2 + 2) * sizeof(char *));
 	i = 0;
 	k = 0;
-	quote_char = 0;
-
 	while (str[i])
 	{
-		// Passer les espaces initiaux
 		while (str[i] && ft_isspace(str[i]))
 			i++;
 		if (str[i] == '\0')
-			break;
-
-		// Allocation mémoire pour le prochain argument
-		args[k] = (char *)safe_malloc((ft_strlen(str) - i + 1) * sizeof(char));
-		j = 0;
-
-		// Gérer les guillemets simples et doubles
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			quote_char = str[i++];
-			while (str[i] && str[i] != quote_char)
-				args[k][j++] = str[i++];
-			if (str[i] == quote_char)
-				i++; // Passer le guillemet fermant
-			quote_char = 0; // Réinitialiser la variable de guillemet
-		}
-		else
-		{
-			// Copier le mot jusqu'au prochain espace ou la fin de la chaîne
-			while (str[i] && !ft_isspace(str[i]) && str[i] != '"' && str[i] != '\'')
-				args[k][j++] = str[i++];
-		}
-		args[k][j] = '\0'; // Terminer l'argument actuel
-		k++;
+			break ;
+		args[k++] = extract_argument(str, &i);
 	}
-	args[k] = NULL; // Terminer le tableau de tableaux
-
+	args[k] = NULL;
 	return (args);
 }
 
@@ -99,10 +95,10 @@ char	**step01(char *str)
  */
 t_token	*step02(char **array)
 {
-	t_token		*token_list;
-	t_token		*new_token;
+	t_token			*token_list;
+	t_token			*new_token;
 	t_token_type	type;
-	int			i;
+	int				i;
 
 	token_list = NULL;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/09 20:42:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:35:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # define BUFFER_SIZE 1024
 
-#ifdef __linux__
-#include <linux/limits.h>
-#elif defined(__APPLE__)
-#include <sys/syslimits.h>
-#endif
+# ifdef __linux__
+#  include <linux/limits.h>
+# elif defined(__APPLE__)
+#  include <sys/syslimits.h>
+# endif
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -140,7 +140,11 @@ char			*read_input(void);
 //--------------------------------------------------------------------------//
 //									builtin									//
 //00
-// int				exe_cd(char *str, t_env *envp_list);
+void	exe_cd(char *path, t_envfinal *env);
+t_envfinal	*find_env_variable(t_envfinal *env, char *key);
+void	update_env_variable(t_envfinal *env, char *key, char *new_value);
+t_envfinal	*create_env_variable(char *key, char *value);
+void	add_env_variable(t_envfinal **env, t_envfinal *new_var);
 //01
 int				exe_echo(char *str);
 //02
@@ -182,6 +186,13 @@ void			increment_int(t_envfinal *env, char *str);
 void			decrement_int(t_envfinal *env, char *str);
 void			modif_env(t_envfinal *env, char *type_env, char *new_content);
 char			*find_envcontent(t_envfinal *env, char *type_env);
+
+
+
+
+
+
+void	exe_ls(void);
 
 
 #endif
