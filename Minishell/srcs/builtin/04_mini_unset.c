@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_mini_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/08 19:53:15 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:43:53 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 
 void	delete_env(t_envfinal **env, char *key)
 {
-	t_envfinal *current = *env;
-	t_envfinal *previous = NULL;
+	t_envfinal	*current;
+	t_envfinal	*previous;
 
+	current = *env;
+	previous = NULL;
 	while (current != NULL && strcmp(current->type, key) != 0)
 	{
 		previous = current;

@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 /*check_option : Vérifie si un argument est une option '-n' valide.
   exe_echo : gère l'option -n pour ne pas ajouter de nouvelle ligne et affiche
   les arguments avec des espaces entre eux. return 0 si ok.*/
 /* ************************************************************************** */
-static int check_option_echo(char *str, int *start_index)
+static int	check_option_echo(char *str, int *start_index)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] != '-')
@@ -36,11 +35,21 @@ static int check_option_echo(char *str, int *start_index)
 	return (0);
 }
 
+static void	ft_fflush_stdout(void)
+{
+	if (stdout->_IO_write_ptr > stdout->_IO_write_base)
+	{
+		write(STDOUT_FILENO, stdout->_IO_write_base,
+			stdout->_IO_write_ptr - stdout->_IO_write_base);
+		stdout->_IO_write_ptr = stdout->_IO_write_base;
+	}
+}
+
 int	exe_echo(char *str)
 {
-	int option;
-	int i;
-	int start_index;
+	int	option;
+	int	i;
+	int	start_index;
 
 	option = 0;
 	i = 0;
@@ -61,5 +70,6 @@ int	exe_echo(char *str)
 		printf("%s", &str[i]);
 	if (!option)
 		printf("\n");
+	ft_fflush_stdout();
 	return (0);
 }

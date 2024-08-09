@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 19:53:15 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:20:13 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <termios.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <term.h>
+// # include <term.h>
 # include <limits.h>
 //# include <linux/limits.h>
 # include <stdbool.h>
@@ -152,8 +152,7 @@ int				exe_echo(char *str);
 //02
 void			mini_env(t_envfinal *envp);
 //03
-// int				mini_export(char **str, t_env *envp_list);
-// void			print_export(t_env *envplist);
+void			exe_export(t_envfinal *env, t_token *token);
 //04
 int				mini_unset(t_token *token, t_envfinal *env);
 

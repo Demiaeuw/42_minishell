@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_bt_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/08 19:07:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:03:50 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,3 @@ int	is_proper_env(char *env_name)
 	else
 		return(0);
 }
-
-/*void	gestion_erreur_bt(char *cmd, char *word, int status)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
-	if (word)
-		ft_putstr_fd(": ", 2);
-	ft_putstr_fd(word, 2);
-	if (status == MANY_ARG)
-		ft_putstr_fd(": too many arguments\n", 2);
-	else if (status == INVALID_ARG)
-		ft_putstr_fd(": not a valid identifier\n", 2);
-}*/
