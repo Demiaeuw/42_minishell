@@ -1,66 +1,65 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   06_mini_exit.c                                     :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2024/07/30 12:37:29 by yonieva           #+#    #+#             */
-// /*   Updated: 2024/07/30 12:37:29 by yonieva          ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   06_mini_exit.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 12:37:29 by yonieva           #+#    #+#             */
+/*   Updated: 2024/07/30 12:37:29 by yonieva          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
- #include "../../include/minishell.h"
+#include "../../include/minishell.h"
 
-
-static int	string_to_int(const char *str, int *result) 
+static int	string_to_int(const char *str, int *result)
 {
-	int value = 0;
-	int sign = 1;
+	int	value;
+	int	sign;
 
-	while (*str == ' ') 
+	value = 0;
+	sign = 1;
+	while (*str == ' ')
 		str++;
-	if (*str == '-') 
+	if (*str == '-')
 	{
 		sign = -1;
 		str++;
-	} 
-	else if (*str == '+') 
+	}
+	else if (*str == '+')
 	{
 		str++;
 	}
-	while (*str >= '0' && *str <= '9') 
+	while (*str >= '0' && *str <= '9')
 	{
 		value = value * 10 + (*str - '0');
 		str++;
 	}
-	if (*str != '\0') 
-		return (0); 
+	if (*str != '\0')
+		return (0);
 	*result = value * sign;
-	return (1); 
+	return (1);
 }
 
-void	exe_exit(char *str, t_envfinal *env, t_token *token) 
+void	exe_exit(char *str, t_envfinal *env, t_token *token)
 {
-	int exit_code = 0;
-	int conversion_success;
+	int	exit_code;
+	int	conversion_success;
 
-	while (*str == ' ') 
-	{
+	exit_code = 0;
+	while (*str == ' ')
 		str++;
-	}
-
-	if (*str == '\0') {
+	if (*str == '\0')
+	{
 		decrement_shlvl(env);
 		free_token_list(&token, free_token_value);
 		return ;
 	}
 	conversion_success = string_to_int(str, &exit_code);
-	if (!conversion_success || exit_code < 0 || exit_code > 255) 
+	if (!conversion_success || exit_code < 0 || exit_code > 255)
 		exit_code = 1;
 	decrement_shlvl(env);
 	free_token_list(&token, free_token_value);
 	free_env_list(env);
 	exit(exit_code);
 }
-

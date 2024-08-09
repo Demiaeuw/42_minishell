@@ -14,10 +14,10 @@
 
 int	exe_pwd(void)
 {
-	char temp[1024];
+	char	temp[1024];
 
 	if (getcwd(temp, sizeof(temp)) == NULL)
-        return 1;
+		return (1);
 	printf("%s\n", temp);
 	return (0);
 }

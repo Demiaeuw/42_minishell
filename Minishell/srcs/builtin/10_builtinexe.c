@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/09 15:17:54 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:32:39 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	main_builtin(t_token *token, t_envfinal *env)
 {
-	t_token *current;
+	t_token	*current;
 
 	current = token;
 	while (current != NULL)
@@ -24,7 +24,7 @@ void	main_builtin(t_token *token, t_envfinal *env)
 			if (builtin_check(current))
 				builtin_selector(current, env);
 			else
-				execute_execve(current); // a faire la fonction exeve
+				execute_execve(current);
 		}
 		current = current->next;
 	}
@@ -46,11 +46,11 @@ void	builtin_selector(t_token *token, t_envfinal *env)
 	else if (ft_strcmp("export", token->builtin_info) == 0)
 		exe_export(env, token);
 	else if (ft_strcmp("unset", token->builtin_info) == 0)
-		mini_unset(token, env);
+		exe_unset(&env, token);
 	else if (ft_strcmp("pwd", token->builtin_info) == 0)
 		exe_pwd();
 	else if (ft_strcmp("exit", token->builtin_info) == 0)
-	 	exe_exit(token->value, env, token);
+		exe_exit(token->value, env, token);
 	else
 		printf("else nique ta reum\n");
 }

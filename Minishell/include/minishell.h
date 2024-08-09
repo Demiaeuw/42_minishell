@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/09 15:20:13 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:27:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # include <unistd.h>
 // # include <term.h>
 # include <limits.h>
-//# include <linux/limits.h>
+// # include <linux/limits.h>
 # include <stdbool.h>
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
@@ -154,8 +154,7 @@ void			mini_env(t_envfinal *envp);
 //03
 void			exe_export(t_envfinal *env, t_token *token);
 //04
-int				mini_unset(t_token *token, t_envfinal *env);
-
+void			exe_unset(t_envfinal **env, t_token *token);
 //05
 int				exe_pwd(void);
 //06

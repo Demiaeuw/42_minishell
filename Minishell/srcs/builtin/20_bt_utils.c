@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/09 15:03:50 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:31:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_proper_env(char *env_name)
 	full_len = ft_strlen(env_name);
 	env_len = get_env_len(env_name);
 	if (full_len == env_len)
-		return(1);
+		return (1);
 	else
-		return(0);
+		return (0);
 }
