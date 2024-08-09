@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/09 16:27:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 20:42:28 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ typedef enum s_token_type
 	TOKEN_VARIABLE,
 	TOKEN_UNKNOWN
 }	t_token_type;
-
-typedef enum e_builtin_error
-{
-	MANY_ARG,
-	INVALID_ARG
-}	t_builtin_error;
 
 typedef struct s_token
 {
