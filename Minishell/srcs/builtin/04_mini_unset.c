@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/09 16:29:31 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:39:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	remove_env_node(t_envfinal **env, t_envfinal *curt, t_envfinal *prv)
 	if (!prv)
 		*env = curt->next;
 	else
-		previous->next = curt->next;
+		prv->next = curt->next;
 	free(curt->type);
 	free(curt->content);
 	free(curt);
