@@ -34,8 +34,8 @@ SRCS = 	srcs/main.c\
 		srcs/envp/01_free.c\
 		srcs/envp/02_modification.c\
 		srcs/exec/00_main_exec.c\
-		srcs/exec/10_interface.c\
-		srcs/exec/11_signal_handler.c\
+		srcs/exec/01_exec_execve.c\
+		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
 		srcs/exec/30_minishell_himself.c\
 		srcs/parsing/00_error.c\

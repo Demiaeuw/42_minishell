@@ -6,9 +6,11 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 20:16:46 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 20:17:01 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:28:52 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../include/minishell.h"
 
 void launch_minishell(char **env)
 {

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 03:04:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:52:33 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute_pipes(t_token *token, t_envfinal *env)
         {
             builtin_selector(token, env);
         } else {
-            execute_execve(token);
+            execute_execve(token, env);
         }
         exit(EXIT_SUCCESS);
     }
@@ -50,7 +50,7 @@ void	execute_pipes(t_token *token, t_envfinal *env)
         } 
         else 
         {
-            execute_execve(token->next->next);
+            execute_execve(token->next->next, env);
         }
         exit(EXIT_SUCCESS);
     }

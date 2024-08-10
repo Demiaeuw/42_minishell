@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:13:23 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 20:18:25 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:45:06 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ bool	is_builtin_command(char *com)
 {
 	return (!strcmp(com, "cd") || !strcmp(com, "echo") || !strcmp(com, "pwd")
 		|| !strcmp(com, "env") || !strcmp(com, "export")
-		|| !strcmp(com, "unset") || !strcmp(com, "exit")
-		|| !strcmp(com, "clear") || !strcmp(com, "./minishell"));
+		|| !strcmp(com, "unset") || !strcmp(com, "exit"));
 }
 
 void	add_builtin(t_token *token)

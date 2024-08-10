@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 20:17:24 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:49:57 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,9 @@ void			clean_path(char *path);
 //									Execution								//
 //00
 void			main_exec(t_token *token, t_envfinal *env);
+//01
+void			execute_execve(t_token *token, t_envfinal *env);
+
 //10
 void			display_prompt(void);
 char			*read_input(void);
@@ -168,13 +171,11 @@ void 			exe_clear(void);
 void			main_builtin(t_token *token, t_envfinal *env);
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envfinal *env);
-void			execute_execve(t_token *token);
+void			other_command(t_token *token, t_envfinal *env);
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
-void			gestion_erreur_bt(char *cmd, char *word, int status);
-
 //--------------------------------------------------------------------------//
 //									envp									//
 //00
@@ -201,8 +202,14 @@ char			*find_envcontent(t_envfinal *env, char *type_env);
 
 
 
+// Debut de test
 void launch_minishell(char **env);
 void	exe_ls(void);
+char	**convert_env(t_envfinal *env);
+char	**free_env(char **str, int count);
+int	count_env(t_envfinal *env);
+// fin de tes
+
 
 
 #endif
