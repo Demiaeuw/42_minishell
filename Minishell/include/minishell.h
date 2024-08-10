@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 21:52:44 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:25:03 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,6 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
-/**
- * Définition d'une énumération pour les types de tokens
- * Permet d'augmenter la lisibilité du code
- *
- * TOKEN_COMMAND : Représente une commande (ex: "ls", "cd" etc...)
- * TOKEN_ARGUMENT : Représente un argument de commande (ex: "-l")
- * TOKEN_PIPE : Représente le caractère de pipe ('|')
- * TOKEN_REDIRECTION : Représente les redirections ('>', '<', '>>' , '<<')
- * TOKEN_STRING : Représente une chaîne de caractères entre guillemets
- * TOKEN_VARIABLE : Représente une variable d'environnement (ex: "$PATH")
- * TOKEN_UNKNOWN : Représente un type de token inconnu ou non défini
- */
 typedef enum s_token_type
 {
 	TOKEN_COMMAND,
@@ -147,14 +135,17 @@ char			**convert_env(t_envfinal *env);
 char			**free_env(char **str, int count);
 int				count_env(t_envfinal *env);
 //10
-void			display_prompt(void);
-char			*read_input(void);
+// void			handle_sigint(int sig);
 //20
 void 			execute_pipes(t_token *token, t_envfinal *env);
+//30
+void			launch_minishell(char **env);
+//31
+void 			exe_clear(void);
 
 
 //--------------------------------------------------------------------------//
-//									builtin									//
+//									Builtin									//
 //00
 int				exe_cd(char *path, t_envfinal *env);
 //01
@@ -169,9 +160,6 @@ void			exe_unset(t_envfinal **env, t_token *token);
 int				exe_pwd(void);
 //06
 void			exe_exit(char *str, t_envfinal *env, t_token *token);
-//07
-void 			exe_clear(void);
-
 //10
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envfinal *env);
@@ -180,7 +168,7 @@ int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
 //--------------------------------------------------------------------------//
-//									envp									//
+//									Environement							//
 //00
 void			main_env(t_envfinal **env, char **envp);
 t_envfinal		*create_env_node(const char *type, const char *content);
@@ -206,7 +194,6 @@ char			*find_envcontent(t_envfinal *env, char *type_env);
 
 
 // Debut de test
-void launch_minishell(char **env);
 void	exe_ls(void);
 // fin de tes
 

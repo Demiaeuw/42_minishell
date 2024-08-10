@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 19:26:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:21:57 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,12 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (*input)
 			add_history(input);
-
 		token_list = main_parse(input);
 		free(input);
-
-		// Exécution de la commande saisie par l'utilisateur
 		main_exec(token_list, env_list);
-
-		// Libération de la liste de tokens
 		free_token_list(&token_list, free_token_value);
 	}
-
-	// Libération de la mémoire allouée à l'environnement
 	free_env_list(env_list);
-
-	// Libération de l'historique avant la sortie
 	clear_history();
-
 	return (0);
 }
