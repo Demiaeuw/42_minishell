@@ -6,13 +6,18 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 23:09:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 00:02:10 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //debut de test
+static void	display_prompt(void)
+{
+	write(STDOUT_FILENO, "minishell> ", 12);
+}
+
 static char	*read_input(void)
 {
 	char *buffer = (char*)malloc(sizeof(char) * BUFFER_SIZE);
@@ -43,6 +48,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		// input = readline("minishell> ");
+		display_prompt();
 		input = read_input();
 		if (input == NULL)
 			break ;

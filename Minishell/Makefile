@@ -35,6 +35,7 @@ SRCS = 	srcs/main.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
 		srcs/exec/02_envlst_to_envarray.c\
+		srcs/exec/03_tokenlst_to_tokenarray.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
 		srcs/exec/30_minishell_himself.c\
@@ -49,7 +50,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/13_builtin_gestion.c\
 		srcs/parsing/20_expanser.c\
 		srcs/parsing/21_expanser_utils.c\
-		srcs/builtin/testls.c
+		srcs/parsing/23_get_command_path.c
 		
 # srcs/parsing/22_expand_variable.c\
 

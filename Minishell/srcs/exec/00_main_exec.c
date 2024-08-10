@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 21:45:42 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 00:12:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ void	main_command(t_token *token, t_envfinal *env)
 void	other_command(t_token *token, t_envfinal *env)
 {
 	char	**envarray;
-	//test
-	if (ft_strcmp(token->builtin_info, "ls") == 0)
-		exe_ls();
-	//fin de test
-	else if (!ft_strcmp("./minishell", token->value))
+	// char	**tokenarray;
+
+	envarray = convert_env(env);
+	// tokenarray = convert_token(token);
+	if (!ft_strcmp("./minishell", token->value))
 	{
-		envarray = convert_env(env);
 		launch_minishell(envarray);
 		return ;
 	}

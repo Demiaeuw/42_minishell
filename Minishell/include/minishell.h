@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 22:29:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 00:11:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,9 @@ void			clean_path(char *path);
 // char			*process_var(const char *start, const char **end,
 // 					char *res, size_t size, char **res_ptr, t_list *envp_list);
 // char 			*expend_variable(const char *input, t_envfinal *envp_list);
+//23
+char	*join_path(const char *path, const char *cmd);
+char	*get_command_path(const char *cmd);
 
 //--------------------------------------------------------------------------//
 //									Execution								//
@@ -129,11 +132,17 @@ void			main_exec(t_token *token, t_envfinal *env);
 void			main_command(t_token *token, t_envfinal *env);
 void			other_command(t_token *token, t_envfinal *env);
 //01
-void			execute_execve(t_token *token, t_envfinal *env);
+// void			execute_execve(t_token *token, char **tokenarray,
+// 					char **envarray);
+void	execute_execve(t_token *token, t_envfinal *env);
 //02
 char			**convert_env(t_envfinal *env);
 char			**free_env(char **str, int count);
 int				count_env(t_envfinal *env);
+//03
+char			**convert_token(t_token *token);
+char			**free_token(char **str, int count);
+int				count_token(t_token *token);
 //10
 void			handle_sigint(int sig);
 //20
@@ -194,7 +203,6 @@ char			*find_envcontent(t_envfinal *env, char *type_env);
 
 
 // Debut de test
-void	exe_ls(void);
 // fin de tes
 
 
