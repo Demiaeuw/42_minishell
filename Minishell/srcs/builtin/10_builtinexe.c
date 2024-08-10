@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/09 22:49:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 03:10:15 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	builtin_selector(t_token *token, t_envfinal *env)
 		exe_exit(token->value, env, token);
 	else if (ft_strcmp("cd", token->builtin_info) == 0)
 		exe_cd(token->value, env);
+	else if (ft_strcmp("clear", token->builtin_info) == 0)
+        exe_clear();
 	else
 		printf("else nique ta reum\n");
 }

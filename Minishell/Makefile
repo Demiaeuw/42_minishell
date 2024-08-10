@@ -26,14 +26,17 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/04_mini_unset.c\
 		srcs/builtin/05_mini_pwd.c\
 		srcs/builtin/06_mini_exit.c\
+		srcs/builtin/07_clear.c\
 		srcs/builtin/10_builtinexe.c\
 		srcs/builtin/20_bt_utils.c\
 		srcs/envp/00_init1.c\
 		srcs/envp/00_init2.c\
 		srcs/envp/01_free.c\
 		srcs/envp/02_modification.c\
+		srcs/exec/00_main_exec.c\
 		srcs/exec/10_interface.c\
-		srcs/exec/00_error.c\
+		srcs/exec/11_signal_handler.c\
+		srcs/exec/20_pipe.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
 		srcs/parsing/02_free.c\

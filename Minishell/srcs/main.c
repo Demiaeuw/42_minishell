@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 18:46:35 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/10 02:49:00 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int ac, char **av, char **env)
 		free(input);
 
 		// // 4 - Exécution de la commande saisie par l'utilisateur
+		main_exec(token_list, env_list);
 		// // selection builtin ou non
-		main_builtin(token_list, env_list);
 		// // si oui :
 		// //		go la fonction qui gere les builtin
 		// //				selection du builtin

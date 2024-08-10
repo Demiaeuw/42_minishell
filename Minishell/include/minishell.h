@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/09 22:35:14 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 03:10:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,14 @@ void			clean_path(char *path);
 // 					char *res, size_t size, char **res_ptr, t_list *envp_list);
 //--------------------------------------------------------------------------//
 //									Execution								//
-//01
-// void			main_init_envp(t_env *envp_list, char **envp);
+//00
+void			main_exec(t_token *token, t_envfinal *env);
 //10
 void			display_prompt(void);
 char			*read_input(void);
+//20
+void 			execute_pipes(t_token *token, t_envfinal *env);
+
 
 //--------------------------------------------------------------------------//
 //									builtin									//
@@ -157,6 +160,9 @@ void			exe_unset(t_envfinal **env, t_token *token);
 int				exe_pwd(void);
 //06
 void			exe_exit(char *str, t_envfinal *env, t_token *token);
+//07
+void 			exe_clear(void);
+
 //10
 void			main_builtin(t_token *token, t_envfinal *env);
 int				builtin_check(t_token *token);
