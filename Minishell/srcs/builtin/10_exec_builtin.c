@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   10_builtinexe.c                                    :+:      :+:    :+:   */
+/*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 19:14:01 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/10 20:19:39 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ void	builtin_selector(t_token *token, t_envfinal *env)
 		// token->value = expend_variable(token->value, env);
 		exe_echo(token->value);
 	}
-	else if (ft_strcmp("env", token->builtin_info) == 0)
+	else if (!ft_strcmp("env", token->builtin_info))
 		mini_env(env);
-	else if (ft_strcmp("export", token->builtin_info) == 0)
+	else if (!ft_strcmp("export", token->builtin_info))
 		exe_export(env, token);
-	else if (ft_strcmp("unset", token->builtin_info) == 0)
+	else if (!ft_strcmp("unset", token->builtin_info))
 		exe_unset(&env, token);
-	else if (ft_strcmp("pwd", token->builtin_info) == 0)
+	else if (!ft_strcmp("pwd", token->builtin_info))
 		exe_pwd();
-	else if (ft_strcmp("exit", token->builtin_info) == 0)
+	else if (!ft_strcmp("exit", token->builtin_info))
 		exe_exit(token->value, env, token);
-	else if (ft_strcmp("clear", token->builtin_info) == 0)
+	else if (!ft_strcmp("clear", token->builtin_info))
         exe_clear();
+	else if (!ft_strcmp("./minishell", token->builtin_info))
+		
 	else
 		printf("c'est un builtin mais tu la pas gerer connard\n");
 }

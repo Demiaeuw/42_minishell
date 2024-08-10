@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 19:29:19 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:17:24 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,9 @@ char			*find_envcontent(t_envfinal *env, char *type_env);
 
 
 
+
+
+void launch_minishell(char **env);
 void	exe_ls(void);
 
 

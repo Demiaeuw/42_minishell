@@ -37,6 +37,7 @@ SRCS = 	srcs/main.c\
 		srcs/exec/10_interface.c\
 		srcs/exec/11_signal_handler.c\
 		srcs/exec/20_pipe.c\
+		srcs/exec/30_minishell_himself.c\
 		srcs/parsing/00_error.c\
 		srcs/parsing/01_init.c\
 		srcs/parsing/02_free.c\
