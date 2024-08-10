@@ -29,12 +29,12 @@ char	*extend_result(char *result, size_t *result_size, size_t add_size)
 	return (new_result);
 }
 // Fonction pour retourner la valeur d'une variable d'env à la char
-char *append_var(char *res, const char *var, t_env *envp_list, size_t size)
+char *append_var(char *res, const char *var_name, t_envfinal *envp_list, size_t size)
 {
 	char *var_value;
 	size_t var_len;
 
-	var_value = envp_find(envp_list, var_name);
+	var_value = find_envcontent(env, var_name);
 	var_len = 0;
 
 	free((char*)var_name);
@@ -55,11 +55,11 @@ char *append_var(char *res, const char *var, t_env *envp_list, size_t size)
 // Extrait le nom de la variable
 char *process_var(const char *start, const char **end,
 					char *res, size_t size,
-					char **res_ptr, t_env *envp_list)
+					char **res_ptr, t_envfinal *envp_list)
 {
 	char *var_name;
 
-	var_name = ft_strndup(start, *end = start);
+	var_name = ft_strdup(start, *end = start);
 	if(!var_name)
 	{
 		free(res);

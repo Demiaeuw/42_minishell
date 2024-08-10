@@ -10,40 +10,69 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+ #include "../../include/minishell.h"
 
-// int	exe_cd(char *str, t_envfinal *envp_list)
-// {
-// 	char	old_pwd[PATH_MAX];
-// 	char	new_pwd[PATH_MAX];
-// 	char	*dest;
 
-// /*Si aucun str , on recupere juste la variable HOME*/
-// /*puisque quand on fait 'cd' sans argument, on reste au meme endroit.*/
-// 	if (str == NULL)
-// 		dest = find_envcontent(envp_list, "HOME");
-// /*Sinon, utilise l argument comme répertoire de destination.*/
-// 	else
-// 		dest = str;
-// 	old_pwd[0] = '\0';
-// 	getcwd(old_pwd, PATH_MAX);
-// /*Tente de changer de répertoire vers dest avec 'chdir' (ft incluse en C)*/
-// 	if (chdir(dest) == -1)
-// 		return (1);
-// 	if (!getcwd(new_pwd, PATH_MAX))
-// 		return(1);
-// 	/* Si old_pwd est vide mais que PWD est définie,*/
-// 	/*copie la valeur de PWD dans old_pwd.*/
-// 	if (!ft_strlen(old_pwd) && find_envcontent(envp_list, "PWD"))//////////////////////////////////////////////////////////////////////////////////////
-// 		ft_strcpy(old_pwd, find_envcontent(envp_list, "PWD"));
-// 	/*maj des variables OLD_PWD et PWD*/
-// 	modif_env(envp_list, "OLDPWD", old_pwd);
-// 	modif_env(envp_list, "PWD", old_pwd);
-// 	return (0);
-// }
-// /* ************************************************************************** */
+int 	exe_cd(char *str, t_envfinal *env)
+{
+    char old_pwd[PATH_MAX];
+    char new_pwd[PATH_MAX];
+    char *dest;
 
-void	exe_cd(char *path, t_envfinal *env)
+    // Si aucun chemin n'est fourni, utiliser la valeur de HOME
+    if (str == NULL || strlen(str) == 0)
+    {
+        dest = find_envcontent(env, "HOME");
+        if (!dest)
+        {
+            fprintf(stderr, "cd: HOME not set\n");
+            return 1;
+        }
+    }
+    else
+    {
+        dest = str;
+    }
+
+    // Récupérer le répertoire courant actuel
+    if (!getcwd(old_pwd, sizeof(old_pwd)))
+    {
+        perror("getcwd");
+        return 1;
+    }
+
+    // Changer de répertoire
+    if (chdir(dest) == -1)
+    {
+        perror("cd");
+        return 1;
+    }
+
+    // Récupérer le nouveau répertoire courant
+    if (!getcwd(new_pwd, sizeof(new_pwd)))
+    {
+        perror("getcwd");
+        return 1;
+    }
+
+    // Mettre à jour OLDPWD et PWD dans l'environnement
+    if (find_envcontent(env, "PWD") && strlen(old_pwd) == 0)
+    {
+        char *pwd = find_envcontent(env, "PWD");
+        if (pwd)
+        {
+            strncpy(old_pwd, pwd, sizeof(old_pwd) - 1);
+            old_pwd[sizeof(old_pwd) - 1] = '\0'; // Assurer la terminaison de la chaîne
+        }
+    }
+
+    modif_env(env, "OLDPWD", old_pwd);
+    modif_env(env, "PWD", new_pwd);
+
+    return 0;
+}
+
+/*void	exe_cd(char *path, t_envfinal *env)
 {
 	char	*old_pwd;
 	char	*new_pwd;
@@ -82,4 +111,4 @@ void	exe_cd(char *path, t_envfinal *env)
 	// Libère la mémoire utilisée
 	free(old_pwd);
 	free(new_pwd);
-}
+}*/

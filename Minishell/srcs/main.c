@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 16:24:27 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:18:06 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int ac, char **av, char **env)
 		display_prompt();
 		// select_history(history);
 		input = read_input();
+		add_history(input);
 		// save_history(&history, input);
 		token_list = main_parse(input);
 		free(input);
@@ -53,6 +54,7 @@ int	main(int ac, char **av, char **env)
 
 	}
 	free_env_list(env_list);
+	clear_history();
 	// free_history(history);// a rajouter dans exit/buitin_selector/main_builtin
 	return (0);
 }

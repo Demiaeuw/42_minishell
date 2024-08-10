@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 16:05:27 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:14:01 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # include <termios.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 // # include <term.h>
 # include <limits.h>
 // # include <linux/limits.h>
@@ -132,10 +134,12 @@ char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
 // char			*extend_result(char *result, size_t size, size_t add_size);
-// char			*append_var(char *res, const char *var, t_env *envp_list,
-//					size_t size);
+// char			*append_var(char *res, const char *var, t_envfinal *envp_list,
+// 					size_t size);
 // char			*process_var(const char *start, const char **end,
 // 					char *res, size_t size, char **res_ptr, t_list *envp_list);
+// char 			*expend_variable(const char *input, t_envfinal *envp_list);
+
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
@@ -155,11 +159,11 @@ void 			execute_pipes(t_token *token, t_envfinal *env);
 //--------------------------------------------------------------------------//
 //									builtin									//
 //00
-void	exe_cd(char *path, t_envfinal *env);
-t_envfinal	*find_env_variable(t_envfinal *env, char *key);
-void	update_env_variable(t_envfinal *env, char *key, char *new_value);
-t_envfinal	*create_env_variable(char *key, char *value);
-void	add_env_variable(t_envfinal **env, t_envfinal *new_var);
+int				exe_cd(char *path, t_envfinal *env);
+// t_envfinal		*find_env_variable(t_envfinal *env, char *key);
+// void			update_env_variable(t_envfinal *env, char *key, char *new_value);
+// t_envfinal		*create_env_variable(char *key, char *value);
+// void			add_env_variable(t_envfinal **env, t_envfinal *new_var);
 //01
 int				exe_echo(char *str);
 //02

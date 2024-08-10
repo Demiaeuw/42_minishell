@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:55:16 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 16:16:00 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:18:06 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,42 +54,9 @@ void	save_history(t_history **history, char *cmd)
 
 void	select_history(t_history *history)
 {
-	t_history	*current;
-	char		c;
-	struct termios oldt, newt;
-
-	// Obtenir les paramètres actuels du terminal
-	tcgetattr(STDIN_FILENO, &oldt);
-	newt = oldt;
-	newt.c_lflag &= ~(ICANON | ECHO); // Désactiver le mode canonique et l'écho
-	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-
-	current = history;
-	while (current && current->next != NULL)
-		current = current->next;
-
-	while (1)
-	{
-		c = getchar();
-		if (c == 27) // Séquence d'échappement
-		{
-			getchar(); // Ignorer le caractère '['
-			c = getchar();
-			if (c == 'A') // Flèche du haut
-			{
-				if (current)
-				{
-					printf("\33[2K\rMinishell 🌟> %s", current->cmd); // Effacer la ligne actuelle et afficher l'historique
-					current = current->prev;
-				}
-			}
-		}
-		if (c == '\n') // Entrée pour quitter
-			break;
-	}
-
-	// Restaurer les paramètres du terminal
-	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	(void)history;
+	// t_history	*current;
+	printf("tet");
 }
 
 void	free_history(t_history *history)

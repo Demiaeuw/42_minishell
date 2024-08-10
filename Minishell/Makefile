@@ -49,8 +49,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/20_expanser.c\
 		srcs/parsing/21_expanser_utils.c\
 		srcs/builtin/testls.c
-
-
+		
 # srcs/parsing/22_expand_variable.c\
 
 # Fichiers objets
@@ -69,7 +68,7 @@ rapide: $(LIBFT) $(FT_PRINTF) $(GNL) $(NAME) printactionobjokrapide
 
 # Règle pour créer l'exécutable
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(FT_PRINTF) $(GNL)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(FT_PRINTF) $(GNL) -lreadline
 
 # Compilation des fichiers objets
 $(OBJDIR)/%.o: %.c
