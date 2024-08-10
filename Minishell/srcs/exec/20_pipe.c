@@ -17,17 +17,20 @@ void	execute_pipes(t_token *token, t_envfinal *env)
     int pipefd[2];
     pid_t pid1, pid2;
 
-    if (pipe(pipefd) == -1) {
+    if (pipe(pipefd) == -1) 
+    {
         perror("pipe failed");
         exit(EXIT_FAILURE);
     }
 
     pid1 = fork();
-    if (pid1 == 0) { // Premier processus enfant - `echo`
+    if (pid1 == 0) 
+    { // Premier processus enfant - `echo`
         dup2(pipefd[1], STDOUT_FILENO); // Rediriger stdout vers l'écriture du pipe
         close(pipefd[0]); // Fermer la lecture du pipe
         close(pipefd[1]); // Fermer l'écriture du pipe
-        if (builtin_check(token)) {
+        if (builtin_check(token)) 
+        {
             builtin_selector(token, env);
         } else {
             execute_execve(token);
@@ -36,13 +39,17 @@ void	execute_pipes(t_token *token, t_envfinal *env)
     }
 
     pid2 = fork();
-    if (pid2 == 0) { // Deuxième processus enfant - `pwd`
+    if (pid2 == 0) 
+    { // Deuxième processus enfant - `pwd`
         dup2(pipefd[0], STDIN_FILENO); // Rediriger stdin vers la lecture du pipe
         close(pipefd[1]); // Fermer l'écriture du pipe
         close(pipefd[0]); // Fermer la lecture du pipe
-        if (builtin_check(token->next->next)) {
+        if (builtin_check(token->next->next)) 
+        {
             builtin_selector(token->next->next, env);
-        } else {
+        } 
+        else 
+        {
             execute_execve(token->next->next);
         }
         exit(EXIT_SUCCESS);
