@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 19:14:01 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/10 19:29:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,6 @@ typedef struct s_envfinal
 	struct s_envfinal	*next;
 }	t_envfinal;
 
-typedef struct s_history
-{
-	char				*cmd;
-	struct s_history	*next;
-	struct s_history	*prev;
-}	t_history;
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
@@ -144,11 +138,6 @@ void			clean_path(char *path);
 //									Execution								//
 //00
 void			main_exec(t_token *token, t_envfinal *env);
-//01
-t_history		*init_history(void);
-void			save_history(t_history **history, char *cmd);
-void			select_history(t_history *history);
-void			free_history(t_history *history);
 //10
 void			display_prompt(void);
 char			*read_input(void);
@@ -160,10 +149,6 @@ void 			execute_pipes(t_token *token, t_envfinal *env);
 //									builtin									//
 //00
 int				exe_cd(char *path, t_envfinal *env);
-// t_envfinal		*find_env_variable(t_envfinal *env, char *key);
-// void			update_env_variable(t_envfinal *env, char *key, char *new_value);
-// t_envfinal		*create_env_variable(char *key, char *value);
-// void			add_env_variable(t_envfinal **env, t_envfinal *new_var);
 //01
 int				exe_echo(char *str);
 //02
