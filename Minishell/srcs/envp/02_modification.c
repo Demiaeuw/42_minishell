@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_modification.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 19:14:01 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/10 21:56:33 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	increment_int(t_envfinal *env, char *str)
 	current = env;
 	while (current && ft_strcmp(current->type, str) != 0)
 		current = current->next;
-
 	if (current)
 	{
 		temp = ft_atoi(current->content);

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:37:43 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/08 15:15:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 21:57:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * Fonction pour afficher la liste chaînée des variables d'environnement
  * Argument : 
  * 1. liste chainé de l'environement
- */ 
+ */
 void	print_env_list(t_envfinal *env_list)
 {
 	while (env_list)
@@ -25,7 +25,6 @@ void	print_env_list(t_envfinal *env_list)
 		env_list = env_list->next;
 	}
 }
-
 
 /**
  * Fonction pour +1 un int
@@ -49,7 +48,7 @@ void	increment_shlvl(t_envfinal *env)
 		if (new_content)
 		{
 			free(current->content);
-			current->content = new_content; // free content ici peut etre
+			current->content = new_content;
 		}
 	}
 	return ;

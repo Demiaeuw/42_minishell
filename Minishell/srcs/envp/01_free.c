@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:47:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/07 19:51:50 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:02:47 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void    free_node(t_envfinal *node)
+void	free_node(t_envfinal *node)
 {
 	if (node)
 	{
@@ -22,11 +22,14 @@ void    free_node(t_envfinal *node)
 	}
 }
 
-// Fonction pour libérer la mémoire de la liste chaînée des variables d'environnement
+/**
+ * Fonction pour libérer la mémoire de la liste chaînée 
+ * des variables d'environnement
+ */
 void	free_env_list(t_envfinal *env_list)
 {
-	t_envfinal *current;
-	t_envfinal *next;
+	t_envfinal	*current;
+	t_envfinal	*next;
 
 	current = env_list;
 	while (current)
