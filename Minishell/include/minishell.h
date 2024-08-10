@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 03:10:45 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 16:05:27 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,13 @@ typedef struct s_envfinal
 	char				*content;
 	struct s_envfinal	*next;
 }	t_envfinal;
+
+typedef struct s_history
+{
+	char				*cmd;
+	struct s_history	*next;
+	struct s_history	*prev;
+}	t_history;
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
@@ -133,6 +140,11 @@ void			clean_path(char *path);
 //									Execution								//
 //00
 void			main_exec(t_token *token, t_envfinal *env);
+//01
+t_history		*init_history(void);
+void			save_history(t_history **history, char *cmd);
+void			select_history(t_history *history);
+void			free_history(t_history *history);
 //10
 void			display_prompt(void);
 char			*read_input(void);
