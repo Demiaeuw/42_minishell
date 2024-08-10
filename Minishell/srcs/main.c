@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 22:21:57 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:30:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av, char **env)
 	t_envfinal		*env_list = NULL;
 	char 			*input;
 
+	signal(SIGINT, handle_sigint);
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;

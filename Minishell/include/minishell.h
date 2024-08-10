@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 22:25:03 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:29:48 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char			**convert_env(t_envfinal *env);
 char			**free_env(char **str, int count);
 int				count_env(t_envfinal *env);
 //10
-// void			handle_sigint(int sig);
+void			handle_sigint(int sig);
 //20
 void 			execute_pipes(t_token *token, t_envfinal *env);
 //30
