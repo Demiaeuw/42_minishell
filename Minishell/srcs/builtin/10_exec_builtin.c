@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 17:27:39 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:08:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	builtin_check(t_token *token)
 
 void	builtin_selector(t_token *token, t_envfinal *env)
 {
-	// if (!ft_strcmp("cd", token->builtin_info) == 0)
-	// 	transform_cd(env, token);
-	if (!ft_strcmp("echo", token->builtin_info))
+	if (!ft_strcmp("cd", token->builtin_info))
+		exe_cd(token, env);
+	else if (!ft_strcmp("echo", token->builtin_info))
 		exe_echo(token->value);
 	else if (!ft_strcmp("env", token->builtin_info))
 		mini_env(env);

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 17:29:10 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:07:22 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,10 @@ void 			exe_clear(void);
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
-void			exe_cd(t_token *token, t_envfinal *env);
+char *get_env_value2(const char *var, t_envfinal *env);
+void update_env(t_envfinal *env, char *var, char *value);
+char *get_target_path2(t_token *token, t_envfinal *env);
+void exe_cd(t_token *token, t_envfinal *env);
 
 //01
 int				exe_echo(char *str);
