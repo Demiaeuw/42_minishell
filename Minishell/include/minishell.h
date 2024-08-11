@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 15:43:52 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/11 16:25:26 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void			*safe_malloc(size_t bytes);
 void			free_token_value(void *value);
 void			free_token_list(t_token **lst, void (*del)(void*));
 void			free_split_result(char **result);
+void			ft_free_tab(char **tab);
 //03
 char			*get_token_type_name(t_token_type type);
 void			print_tokens(t_token *token);
@@ -108,6 +109,7 @@ t_token			*simplify_list(t_token *token);
 void			copy_com(const char *src, char *dest);
 bool			is_builtin_command(char *com);
 void			add_builtin(t_token *token);
+
 //--------------------------------------------------------------------------//
 //									Expension								//
 //20

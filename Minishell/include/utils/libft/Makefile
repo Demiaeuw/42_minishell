@@ -54,7 +54,8 @@ SRCS =	ft_atoi.c\
 	ft_print_array.c\
 	ft_dup.c\
 	ft_dup2.c\
-	ft_strcmp.c
+	ft_strcmp.c\
+	ft_tablen.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
