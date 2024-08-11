@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 21:56:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:29:01 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,18 @@ void	modif_env(t_envfinal *env, char *type_env, char *newcont)
  */
 char	*find_envcontent(t_envfinal *env, char *type_env)
 {
-	char		*result;
 	t_envfinal	*current;
 
 	current = env;
-	while (current && ft_strcmp(current->type, type_env))
+	while (current)
+	{
+		if (ft_strcmp(current->type, type_env) == 0)
+		{
+			char *result = safe_malloc(sizeof(char) * (ft_strlen(current->content) + 1));
+			ft_strcpy(result, current->content);
+			return (result);
+		}
 		current = current->next;
-	result = safe_malloc(sizeof(char) * (ft_strlen(current->content) + 1));
-	ft_strcpy(result, current->content);
-	return (result);
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 00:15:13 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:34:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,16 +202,16 @@ void	execute_execve(t_token *token, t_envfinal *env)
 	else
 	{
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-		{
-			int exit_status = WEXITSTATUS(status);
-			printf("Child process exited with status %d\n", exit_status);
-		}
-		else if (WIFSIGNALED(status))
-		{
-			int signal = WTERMSIG(status);
-			printf("Child process was terminated by signal %d\n", signal);
-		}
+		// if (WIFEXITED(status))
+		// {
+		// 	int exit_status = WEXITSTATUS(status);
+		// 	printf("Child process exited with status %d\n", exit_status);
+		// }
+		// else if (WIFSIGNALED(status))
+		// {
+		// 	int signal = WTERMSIG(status);
+		// 	printf("Child process was terminated by signal %d\n", signal);
+		// }
 	}
 
 	free(args);

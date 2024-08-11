@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 00:11:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:30:48 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void			other_command(t_token *token, t_envfinal *env);
 //01
 // void			execute_execve(t_token *token, char **tokenarray,
 // 					char **envarray);
-void	execute_execve(t_token *token, t_envfinal *env);
+void			execute_execve(t_token *token, t_envfinal *env);
 //02
 char			**convert_env(t_envfinal *env);
 char			**free_env(char **str, int count);
@@ -156,7 +156,8 @@ void 			exe_clear(void);
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
-int				exe_cd(char *path, t_envfinal *env);
+void			exe_cd(t_token *token, t_envfinal *env);
+
 //01
 int				exe_echo(char *str);
 //02

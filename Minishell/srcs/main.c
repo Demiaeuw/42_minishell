@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 00:02:10 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:32:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int ac, char **av, char **env)
 		// input = readline("minishell> ");
 		display_prompt();
 		input = read_input();
+		//
 		if (input == NULL)
 			break ;
 		if (*input)
