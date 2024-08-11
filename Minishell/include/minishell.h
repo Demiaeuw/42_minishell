@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 16:25:26 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:29:10 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ char			*find_envcontent(t_envfinal *env, char *type_env);
 
 
 // Debut de test
+
 // fin de tes
 
 
