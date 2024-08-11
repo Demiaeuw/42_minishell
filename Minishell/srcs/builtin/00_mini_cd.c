@@ -12,53 +12,28 @@
 
 #include "../../include/minishell.h"
 
-static void	update_env_pwd(t_envfinal *env, const char *new_pwd)
+static char	*get_target_path(char **tab, char **env)
 {
-    t_envfinal *current;
+	char	*path;
+	char	*pwd;
 
-    current = env;
-    while (current)
-    {
-        if (!ft_strcmp(current->type, "PWD"))
-        {
-            free(current->content);
-            current->content = strdup(new_pwd);
-            break;
-        }
-        current = current->next;
-    }
-}
-
-void	exe_cd(t_token *token, t_envfinal *env)
-{
-    char *path = token->value;
-    char cwd[1024];
-
-    if (!path || ft_strcmp(path, "~") == 0) // Si aucun chemin n'est fourni ou si "~" est utilisé
-    {
-        path = find_envcontent(env, "HOME");
-        if (!path)
-        {
-            write(2, "cd: HOME not set\n", 17);
-            return;
-        }
-    }
-
-    if (chdir(path) == -1)
-    {
-        perror("cd");
-        free(path); // Libère la mémoire allouée par find_envcontent
-        return;
-    }
-
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    {
-        update_env_pwd(env, cwd);
-    }
-    else
-    {
-        perror("getcwd");
-    }
-
-    free(path); // Libère la mémoire allouée par find_envcontent
+	if (len_tab(tab) > 1)
+	{
+		ft_putstr_fd("cd: too many arguments\n", 2);
+		return (NULL);
+	}
+	else if (len_tab(tab) == 1)
+	{
+		if (tab[0][0] != '/')
+		{
+			pwd = get_cwd(0);
+			path = ft_strjoin(pwd, ft_strdup("/"));
+			path = ft_strjoin(path, ft_strdup(tab[0]));
+		}
+		else
+			path = ft_strdup(tab[0]);
+	}
+	else
+		path = get_env_value("HOME", env);
+	return (path);
 }
