@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+/*#include "../../include/minishell.h"
 
 static char	*get_target_path(char **tab, char **env)
 {
@@ -36,4 +36,4 @@ static char	*get_target_path(char **tab, char **env)
 	else
 		path = get_env_value("HOME", env);
 	return (path);
-}
+}*/

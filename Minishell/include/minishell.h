@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 13:30:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:43:52 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,22 @@ t_token			*simplify_list(t_token *token);
 void			copy_com(const char *src, char *dest);
 bool			is_builtin_command(char *com);
 void			add_builtin(t_token *token);
+//--------------------------------------------------------------------------//
+//									Expension								//
 //20
-void			expanser_commands(t_token token_list);
+//void			expanser_commands(t_token token_list);
+char			*get_env_value(const char *name, t_envfinal *env);
+char			*expand_variables_in_value(const char *value, t_envfinal *env); 
+void			process_token_values(t_token *token, t_envfinal *env);
 //21
 bool			is_relativ_path(const char *path);
 char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
-// char			*extend_result(char *result, size_t size, size_t add_size);
-// char			*append_var(char *res, const char *var, t_envfinal *envp_list,
-// 					size_t size);
-// char			*process_var(const char *start, const char **end,
-// 					char *res, size_t size, char **res_ptr, t_list *envp_list);
-// char 			*expend_variable(const char *input, t_envfinal *envp_list);
+char 			*resolve_path(const char *path); 
 //23
-char	*join_path(const char *path, const char *cmd);
-char	*get_command_path(const char *cmd);
+char			*join_path(const char *path, const char *cmd);
+char			*get_command_path(const char *cmd);
 
 //--------------------------------------------------------------------------//
 //									Execution								//

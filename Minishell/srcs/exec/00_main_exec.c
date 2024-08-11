@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 00:12:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:36:24 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	main_command(t_token *token, t_envfinal *env)
 		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
 		{
 			if (builtin_check(current))
+			{	
+				process_token_values(token, env);
 				builtin_selector(current, env);
+			}
 			else
 				other_command(current, env);
 		}
