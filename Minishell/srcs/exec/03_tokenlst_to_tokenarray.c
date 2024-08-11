@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_tokenlst_to_tokenarray.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:53:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 00:17:07 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:03:44 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,11 @@ int	count_token(t_token *token)
 	return(count);
 }
 
-// char	**convert_token(t_token *token)
-// {
-// 	t_token	*current;
-// 	char	**str;
-// 	int		i;
-// 	int		count;
-
-// 	i = 0;
-// 	current = token;
-// 	count = count_token(token);
-// 	str = (char **)malloc((count + 1) * sizeof (char *));
-// 	if (!str)
-// 		return (NULL);
-// 	while (i < count)
-// 	{
-// 		str[i] = strdup(current->value);
-// 		if (!str[i])
-// 			return (free_token(str, i));
-// 		current = current->next;
-// 		i++;
-// 	}
-// 	str[count] = NULL;
-// 	return (str);
-// }
-
 char	**convert_token(t_token *token)
 {
-	int		count;
-	char	**args;
 	t_token	*current;
+	char	**str;
+	int		count;
 	int		i;
 
 	// Compte le nombre de tokens (commande + arguments)
@@ -81,22 +56,19 @@ char	**convert_token(t_token *token)
 		count++;
 		current = current->next;
 	}
-
 	// Alloue de la mémoire pour les arguments
-	args = (char **)safe_malloc((count + 1) * sizeof(char *));
-	if (!args)
+	str = (char **)safe_malloc((count + 1) * sizeof(char *));
+	if (!str)
 		return (NULL);
-
 	// Copie les valeurs des tokens dans le tableau
 	i = 0;
 	current = token;
 	while (current && current->type != TOKEN_PIPE)
 	{
-		args[i] = ft_strdup(current->value);
+		str[i] = ft_strdup(current->value);
 		i++;
 		current = current->next;
 	}
-	args[i] = NULL;
-
-	return (args);
+	str[i] = NULL;
+	return (str);
 }

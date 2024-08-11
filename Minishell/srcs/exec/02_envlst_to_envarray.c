@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   02_envlst_to_envarray.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:50:40 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 21:53:26 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:04:42 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	**free_env(char **str, int count)
+{
+	int	i;
+
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (i < count)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
+}
+
+int	count_env(t_envfinal *env)
+{
+	int	count;
+	t_envfinal *current;
+
+	count = 0;
+	current = env;
+	while (current != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
 
 char	**convert_env(t_envfinal *env)
 {
@@ -44,36 +75,4 @@ char	**convert_env(t_envfinal *env)
 	}
 	str[i] = NULL;
 	return (str);
-}
-
-char	**free_env(char **str, int count)
-{
-	int	i;
-
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (i < count)
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	return (NULL);
-}
-
-
-int	count_env(t_envfinal *env)
-{
-	int	count;
-	t_envfinal *current;
-
-	count = 0;
-	current = env;
-	while (current != NULL)
-	{
-		count++;
-		current = current->next;
-	}
-	return (count);
 }
