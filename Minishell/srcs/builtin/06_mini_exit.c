@@ -52,14 +52,14 @@ void	exe_exit(char *str, t_envfinal *env, t_token *token)
 	if (*str == '\0')
 	{
 		decrement_shlvl(env);
-		free_token_list(&token, free_token_value);
+		free_token_list(token);
 		return ;
 	}
 	conversion_success = string_to_int(str, &exit_code);
 	if (!conversion_success || exit_code < 0 || exit_code > 255)
 		exit_code = 1;
 	decrement_shlvl(env);
-	free_token_list(&token, free_token_value);
+	free_token_list(token);
 	free_env_list(env);
 	exit(exit_code);
 }

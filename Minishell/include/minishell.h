@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:50:36 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:39:03 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,9 @@
 
 typedef enum s_token_type
 {
-	TOKEN_COMMAND,
-	TOKEN_ARGUMENT,
-	TOKEN_PIPE,
-	TOKEN_REDIRECTION,
-	TOKEN_STRING,
-	TOKEN_VARIABLE,
-	TOKEN_UNKNOWN
-}	t_token_type;
+    TOKEN_COMMAND,
+    TOKEN_PIPE
+}   t_token_type;
 
 typedef struct s_token
 {
@@ -76,39 +71,25 @@ typedef struct s_envfinal
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
-void			main_error(void (*f)(int), int index);
-void			ft_error(int index);
+t_token 		*main_parsing(char *input);
+int    			process_token(char *token, t_token **token_list);
+void    		finalize_parsing(t_token **new_node, char **tokenarray);
 //01
-t_token			*create_token(t_token_type type, char *value);
-void			add_token(t_token **token_list, t_token *new_token);
-void			*safe_malloc(size_t bytes);
+char			**ft_split_quoted(const char *str);
 //02
-void			free_token_value(void *value);
-void			free_token_list(t_token **lst, void (*del)(void*));
-void			free_split_result(char **result);
-void			ft_free_tab(char **tab);
+t_token			*create_command_node(char *input);
+t_token			*create_pipe_node(void);
+void			add_token_node(t_token **head, t_token *new_node);
 //03
-char			*get_token_type_name(t_token_type type);
-void			print_tokens(t_token *token);
-void			signature(void);
-//10
-t_token			*main_parse(char *str);
-char			**step01(char *str);
-t_token			*step02(char **array);
-//11
-t_token_type	token_compare(char *arg);
-void			last_command(t_token *token);
-//12
-void			add_combined_token(t_token **simplst, char **combival,
-					bool *firstcmd);
-void			add_pipe_token(t_token **simplified_list);
-void			combine_value(char **combival, char *current_value,
-					bool *firstcmd);
-t_token			*simplify_list(t_token *token);
-//13
-void			copy_com(const char *src, char *dest);
 bool			is_builtin_command(char *com);
-void			add_builtin(t_token *token);
+bool			check_builtin(char *value);
+char			*get_builtin_info(char *value);
+char			*close_quotes_if_needed(char *str);
+char			*clean_whitespace(char *str);
+//10
+void			print_token_list(t_token *head);
+void			free_token_list(t_token *token_list);
+void			free_token_array(char **tokenarray);
 
 //--------------------------------------------------------------------------//
 //									Expension								//

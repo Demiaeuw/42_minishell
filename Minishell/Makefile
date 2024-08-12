@@ -40,14 +40,12 @@ SRCS = 	srcs/main.c\
 		srcs/exec/20_pipe.c\
 		srcs/exec/30_minishell_himself.c\
 		srcs/exec/31_mini_clear.c\
-		srcs/parsing/00_error.c\
-		srcs/parsing/01_init.c\
-		srcs/parsing/02_free.c\
-		srcs/parsing/03_printing.c\
-		srcs/parsing/10_parsing.c\
-		srcs/parsing/11_token_comp.c\
-		srcs/parsing/12_cleaning_list.c\
-		srcs/parsing/13_builtin_gestion.c\
+		srcs/parsing/00_parsing.c\
+		srcs/parsing/01_spliting_quote.c\
+		srcs/parsing/02_create_node.c\
+		srcs/parsing/03_analyse1.c\
+		srcs/parsing/03_analyse2.c\
+		srcs/parsing/10_parsing_utils.c\
 		srcs/parsing/20_expanser_env.c\
 		srcs/parsing/21_expanser_utils.c\
 		srcs/parsing/22_expanser_path.c\
