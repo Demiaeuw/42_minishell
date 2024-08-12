@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 16:24:53 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:08:28 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,7 @@ int				is_proper_env(char *env_name);
 //									Environement							//
 //00
 char			**env_dup(char **env);
+void			set_env_value(char **env, char *key, char *new_value);
+void 			free_array(char **tab);
 
 #endif
