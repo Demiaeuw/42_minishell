@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:53:24 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:58:45 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,6 @@ static char	*get_command_path2(char *command)
 	free(paths);
 	return (NULL);  // Commande introuvable
 }
-
-
-
 
 void	execute_execve(t_token *token, char **env)
 {

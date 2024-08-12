@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:53:10 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:02:31 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,19 @@ void	main_command(t_token *token, char **env)
 
 void	other_command(t_token *token, char **env)
 {
-	char	**envarray;
 	// char	**tokenarray;
 
-	envarray = convert_env(env);
 	// tokenarray = convert_token(token);
 	if (!ft_strcmp("./minishell", token->value))
 	{
-		launch_minishell(envarray);
+		launch_minishell(env);
 		return ;
 	}
 	else if (!ft_strcmp("clear", token->builtin_info))
         exe_clear();
 	else
-		execute_execve(token, env);
+	{
+		printf("execve normalement");
+		//execute_execve(token, env);
+	}
 }

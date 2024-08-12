@@ -28,13 +28,9 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/06_mini_exit.c\
 		srcs/builtin/10_exec_builtin.c\
 		srcs/builtin/20_bt_utils.c\
-		srcs/envp/00_init1.c\
-		srcs/envp/00_init2.c\
-		srcs/envp/01_free.c\
-		srcs/envp/02_modification.c\
+		srcs/envp/00_init_env.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
-		srcs/exec/02_envlst_to_envarray.c\
 		srcs/exec/03_tokenlst_to_tokenarray.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
@@ -50,7 +46,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/21_expanser_utils.c\
 		srcs/parsing/22_expanser_path.c\
 		srcs/parsing/23_get_command_path.c
-		
+
 # srcs/parsing/22_expand_variable.c\
 
 # Fichiers objets
