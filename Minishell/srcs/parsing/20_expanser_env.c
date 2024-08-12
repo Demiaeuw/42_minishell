@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-char	*expand_variables_in_value(const char *value, char **env)
+static char	*expand_variables_in_value(const char *value, char **env)
 {
 	size_t	len;
 	char	*result;
@@ -66,11 +66,14 @@ void	process_token_values(t_token *token, char **env)
 	char	*expanded_value;
 
 	current = token;
-	while (current != NULL)
+	if(token->is_builtin == true)
 	{
-		expanded_value = expand_variables_in_value(current->value, env);
-		free(current->value); // Libérer l'ancienne valeur
-		current->value = expanded_value; // Mettre à jour avec nouvelle valeur
-		current = current->next;
+		while (current != NULL)
+		{
+			expanded_value = expand_variables_in_value(current->value, env);
+			free(current->value); // Libérer l'ancienne valeur
+			current->value = expanded_value; // Mettre à jour avec nouvelle valeur
+			current = current->next;
+		}
 	}
 }

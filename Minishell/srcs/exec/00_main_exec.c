@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:36:57 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:50:14 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	main_command(t_token *token, char **env)
 				builtin_selector(current, env);
 			}
 			else
-				execute_execve(current, env)
+				execute_execve(current, env);
 		}
 		current = current->next;
 	}
