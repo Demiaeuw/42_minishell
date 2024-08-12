@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:53:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 16:03:44 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 23:40:53 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char	**free_token(char **str, int count)
 
 int	count_token(t_token *token)
 {
-	int	count;
-	t_token *current;
+	int		count;
+	t_token	*current;
 
 	count = 0;
 	current = token;
@@ -38,7 +38,7 @@ int	count_token(t_token *token)
 		count++;
 		current = current->next;
 	}
-	return(count);
+	return (count);
 }
 
 char	**convert_token(t_token *token)
@@ -48,7 +48,6 @@ char	**convert_token(t_token *token)
 	int		count;
 	int		i;
 
-	// Compte le nombre de tokens (commande + arguments)
 	count = 0;
 	current = token;
 	while (current && current->type != TOKEN_PIPE)
@@ -56,11 +55,9 @@ char	**convert_token(t_token *token)
 		count++;
 		current = current->next;
 	}
-	// Alloue de la mémoire pour les arguments
 	str = (char **)safe_malloc((count + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
-	// Copie les valeurs des tokens dans le tableau
 	i = 0;
 	current = token;
 	while (current && current->type != TOKEN_PIPE)

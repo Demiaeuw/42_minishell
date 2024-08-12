@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/12 22:46:00 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 23:38:28 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ static int	count_tokens(const char *str, char delimiter)
 	return (count);
 }
 
+static char	*allocate_token(const char *start, size_t len)
+{
+	char	*token;
+
+	token = (char *)malloc(len + 1);
+	if (token)
+	{
+		strncpy(token, start, len);
+		token[len] = '\0';
+	}
+	return (token);
+}
+
 static char	*get_next_token(const char **str, char delimiter)
 {
 	const char	*start;
@@ -49,12 +62,7 @@ static char	*get_next_token(const char **str, char delimiter)
 	while (**str && **str != delimiter)
 		(*str)++;
 	len = *str - start;
-	token = (char *)malloc(len + 1);
-	if (token)
-	{
-		strncpy(token, start, len);
-		token[len] = '\0';
-	}
+	token = allocate_token(start, len);
 	while (**str == delimiter)
 		(*str)++;
 	return (token);
@@ -74,9 +82,11 @@ char	**split_command(const char *cmd)
 		return (NULL);
 	cmd_ptr = cmd;
 	i = 0;
-	while ((token = get_next_token(&cmd_ptr, ' ')) != NULL)
+	token = get_next_token(&cmd_ptr, ' ');
+	while (token != NULL)
 	{
 		args[i++] = token;
+		token = get_next_token(&cmd_ptr, ' ');
 	}
 	args[i] = NULL;
 	return (args);
