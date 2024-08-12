@@ -21,6 +21,7 @@ typedef struct s_token
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 t_token *create_command_node(char *value);
+char *close_quotes_if_needed(char *str);
 void free_token_list(t_token *token_list);
 void free_token_array(char **tokenarray);
 size_t  ft_strlen(const char *c);
@@ -32,6 +33,7 @@ void    add_token_node(t_token **head, t_token *new_node);
 t_token *main_parsing(char *input);
 char    **ft_split_quoted(const char *s);
 void    print_token_list(t_token *head);
+char *clean_whitespace(char *str);
 
 
 t_token *create_command_node(char *value)
@@ -147,7 +149,30 @@ t_token *main_parsing(char *input)
     i = 0;
     while (tokenarray[i])
     {
-        new_node = create_command_node(tokenarray[i]);
+        // Nettoyer les espaces de la chaîne
+        char *cleaned_value = clean_whitespace(tokenarray[i]);
+        if (!cleaned_value)
+        {
+            free_token_list(token_list);
+            free_token_array(tokenarray);
+            return (NULL);
+        }
+
+        // Vérifier et fermer les guillemets si nécessaire
+        char *final_value = close_quotes_if_needed(cleaned_value);
+        free(cleaned_value); // Libérer la mémoire allouée pour la chaîne nettoyée
+
+        if (!final_value)
+        {
+            free_token_list(token_list);
+            free_token_array(tokenarray);
+            return (NULL);
+        }
+
+        // Créez le nœud de commande avec la valeur finale
+        new_node = create_command_node(final_value);
+        free(final_value); // Libérez la chaîne finale après utilisation
+
         if (!new_node)
         {
             free_token_list(token_list);
@@ -177,6 +202,8 @@ t_token *main_parsing(char *input)
 
     return (token_list);
 }
+
+
 
 void free_token_list(t_token *token_list)
 {
@@ -213,16 +240,74 @@ void free_token_array(char **tokenarray)
     free(tokenarray);
 }
 
-size_t  ft_strlen(const char *c)
+char *close_quotes_if_needed(char *str)
 {
-    size_t  len;
+    int len = strlen(str);
+    int i;
+    bool single_quote_open = false;
+    bool double_quote_open = false;
 
-    len = 0;
-    while (c[len])
+    // Parcourir la chaîne pour vérifier les guillemets ouverts
+    for (i = 0; i < len; i++)
     {
-        len++;
+        if (str[i] == '\'')
+            single_quote_open = !single_quote_open;
+        else if (str[i] == '"')
+            double_quote_open = !double_quote_open;
     }
-    return (len);
+
+    // Si un guillemet est resté ouvert, on ferme en ajoutant à la fin
+    char *new_str = malloc(len + 2); // +1 pour le guillemet manquant +1 pour le '\0'
+    if (!new_str)
+        return NULL;
+
+    strcpy(new_str, str);
+
+    if (single_quote_open)
+        new_str[len++] = '\'';
+    else if (double_quote_open)
+        new_str[len++] = '"';
+
+    new_str[len] = '\0';
+    return new_str;
+}
+
+
+char *clean_whitespace(char *str)
+{
+    int i = 0, j = 0;
+    int len = strlen(str);
+    char *cleaned_str = malloc(len + 1); // Allocation mémoire pour la chaîne nettoyée
+
+    if (!cleaned_str)
+        return NULL;
+
+    // Ignorer les espaces au début
+    while (str[i] == ' ')
+        i++;
+
+    while (str[i])
+    {
+        // Copier le caractère actuel
+        cleaned_str[j++] = str[i];
+
+        // Ignorer les espaces multiples
+        if (str[i] == ' ' && str[i + 1] == ' ')
+        {
+            while (str[i] == ' ')
+                i++;
+            continue;
+        }
+
+        i++;
+    }
+
+    // Supprimer les espaces en fin de chaîne
+    if (j > 0 && cleaned_str[j - 1] == ' ')
+        j--;
+
+    cleaned_str[j] = '\0';
+    return cleaned_str;
 }
 
 char **ft_split_quoted(const char *str)
@@ -262,6 +347,46 @@ char **ft_split_quoted(const char *str)
     return result;
 }
 
+void    print_token_list(t_token *head)
+{
+    t_token *current = head;
+
+    while (current != NULL)
+    {
+        printf("Value: %s\n", current->value);
+        printf("Type: %d\n", current->type);
+        printf("Is Builtin: %s\n", current->is_builtin ? "Yes" : "No");
+        printf("Builtin Info: %s\n", current->builtin_info);
+        printf("Is Last Command: %s\n", current->is_last_command ? "Yes" : "No");
+        printf("-----\n");
+        current = current->next;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+//ne pas garder
+size_t  ft_strlen(const char *c)
+{
+    size_t  len;
+
+    len = 0;
+    while (c[len])
+    {
+        len++;
+    }
+    return (len);
+}
+
+
+
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	unsigned int	i;
@@ -284,26 +409,18 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 }
 
 
-void    print_token_list(t_token *head)
-{
-    t_token *current = head;
-
-    while (current != NULL)
-    {
-        printf("Value: %s\n", current->value);
-        printf("Type: %d\n", current->type);
-        printf("Is Builtin: %s\n", current->is_builtin ? "Yes" : "No");
-        if (current->is_builtin)
-            printf("Builtin Info: %s\n", current->builtin_info);
-        printf("Is Last Command: %s\n", current->is_last_command ? "Yes" : "No");
-        printf("-----\n");
-        current = current->next;
-    }
-}
 
 int main(void)
 {
-    char test[] = "echo je test ma fonction | pour voir si ca marche";
+	// char test[] = "echo je test ma fonction pour voir si ca marche";
+	// char test[] = "               echo je test ma fonction pour               voir si ca marche       ";
+	// char test[] = "ls je test ma fonction pour voir si ca marche";
+	// char test[] = "cd je test ma fonction pour voir si ca marche";
+    // char test[] = "echo je test ma fonction | pour voir si ca marche";
+	// char test[] = "echo je test ma \"fonction | pour \"voir si ca marche";
+	// char test[] = "echo je test ma \' fonction | pour \' voir si ca marche";
+	// char test[] = "echo je test | ma fonction | pour | voir | si ca marche";
+	char test[] = "echo je test ma \" fonction pour voir si ca marche";
     t_token *token = main_parsing(test);
     print_token_list(token);
     free_token_list(token);
