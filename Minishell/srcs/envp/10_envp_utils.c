@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:08:28 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/12 17:20:56 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	print_env(char **env)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (env[i] != NULL)
-    {
-        printf("%s\n", env[i]);
-        i++;
-    }
+	i = 0;
+	while (env[i] != NULL)
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 }
 
 void    set_env_value(char **env, char *key, char *new_value)
@@ -60,17 +60,33 @@ void    set_env_value(char **env, char *key, char *new_value)
 
 
 
-void    free_array(char **tab)
+char	*get_env_value(char *str, char **env)
 {
-    int i;
+	int		i;
+	size_t 	len;
 
-    i = 0;
-    if (!tab)
-        return ;
-    while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
+	i = 0;
+	len = ft_strlen(str);
+	while (env[i] != NULL)
+	{
+		if (ft_strncmp(env[i], str, len) == 0 && env[i][len] == '=')
+			return (ft_strdup(env[i] + len + 1));
+		i++;
+	}
+	return (NULL);
+}
+
+void    free_array(char **array)
+{
+	int i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
