@@ -31,7 +31,7 @@ char	*ft_strcat(char *dest, const char *src);
 char	*ft_strcpy(char *dest, const char *src);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
-int		ft_tablen(char **tab);
+int		ft_tablen(char **array);
 
 
 /*				TRANSFORM				*/

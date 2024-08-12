@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 15:23:50 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:37:02 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,40 @@
 
 t_token    *main_parsing(char *input)
 {
-    char    **tokenarray;
-    t_token *token_list;
-    t_token *new_node;
-    t_token *pipe_node;
-    int     i;
+	char	**tokenarray;
+	t_token	*token_list;
+	t_token	*new_node;
+	t_token	*pipe_node;
+	int		i;
 
-    token_list = NULL;
-    tokenarray = ft_split_quoted(input);
-    if (!tokenarray)
-        return (NULL);
-    i = 0;
-    while (tokenarray[i])
-    {
-        if (!process_token(tokenarray[i], &token_list))
-        {
-            free_token_list(token_list);
-            free_token_array(tokenarray);
-            return (NULL);
-        }
-        if (tokenarray[i + 1] != NULL)
-        {
-            pipe_node = create_pipe_node();
-            if (!pipe_node)
-            {
-                free_token_list(token_list);
-                free_token_array(tokenarray);
-                return (NULL);
-            }
-            add_token_node(&token_list, pipe_node);
-        }
-        i++;
-    }
-    finalize_parsing(&new_node, tokenarray);
-    return (token_list);
+	token_list = NULL;
+	tokenarray = ft_split_quoted(input);
+	if (!tokenarray)
+		return (NULL);
+	i = 0;
+	while (tokenarray[i])
+	{
+		if (!process_token(tokenarray[i], &token_list))
+		{
+			free_token_list(token_list);
+			free_token_array(tokenarray);
+			return (NULL);
+		}
+		if (tokenarray[i + 1] != NULL)
+		{
+			pipe_node = create_pipe_node();
+			if (!pipe_node)
+			{
+				free_token_list(token_list);
+				free_token_array(tokenarray);
+				return (NULL);
+			}
+			add_token_node(&token_list, pipe_node);
+		}
+		i++;
+	}
+	finalize_parsing(&new_node, tokenarray);
+	return (token_list);
 }
 
 int    process_token(char *token, t_token **token_list)

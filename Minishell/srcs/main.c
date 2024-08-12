@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 16:25:14 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:38:05 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		input = readline("minishell> ");
+		// 
 		// display_prompt();
 		// input = read_input();
 		//
@@ -63,7 +64,7 @@ int	main(int ac, char **av, char **env)
 		main_exec(token_list, new_env);
 		free_token_list(token_list);
 	}
-	//free_env_list(env_list);
+	
 	clear_history();
 	return (0);
 }
