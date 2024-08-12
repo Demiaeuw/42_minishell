@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 22:12:12 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/12 23:00:20 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void			free_token_array(char **tokenarray);
 //									Expension								//
 //20
 char			*get_env_value(const char *name, char **env);
+void			set_env_value(char **env, char *key, char *new_value);
 void			process_token_values(t_token *token, char **env);
 //21
 bool			is_relativ_path(const char *path);
@@ -120,6 +121,7 @@ void 			exe_clear(void);
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
+int				exe_cd(char *input, char **env);
 //01
 int				exe_echo(char *str);
 //02

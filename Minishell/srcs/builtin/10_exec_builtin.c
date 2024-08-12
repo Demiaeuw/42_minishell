@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 22:13:08 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/12 22:54:48 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	builtin_check(t_token *token)
 void	builtin_selector(t_token *token, char **env)
 {
 	process_token_values(token, env);
-	// if (!ft_strcmp("cd", token->builtin_info))
-	// 	exe_cd(token, env);
+	if (!ft_strcmp("cd", token->builtin_info))
+	 	exe_cd(token->value, env);
 	if (!ft_strcmp("echo", token->builtin_info))
 		exe_echo(token->value);
 	else if (!ft_strcmp("env", token->builtin_info))
