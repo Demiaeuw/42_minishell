@@ -30,11 +30,10 @@ SRCS = 	srcs/main.c\
 		srcs/envp/10_envp_utils.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
+		srcs/exec/02_exec_utils.c\
 		srcs/exec/03_tokenlst_to_tokenarray.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
-		srcs/exec/30_minishell_himself.c\
-		srcs/exec/31_mini_clear.c\
 		srcs/parsing/00_parsing.c\
 		srcs/parsing/01_spliting_quote.c\
 		srcs/parsing/02_create_node.c\

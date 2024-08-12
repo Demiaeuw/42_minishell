@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:50:14 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/12 22:59:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

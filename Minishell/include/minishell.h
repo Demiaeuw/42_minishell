@@ -100,8 +100,6 @@ char			*get_command_path(const char *cmd);
 void			main_exec(t_token *token, char **env);
 void			main_command(t_token *token, char **env);
 void			other_command(t_token *token, char **env);
-//01
-// void			execute_execve(t_token *token, char **tokenarray,
 // 					char **envarray);
 void			execute_execve(t_token *token, char **env);
 //03
@@ -112,11 +110,6 @@ int				count_token(t_token *token);
 void			handle_sigint(int sig);
 //20
 void 			execute_pipes(t_token *token, char **env);
-//30
-void			launch_minishell(char **env);
-//31
-void 			exe_clear(void);
-
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
