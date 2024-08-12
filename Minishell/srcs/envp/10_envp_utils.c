@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_mini_env.c                                      :+:      :+:    :+:   */
+/*   10_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/12 16:27:30 by acabarba         ###   ########.fr       */
+/*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
+/*   Updated: 2024/08/12 16:24:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	mini_env(char **env)
+void	print_env(char **env)
 {
-	print_env(env);
+    int i;
+
+    i = 0;
+    while (env[i] != NULL)
+    {
+        printf("%s\n", env[i]);
+        i++;
+    }
 }
