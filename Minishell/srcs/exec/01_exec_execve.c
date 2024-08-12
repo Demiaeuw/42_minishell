@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 15:58:45 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:20:33 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,14 @@ void	execute_execve(t_token *token, char **env)
 	pid_t	pid;
 	int		status;
 	char	**args;
-	char	**envp;
 	char	*cmd_path;
 
 	args = convert_token(token);
-	envp = convert_env(env);
-	if (!args || !envp)
+	if (!args || !env)
 	{
 		perror("Memory allocation failed");
 		free(args);
-		free(envp);
+		free(env);
 		return ;
 	}
 
@@ -175,7 +173,7 @@ void	execute_execve(t_token *token, char **env)
 	{
 		fprintf(stderr, "Command not found: %s\n", args[0]);
 		free(args);
-		free(envp);
+		free(env);
 		return ;
 	}
 
@@ -184,13 +182,13 @@ void	execute_execve(t_token *token, char **env)
 	{
 		perror("fork");
 		free(args);
-		free(envp);
+		free(env);
 		free(cmd_path);
 		return ;
 	}
 	else if (pid == 0)
 	{
-		if (execve(cmd_path, args, envp) == -1)
+		if (execve(cmd_path, args, env) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);
@@ -212,7 +210,7 @@ void	execute_execve(t_token *token, char **env)
 	}
 
 	free(args);
-	free(envp);
+	free(env);
 	free(cmd_path);
 }
 

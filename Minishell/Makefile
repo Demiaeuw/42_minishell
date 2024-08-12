@@ -27,6 +27,7 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/10_exec_builtin.c\
 		srcs/builtin/20_bt_utils.c\
 		srcs/envp/00_init_env.c\
+		srcs/envp/10_envp_utils.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
 		srcs/exec/03_tokenlst_to_tokenarray.c\

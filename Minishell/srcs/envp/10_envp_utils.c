@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:21:40 by acabarba         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/08/12 17:31:36 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ char	*get_env_value(char *str, char **env)
 	return (NULL);
 }
 
-void    free_array(char **array)
+void	free_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!tab)

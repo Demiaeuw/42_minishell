@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 16:19:18 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:17:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char	**env_dup(char **env)
 
 	var_env = 0;
 	i = 0;
-
-	while(env[var_env] != NULL)
+	while (env[var_env] != NULL)
 		var_env++;
 	dup_env = malloc((var_env + 1) * sizeof(char *));
 	if (!dup_env)
@@ -55,5 +54,5 @@ char	**env_dup(char **env)
 		i++;
 	}
 	dup_env[var_env] = NULL;
-	return(dup_env);
+	return (dup_env);
 }
