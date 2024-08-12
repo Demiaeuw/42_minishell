@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 18:10:24 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:52:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 int	main(int ac, char **av, char **env)
 {
 	t_token			*token_list;
-	t_envfinal		*env_list = NULL;
+	char			**env2;
+	char			**export;
 	char 			*input;
 
 	signal(SIGINT, handle_sigint);
@@ -43,7 +44,8 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_FAILURE);
 	(void)av;
 
-	main_env(&env_list, env);
+	env2 = env_dup(env);
+	export = env_dup(env2);
 
 	while (1)
 	{
@@ -57,10 +59,10 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 		token_list = main_parse(input);
 		free(input);
-		main_exec(token_list, env_list);
-		free_token_list(&token_list, free_token_value);
+		main_exec(token_list, env);
+		//free_token_list(&token_list, free_token_value);
 	}
-	free_env_list(env_list);
+	//free_env_list(env_list);
 	clear_history();
 	return (0);
 }

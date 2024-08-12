@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 13:34:31 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:53:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ static char	*get_command_path2(char *command)
 
 
 
-void	execute_execve(t_token *token, t_envfinal *env)
+void	execute_execve(t_token *token, char **env)
 {
 	pid_t	pid;
 	int		status;

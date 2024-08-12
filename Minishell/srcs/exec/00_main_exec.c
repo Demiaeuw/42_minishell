@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 14:36:24 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/12 14:53:10 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	main_exec(t_token *token, t_envfinal *env)
+void	main_exec(t_token *token, char **env)
 {
 	t_token *current;
 	int		pipe;
@@ -31,7 +31,7 @@ void	main_exec(t_token *token, t_envfinal *env)
 		main_command(token, env);
 }
 
-void	main_command(t_token *token, t_envfinal *env)
+void	main_command(t_token *token, char **env)
 {
 	t_token	*current;
 
@@ -41,7 +41,7 @@ void	main_command(t_token *token, t_envfinal *env)
 		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
 		{
 			if (builtin_check(current))
-			{	
+			{
 				process_token_values(token, env);
 				builtin_selector(current, env);
 			}
@@ -52,7 +52,7 @@ void	main_command(t_token *token, t_envfinal *env)
 	}
 }
 
-void	other_command(t_token *token, t_envfinal *env)
+void	other_command(t_token *token, char **env)
 {
 	char	**envarray;
 	// char	**tokenarray;
@@ -66,6 +66,6 @@ void	other_command(t_token *token, t_envfinal *env)
 	}
 	else if (!ft_strcmp("clear", token->builtin_info))
         exe_clear();
-	else 
+	else
 		execute_execve(token, env);
 }

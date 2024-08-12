@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 18:07:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:50:36 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,14 @@ void			add_builtin(t_token *token);
 //20
 //void			expanser_commands(t_token token_list);
 char			*get_env_value(const char *name, t_envfinal *env);
-char			*expand_variables_in_value(const char *value, t_envfinal *env); 
+char			*expand_variables_in_value(const char *value, t_envfinal *env);
 void			process_token_values(t_token *token, t_envfinal *env);
 //21
 bool			is_relativ_path(const char *path);
 char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
-char 			*resolve_path(const char *path); 
+char 			*resolve_path(const char *path);
 //23
 char			*join_path(const char *path, const char *cmd);
 char			*get_command_path(const char *cmd);
@@ -130,7 +130,7 @@ char			*get_command_path(const char *cmd);
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
-void			main_exec(t_token *token, t_envfinal *env);
+void			main_exec(t_token *token, char **env);
 void			main_command(t_token *token, t_envfinal *env);
 void			other_command(t_token *token, t_envfinal *env);
 //01
@@ -185,33 +185,22 @@ int				is_proper_env(char *env_name);
 //--------------------------------------------------------------------------//
 //									Environement							//
 //00
-void			main_env(t_envfinal **env, char **envp);
-t_envfinal		*create_env_node(const char *type, const char *content);
-void			add_env_node(t_envfinal **env_list, t_envfinal *new_node);
-void			init_env_list(t_envfinal **env_list, char **envp);
-void			print_env_list(t_envfinal *env_list);
-void			increment_shlvl(t_envfinal *env);
-void			decrement_shlvl(t_envfinal *env);
+char			**env_dup(char **env);
+//--------------------------------Ancien ENV---------------------------------//
+// void			main_env(t_envfinal **env, char **envp);
+// t_envfinal		*create_env_node(const char *type, const char *content);
+// void			add_env_node(t_envfinal **env_list, t_envfinal *new_node);
+// void			init_env_list(t_envfinal **env_list, char **envp);
+// void			print_env_list(t_envfinal *env_list);
+// void			increment_shlvl(t_envfinal *env);
+// void			decrement_shlvl(t_envfinal *env);
 //01
-void			free_node(t_envfinal *node);
-void			free_env_list(t_envfinal *env_list);
+// void			free_node(t_envfinal *node);
+// void			free_env_list(t_envfinal *env_list);
 //02
-void			increment_int(t_envfinal *env, char *str);
-void			decrement_int(t_envfinal *env, char *str);
-void			modif_env(t_envfinal *env, char *type_env, char *new_content);
-char			*find_envcontent(t_envfinal *env, char *type_env);
-
-
-
-
-
-
-
-
-// Debut de test
-
-// fin de tes
-
-
+// void			increment_int(t_envfinal *env, char *str);
+// void			decrement_int(t_envfinal *env, char *str);
+// void			modif_env(t_envfinal *env, char *type_env, char *new_content);
+// char			*find_envcontent(t_envfinal *env, char *type_env);
 
 #endif
