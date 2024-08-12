@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:12:53 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:37:29 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,61 +118,3 @@ void	execute_execve(t_token *token, char **env)
 	free(args);
 	free(cmd_path);
 }
-
-// void	execute_execve(t_token *token, char **env)
-// {
-// 	pid_t	pid;
-// 	int		status;
-// 	char	**args;
-// 	char	*cmd_path;
-// 	char	**split_args;
-
-// 	split_args = split_command(token->value);
-// 	if (!split_args)
-// 	{
-// 		perror("Memory allocation failed");
-// 		return ;
-// 	}
-// 	args = convert_token(token);
-// 	if (!args)
-// 	{
-// 		perror("Memory allocation failed");
-// 		return ;
-// 	}
-// 	// Debug: Affiche les arguments de la commande
-// 	printf("Arguments :\n");
-// 	for (int i = 0; args[i]; i++)
-// 		printf("args[%d]: %s\n", i, args[i]);
-// 	cmd_path = get_command_path(args[0]);
-// 	if (!cmd_path)
-// 	{
-// 		fprintf(stderr, "Command not found: %s\n", args[0]);
-// 		free(args);
-// 		return ;
-// 	}
-// 	// Debug: Affiche le chemin de la commande
-// 	printf("Command path: %s\n", cmd_path);
-// 	pid = fork();
-// 	if (pid == -1)
-// 	{
-// 		perror("fork");
-// 		free(args);
-// 		free(cmd_path);
-// 		return ;
-// 	}
-// 	else if (pid == 0)
-// 	{
-// 		if (execve(cmd_path, args, env) == -1)
-// 		{
-// 			perror("execve");
-// 			exit(EXIT_FAILURE);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		waitpid(pid, &status, 0);
-// 	}
-// 	free(args);
-// 	free(cmd_path);
-// }
-

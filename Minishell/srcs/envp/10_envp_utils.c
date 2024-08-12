@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/08/12 20:15:44 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/08/12 21:24:36 by gaesteve          #+#    #+#             */
+/*   Updated: 2024/08/12 21:25:23 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_env(char **env)
 char	*get_env_value(char *str, char **env)
 {
 	int		i;
-	size_t 	len;
+	size_t	len;
 
 	i = 0;
 	len = ft_strlen(str);

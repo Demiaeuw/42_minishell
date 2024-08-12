@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:08:56 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:40:54 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ char			*get_command_path(const char *cmd);
 //00
 void			main_exec(t_token *token, char **env);
 void			main_command(t_token *token, char **env);
-void			other_command(t_token *token, char **env);
 //01
 void			execute_execve(t_token *token, char **env);
 char			**split_command(const char *cmd);
@@ -111,10 +110,6 @@ int				count_token(t_token *token);
 void			handle_sigint(int sig);
 //20
 void			execute_pipes(t_token *token, char **env);
-//30
-void			launch_minishell(char **env);
-//31
-void			exe_clear(void);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 20:51:30 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:36:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,8 @@ void	main_command(t_token *token, char **env)
 				builtin_selector(current, env);
 			}
 			else
-				other_command(current, env);
+				execute_execve(current, env)
 		}
 		current = current->next;
-	}
-}
-
-void	other_command(t_token *token, char **env)
-{
-	if (!ft_strcmp("./minishell", token->value))
-	{
-		launch_minishell(env);
-		return ;
-	}
-	else if (!ft_strcmp("clear", token->builtin_info))
-		exe_clear();
-	else
-	{
-		execute_execve(token, env);
 	}
 }
