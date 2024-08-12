@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 23:00:20 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/12 23:19:36 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ char			*get_command_path(const char *cmd);
 //00
 void			main_exec(t_token *token, char **env);
 void			main_command(t_token *token, char **env);
-void			other_command(t_token *token, char **env);
-// 					char **envarray);
+//01
 void			execute_execve(t_token *token, char **env);
+//02
+char			**split_command(const char *cmd);
 //03
 char			**convert_token(t_token *token);
 char			**free_token(char **str, int count);
@@ -119,6 +120,10 @@ int				exe_cd(char *input, char **env);
 int				exe_echo(char *str);
 //02
 void			mini_env(char **env);
+//03
+//				mini_export
+//04
+//				mini_unset
 //05
 int				exe_pwd(void);
 //06
@@ -138,5 +143,8 @@ void			init_terminal(char **env);
 char			**env_dup(char **env);
 //10
 void			print_env(char **env);
+void			set_env_value(char **env, char *key, char *new_value);
+char			*get_env_value(char *str, char **env);
+void			free_array(char **array);
 
 #endif
