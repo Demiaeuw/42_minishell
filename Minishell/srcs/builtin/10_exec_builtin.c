@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:42:43 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:39:42 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	builtin_check(t_token *token)
 
 void	builtin_selector(t_token *token, char **env)
 {
+	expand_variables_in_value(token->value, env);
 	// if (!ft_strcmp("cd", token->builtin_info))
 	// 	exe_cd(token, env);
 	if (!ft_strcmp("echo", token->builtin_info))
