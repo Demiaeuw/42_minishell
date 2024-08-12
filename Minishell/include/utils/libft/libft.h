@@ -43,6 +43,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
+char	*ft_strndup(const char *s1, size_t n);
+
 
 /*				WRITE					*/
 void	ft_putchar_fd(char c, int fd);
@@ -70,6 +72,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
+void	*safe_malloc(size_t bytes);
 
 /*				STRUCT					*/
 typedef struct s_list

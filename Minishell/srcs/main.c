@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/11 18:10:24 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:47:18 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (*input)
 			add_history(input);
-		token_list = main_parse(input);
+		token_list = main_parsing(input);
 		free(input);
 		main_exec(token_list, env_list);
-		free_token_list(&token_list, free_token_value);
+		free_token_list(token_list);
 	}
 	free_env_list(env_list);
 	clear_history();

@@ -19,29 +19,34 @@ bool	is_relativ_path(const char *path)
 /* ************************************************************************** */
 char	*get_absolute_path(const char *relative_path)
 {
-	char	courant_path[PATH_MAX];
-	int		len;
-	char	*absolute_path;
+	(void)relative_path;
+	printf("get_absolute_path");
+	return ("test");
+	// char	courant_path[PATH_MAX];
+	// int		len;
+	// char	*absolute_path;
 
-	if (getcwd(courant_path, sizeof(courant_path)) == NULL)
-		main_error(ft_error, 2);
-	len = ft_strlen(courant_path) + ft_strlen(relative_path) + 2;
-	absolute_path = safe_malloc(len);
-	ft_strcpy(absolute_path, courant_path);
-	ft_strcat(absolute_path, "/");
-	ft_strcat(absolute_path, relative_path);
-	return (absolute_path);
+	// if (getcwd(courant_path, sizeof(courant_path)) == NULL)
+	// 	main_error(ft_error, 2);
+	// len = ft_strlen(courant_path) + ft_strlen(relative_path) + 2;
+	// absolute_path = safe_malloc(len);
+	// ft_strcpy(absolute_path, courant_path);
+	// ft_strcat(absolute_path, "/");
+	// ft_strcat(absolute_path, relative_path);
+	// return (absolute_path);
 }
 /* ************************************************************************** */
 void	clean_path(char *path)
 {
-	char *absolute_path;
+	(void)path;
+	printf("clean_path");
+	// char *absolute_path;
 
-	absolute_path = get_absolute_path(path);
-	if(absolute_path)
-	{
-		ft_strcpy(path, absolute_path);
-		free(absolute_path);
-	}
+	// absolute_path = get_absolute_path(path);
+	// if(absolute_path)
+	// {
+	// 	ft_strcpy(path, absolute_path);
+	// 	free(absolute_path);
+	// }
 }
 /* ************************************************************************** */     
