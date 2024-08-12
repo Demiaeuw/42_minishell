@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:16:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:20:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_envfinal
 //									Parsing									//
 //00
 t_token 		*main_parsing(char *input);
+int    			process_token(char *token, t_token **token_list);
+void    		finalize_parsing(t_token **new_node, char **tokenarray);
 //01
 char			**ft_split_quoted(const char *str);
 //02
