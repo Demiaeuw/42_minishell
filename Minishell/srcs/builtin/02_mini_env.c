@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/10 22:05:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:09:54 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	mini_env(t_envfinal *envp)
+void	mini_env(char **env)
 {
-	print_env_list(envp);
+	print_env(env);
 }
