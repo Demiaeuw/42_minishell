@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:37:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:46:27 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void			free_token_array(char **tokenarray);
 //									Expension								//
 //20
 //void			expanser_commands(t_token token_list);
-char			*get_env_value(const char *name, char **env);
 char			*expand_variables_in_value(const char *value, char **env);
 void			process_token_values(t_token *token, char **env);
 //21
@@ -130,7 +129,7 @@ void			mini_env(char **env);
 //05
 int				exe_pwd(void);
 //06
-//void			exe_exit(char *str, char **env, t_token *token);
+void			exe_exit(char *str, char **env, t_token *token);
 //10
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, char **env);
@@ -144,7 +143,6 @@ int				is_proper_env(char *env_name);
 void			edit_shlvl(char **env);
 void			init_terminal(char **env);
 char			**env_dup(char **env);
-void			set_env_value(char **env, char *key, char *new_value);
 void 			free_array(char **tab);
 //10
 void			print_env(char **env);

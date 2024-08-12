@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/08/12 17:31:36 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:40:04 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    set_env_value(char **env, char *key, char *new_value)
         }
         i++;
     }
-    return (0);
+    return ;
 }
 
 char	*get_env_value(char *str, char **env)
@@ -72,12 +72,12 @@ void	free_array(char **array)
 	int	i;
 
 	i = 0;
-	if (!tab)
+	if (!array)
 		return ;
-	while (tab[i])
+	while (array[i])
 	{
-		free(tab[i]);
+		free(array[i]);
 		i++;
 	}
-	free(tab);
+	free(array);
 }

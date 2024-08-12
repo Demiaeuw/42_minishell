@@ -12,18 +12,6 @@
 
 #include "../../include/minishell.h"
 
-// // Fonction pour obtenir la valeur d'une variable d'environnement
-// char	*get_env_value(const char *name, t_envfinal *env)
-// {
-//     while (env != NULL)
-// 	{
-//         if (strcmp(env->type, name) == 0)
-//             return env->content;
-//         env = env->next;
-//     }
-//     return NULL;
-// }
-
 // // Fonction pour expander les variables d'environnement dans un token
 // char *expand_variables_in_value(const char *value, t_envfinal *env)
 // {
@@ -75,23 +63,6 @@
 //         current = current->next;
 //     }
 // }
-
-// Fonction pour obtenir la valeur d'une variable d'environnement
-char	*get_env_value(const char *name, char **env)
-{
-	int		i;
-	size_t	name_len;
-
-	i = 0;
-	name_len = strlen(name);
-	while (env[i] != NULL)
-	{
-		if (strncmp(env[i], name, name_len) == 0 && env[i][name_len] == '=')
-			return (env[i] + name_len + 1); // Retourne le contenu après 'nom='
-		i++;
-	}
-	return (NULL);
-}
 
 // Fonction pour expander les variables d'environnement dans un token
 char	*expand_variables_in_value(const char *value, char **env)

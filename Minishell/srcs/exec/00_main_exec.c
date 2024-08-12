@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:20:23 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:43:32 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	other_command(t_token *token, char **env)
 		return ;
 	}
 	else if (!ft_strcmp("clear", token->builtin_info))
-        exe_clear();
+		exe_clear();
 	else
 	{
-		printf("execve normalement");
+		printf("execve de base");
 		//execute_execve(token, env);
 	}
 }
