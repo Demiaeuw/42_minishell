@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:28:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:37:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -143,6 +144,8 @@ int				is_proper_env(char *env_name);
 void			edit_shlvl(char **env);
 void			init_terminal(char **env);
 char			**env_dup(char **env);
+void			set_env_value(char **env, char *key, char *new_value);
+void 			free_array(char **tab);
 //10
 void			print_env(char **env);
 void			set_env_value(char **env, char *key, char *new_value);
