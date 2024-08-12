@@ -6,10 +6,9 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:51:12 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:08:56 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -42,9 +41,9 @@
 
 typedef enum s_token_type
 {
-    TOKEN_COMMAND,
-    TOKEN_PIPE
-}   t_token_type;
+	TOKEN_COMMAND,
+	TOKEN_PIPE
+}	t_token_type;
 
 typedef struct s_token
 {
@@ -59,9 +58,9 @@ typedef struct s_token
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
-t_token 		*main_parsing(char *input);
-int    			process_token(char *token, t_token **token_list);
-void    		finalize_parsing(t_token **new_node, char **tokenarray);
+t_token			*main_parsing(char *input);
+int				process_token(char *token, t_token **token_list);
+void			finalize_parsing(t_token **new_node, char **tokenarray);
 //01
 char			**ft_split_quoted(const char *str);
 //02
@@ -90,7 +89,7 @@ bool			is_relativ_path(const char *path);
 char			*get_absolute_path(const char *relative_path);
 void			clean_path(char *path);
 //22
-char 			*resolve_path(const char *path);
+char			*resolve_path(const char *path);
 //23
 char			*join_path(const char *path, const char *cmd);
 char			*get_command_path(const char *cmd);
@@ -102,9 +101,8 @@ void			main_exec(t_token *token, char **env);
 void			main_command(t_token *token, char **env);
 void			other_command(t_token *token, char **env);
 //01
-// void			execute_execve(t_token *token, char **tokenarray,
-// 					char **envarray);
 void			execute_execve(t_token *token, char **env);
+char			**split_command(const char *cmd);
 //03
 char			**convert_token(t_token *token);
 char			**free_token(char **str, int count);
@@ -112,20 +110,24 @@ int				count_token(t_token *token);
 //10
 void			handle_sigint(int sig);
 //20
-void 			execute_pipes(t_token *token, char **env);
+void			execute_pipes(t_token *token, char **env);
 //30
 void			launch_minishell(char **env);
 //31
-void 			exe_clear(void);
-
+void			exe_clear(void);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
+//				mini_cd
 //01
 int				exe_echo(char *str);
 //02
 void			mini_env(char **env);
+//03
+//				mini_export
+//04
+//				mini_unset
 //05
 int				exe_pwd(void);
 //06

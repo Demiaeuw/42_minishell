@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:43:32 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:51:30 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	main_exec(t_token *token, char **env)
 {
-	t_token *current;
+	t_token	*current;
 	int		pipe;
 
 	current = token;
@@ -54,9 +54,6 @@ void	main_command(t_token *token, char **env)
 
 void	other_command(t_token *token, char **env)
 {
-	// char	**tokenarray;
-
-	// tokenarray = convert_token(token);
 	if (!ft_strcmp("./minishell", token->value))
 	{
 		launch_minishell(env);
@@ -66,7 +63,6 @@ void	other_command(t_token *token, char **env)
 		exe_clear();
 	else
 	{
-		printf("execve de base");
-		//execute_execve(token, env);
+		execute_execve(token, env);
 	}
 }

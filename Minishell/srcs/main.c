@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 16:48:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:12:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_token			*token_list;
 	char			**new_env;
-	//char			**export;
 	char 			*input;
 
 	signal(SIGINT, handle_sigint);
@@ -46,8 +45,8 @@ int	main(int ac, char **av, char **env)
 
 	new_env = env_dup(env);
 	init_terminal(new_env);
-	//export = env_dup(new_env);
-
+	//pour du debugage sur le PATH
+	//printf("PATH: %s\n", getenv("PATH"));
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -64,7 +63,6 @@ int	main(int ac, char **av, char **env)
 		main_exec(token_list, new_env);
 		free_token_list(token_list);
 	}
-
 	clear_history();
 	return (0);
 }

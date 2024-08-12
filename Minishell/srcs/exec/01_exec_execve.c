@@ -6,150 +6,50 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:20:33 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:12:53 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// void	execute_execve(t_token *token, t_envfinal *env)
-// {
-// 	pid_t	pid;
-// 	int		status;
-
-// 	char **str = convert_token(token);
-// 	char **envp = convert_env(env);
-
-// 	if (!str || !envp)
-// 	{
-// 		perror("Memory allocation failed");
-// 		free(str);
-// 		free(envp);
-// 		return ;
-// 	}
-// 	pid = fork();
-// 	if (pid == -1)
-// 	{
-// 		perror("fork");
-// 		free(str);
-// 		free(envp);
-// 		return ;
-// 	}
-// 	else if (pid == 0)
-// 	{
-// 		if (execve(str[0], str, envp) == -1)
-// 		{
-// 			perror("execve");
-// 			exit(EXIT_FAILURE);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		waitpid(pid, &status, 0);
-// 		if (WIFEXITED(status))
-// 		{
-// 			int exit_status = WEXITSTATUS(status);
-// 			printf("Child process exited with status %d\n", exit_status);
-// 		}
-// 		else if (WIFSIGNALED(status))
-// 		{
-// 			int signal = WTERMSIG(status);
-// 			printf("Child process was terminated by signal %d\n", signal);
-// 		}
-// 		else
-// 		{
-// 			printf("Child process terminated abnormally\n");
-// 		}
-// 	}
-// 	free(str);
-// 	free(envp);
-// }
-
-
-//----------------------------------------------------------------------------//
-
-
-
-// void	execute_execve(t_token *token, char **tokenarray, char **envarray)
-// {
-// 	pid_t	pid;
-// 	int		status;
-// 	// char *command_path;
-
-// 	// *command_path = get_command_path(token->builtin_info);
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		// Processus enfant : exécute la commande spécifiée
-// 		if (execve(get_command_path(token->builtin_info), tokenarray, envarray) == -1)
-// 		{
-// 			perror("Erreur execve");
-// 			exit(EXIT_FAILURE);
-// 		}
-// 	}
-// 	else if (pid < 0)
-// 	{
-// 		// Échec du fork
-// 		perror("Erreur fork");
-// 	}
-// 	else
-// 	{
-// 		// Processus parent : attend la fin du processus enfant
-// 		waitpid(pid, &status, 0);
-// 	}
-// 	// free(tableau de tableau de token);
-// 	// free(tableau de tableau de env);
-// }
-
-
-//----------------------------------------------------------------------------//
-
-static char	*get_command_path2(char *command)
+char	**split_command(const char *cmd)
 {
-	char	*path_env;
-	char	**paths;
-	char	*full_path;
+	char	**args;
+	int		count;
 	int		i;
+	char	*cmd_copy;
+	char	*token;
 
-	// Si la commande est déjà un chemin absolu
-	if (command[0] == '/' || command[0] == '.')
-		return (strdup(command));
-
-	// Récupération de la variable d'environnement PATH
-	path_env = getenv("PATH");
-	if (!path_env)
-		return (NULL);
-
-	// Séparation des différents chemins dans PATH
-	paths = ft_split(path_env, ':');
-	if (!paths)
-		return (NULL);
-
-	// Recherche de la commande dans les chemins
-	i = 0;
-	while (paths[i])
+	// Compte le nombre de mots dans la commande
+	count = 0;
+	cmd_copy = strdup(cmd);
+	token = strtok(cmd_copy, " ");
+	while (token)
 	{
-		full_path = malloc(strlen(paths[i]) + strlen(command) + 2);
-		if (!full_path)
-		{
-			free(paths);
-			return (NULL);
-		}
-		strcpy(full_path, paths[i]);
-		strcat(full_path, "/");
-		strcat(full_path, command);
-
-		// Vérification si le chemin existe et est exécutable
-		if (access(full_path, X_OK) == 0)
-		{
-			free(paths);
-			return (full_path);
-		}
-		free(full_path);
-		i++;
+		count++;
+		token = strtok(NULL, " ");
 	}
-	free(paths);
-	return (NULL);  // Commande introuvable
+	free(cmd_copy);
+
+	// Alloue de la mémoire pour les arguments
+	args = (char **)malloc((count + 1) * sizeof(char *));
+	if (!args)
+		return (NULL);
+
+	// Sépare la commande en arguments
+	i = 0;
+	cmd_copy = strdup(cmd);
+	token = strtok(cmd_copy, " ");
+	while (token)
+	{
+		args[i] = strdup(token);
+		i++;
+		token = strtok(NULL, " ");
+	}
+	args[i] = NULL;
+	free(cmd_copy);
+
+	return (args);
 }
 
 void	execute_execve(t_token *token, char **env)
@@ -158,37 +58,52 @@ void	execute_execve(t_token *token, char **env)
 	int		status;
 	char	**args;
 	char	*cmd_path;
+	char	**split_args;
 
-	args = convert_token(token);
-	if (!args || !env)
+	split_args = split_command(token->value);  // Utilisation de la nouvelle fonction
+	if (!split_args)
 	{
 		perror("Memory allocation failed");
-		free(args);
-		free(env);
 		return ;
 	}
 
-	cmd_path = get_command_path2(args[0]);
-	if (!cmd_path)
+	args = convert_token(token);  // Convertit les tokens en arguments
+	if (!args)
 	{
-		fprintf(stderr, "Command not found: %s\n", args[0]);
-		free(args);
-		free(env);
+		perror("Memory allocation failed");
+		free(split_args);
 		return ;
 	}
+
+	// Debug: Affiche les arguments de la commande
+	printf("Arguments :\n");
+	for (int i = 0; split_args[i]; i++)
+		printf("split_args[%d]: %s\n", i, split_args[i]);
+
+	cmd_path = get_command_path(split_args[0]);
+	if (!cmd_path)
+	{
+		fprintf(stderr, "Command not found: %s\n", split_args[0]);
+		free(split_args);
+		free(args);
+		return ;
+	}
+
+	// Debug: Affiche le chemin de la commande
+	printf("Command path: %s\n", cmd_path);
 
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");
+		free(split_args);
 		free(args);
-		free(env);
 		free(cmd_path);
 		return ;
 	}
 	else if (pid == 0)
 	{
-		if (execve(cmd_path, args, env) == -1)
+		if (execve(cmd_path, split_args, env) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);
@@ -197,20 +112,67 @@ void	execute_execve(t_token *token, char **env)
 	else
 	{
 		waitpid(pid, &status, 0);
-		// if (WIFEXITED(status))
-		// {
-		// 	int exit_status = WEXITSTATUS(status);
-		// 	printf("Child process exited with status %d\n", exit_status);
-		// }
-		// else if (WIFSIGNALED(status))
-		// {
-		// 	int signal = WTERMSIG(status);
-		// 	printf("Child process was terminated by signal %d\n", signal);
-		// }
 	}
 
+	free(split_args);
 	free(args);
-	free(env);
 	free(cmd_path);
 }
+
+// void	execute_execve(t_token *token, char **env)
+// {
+// 	pid_t	pid;
+// 	int		status;
+// 	char	**args;
+// 	char	*cmd_path;
+// 	char	**split_args;
+
+// 	split_args = split_command(token->value);
+// 	if (!split_args)
+// 	{
+// 		perror("Memory allocation failed");
+// 		return ;
+// 	}
+// 	args = convert_token(token);
+// 	if (!args)
+// 	{
+// 		perror("Memory allocation failed");
+// 		return ;
+// 	}
+// 	// Debug: Affiche les arguments de la commande
+// 	printf("Arguments :\n");
+// 	for (int i = 0; args[i]; i++)
+// 		printf("args[%d]: %s\n", i, args[i]);
+// 	cmd_path = get_command_path(args[0]);
+// 	if (!cmd_path)
+// 	{
+// 		fprintf(stderr, "Command not found: %s\n", args[0]);
+// 		free(args);
+// 		return ;
+// 	}
+// 	// Debug: Affiche le chemin de la commande
+// 	printf("Command path: %s\n", cmd_path);
+// 	pid = fork();
+// 	if (pid == -1)
+// 	{
+// 		perror("fork");
+// 		free(args);
+// 		free(cmd_path);
+// 		return ;
+// 	}
+// 	else if (pid == 0)
+// 	{
+// 		if (execve(cmd_path, args, env) == -1)
+// 		{
+// 			perror("execve");
+// 			exit(EXIT_FAILURE);
+// 		}
+// 	}
+// 	else
+// 	{
+// 		waitpid(pid, &status, 0);
+// 	}
+// 	free(args);
+// 	free(cmd_path);
+// }
 

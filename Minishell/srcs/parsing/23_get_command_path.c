@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   23_get_command_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:46:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/10 23:47:45 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:09:49 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_command_path(const char *cmd)
 	int		i;
 
 	if (access(cmd, X_OK) == 0)
-		return (strdup(cmd)); // Si cmd est déjà un chemin absolu valide
+		return (ft_strdup(cmd)); // Si cmd est déjà un chemin absolu valide
 
 	path_env = getenv("PATH");
 	if (!path_env)
