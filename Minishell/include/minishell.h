@@ -6,7 +6,11 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/12 17:08:28 by yonieva          ###   ########.fr       */
+=======
+/*   Updated: 2024/08/12 16:43:21 by gaesteve         ###   ########.fr       */
+>>>>>>> 5752416cedcbfbdf31b505b958931f087a5d1098
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +126,6 @@ void 			exe_clear(void);
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
-char *get_env_value2(const char *var, char **env);
-void update_env(char **env, char *var, char *value);
-char *get_target_path2(t_token *token, char **env);
-void exe_cd(t_token *token, char **env);
-
 //01
 int				exe_echo(char *str);
 //02
@@ -145,8 +144,15 @@ int				is_proper_env(char *env_name);
 //--------------------------------------------------------------------------//
 //									Environement							//
 //00
+void			edit_shlvl(char **env);
+void			init_terminal(char **env);
 char			**env_dup(char **env);
+<<<<<<< HEAD
 void			set_env_value(char **env, char *key, char *new_value);
 void 			free_array(char **tab);
+=======
+//10
+void			print_env(char **env);
+>>>>>>> 5752416cedcbfbdf31b505b958931f087a5d1098
 
 #endif
