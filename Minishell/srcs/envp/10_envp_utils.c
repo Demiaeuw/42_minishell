@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 17:20:56 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:21:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,6 @@ void    set_env_value(char **env, char *key, char *new_value)
     }
     return (0);
 }
-
-
-
-
-
-
-
-
-
 
 char	*get_env_value(char *str, char **env)
 {
