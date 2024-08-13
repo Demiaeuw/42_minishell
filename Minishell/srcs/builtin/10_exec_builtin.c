@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:18:57 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/13 15:53:43 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	builtin_selector(t_token *token, char **env)
 	else if (!ft_strcmp("export", token->builtin_info))
 		exe_export(token->value, &env);
 	// else if (!ft_strcmp("unset", token->builtin_info))
-	// 	exe_unset(&env, token);
+	// 	exe_unset(&env, token->value);
 	else if (!ft_strcmp("pwd", token->builtin_info))
 		exe_pwd();
 	else if (!ft_strcmp("exit", token->builtin_info))

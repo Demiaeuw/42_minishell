@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:18:26 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/13 15:53:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,8 @@ void			mini_env(char **env);
 //03
 void			exe_export(char *input, char ***env);
 void			add_env_entry(char *key, char *value, char ***env);
-
-
 //04
-//				mini_unset
+
 //05
 int				exe_pwd(void);
 //06
