@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:53:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:55:22 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,6 @@ void			free_token_array(char **tokenarray);
 //20
 void			process_token_values(t_token *token, char **env);
 char			*ft_remove_quotes(char *str);
-//21
-bool			is_relativ_path(const char *path);
-char			*get_absolute_path(const char *relative_path);
-void			clean_path(char *path);
-//22
-char 			*resolve_path(const char *path);
-//23
-char			*join_path(const char *path, const char *cmd);
-char			*get_command_path(const char *cmd);
 
 //--------------------------------------------------------------------------//
 //									Execution								//

@@ -42,12 +42,8 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/03_analyse1.c\
 		srcs/parsing/03_analyse2.c\
 		srcs/parsing/10_parsing_utils.c\
-		srcs/parsing/20_expanser_env.c\
-		srcs/parsing/21_expanser_utils.c\
-		srcs/parsing/22_expanser_path.c\
-		srcs/parsing/23_get_command_path.c
-
-# srcs/parsing/22_expand_variable.c\
+		srcs/parsing/11_pathing_gestion.c\
+		srcs/parsing/20_expanser_env.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
