@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 13:31:26 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:18:26 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void			free_token_array(char **tokenarray);
 //									Expension								//
 //20
 void			process_token_values(t_token *token, char **env);
+char			*ft_remove_quotes(char *str);
 //21
 bool			is_relativ_path(const char *path);
 char			*get_absolute_path(const char *relative_path);

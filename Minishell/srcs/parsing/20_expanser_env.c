@@ -25,7 +25,6 @@ static char	*expand_variables_in_value(const char *value, char **env)
 	i = 0;
 	j = 0;
 	in_single_quotes = 0;
-
 	while (i < len)
 	{
 		if (value[i] == '\'')
@@ -37,7 +36,6 @@ static char	*expand_variables_in_value(const char *value, char **env)
 		{
 			i++; // Passer le '$'
 			size_t var_start = i;
-			// Trouver la fin du nom de la variable
 			while (i < len && (ft_isalnum(value[i]) || value[i] == '_'))
 				i++;
 			char *var_name = strndup(&value[var_start], i - var_start);
@@ -60,6 +58,66 @@ static char	*expand_variables_in_value(const char *value, char **env)
 }
 
 
+static void ft_strshift_left(char *str, int start)
+{
+    int i;
+
+    i = start;
+    while (str[i] != '\0')
+    {
+        str[i] = str[i + 1];
+        i++;
+    }
+}
+
+char *ft_remove_quotes(char *str)
+{
+    int i;
+    int in_double_quotes;
+
+    if (!str)
+        return NULL;
+
+    i = 0;
+    in_double_quotes = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] == '"')
+        {
+            // Toggle the in_double_quotes flag
+            in_double_quotes = !in_double_quotes;
+            ft_strshift_left(str, i);
+            // Do not increment i here to check the new character at the same position
+        }
+        else if (str[i] == '\'' && !in_double_quotes)
+        {
+            // Remove single quote only if we are not inside double quotes
+            ft_strshift_left(str, i);
+            // Do not increment i here to check the new character at the same position
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    // Remove leading and trailing spaces
+    i = 0;
+    while (str[i] == ' ')
+        ft_strshift_left(str, i);
+
+    // After removing leading spaces, check trailing spaces
+    i = 0;
+    while (str[i] != '\0')
+        i++;
+    while (i > 0 && str[i - 1] == ' ')
+        str[--i] = '\0';
+
+    return str;
+}
+
+
 void	process_token_values(t_token *token, char **env)
 {
 	t_token *current;
@@ -72,6 +130,7 @@ void	process_token_values(t_token *token, char **env)
 		{
 			expanded_value = expand_variables_in_value(current->value, env);
 			free(current->value); // Libérer l'ancienne valeur
+			expanded_value = ft_remove_quotes(expanded_value);
 			current->value = expanded_value; // Mettre à jour avec nouvelle valeur
 			current = current->next;
 		}

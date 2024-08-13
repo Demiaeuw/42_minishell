@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 13:22:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:18:57 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	builtin_selector(t_token *token, char **env)
 	else if (!ft_strcmp("pwd", token->builtin_info))
 		exe_pwd();
 	else if (!ft_strcmp("exit", token->builtin_info))
-		exe_exit(token->value, env, token);
+		exe_exit(token->value, env, token); 
 }
