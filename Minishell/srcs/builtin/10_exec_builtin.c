@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:06:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:16:14 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	builtin_selector(t_token *token, t_envp *envp)
 		mini_env(envp);
 	// else if (!ft_strcmp("export", token->builtin_info))
 	// 	exe_export(token->value, &envp);
-	// else if (!ft_strcmp("unset", token->builtin_info))
-	// 	exe_unset(envp, token->value);
+	else if (!ft_strcmp("unset", token->builtin_info))
+		exe_unset(envp, token->value);
 	else if (!ft_strcmp("pwd", token->builtin_info))
 		exe_pwd();
 	else if (!ft_strcmp("exit", token->builtin_info))
-		exe_exit(token->value, envp, token); 
+		exe_exit(token->value, envp, token);
 }
 

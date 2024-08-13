@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:07:02 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:23:08 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ void			mini_env(t_envp *envp);
 
 
 //04
-
+void			unset_variable(t_envp *envp, const char *var);
+void			exe_unset(t_envp *envp, char *var);
 //05
 int				exe_pwd(void);
 //06
