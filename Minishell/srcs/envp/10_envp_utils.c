@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:24:36 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/13 16:10:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:21:18 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,21 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+}
+
+void	free_t_envp(t_envp *envp)
+{
+	int i;
+
+	if (envp == NULL)
+		return;
+
+	if (envp->env)
+	{
+		i = 0;
+		while (envp->env[i] != NULL)
+			free(envp->env[i]);
+		free(envp->env);
+	}
+	free(envp);
 }

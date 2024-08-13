@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:23:08 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:28:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,7 @@ void			print_env(char **env);
 void			set_env_value(char **env, char *key, char *new_value);
 char			*get_env_value(char *str, char **env);
 void			free_array(char **array);
+void			free_t_envp(t_envp *envp);
+
 
 #endif

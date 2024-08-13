@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:03:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:23:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 int	main(int ac, char **av, char **env)
 {
 	t_token	*token_list;
-	t_envp	envp;
+	t_envp	*envp;  // Déclare envp comme un pointeur vers t_envp
 	char	*input;
 
 	signal(SIGINT, handle_sigint);
@@ -43,8 +43,11 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_FAILURE);
 	(void)av;
 
-	envp = env_dup(env);
-	init_terminal(&envp);
+	envp = (t_envp *)malloc(sizeof(t_envp));  // Allocation dynamique de t_envp
+	if (envp == NULL)  // Vérifie si l'allocation a échoué
+		exit(EXIT_FAILURE);
+	envp->env = env_dup(env).env;  // Initialisation de env dans envp
+	init_terminal(envp);  // Initialiser le terminal
 
 	while (1)
 	{
@@ -55,9 +58,10 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 		token_list = main_parsing(input);
 		free(input);
-		main_exec(token_list, &envp);
+		main_exec(token_list, envp);  // Passe le pointeur envp
 		free_token_list(token_list);
 	}
 	clear_history();
+	// free_t_envp(envp);
 	return (0);
 }

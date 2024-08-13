@@ -58,7 +58,7 @@ void	exe_exit(char *str, t_envp *envp, t_token *token)
 	if (!conversion_success || exit_code < 0 || exit_code > 255)
 		exit_code = 1;
 	free_token_list(token);
-	free_array(envp->env);
+	free_t_envp(envp);
 	exit(exit_code);
 }
 
