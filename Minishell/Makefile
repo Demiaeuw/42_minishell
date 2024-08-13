@@ -22,36 +22,29 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/00_mini_cd.c\
 		srcs/builtin/01_mini_echo.c\
 		srcs/builtin/02_mini_env.c\
-		srcs/builtin/03_mini_export.c\
+		srcs/builtin/03_mini_export1.c\
+		srcs/builtin/03_mini_export2.c\
 		srcs/builtin/04_mini_unset.c\
 		srcs/builtin/05_mini_pwd.c\
 		srcs/builtin/06_mini_exit.c\
 		srcs/builtin/10_exec_builtin.c\
 		srcs/builtin/20_bt_utils.c\
-		srcs/envp/00_init1.c\
-		srcs/envp/00_init2.c\
-		srcs/envp/01_free.c\
-		srcs/envp/02_modification.c\
+		srcs/envp/00_init_env.c\
+		srcs/envp/10_envp_utils.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
-		srcs/exec/02_envlst_to_envarray.c\
+		srcs/exec/02_exec_utils.c\
 		srcs/exec/03_tokenlst_to_tokenarray.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
-		srcs/exec/30_minishell_himself.c\
-		srcs/exec/31_mini_clear.c\
 		srcs/parsing/00_parsing.c\
 		srcs/parsing/01_spliting_quote.c\
 		srcs/parsing/02_create_node.c\
 		srcs/parsing/03_analyse1.c\
 		srcs/parsing/03_analyse2.c\
 		srcs/parsing/10_parsing_utils.c\
-		srcs/parsing/20_expanser_env.c\
-		srcs/parsing/21_expanser_utils.c\
-		srcs/parsing/22_expanser_path.c\
-		srcs/parsing/23_get_command_path.c
-		
-# srcs/parsing/22_expand_variable.c\
+		srcs/parsing/11_pathing_gestion.c\
+		srcs/parsing/20_expanser_env.c
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

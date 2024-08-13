@@ -3,63 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   04_mini_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 16:14:09 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/09 16:39:34 by acabarba         ###   ########.fr       */
+/*   Created: 2024/08/13 13:55:21 by acabarba          #+#    #+#             */
+/*   Updated: 2024/08/13 23:27:01 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*extract_key(t_token *token)
+void exe_unset(t_envp *envp, char *args)
 {
-	char	*key;
-	int		i;
-	int		j;
+    char *var = args;
 
-	key = safe_malloc(ft_strlen(token->value) + 1);
-	i = 0;
-	j = 0;
-	while (token->value[i] == ' ')
-		i++;
-	i += 5;
-	while (token->value[i] == ' ')
-		i++;
-	while (token->value[i])
-		key[j++] = token->value[i++];
-	key[j] = '\0';
-	return (key);
+    // Skip the leading "unset " part if it's there
+    if (strncmp(var, "unset ", 6) == 0)
+        var += 6;
+
+    if (*var)
+    {
+        printf("Unsetting variable: %s\n", var); // Debugging print
+        unset_variable(envp, var);
+    }
 }
 
-static void	remove_env_node(t_envfinal **env, t_envfinal *curt, t_envfinal *prv)
+void unset_variable(t_envp *envp, const char *var)
 {
-	if (!prv)
-		*env = curt->next;
-	else
-		prv->next = curt->next;
-	free(curt->type);
-	free(curt->content);
-	free(curt);
-}
+    int i = 0;
+    int j;
+    int var_len = ft_strlen(var);
 
-void	exe_unset(t_envfinal **env, t_token *token)
-{
-	t_envfinal	*current;
-	t_envfinal	*previous;
-	char		*key;
+    printf("Looking for variable: %s\n", var); // Debugging print
 
-	if (!token || !env || !*env)
-		return ;
-	key = extract_key(token);
-	current = *env;
-	previous = NULL;
-	while (current && ft_strcmp(current->type, key) != 0)
-	{
-		previous = current;
-		current = current->next;
-	}
-	if (current)
-		remove_env_node(env, current, previous);
-	free(key);
+    while (envp->env[i])
+    {
+        if (ft_strncmp(envp->env[i], var, var_len) == 0 && envp->env[i][var_len] == '=')
+        {
+            printf("Found and unsetting: %s\n", envp->env[i]); // Debugging print
+            free(envp->env[i]);
+            j = i;
+            while (envp->env[j])
+            {
+                envp->env[j] = envp->env[j + 1];
+                j++;
+            }
+            return;
+        }
+        i++;
+    }
 }

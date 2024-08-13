@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 15:43:01 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:39:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,34 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_token			*token_list;
-	char			**new_env;
-	char			**export;
-	char 			*input;
+	t_token	*token_list;
+	t_envp	*envp;
+	char	*input;
 
 	signal(SIGINT, handle_sigint);
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
 
-	new_env = env_dup(env);
-	export = env_dup(new_env);
+	envp = (t_envp *)malloc(sizeof(t_envp));
+	if (envp == NULL)
+		exit(EXIT_FAILURE);
+	envp->env = env_dup(env).env;
+	init_terminal(envp);
 
 	while (1)
 	{
 		input = readline("minishell> ");
-		// display_prompt();
-		// input = read_input();
-		//
 		if (input == NULL)
 			break ;
 		if (*input)
 			add_history(input);
 		token_list = main_parsing(input);
 		free(input);
-		main_exec(token_list, new_env);
+		main_exec(token_list, envp);  // Passe le pointeur envp
 		free_token_list(token_list);
 	}
-	//free_env_list(env_list);
 	clear_history();
+	// free_t_envp(envp);
 	return (0);
 }

@@ -12,66 +12,127 @@
 
 #include "../../include/minishell.h"
 
-// Fonction pour obtenir la valeur d'une variable d'environnement
-char	*get_env_value(const char *name, t_envfinal *env) 
+static char	*expand_variables_in_value(const char *value, char **env)
 {
-    while (env != NULL) 
-	{
-        if (strcmp(env->type, name) == 0) 
-            return env->content;
-        env = env->next;
-    }
-    return NULL;
-}
+	size_t	len;
+	char	*result;
+	size_t	i;
+	size_t	j;
+	int		in_single_quotes;
 
-// Fonction pour expander les variables d'environnement dans un token
-char *expand_variables_in_value(const char *value, t_envfinal *env) 
-{
-    size_t len = strlen(value);
-    char *result = malloc(len * 2 + 1);
-    if (!result) return NULL;
-
-    size_t i = 0, j = 0;
-    while (i < len) 
+	len = strlen(value);
+	result = safe_malloc(len * 2 + 1);  // Allocation de mémoire initiale
+	i = 0;
+	j = 0;
+	in_single_quotes = 0;
+	while (i < len)
 	{
-        if (value[i] == '$' && (i == 0 || isspace(value[i - 1]))) 
+		if (value[i] == '\'')
 		{
-            i++;  // Passer le '$'
-            size_t var_start = i;
-
-            // Trouver la fin du nom de la variable
-            while (i < len && (isalnum(value[i]) || value[i] == '_')) 
-                i++;
-            char *var_name = strndup(&value[var_start], i - var_start);
-            char *env_value = get_env_value(var_name, env);
-            free(var_name);
-
-            if (env_value) 
+			in_single_quotes = !in_single_quotes; // Toggle entre guillemets simples
+			result[j++] = value[i++];
+		}
+		else if (value[i] == '$' && !in_single_quotes)
+		{
+			i++; // Passer le '$'
+			size_t var_start = i;
+			while (i < len && (ft_isalnum(value[i]) || value[i] == '_'))
+				i++;
+			char *var_name = strndup(&value[var_start], i - var_start);
+			char *env_value = get_env_value(var_name, env);
+			free(var_name);
+			if (env_value)
 			{
-                size_t env_len = strlen(env_value);
-                // Réallocation de `result` si nécessaire
-                result = realloc(result, j + env_len + (len - i) + 1);
-                memcpy(&result[j], env_value, env_len);
-                j += env_len;
-            }
-        } 
-		else 
-        	result[j++] = value[i++];
-    }
-
-    result[j] = '\0';
-    return result;
+				size_t env_len = ft_strlen(env_value);
+				// Réallocation de `result` si nécessaire
+				result = realloc(result, j + env_len + (len - i) + 1);
+				ft_memcpy(&result[j], env_value, env_len);
+				j += env_len;
+			}
+		}
+		else
+			result[j++] = value[i++];
+	}
+	result[j] = '\0';
+	return (result);
 }
 
-void	process_token_values(t_token *token, t_envfinal *env) 
-{
-    t_token *current = token;
 
-    while (current != NULL) 
-	{
-        char *expanded_value = expand_variables_in_value(current->value, env);
-        free(current->value);  // Libérer l'ancienne valeur
-        current->value = expanded_value;  // Mettre à jour avec la nouvelle valeur
-        current = current->next;
+static void ft_strshift_left(char *str, int start)
+{
+    int i;
+
+    i = start;
+    while (str[i] != '\0')
+    {
+        str[i] = str[i + 1];
+        i++;
     }
+}
+
+char *ft_remove_quotes(char *str)
+{
+    int i;
+    int in_double_quotes;
+
+    if (!str)
+        return NULL;
+
+    i = 0;
+    in_double_quotes = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] == '"')
+        {
+            // Toggle the in_double_quotes flag
+            in_double_quotes = !in_double_quotes;
+            ft_strshift_left(str, i);
+            // Do not increment i here to check the new character at the same position
+        }
+        else if (str[i] == '\'' && !in_double_quotes)
+        {
+            // Remove single quote only if we are not inside double quotes
+            ft_strshift_left(str, i);
+            // Do not increment i here to check the new character at the same position
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    // Remove leading and trailing spaces
+    i = 0;
+    while (str[i] == ' ')
+        ft_strshift_left(str, i);
+
+    // After removing leading spaces, check trailing spaces
+    i = 0;
+    while (str[i] != '\0')
+        i++;
+    while (i > 0 && str[i - 1] == ' ')
+        str[--i] = '\0';
+
+    return str;
+}
+
+
+void	process_token_values(t_token *token, char **env)
+{
+	t_token *current;
+	char	*expanded_value;
+
+	current = token;
+	if(token->is_builtin == true)
+	{
+		while (current != NULL)
+		{
+			expanded_value = expand_variables_in_value(current->value, env);
+			free(current->value); // Libérer l'ancienne valeur
+			expanded_value = ft_remove_quotes(expanded_value);
+			current->value = expanded_value; // Mettre à jour avec nouvelle valeur
+			current = current->next;
+		}
+	}
 }

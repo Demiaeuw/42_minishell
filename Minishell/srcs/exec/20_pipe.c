@@ -3,60 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   20_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:54:36 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:56:50 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	execute_pipes(t_token *token, char **env)
+void	execute_pipes(t_token *token, t_envp *env)
 {
-    int pipefd[2];
-    pid_t pid1, pid2;
-
-    if (pipe(pipefd) == -1)
-    {
-        perror("pipe failed");
-        exit(EXIT_FAILURE);
-    }
-
-    pid1 = fork();
-    if (pid1 == 0)
-    { // Premier processus enfant - `echo`
-        dup2(pipefd[1], STDOUT_FILENO); // Rediriger stdout vers l'écriture du pipe
-        close(pipefd[0]); // Fermer la lecture du pipe
-        close(pipefd[1]); // Fermer l'écriture du pipe
-        if (builtin_check(token))
-        {
-            builtin_selector(token, env);
-        } else {
-            execute_execve(token, env);
-        }
-        exit(EXIT_SUCCESS);
-    }
-
-    pid2 = fork();
-    if (pid2 == 0)
-    { // Deuxième processus enfant - `pwd`
-        dup2(pipefd[0], STDIN_FILENO); // Rediriger stdin vers la lecture du pipe
-        close(pipefd[1]); // Fermer l'écriture du pipe
-        close(pipefd[0]); // Fermer la lecture du pipe
-        if (builtin_check(token->next->next))
-        {
-            builtin_selector(token->next->next, env);
-        }
-        else
-        {
-            execute_execve(token->next->next, env);
-        }
-        exit(EXIT_SUCCESS);
-    }
-
-    close(pipefd[0]);
-    close(pipefd[1]);
-    waitpid(pid1, NULL, 0);
-    waitpid(pid2, NULL, 0);
+	(void) token;
+	(void) env;
+	printf("gestion des pipe a faire");
 }

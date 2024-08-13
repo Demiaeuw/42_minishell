@@ -1,44 +1,78 @@
-char	**clone_env(char **env)
-{
-	int		num_elements;
-	char	**env_clone;
-	int		i;
 
-	num_elements = 0;
-	i = 0;
-	while (env[num_elements] != NULL)
-	{
-		num_elements++;
-	}
-	env_clone = malloc((num_elements + 1) * sizeof(char *));
-	while (i < num_elements)
-	{
-		env_clone[i] = ft_strdup(env[i]);
-		i++;
-	}
-	env_clone[num_elements] = NULL;
-	return (env_clone);
+EXPORT FONCTIONNEL
+
+void add_or_update_env(t_envp *envp, const char *var, const char *value)
+{
+    int i = 0;
+    int var_len = strlen(var);
+    char *new_entry = NULL;
+
+    // Create the new environment variable string
+    new_entry = (char *)malloc(var_len + strlen(value) + 2); // +1 for '=' and +1 for '\0'
+    if (!new_entry)
+    {
+        return;
+    }
+    sprintf(new_entry, "%s=%s", var, value);
+
+    // Check if the variable already exists
+    while (envp->env[i])
+    {
+        if (strncmp(envp->env[i], var, var_len) == 0 && envp->env[i][var_len] == '=')
+        {
+            // Update existing variable
+            free(envp->env[i]);
+            envp->env[i] = new_entry;
+            return;
+        }
+        i++;
+    }
+
+    // Add new variable
+    char **new_env = realloc(envp->env, (i + 2) * sizeof(char *));
+    if (!new_env)
+    {
+        free(new_entry);
+        return;
+    }
+    envp->env = new_env;
+    envp->env[i] = new_entry;
+    envp->env[i + 1] = NULL;
 }
 
-
-
-
-int	main(int ac, char **av, char **env)
+void exe_export(t_envp *envp, char *args)
 {
-	int		i;
-	char	**env2;
-	char	**export;
+    if (!args)
+    {
+        return;
+    }
 
-	if (ac > 2 && !*av)
-		return (0);
-	init_signal();
-	env2 = clone_env(env);
-	init_terminal(env2);
-	export = clone_env(env2);
-	g_global_sig = 0;
-	i = 0;
-	start_terminal(env2, export, i);
-	free_tab(env2);
-	free_tab(export);
-	return (0);
+    // Skip the "export" keyword if present
+    if (strncmp(args, "export ", 7) == 0)
+    {
+        args += 7;
+    }
+
+    char *token = strtok(args, " ");
+    while (token != NULL)
+    {
+        char *equal_sign = strchr(token, '=');
+        if (!equal_sign)
+        {
+            token = strtok(NULL, " ");
+            continue;
+        }
+
+        // Split the token into variable name and value
+        char *var = strndup(token, equal_sign - token);
+        char *value = equal_sign + 1;
+
+        if (var && *var)
+        {
+            add_or_update_env(envp, var, value);
+        }
+
+        free(var);
+        token = strtok(NULL, " ");
+    }
 }

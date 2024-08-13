@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:53:10 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:49:33 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	main_exec(t_token *token, char **env)
+void	main_exec(t_token *token, t_envp *envp)
 {
-	t_token *current;
+	t_token	*current;
 	int		pipe;
 
 	current = token;
@@ -26,12 +26,12 @@ void	main_exec(t_token *token, char **env)
 		current = current->next;
 	}
 	if (pipe == 1)
-		execute_pipes(token, env);
+		execute_pipes(token, envp);
 	else
-		main_command(token, env);
+		main_command(token, envp);
 }
 
-void	main_command(t_token *token, char **env)
+void	main_command(t_token *token, t_envp *envp)
 {
 	t_token	*current;
 
@@ -42,30 +42,12 @@ void	main_command(t_token *token, char **env)
 		{
 			if (builtin_check(current))
 			{
-				process_token_values(token, env);
-				builtin_selector(current, env);
+				process_token_values(token, envp->env);
+				builtin_selector(current, envp);
 			}
 			else
-				other_command(current, env);
+				execute_execve(current, envp);
 		}
 		current = current->next;
 	}
-}
-
-void	other_command(t_token *token, char **env)
-{
-	char	**envarray;
-	// char	**tokenarray;
-
-	envarray = convert_env(env);
-	// tokenarray = convert_token(token);
-	if (!ft_strcmp("./minishell", token->value))
-	{
-		launch_minishell(envarray);
-		return ;
-	}
-	else if (!ft_strcmp("clear", token->builtin_info))
-        exe_clear();
-	else
-		execute_execve(token, env);
 }
