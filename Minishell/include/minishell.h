@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 22:57:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:07:02 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ void			execute_pipes(t_token *token, t_envp *env);
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
-int				exe_cd(char *input, char **env);
+int 			exe_cd(char *input, t_envp *envp);
+
 //01
 int				exe_echo(char *str);
 //02

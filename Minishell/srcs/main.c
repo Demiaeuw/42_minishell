@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 22:24:40 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:03:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_FAILURE);
 	(void)av;
 
-	envp.env = env_dup(env);
-	init_terminal(envp.env);
+	envp = env_dup(env);
+	init_terminal(&envp);
 
 	while (1)
 	{
