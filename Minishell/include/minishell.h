@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:55:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:57:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_envp
+{
+	char	**env;
+}	t_envp;
+
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
@@ -77,6 +82,9 @@ char			*clean_whitespace(char *str);
 void			print_token_list(t_token *head);
 void			free_token_list(t_token *token_list);
 void			free_token_array(char **tokenarray);
+//11
+char			*join_path(const char *path, const char *cmd);
+char			*get_command_path(const char *cmd);
 
 //--------------------------------------------------------------------------//
 //									Expension								//
@@ -87,10 +95,10 @@ char			*ft_remove_quotes(char *str);
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
-void			main_exec(t_token *token, char **env);
-void			main_command(t_token *token, char **env);
+void			main_exec(t_token *token, t_envp *envp);
+void			main_command(t_token *token, t_envp *envp);
 //01
-void			execute_execve(t_token *token, char **env);
+void	execute_execve(t_token *token, t_envp *envp);
 //02
 char			**split_command(const char *cmd);
 //03
@@ -100,7 +108,7 @@ int				count_token(t_token *token);
 //10
 void			handle_sigint(int sig);
 //20
-void 			execute_pipes(t_token *token, char **env);
+void			execute_pipes(t_token *token, t_envp *env);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
@@ -109,19 +117,20 @@ int				exe_cd(char *input, char **env);
 //01
 int				exe_echo(char *str);
 //02
-void			mini_env(char **env);
+void			mini_env(t_envp *envp);
 //03
-void			exe_export(char *input, char ***env);
-void			add_env_entry(char *key, char *value, char ***env);
+
+
 //04
 
 //05
 int				exe_pwd(void);
 //06
-void			exe_exit(char *str, char **env, t_token *token);
+void			exe_exit(char *str, t_envp *envp, t_token *token);
+
 //10
 int				builtin_check(t_token *token);
-void			builtin_selector(t_token *token, char **env);
+void			builtin_selector(t_token *token, t_envp *envp);
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
@@ -130,8 +139,8 @@ int				is_proper_env(char *env_name);
 //									Environement							//
 //00
 void			edit_shlvl(char **env);
-void			init_terminal(char **env);
-char			**env_dup(char **env);
+void			init_terminal(t_envp *envp);
+t_envp			env_dup(char **env);
 //10
 void			print_env(char **env);
 void			set_env_value(char **env, char *key, char *new_value);

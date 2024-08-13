@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/12 23:38:28 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:33:02 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,4 @@ char	**split_command(const char *cmd)
 	args[i] = NULL;
 	return (args);
 }
+

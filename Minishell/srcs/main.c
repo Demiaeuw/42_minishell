@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:41:15 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:24:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,28 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_token			*token_list;
-	char			**new_env;
-	char 			*input;
+	t_token	*token_list;
+	t_envp	envp;
+	char	*input;
 
 	signal(SIGINT, handle_sigint);
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
 
-	new_env = env_dup(env);
-	init_terminal(new_env);
-	//pour du debugage sur le PATH
-	//printf("PATH: %s\n", getenv("PATH"));
+	envp.env = env_dup(env);
+	init_terminal(envp.env);
+
 	while (1)
 	{
 		input = readline("minishell> ");
-		//
-		// display_prompt();
-		// input = read_input();
-		//
 		if (input == NULL)
 			break ;
 		if (*input)
 			add_history(input);
 		token_list = main_parsing(input);
 		free(input);
-		main_exec(token_list, new_env);
+		main_exec(token_list, &envp);
 		free_token_list(token_list);
 	}
 	clear_history();

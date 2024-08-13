@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 22:59:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:52:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	main_exec(t_token *token, char **env)
+void	main_exec(t_token *token, t_envp *envp)
 {
 	t_token	*current;
 	int		pipe;
@@ -26,12 +26,12 @@ void	main_exec(t_token *token, char **env)
 		current = current->next;
 	}
 	if (pipe == 1)
-		execute_pipes(token, env);
+		execute_pipes(token, envp);
 	else
-		main_command(token, env);
+		main_command(token, envp);
 }
 
-void	main_command(t_token *token, char **env)
+void	main_command(t_token *token, t_envp *envp)
 {
 	t_token	*current;
 
@@ -42,12 +42,13 @@ void	main_command(t_token *token, char **env)
 		{
 			if (builtin_check(current))
 			{
-				process_token_values(token, env);
-				builtin_selector(current, env);
+				process_token_values(token, envp->env);
+				builtin_selector(current, envp);
 			}
 			else
-				execute_execve(current, env);
+				execute_execve(current, envp);
 		}
 		current = current->next;
 	}
 }
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:52:26 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:32:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
-static void	execute_child_process(char *cmd_path, char **split_args, char **env)
+static void	execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 {
-	if (execve(cmd_path, split_args, env) == -1)
+	if (execve(cmd_path, split_args, envp->env) == -1)
 	{
 		perror("execve");
 		exit(EXIT_FAILURE);
@@ -56,7 +56,7 @@ static int	prepare_execution(char **split_args, char **args, char **cmd_path)
 	return (1);
 }
 
-void	execute_execve(t_token *token, char **env)
+void	execute_execve(t_token *token, t_envp *envp)
 {
 	pid_t	pid;
 	int		status;
@@ -76,10 +76,11 @@ void	execute_execve(t_token *token, char **env)
 		return ;
 	}
 	if (pid == 0)
-		execute_child_process(cmd_path, split_args, env);
+		execute_child_process(cmd_path, split_args, envp);
 	else
 		waitpid(pid, &status, 0);
 	free(split_args);
 	free(args);
 	free(cmd_path);
 }
+

@@ -41,7 +41,7 @@ static int	string_to_int(const char *str, int *result)
 	return (1);
 }
 
-void	exe_exit(char *str, char **env, t_token *token)
+void	exe_exit(char *str, t_envp *envp, t_token *token)
 {
 	int	exit_code;
 	int	conversion_success;
@@ -58,6 +58,7 @@ void	exe_exit(char *str, char **env, t_token *token)
 	if (!conversion_success || exit_code < 0 || exit_code > 255)
 		exit_code = 1;
 	free_token_list(token);
-	free_array(env);
+	free_array(envp->env);
 	exit(exit_code);
 }
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:52:17 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:26:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,40 @@ void	edit_shlvl(char **env)
 	}
 }
 
-void	init_terminal(char **env)
+void	init_terminal(t_envp *envp)
 {
-	edit_shlvl(env);
+	edit_shlvl(envp->env);
 }
 
-char	**env_dup(char **env)
+t_envp	env_dup(char **env)
 {
+	t_envp	dup_envp;
 	int		var_env;
-	char	**dup_env;
 	int		i;
 
 	var_env = 0;
 	i = 0;
 	while (env[var_env] != NULL)
 		var_env++;
-	dup_env = malloc((var_env + 1) * sizeof(char *));
-	if (!dup_env)
-		return (NULL);
+	dup_envp.env = malloc((var_env + 1) * sizeof(char *));
+	if (!dup_envp.env)
+	{
+		dup_envp.env = NULL;
+		return (dup_envp);
+	}
 	while (i < var_env)
 	{
-		dup_env[i] = ft_strdup(env[i]);
-		if (!dup_env[i])//ce if est nouveau
+		dup_envp.env[i] = ft_strdup(env[i]);
+		if (!dup_envp.env[i])
 		{
 			while (i > 0)
-				free(dup_env[--i]);
-			free(dup_env);
-			return (NULL);
-		}//jusque la
+				free(dup_envp.env[--i]);
+			free(dup_envp.env);
+			dup_envp.env = NULL;
+			return (dup_envp);
+		}
 		i++;
 	}
-	dup_env[var_env] = NULL;
-	return (dup_env);
+	dup_envp.env[var_env] = NULL;
+	return (dup_envp);
 }
