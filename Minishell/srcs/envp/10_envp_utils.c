@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:24:36 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/12 21:25:23 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:46:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	print_env(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
-		printf("%s\n", env[i]);
+		printf("env[%d]: %s\n", i, env[i]);  // Affiche chaque entrée de l'environnement
 		i++;
 	}
+	printf("Finished printing environment.\n");
 }
 
 char	*get_env_value(char *str, char **env)

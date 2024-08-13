@@ -22,6 +22,7 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/00_mini_cd.c\
 		srcs/builtin/01_mini_echo.c\
 		srcs/builtin/02_mini_env.c\
+		srcs/builtin/03_mini_export.c\
 		srcs/builtin/05_mini_pwd.c\
 		srcs/builtin/06_mini_exit.c\
 		srcs/builtin/10_exec_builtin.c\
