@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 20:32:05 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:52:17 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ char	**env_dup(char **env)
 	while (i < var_env)
 	{
 		dup_env[i] = ft_strdup(env[i]);
+		if (!dup_env[i])//ce if est nouveau
+		{
+			while (i > 0)
+				free(dup_env[--i]);
+			free(dup_env);
+			return (NULL);
+		}//jusque la
 		i++;
 	}
 	dup_env[var_env] = NULL;
