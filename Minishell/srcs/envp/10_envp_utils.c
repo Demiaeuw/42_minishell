@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:24:36 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/13 23:21:18 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:55:15 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	print_env(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
-		printf("env[%d]: %s\n", i, env[i]);// Affiche chaque entrée de l'env
+		printf("%s\n", env[i]);
 		i++;
 	}
-	// printf("Finished printing environment.\n");
 }
 
 char	*get_env_value(char *str, char **env)
@@ -85,16 +84,18 @@ void	free_array(char **array)
 
 void	free_t_envp(t_envp *envp)
 {
-	int i;
+	int	i;
 
 	if (envp == NULL)
-		return;
-
+		return ;
 	if (envp->env)
 	{
 		i = 0;
 		while (envp->env[i] != NULL)
+		{
 			free(envp->env[i]);
+			i++;
+		}
 		free(envp->env);
 	}
 	free(envp);

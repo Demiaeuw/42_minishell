@@ -6,21 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:59:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:06:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 01:05:55 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	free_tokens(char **tokens)
-{
-	int i;
 
-	i = 0;
-	while (tokens[i])
-		free(tokens[i++]);
-	free(tokens);
-}
 
 static char	*extract_token(const char *str, int start, int len)
 {
@@ -34,8 +26,16 @@ static int	handle_quote(char c, bool *in_quotes, char *quote_char)
 {
 	if ((c == '"' || c == '\'') && (!*in_quotes || *quote_char == c))
 	{
-		*in_quotes = !(*in_quotes);
-		*quote_char = *in_quotes ? c : '\0';
+		if (*in_quotes)
+		{
+			*in_quotes = 0;
+			*quote_char = '\0';
+		}
+		else
+		{
+			*in_quotes = 1;
+			*quote_char = c;
+		}
 	}
 	return (*in_quotes);
 }

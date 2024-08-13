@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 22:26:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:07:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 void	edit_shlvl(char **env)
 {
-	char	*tmp;
+	char	*new_value;
+	char	*old_value;
 
 	while (*env)
 	{
 		if (ft_strncmp(*env, "SHLVL=", 6) == 0)
 		{
-			tmp = ft_strjoin(ft_strdup("SHLVL="), ft_itoa(ft_atoi(*env + 6)
-						+ 1));
+			old_value = ft_itoa(ft_atoi(*env + 6) + 1);
+			if (old_value == NULL)
+				return ;
+			new_value = ft_strjoin("SHLVL=", old_value);
+			free(old_value);
+			if (new_value == NULL)
+				return ;
 			free(*env);
-			*env = tmp;
-			break ;
 		}
 		env++;
 	}

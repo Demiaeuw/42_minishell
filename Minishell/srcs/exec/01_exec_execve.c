@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 22:32:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:51:25 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
-static void	execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
+static void	execute_child_process(char *ch, char **split_args, t_envp *envp)
 {
-	if (execve(cmd_path, split_args, envp->env) == -1)
+	if (execve(ch, split_args, envp->env) == -1)
 	{
 		perror("execve");
 		exit(EXIT_FAILURE);
@@ -83,4 +83,3 @@ void	execute_execve(t_token *token, t_envp *envp)
 	free(args);
 	free(cmd_path);
 }
-

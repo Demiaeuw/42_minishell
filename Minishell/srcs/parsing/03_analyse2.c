@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_analyse2.c                                      :+:      :+:    :+:   */
+/*   03_analyse2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:33:42 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 13:40:19 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:44:49 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*close_quotes_if_needed(char *str)
 	bool single_quote_open = false;
 	bool double_quote_open = false;
 
-	// Parcourir la chaîne pour vérifier les guillemets ouverts
+	i = 0;
 	while (i < len)
 	{
 		if (str[i] == '\'')
@@ -67,10 +67,7 @@ char	*clean_whitespace(char *str)
 
     while (str[i])
     {
-        // Copier le caractère actuel
         cleaned_str[j++] = str[i];
-
-        // Ignorer les espaces multiples
         if (str[i] == ' ' && str[i + 1] == ' ')
         {
             while (str[i] == ' ')
@@ -80,8 +77,6 @@ char	*clean_whitespace(char *str)
 
         i++;
     }
-
-    // Supprimer les espaces en fin de chaîne
     if (j > 0 && cleaned_str[j - 1] == ' ')
         j--;
 
@@ -89,3 +84,11 @@ char	*clean_whitespace(char *str)
     return cleaned_str;
 }
 
+void finalize_parsing(t_token *new_node, char **tokenarray)
+{
+	if (new_node != NULL && new_node != NULL)
+		new_node->is_last_command = 1;
+
+	if (tokenarray != NULL)
+		free_token_array(tokenarray);
+}

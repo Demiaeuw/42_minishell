@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:28:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 01:00:40 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@
 
 typedef enum s_token_type
 {
-    TOKEN_COMMAND,
-    TOKEN_PIPE
-}   t_token_type;
+	TOKEN_COMMAND,
+	TOKEN_PIPE
+}		t_token_type;
 
 typedef struct s_token
 {
@@ -63,9 +63,13 @@ typedef struct s_envp
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
-t_token 		*main_parsing(char *input);
-int    			process_token(char *token, t_token **token_list);
-void    		finalize_parsing(t_token **new_node, char **tokenarray);
+t_token			*main_parsing(char *input);
+int				parse_tokens(char **tokenarray, t_token **token_list);
+int				process_single_token(char *token, t_token **token_list);
+int				add_pipe_to_list(t_token **token_list);
+int				process_token(char *token, t_token **token_list);
+void			finalize_parsing(t_token *new_node, char **tokenarray);
+
 //01
 char			**ft_split_quoted(const char *str);
 //02
@@ -82,6 +86,7 @@ char			*clean_whitespace(char *str);
 void			print_token_list(t_token *head);
 void			free_token_list(t_token *token_list);
 void			free_token_array(char **tokenarray);
+void			free_tokens(char **tokens);
 //11
 char			*join_path(const char *path, const char *cmd);
 char			*get_command_path(const char *cmd);
@@ -98,30 +103,35 @@ char			*ft_remove_quotes(char *str);
 void			main_exec(t_token *token, t_envp *envp);
 void			main_command(t_token *token, t_envp *envp);
 //01
-void	execute_execve(t_token *token, t_envp *envp);
+void			execute_execve(t_token *token, t_envp *envp);
 //02
 char			**split_command(const char *cmd);
 //03
 char			**convert_token(t_token *token);
-char			**free_token(char **str, int count);
 int				count_token(t_token *token);
 //10
 void			handle_sigint(int sig);
 //20
 void			execute_pipes(t_token *token, t_envp *env);
+char			**free_token(char **str, int count);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
-int 			exe_cd(char *input, t_envp *envp);
-
+int				exe_cd(char *input, t_envp *envp);
 //01
 int				exe_echo(char *str);
 //02
 void			mini_env(t_envp *envp);
 //03
-
-
+char			*create_new_entry(const char *var, const char *value);
+void			update_env(t_envp *envp, const char *var, int var_len,
+					char *new_entry);
+void			add_new_env_variable(t_envp *envp, char *new_entry);
+void			add_or_update_env(t_envp *envp, const char *var,
+					const char *value);
+void			process_export_token(t_envp *envp, char *token);
+void			exe_export(t_envp *envp, char *args);
 //04
 void			unset_variable(t_envp *envp, const char *var);
 void			exe_unset(t_envp *envp, char *var);
@@ -149,6 +159,5 @@ void			set_env_value(char **env, char *key, char *new_value);
 char			*get_env_value(char *str, char **env);
 void			free_array(char **array);
 void			free_t_envp(t_envp *envp);
-
 
 #endif

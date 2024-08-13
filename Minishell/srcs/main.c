@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:23:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:39:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 int	main(int ac, char **av, char **env)
 {
 	t_token	*token_list;
-	t_envp	*envp;  // Déclare envp comme un pointeur vers t_envp
+	t_envp	*envp;
 	char	*input;
 
 	signal(SIGINT, handle_sigint);
@@ -43,11 +43,11 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_FAILURE);
 	(void)av;
 
-	envp = (t_envp *)malloc(sizeof(t_envp));  // Allocation dynamique de t_envp
-	if (envp == NULL)  // Vérifie si l'allocation a échoué
+	envp = (t_envp *)malloc(sizeof(t_envp));
+	if (envp == NULL)
 		exit(EXIT_FAILURE);
-	envp->env = env_dup(env).env;  // Initialisation de env dans envp
-	init_terminal(envp);  // Initialiser le terminal
+	envp->env = env_dup(env).env;
+	init_terminal(envp);
 
 	while (1)
 	{

@@ -33,7 +33,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 int		ft_tablen(char **array);
 
-
 /*				TRANSFORM				*/
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
@@ -44,7 +43,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_strndup(const char *s1, size_t n);
-
 
 /*				WRITE					*/
 void	ft_putchar_fd(char c, int fd);

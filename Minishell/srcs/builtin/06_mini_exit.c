@@ -61,4 +61,3 @@ void	exe_exit(char *str, t_envp *envp, t_token *token)
 	free_t_envp(envp);
 	exit(exit_code);
 }
-
