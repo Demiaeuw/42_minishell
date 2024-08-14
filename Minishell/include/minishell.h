@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 21:06:37 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:28:11 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char			*get_command_path(const char *cmd);
 //--------------------------------------------------------------------------//
 //									Expension								//
 //20
+void			parse_chevrons(t_token *tokens);
 void			process_token_values(t_token *token, char **env);
 char 			*clean_string(const char* str);
 

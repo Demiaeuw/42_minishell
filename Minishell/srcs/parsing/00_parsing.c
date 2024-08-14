@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 13:36:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:22:14 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	}
 	finalize_parsing(token_list, tokenarray);
 	process_token_values(token_list, env->env);
+	parse_chevrons(token_list);
 	return (token_list);
 }
 
