@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 19:46:16 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:06:37 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,32 @@ typedef enum s_token_type
 	TOKEN_PIPE
 }		t_token_type;
 
+typedef enum s_chevron_type
+{
+	IN,
+	DOUBLE_IN,
+	OUT,
+	DOUBLE_OUT
+}	t_chevron_type;
+
+typedef struct s_chevron
+{
+	t_chevron_type	type;
+	bool	is_last_open;
+	bool	is_last_closed;
+	char	*file_name;
+	struct s_chevron	*next;
+}	t_chevron;
+
 typedef struct s_token
 {
-	t_token_type	type;
-	char			*value;
-	bool			is_builtin;
-	char			*builtin_info;
-	bool			is_last_command;
-	struct s_token	*next;
+	t_token_type		type;
+	char				*value;
+	bool				is_builtin;
+	char				*builtin_info;
+	bool				is_last_command;
+	struct s_chevron	*file_in_out;
+	struct s_token		*next;
 }	t_token;
 
 typedef struct s_envp
