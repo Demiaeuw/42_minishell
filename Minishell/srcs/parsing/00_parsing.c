@@ -6,13 +6,13 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 01:07:55 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:36:08 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_token	*main_parsing(char *input)
+t_token	*main_parsing(char *input, t_envp *env)
 {
 	char	**tokenarray;
 	t_token	*token_list;
@@ -28,6 +28,7 @@ t_token	*main_parsing(char *input)
 		return (NULL);
 	}
 	finalize_parsing(token_list, tokenarray);
+	process_token_values(token_list, env->env);
 	return (token_list);
 }
 

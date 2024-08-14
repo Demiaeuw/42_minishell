@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:07:36 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:35:36 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_envp
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
-t_token			*main_parsing(char *input);
+t_token			*main_parsing(char *input, t_envp *env);
 int				parse_tokens(char **tokenarray, t_token **token_list);
 int				process_single_token(char *token, t_token **token_list);
 int				add_pipe_to_list(t_token **token_list);

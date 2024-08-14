@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 00:40:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:34:37 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	builtin_check(t_token *token)
 
 void	builtin_selector(t_token *token, t_envp *envp)
 {
-	process_token_values(token, envp->env);
 	if (!ft_strcmp("cd", token->builtin_info))
 		exe_cd(token->value, envp);
 	if (!ft_strcmp("echo", token->builtin_info))

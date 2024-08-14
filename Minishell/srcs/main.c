@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:07:32 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:32:43 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (*input)
 			add_history(input);
-		token_list = main_parsing(input);
+		token_list = main_parsing(input, envp);
 		free(input);
 		main_exec(token_list, envp);
 		free_token_list(token_list);
