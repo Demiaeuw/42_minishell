@@ -31,7 +31,7 @@ void	edit_shlvl(char **env)
 			free(*env);
 			*env = new_value;
 			return ;
-		}
+		} 
 		env++;
 	}
 }
