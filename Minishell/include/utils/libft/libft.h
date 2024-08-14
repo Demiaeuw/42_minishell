@@ -94,4 +94,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_dup(int fildes);
 int		ft_dup2(int fildes, int fildes2);
 
+/*			RAJOUT DURANT MINISHELL			*/
+size_t	ft_strspn(const char *s, const char *accept);
+char	*ft_strpbrk(const char *s, const char *accept);
+char	*ft_strtok(char *str, const char *delim, char **saveptr);
 #endif

@@ -57,7 +57,10 @@ SRCS =	ft_atoi.c\
 	ft_strcmp.c\
 	ft_tablen.c\
 	ft_strndup.c\
-	ft_safe_malloc.c
+	ft_safe_malloc.c\
+	ft_strspn.c\
+	ft_strpbrk.c\
+	ft_strtok.c\
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

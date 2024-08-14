@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 23:39:19 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:07:32 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
-
 	envp = (t_envp *)malloc(sizeof(t_envp));
 	if (envp == NULL)
 		exit(EXIT_FAILURE);
 	envp->env = env_dup(env).env;
 	init_terminal(envp);
-
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -58,7 +56,7 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 		token_list = main_parsing(input);
 		free(input);
-		main_exec(token_list, envp);  // Passe le pointeur envp
+		main_exec(token_list, envp);
 		free_token_list(token_list);
 	}
 	clear_history();

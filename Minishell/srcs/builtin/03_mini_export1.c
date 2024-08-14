@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 11:49:27 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:32:55 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 char	*create_new_entry(const char *var, const char *value)
 {
 	int		var_len;
+	int		value_len;
 	char	*new_entry;
 
 	var_len = strlen(var);
-	new_entry = (char *)malloc(var_len + strlen(value) + 2);
+	value_len = strlen(value);
+	new_entry = (char *)malloc(var_len + value_len + 2);
 	if (!new_entry)
 		return (NULL);
-	sprintf(new_entry, "%s=%s", var, value);
+	strcpy(new_entry, var);
+	new_entry[var_len] = '=';
+	strcpy(new_entry + var_len + 1, value);
 	return (new_entry);
 }
 
@@ -32,7 +36,7 @@ void	update_env(t_envp *envp, const char *var, int var_len, char *new_entry)
 	i = 0;
 	while (envp->env[i])
 	{
-		if (strncmp(envp->env[i], var, var_len) == 0
+		if (ft_strncmp(envp->env[i], var, var_len) == 0
 			&& envp->env[i][var_len] == '=')
 		{
 			free(envp->env[i]);

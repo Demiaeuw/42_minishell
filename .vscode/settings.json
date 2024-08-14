@@ -1,9 +1,10 @@
 {
   "files.associations": {
-    "ft_printf.h": "c",
-    "minishell.h": "c",
-    "07_clear.C": "cpp"
-  },
+	"ft_printf.h": "c",
+	"minishell.h": "c",
+	"07_clear.C": "cpp",
+	"libft.h": "c"
+},
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",

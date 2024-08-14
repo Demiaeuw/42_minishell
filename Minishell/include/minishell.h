@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 11:50:48 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:07:36 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,13 @@ int				is_proper_env(char *env_name);
 //00
 void			edit_shlvl(char **env);
 void			init_terminal(t_envp *envp);
+int				count_env_vars(char **env);
+char			**duplicate_env(char **env, int var_env);
 t_envp			env_dup(char **env);
 //10
 void			print_env(char **env);
-void			set_env_value(char **env, char *key, char *new_value);
 char			*get_env_value(char *str, char **env);
+void			set_env_value(char **env, char *key, char *new_value);
 void			free_array(char **array);
 void			free_t_envp(t_envp *envp);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 00:07:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:01:32 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,47 @@ void	init_terminal(t_envp *envp)
 	edit_shlvl(envp->env);
 }
 
+int	count_env_vars(char **env)
+{
+	int	count;
+
+	count = 0;
+	while (env[count] != NULL)
+		count++;
+	return (count);
+}
+
+char	**duplicate_env(char **env, int var_env)
+{
+	char	**dup_env;
+	int		i;
+
+	dup_env = malloc((var_env + 1) * sizeof(char *));
+	if (!dup_env)
+		return (NULL);
+	i = 0;
+	while (i < var_env)
+	{
+		dup_env[i] = ft_strdup(env[i]);
+		if (!dup_env[i])
+		{
+			while (i > 0)
+				free(dup_env[--i]);
+			free(dup_env);
+			return (NULL);
+		}
+		i++;
+	}
+	dup_env[var_env] = NULL;
+	return (dup_env);
+}
+
 t_envp	env_dup(char **env)
 {
 	t_envp	dup_envp;
 	int		var_env;
-	int		i;
 
-	var_env = 0;
-	i = 0;
-	while (env[var_env] != NULL)
-		var_env++;
-	dup_envp.env = malloc((var_env + 1) * sizeof(char *));
-	if (!dup_envp.env)
-	{
-		dup_envp.env = NULL;
-		return (dup_envp);
-	}
-	while (i < var_env)
-	{
-		dup_envp.env[i] = ft_strdup(env[i]);
-		if (!dup_envp.env[i])
-		{
-			while (i > 0)
-				free(dup_envp.env[--i]);
-			free(dup_envp.env);
-			dup_envp.env = NULL;
-			return (dup_envp);
-		}
-		i++;
-	}
-	dup_envp.env[var_env] = NULL;
+	var_env = count_env_vars(env);
+	dup_envp.env = duplicate_env(env, var_env);
 	return (dup_envp);
 }
