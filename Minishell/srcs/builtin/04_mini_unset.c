@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:55:21 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 01:24:52 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:57:37 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,23 @@
 
 void	exe_unset(t_envp *envp, char *args)
 {
-	char	*var;
+	char	**variables;
+	int		i;
 
-	var = args;
-	if (strncmp(var, "unset ", 6) == 0)
-		var += 6;
-	if (*var)
-		unset_variable(envp, var);
+	i = 0;
+	variables = ft_split(args, ' ');
+	while (variables[i])
+	{
+		unset_variable(envp, variables[i]);
+		i++;
+	}
+	i = 0;
+	while (variables[i])
+	{
+		free(variables[i]);
+		i++;
+	}
+	free(variables);
 }
 
 void	unset_variable(t_envp *envp, const char *var)
@@ -43,6 +53,7 @@ void	unset_variable(t_envp *envp, const char *var)
 				envp->env[j] = envp->env[j + 1];
 				j++;
 			}
+			envp->env[j] = NULL;
 			return ;
 		}
 		i++;

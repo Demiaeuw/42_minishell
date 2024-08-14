@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:24:36 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/14 13:49:01 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:57:06 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,6 @@ void	free_array(char **array)
 	free(array);
 }
 
-// void	free_t_envp(t_envp *envp)
-// {
-// 	int	i;
-
-// 	if (envp == NULL)
-// 		return ;
-// 	if (envp->env)
-// 	{
-// 		i = 0;
-// 		while (envp->env[i] != NULL)
-// 		{
-// 			free(envp->env[i]);
-// 			i++;
-// 		}
-// 		free(envp->env);
-// 	}
-// 	free(envp);
-// }
 void	free_t_envp(t_envp *envp)
 {
 	int	i;
@@ -111,13 +93,10 @@ void	free_t_envp(t_envp *envp)
 		i = 0;
 		while (envp->env[i] != NULL)
 		{
-			printf("Freeing env[%d]: %p\n", i, envp->env[i]);
 			free(envp->env[i]);
 			i++;
 		}
-		printf("Freeing env: %p\n", envp->env);
 		free(envp->env);
 	}
-	printf("Freeing envp: %p\n", envp);
 	free(envp);
 }
