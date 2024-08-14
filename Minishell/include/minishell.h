@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 18:29:52 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:46:16 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char			*get_command_path(const char *cmd);
 //									Expension								//
 //20
 void			process_token_values(t_token *token, char **env);
-char			*ft_remove_quotes(char *str);
+char 			*clean_string(const char* str);
 
 //--------------------------------------------------------------------------//
 //									Execution								//

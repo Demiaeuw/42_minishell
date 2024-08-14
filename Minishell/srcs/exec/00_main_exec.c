@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 00:49:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:50:36 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ void	main_command(t_token *token, t_envp *envp)
 		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
 		{
 			if (builtin_check(current))
-			{
-				process_token_values(token, envp->env);
 				builtin_selector(current, envp);
-			}
 			else
 				execute_execve(current, envp);
 		}

@@ -57,49 +57,34 @@ static char	*expand_variables_in_value(const char *value, char **env)
 	return (result);
 }
 
-
-static void ft_strshift_left(char *str, int start)
-{
-	int i;
-
-	i = start;
-	while (str[i] != '\0')
-	{
-		str[i] = str[i + 1];
-		i++;
-	}
-}
-
-char *ft_remove_quotes(char *str)
-{
-    int i;
-    int in_double_quotes;
-    int in_single_quotes;
-
-    if (!str)
-        return NULL;
-    i = 0;
-    in_double_quotes = 0;
-    in_single_quotes = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == '"' && !in_single_quotes)
-        {
-            in_double_quotes = !in_double_quotes;
-            ft_strshift_left(str, i);
-        }
-        else if (str[i] == '\'' && !in_double_quotes)
-        {
-            in_single_quotes = !in_single_quotes;
-            ft_strshift_left(str, i);
-        }
-        else
-            i++;
+char *clean_string(const char* str) {
+    int len = strlen(str);
+    char* cleaned_str = (char*)malloc(len + 1);
+    if (cleaned_str == NULL) {
+        return NULL; // Gestion d'erreur si l'allocation échoue
     }
-    return (str);
+    
+    int i, j = 0;
+    int in_single_quote = 0;
+    int in_double_quote = 0;
+
+    for (i = 0; i < len; i++) {
+        if (str[i] == '\'' && !in_double_quote) {
+            in_single_quote = !in_single_quote;
+        } else if (str[i] == '\"' && !in_single_quote) {
+            in_double_quote = !in_double_quote;
+        } else if (str[i] == '\'' && in_double_quote) {
+            cleaned_str[j++] = str[i];
+        } else if (str[i] == '\"' && in_single_quote) {
+            cleaned_str[j++] = str[i];
+        } else if (str[i] != '\'' && str[i] != '\"') {
+            cleaned_str[j++] = str[i];
+        }
+    }
+
+    cleaned_str[j] = '\0';
+    return cleaned_str;
 }
-
-
 
 void	process_token_values(t_token *token, char **env)
 {
@@ -113,7 +98,8 @@ void	process_token_values(t_token *token, char **env)
 		{
 			expanded_value = expand_variables_in_value(current->value, env);
 			free(current->value);
-			expanded_value = ft_remove_quotes(expanded_value);
+			if (!ft_strcmp(token->builtin_info, "echo"))
+				expanded_value = clean_string(expanded_value);
 			current->value = expanded_value;
 			current = current->next;
 		}
