@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 13:35:36 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:29:52 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,11 @@ int				exe_echo(char *str);
 //02
 void			mini_env(t_envp *envp);
 //03
-char			*create_new_entry(const char *var, const char *value);
+char			*create_env_entry(const char *var, const char *value);
+void			add_env_variable(t_envp *envp, char *new_entry);
+void			set_env_var(t_envp *envp, const char *var, const char *value);
 void			update_env(t_envp *envp, const char *var, int var_len,
 					char *new_entry);
-void			add_new_env_variable(t_envp *envp, char *new_entry);
-void			add_or_update_env(t_envp *envp, const char *var,
-					const char *value);
 void			process_export_token(t_envp *envp, char *token);
 void			exe_export(t_envp *envp, char *args);
 //04

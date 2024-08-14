@@ -6,75 +6,73 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:32:55 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:33:16 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-char	*create_new_entry(const char *var, const char *value)
+// Creates a new env entry in the format "var=value"
+char	*create_env_entry(const char *var, const char *value)
 {
 	int		var_len;
 	int		value_len;
 	char	*new_entry;
 
-	var_len = strlen(var);
-	value_len = strlen(value);
+	var_len = ft_strlen(var);
+	value_len = ft_strlen(value);
 	new_entry = (char *)malloc(var_len + value_len + 2);
 	if (!new_entry)
 		return (NULL);
-	strcpy(new_entry, var);
+	ft_strcpy(new_entry, var);
 	new_entry[var_len] = '=';
-	strcpy(new_entry + var_len + 1, value);
+	ft_strcpy(new_entry + var_len + 1, value);
 	return (new_entry);
 }
 
-void	update_env(t_envp *envp, const char *var, int var_len, char *new_entry)
+// Returns the size of the env (number of entries)
+static int	get_env_size(char **env)
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	while (envp->env[i])
-	{
-		if (ft_strncmp(envp->env[i], var, var_len) == 0
-			&& envp->env[i][var_len] == '=')
-		{
-			free(envp->env[i]);
-			envp->env[i] = new_entry;
-			return ;
-		}
-		i++;
-	}
-	add_new_env_variable(envp, new_entry);
+	size = 0;
+	while (env[size])
+		size++;
+	return (size);
 }
 
-void	add_new_env_variable(t_envp *envp, char *new_entry)
+// Allocates a new env array of size new_size and copies old_env into it
+static char	**allocate_env_array(char **old_env, int old_size, int new_size)
 {
+	char	**new_env;
 	int		i;
+
+	new_env = malloc(new_size * sizeof(char *));
+	if (!new_env)
+		return (NULL);
+	i = 0;
+	while (i < old_size)
+	{
+		new_env[i] = old_env[i];
+		i++;
+	}
+	return (new_env);
+}
+
+// Adds a new env variable to envp
+void	add_env_variable(t_envp *envp, char *new_entry)
+{
+	int		old_size;
 	char	**new_env;
 
-	i = 0;
-	while (envp->env[i])
-		i++;
-	new_env = realloc(envp->env, (i + 2) * sizeof(char *));
+	old_size = get_env_size(envp->env);
+	new_env = allocate_env_array(envp->env, old_size, old_size + 2);
 	if (!new_env)
 	{
 		free(new_entry);
 		return ;
 	}
+	free(envp->env);
 	envp->env = new_env;
-	envp->env[i] = new_entry;
-	envp->env[i + 1] = NULL;
-}
-
-void	add_or_update_env(t_envp *envp, const char *var, const char *value)
-{
-	int		var_len;
-	char	*new_entry;
-
-	var_len = strlen(var);
-	new_entry = create_new_entry(var, value);
-	if (!new_entry)
-		return ;
-	update_env(envp, var, var_len, new_entry);
+	envp->env[old_size] = new_entry;
+	envp->env[old_size + 1] = NULL;
 }
