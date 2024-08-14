@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_mini_export1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 00:54:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 11:49:27 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	update_env(t_envp *envp, const char *var, int var_len, char *new_entry)
 		}
 		i++;
 	}
-	free(new_entry);
+	add_new_env_variable(envp, new_entry);
 }
 
 void	add_new_env_variable(t_envp *envp, char *new_entry)
@@ -73,5 +73,4 @@ void	add_or_update_env(t_envp *envp, const char *var, const char *value)
 	if (!new_entry)
 		return ;
 	update_env(envp, var, var_len, new_entry);
-	add_new_env_variable(envp, new_entry);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_mini_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:45:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 00:50:56 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 11:50:45 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	process_export_token(t_envp *envp, char *token)
 	var = strndup(token, equal_sign - token);
 	value = equal_sign + 1;
 	if (var && *var)
-	{
 		add_or_update_env(envp, var, value);
-	}
 	free(var);
 }
 
