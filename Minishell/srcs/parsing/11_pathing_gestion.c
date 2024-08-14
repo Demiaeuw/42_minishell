@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   23_get_command_path.c                              :+:      :+:    :+:   */
+/*   11_pathing_gestion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:46:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:09:49 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:52:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,10 @@ char	*join_path(const char *path, const char *cmd)
 /**
  *  Fonction pour récupérer le chemin absolu d'une commande
  */
-char	*get_command_path(const char *cmd)
+static char	*try_access_command(char **paths, const char *cmd)
 {
-	char	*path_env;
-	char	**paths;
 	char	*command_path;
 	int		i;
-
-	if (access(cmd, X_OK) == 0)
-		return (ft_strdup(cmd)); // Si cmd est déjà un chemin absolu valide
-
-	path_env = getenv("PATH");
-	if (!path_env)
-		return (NULL);
-
-	paths = ft_split(path_env, ':'); // Fonction à implémenter pour split par ':'
-	if (!paths)
-		return (NULL);
 
 	i = 0;
 	while (paths[i])
@@ -63,7 +50,21 @@ char	*get_command_path(const char *cmd)
 		free(command_path);
 		i++;
 	}
+	return (NULL);
+}
 
-	free(paths);
-	return (NULL); // Commande non trouvée dans PATH
+char	*get_command_path(const char *cmd)
+{
+	char	*path_env;
+	char	**paths;
+
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	path_env = getenv("PATH");
+	if (!path_env)
+		return (NULL);
+	paths = ft_split(path_env, ':');
+	if (!paths)
+		return (NULL);
+	return (try_access_command(paths, cmd));
 }

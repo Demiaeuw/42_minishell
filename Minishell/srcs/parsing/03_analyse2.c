@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:33:42 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 00:44:49 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:50:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,77 +18,75 @@
  * 1. fermer les quotes si ce n'a pas été fait.
  * 2. retirer les espaces qui ne devrai pas etre present.
  */
-char	*close_quotes_if_needed(char *str)
+
+static void	check_quotes(const char *str, bool *s_q_open, bool *d_q_open)
 {
-	int len = strlen(str);
-	int i;
-	bool single_quote_open = false;
-	bool double_quote_open = false;
+	int		i;
 
 	i = 0;
-	while (i < len)
+	while (str[i])
 	{
 		if (str[i] == '\'')
-			single_quote_open = !single_quote_open;
+			*s_q_open = !*s_q_open;
 		else if (str[i] == '"')
-			double_quote_open = !double_quote_open;
+			*d_q_open = !*d_q_open;
 		i++;
 	}
+}
 
-	// Si un guillemet est resté ouvert, on ferme en ajoutant à la fin
-	char *new_str = malloc(len + 2); // +1 pour le guillemet manquant +1 pour le '\0'
-	if (!new_str)
-		return NULL;
+char	*close_quotes_if_needed(char *str)
+{
+	int		len;
+	char	*new_str;
+	bool	single_quote_open;
+	bool	double_quote_open;
 
-	strcpy(new_str, str);
-
+	single_quote_open = false;
+	double_quote_open = false;
+	check_quotes(str, &single_quote_open, &double_quote_open);
+	len = ft_strlen(str);
+	new_str = safe_malloc(len + 2);
+	ft_strcpy(new_str, str);
 	if (single_quote_open)
 		new_str[len++] = '\'';
 	else if (double_quote_open)
 		new_str[len++] = '"';
-
 	new_str[len] = '\0';
-	return new_str;
+	return (new_str);
 }
-
 
 char	*clean_whitespace(char *str)
 {
-    int i = 0, j = 0;
-    int len = strlen(str);
-    char *cleaned_str = malloc(len + 1); // Allocation mémoire pour la chaîne nettoyée
+	int		i;
+	int		j;
+	char	*cleaned_str;
 
-    if (!cleaned_str)
-        return NULL;
-
-    // Ignorer les espaces au début
-    while (str[i] == ' ')
-        i++;
-
-    while (str[i])
-    {
-        cleaned_str[j++] = str[i];
-        if (str[i] == ' ' && str[i + 1] == ' ')
-        {
-            while (str[i] == ' ')
-                i++;
-            continue;
-        }
-
-        i++;
-    }
-    if (j > 0 && cleaned_str[j - 1] == ' ')
-        j--;
-
-    cleaned_str[j] = '\0';
-    return cleaned_str;
+	i = 0;
+	j = 0;
+	cleaned_str = safe_malloc(ft_strlen(str) + 1);
+	while (str[i] == ' ')
+		i++;
+	while (str[i])
+	{
+		cleaned_str[j++] = str[i];
+		if (str[i] == ' ' && str[i + 1] == ' ')
+		{
+			while (str[i] == ' ')
+				i++;
+			continue ;
+		}
+		i++;
+	}
+	if (j > 0 && cleaned_str[j - 1] == ' ')
+		j--;
+	cleaned_str[j] = '\0';
+	return (cleaned_str);
 }
 
-void finalize_parsing(t_token *new_node, char **tokenarray)
+void	finalize_parsing(t_token *new_node, char **tokenarray)
 {
 	if (new_node != NULL && new_node != NULL)
 		new_node->is_last_command = 1;
-
 	if (tokenarray != NULL)
 		free_token_array(tokenarray);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_analyse1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:08:57 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 21:33:22 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:38:24 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool	check_builtin(char *value)
 	char	*temp;
 	int		i;
 	int		len;
+	bool	is_builtin;
 
 	i = 0;
 	len = 0;
@@ -44,29 +45,29 @@ bool	check_builtin(char *value)
 		i++;
 	}
 	temp[i] = '\0';
-	bool is_builtin = is_builtin_command(temp);
+	is_builtin = is_builtin_command(temp);
 	free(temp);
 	return (is_builtin);
 }
 
 char	*get_builtin_info(char *value)
 {
-    char *temp;
-    int		i;
-    int		len;
+	char	*temp;
+	int		i;
+	int		len;
 
 	i = 0;
 	len = 0;
-    while (value[len] && value[len] != ' ')
-        len++;
-    temp = malloc(sizeof(char) * (len + 1));
-    if (!temp)
-        return (NULL);
-    while (i < len)
-    {
-        temp[i] = value[i];
-        i++;
-    }
-    temp[i] = '\0';
-    return (temp);
+	while (value[len] && value[len] != ' ')
+		len++;
+	temp = malloc(sizeof(char) * (len + 1));
+	if (!temp)
+		return (NULL);
+	while (i < len)
+	{
+		temp[i] = value[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
 }
