@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:01:32 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:48:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	edit_shlvl(char **env)
 			if (new_value == NULL)
 				return ;
 			free(*env);
+			*env = new_value;
+			return ;
 		}
 		env++;
 	}

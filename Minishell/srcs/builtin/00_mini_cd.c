@@ -19,12 +19,12 @@ int	exe_cd(char *input, t_envp *envp)
 	char	cwd[BUFFER_SIZE];
 	char	*path;
 
-	if (strncmp(input, "cd", 2) != 0)
+	if (ft_strncmp(input, "cd", 2) != 0)
 		return (-1);
 	path = input + 2;
 	while (*path == ' ')
 		path++;
-	if (*path == '\0' || strcmp(path, "~") == 0)
+	if (*path == '\0' || ft_strcmp(path, "~") == 0)
 		path = get_env_value("HOME", envp->env);
 	old_pwd = getcwd(cwd, sizeof(cwd));
 	if (!old_pwd)
