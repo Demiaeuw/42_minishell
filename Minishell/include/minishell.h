@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/15 14:15:07 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/15 23:48:11 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char			*get_command_path(const char *cmd);
 //									Expension								//
 //20
 void			process_token_values(t_token *token, char **env);
-void 			parse_chevrons_and_files(t_token *tokens); 
+void 			parse_chevrons_and_files(t_token *tokens);
 char 			*clean_string(const char* str);
 
 //--------------------------------------------------------------------------//
@@ -133,6 +133,8 @@ void			handle_sigint(int sig);
 //20
 void			execute_pipes(t_token *token, t_envp *env);
 char			**free_token(char **str, int count);
+//30
+void			handle_redirections(t_token *token);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
