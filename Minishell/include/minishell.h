@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 21:38:30 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/15 14:15:07 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char			*get_command_path(const char *cmd);
 //									Expension								//
 //20
 void			process_token_values(t_token *token, char **env);
-void			parse_chevrons(t_token *tokens);
+void 			parse_chevrons_and_files(t_token *tokens); 
 char 			*clean_string(const char* str);
 
 //--------------------------------------------------------------------------//
