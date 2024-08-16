@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 15:28:53 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/16 15:30:37 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	main(int ac, char **av, char **env)
 	}
 	clear_history();
 	// free_t_envp(envp);
-	return (0); 
+	return (0);  
 }
