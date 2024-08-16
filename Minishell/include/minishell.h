@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/15 23:48:11 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:47:25 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,13 @@ char			*get_command_path(const char *cmd);
 //									Expension								//
 //20
 void			process_token_values(t_token *token, char **env);
-void 			parse_chevrons_and_files(t_token *tokens);
 char 			*clean_string(const char* str);
+//30
+void			print_chevron(t_token *tokens);
+t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
+void			append_chevron(t_token *token, t_chevron *chevron);
+//31
+void 			parse_chevrons_and_files(t_token *tokens);
 
 //--------------------------------------------------------------------------//
 //									Execution								//
