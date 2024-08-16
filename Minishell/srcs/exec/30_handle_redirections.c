@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   30_handle_redirections.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/16 00:29:34 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:56:04 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,31 @@ void	handle_redirections(t_token *token)
 		}
 		current = current->next;
 	}
+}
+
+char	*truncate_str_chevron(char *str)
+{
+	int		i;
+	char	*new_str;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
+			break ;
+		if (str[i] == '<' || str[i] == '>')
+			break ;
+		i++;
+	}
+	new_str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (str[i] && !(str[i] == '<' || str[i] == '>'))
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }

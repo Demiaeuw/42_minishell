@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   30_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:49:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 12:44:52 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:18:10 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	print_chevron(t_token *tokens)
 	t_token *current_token = tokens;
 	while (current_token) 
 	{
-		printf("Token (Type %d): %s\n", current_token->type, current_token->value);
+		printf("Token (Type %d): %s\n", current_token->type,
+			current_token->value);
 		t_chevron *current_chevron = current_token->file_in_out;
 		while (current_chevron) {
-			printf("  Chevron: Type %d, File %s\n", current_chevron->type, current_chevron->file_name);
+			printf("  Chevron: Type %d, File %s\n", current_chevron->type,
+				current_chevron->file_name);
 			current_chevron = current_chevron->next;
 		}
 		current_token = current_token->next;
@@ -42,6 +44,7 @@ t_chevron	*create_chevron(t_chevron_type type, const char *file_name)
 	new_chevron->is_last_open = false;
 	new_chevron->is_last_closed = false;
 	new_chevron->file_name = strdup(file_name);
+	new_chevron->clean_value = NULL;
 	new_chevron->next = NULL;
 	return new_chevron;
 }
@@ -49,18 +52,48 @@ t_chevron	*create_chevron(t_chevron_type type, const char *file_name)
 void	append_chevron(t_token *token, t_chevron *chevron) 
 {
 	t_chevron *current;
+	
+	
 	if (!token->file_in_out) 
 	{
+		chevron->clean_value =  extract_clean_value(token->value);
 		token->file_in_out = chevron;
 	} 
 	else 
 	{
 		current = token->file_in_out;
-		while (current->next) 
+		while (current->next)
 		{
 			current = current->next;
 		}
 		current->next = chevron;
 	}
+}
+
+char	*extract_clean_value(char *str)
+{
+	int		i;
+	char	*new_str;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
+			break ;
+		if (str[i] == '<' || str[i] == '>')
+			break ;
+		i++;
+	}
+	new_str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (str[i] && !(str[i] == '<' || str[i] == '>'))
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }
 

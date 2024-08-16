@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 00:29:30 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:06:16 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,31 @@ void	main_exec(t_token *token, t_envp *envp)
 	}
 	if (pipe == 1)
 		execute_pipes(token, envp);
-	else
-		main_command(token, envp);
+	else if (token->file_in_out != NULL && token->file_in_out->clean_value != NULL)
+		main_command_chevron(token, envp);
+    else 
+        main_command(token, envp);
 }
 
 void	main_command(t_token *token, t_envp *envp)
+{
+	t_token	*current;
+
+	current = token;
+	while (current != NULL)
+	{
+		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
+		{
+			if (builtin_check(current))
+				builtin_selector(current, envp);
+			else
+				execute_execve(current, envp);
+		}
+		current = current->next;
+	}
+}
+
+void	main_command_chevron(t_token *token, t_envp *envp)
 {
     t_token	*current;
     int saved_stdin = dup(STDIN_FILENO);
@@ -47,7 +67,7 @@ void	main_command(t_token *token, t_envp *envp)
 
             // Exécuter la commande après avoir redirigé STDOUT/STDIN
             if (builtin_check(current))
-                builtin_selector(current, envp);
+                builtin_selector_chevron(current, envp);
             else
                 execute_execve(current, envp);
 
@@ -63,20 +83,3 @@ void	main_command(t_token *token, t_envp *envp)
     close(saved_stdout);
 }
 
-// void	main_command(t_token *token, t_envp *envp)
-// {
-// 	t_token	*current;
-
-// 	current = token;
-// 	while (current != NULL)
-// 	{
-// 		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
-// 		{
-// 			if (builtin_check(current))
-// 				builtin_selector(current, envp);
-// 			else
-// 				execute_execve(current, envp);
-// 		}
-// 		current = current->next;
-// 	}
-// }

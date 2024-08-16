@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 12:47:25 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:56:04 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_chevron
 	bool	is_last_open;
 	bool	is_last_closed;
 	char	*file_name;
+	char	*clean_value;
 	struct s_chevron	*next;
 }	t_chevron;
 
@@ -118,6 +119,7 @@ char 			*clean_string(const char* str);
 void			print_chevron(t_token *tokens);
 t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
 void			append_chevron(t_token *token, t_chevron *chevron);
+char			*extract_clean_value(char *str);
 //31
 void 			parse_chevrons_and_files(t_token *tokens);
 
@@ -126,6 +128,8 @@ void 			parse_chevrons_and_files(t_token *tokens);
 //00
 void			main_exec(t_token *token, t_envp *envp);
 void			main_command(t_token *token, t_envp *envp);
+void			main_command_chevron(t_token *token, t_envp *envp);
+
 //01
 void			execute_execve(t_token *token, t_envp *envp);
 //02
@@ -168,6 +172,8 @@ void			exe_exit(char *str, t_envp *envp, t_token *token);
 //10
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envp *envp);
+void			builtin_selector_chevron(t_token *token, t_envp *envp);
+
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);

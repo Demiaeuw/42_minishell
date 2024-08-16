@@ -6,19 +6,22 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:30:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 12:30:31 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:55:6 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	parse_chevrons_and_files(t_token *tokens) 
+#include "../../include/minishell.h"
+
+void	parse_chevrons_and_files(t_token *token) 
 {
-	t_token *current_token = tokens;
+	t_token *current_token = token;
 
 	while (current_token) 
 	{
 		char *value = current_token->value;
 		char *ptr = value;
 
+		
 		while (*ptr) 
 		{
 			if (*ptr == '>') 
