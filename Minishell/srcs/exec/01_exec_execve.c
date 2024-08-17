@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 23:42:34 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:53:46 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	prepare_execution(char **split_args, char **args, char **cmd_path)
 	*cmd_path = get_command_path(split_args[0]);
 	if (!*cmd_path)
 	{
-		fprintf(stderr, "Command not found: %s\n", split_args[0]);
+		fprintf(stderr, "Command not found: %s\n", split_args[0]);    // A VOIR fprintf ? et stderr ?
 		handle_memory_error(split_args, args);
 		return (0);
 	}

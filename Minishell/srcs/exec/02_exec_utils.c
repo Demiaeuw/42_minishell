@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/16 00:28:28 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:53:46 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*allocate_token(const char *start, size_t len)
 	token = (char *)malloc(len + 1);
 	if (token)
 	{
-		strncpy(token, start, len);
+		ft_strncpy(token, start, len);
 		token[len] = '\0';
 	}
 	return (token);

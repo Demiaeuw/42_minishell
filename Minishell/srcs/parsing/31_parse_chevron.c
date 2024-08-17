@@ -30,7 +30,7 @@ void	handle_out_chevron(char **ptr, t_token *current_token)
 	file_start = *ptr;
 	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
 		(*ptr)++;
-	file_name = strndup(file_start, *ptr - file_start);
+	file_name = ft_strndup(file_start, *ptr - file_start);
 	append_chevron(current_token, create_chevron(type, file_name));
 	free(file_name);
 }
@@ -53,7 +53,7 @@ void	handle_in_chevron(char **ptr, t_token *current_token)
 	file_start = *ptr;
 	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
 		(*ptr)++;
-	file_name = strndup(file_start, *ptr - file_start);
+	file_name = ft_strndup(file_start, *ptr - file_start);
 	append_chevron(current_token, create_chevron(type, file_name));
 	free(file_name);
 }

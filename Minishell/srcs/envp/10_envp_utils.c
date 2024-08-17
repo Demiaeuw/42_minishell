@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:24:36 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/14 16:57:06 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:53:46 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	set_env_value(char **env, char *key, char *new_value)
 		if (ft_strncmp(env[i], key, key_len) == 0 && env[i][key_len] == '=')
 		{
 			free(env[i]);
-			temp = safe_malloc(strlen(key) + strlen(new_value) + 2);
+			temp = safe_malloc(ft_strlen(key) + ft_strlen(new_value) + 2);
 			ft_strcpy(temp, key);
 			ft_strcat(temp, "=");
 			ft_strcat(temp, new_value);
