@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_create_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:02:28 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 14:53:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:56:04 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_token	*create_command_node(char *input)
 	new_node->is_builtin = check_builtin(input);
 	new_node->builtin_info = get_builtin_info(input);
 	new_node->is_last_command = false;
+	new_node->file_in_out = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -46,6 +47,7 @@ t_token	*create_pipe_node(void)
 	new_node->is_builtin = false;
 	new_node->builtin_info = NULL;
 	new_node->is_last_command = false;
+	new_node->file_in_out = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }

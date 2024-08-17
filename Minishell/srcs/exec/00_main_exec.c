@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 19:50:36 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/16 21:21:28 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	main_exec(t_token *token, t_envp *envp)
 	}
 	if (pipe == 1)
 		execute_pipes(token, envp);
+	else if (token->file_in_out != NULL
+		&& token->file_in_out->clean_value != NULL)
+		main_command_chevron(token, envp);
 	else
 		main_command(token, envp);
 }
@@ -47,4 +50,31 @@ void	main_command(t_token *token, t_envp *envp)
 		}
 		current = current->next;
 	}
+}
+
+void	main_command_chevron(t_token *token, t_envp *envp)
+{
+	t_token	*current;
+	int		saved_stdin;
+	int		saved_stdout;
+
+	current = token;
+	saved_stdin = dup(STDIN_FILENO);
+	saved_stdout = dup(STDOUT_FILENO);
+	while (current != NULL)
+	{
+		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
+		{
+			handle_redirections(current);
+			if (builtin_check(current))
+				builtin_selector_chevron(current, envp);
+			else
+				execute_execve(current, envp);
+			dup2(saved_stdin, STDIN_FILENO);
+			dup2(saved_stdout, STDOUT_FILENO);
+		}
+		current = current->next;
+	}
+	close(saved_stdin);
+	close(saved_stdout);
 }

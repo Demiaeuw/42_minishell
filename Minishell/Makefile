@@ -37,6 +37,7 @@ SRCS = 	srcs/main.c\
 		srcs/exec/03_tokenlst_to_tokenarray.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
+		srcs/exec/30_handle_redirections.c\
 		srcs/parsing/00_parsing.c\
 		srcs/parsing/01_spliting_quote.c\
 		srcs/parsing/02_create_node.c\
@@ -44,7 +45,12 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/03_analyse2.c\
 		srcs/parsing/10_parsing_utils.c\
 		srcs/parsing/11_pathing_gestion.c\
-		srcs/parsing/20_expanser_env.c
+		srcs/parsing/20_expanser_env1.c\
+		srcs/parsing/20_expanser_env2.c\
+		srcs/parsing/21_struct_expanser_gestion.c\
+		srcs/parsing/30_redirection.c\
+		srcs/parsing/31_parse_chevron.c
+
 
 # Fichiers objets
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

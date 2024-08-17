@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   02_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/14 00:53:26 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/16 00:28:28 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <string.h>
+#include "../../include/minishell.h"
 
 static int	count_tokens(const char *str, char delimiter)
 {

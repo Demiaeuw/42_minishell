@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 19:46:16 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:33:05 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,43 @@ typedef enum s_token_type
 	TOKEN_PIPE
 }		t_token_type;
 
+typedef enum s_chevron_type
+{
+	IN,
+	DOUBLE_IN,
+	OUT,
+	DOUBLE_OUT
+}	t_chevron_type;
+
+typedef struct s_chevron
+{
+	t_chevron_type	type;
+	bool	is_last_open;
+	bool	is_last_closed;
+	char	*file_name;
+	char	*clean_value;
+	struct s_chevron	*next;
+}	t_chevron;
+
+typedef struct s_exp_data
+{
+	size_t	i;
+	size_t	j;
+	int		in_single_quotes;
+	int		in_double_quotes;
+	size_t	len;
+	char	*result;
+}	t_exp_data;
+
 typedef struct s_token
 {
-	t_token_type	type;
-	char			*value;
-	bool			is_builtin;
-	char			*builtin_info;
-	bool			is_last_command;
-	struct s_token	*next;
+	t_token_type		type;
+	char				*value;
+	bool				is_builtin;
+	char				*builtin_info;
+	bool				is_last_command;
+	struct s_chevron	*file_in_out;
+	struct s_token		*next;
 }	t_token;
 
 typedef struct s_envp
@@ -94,14 +123,33 @@ char			*get_command_path(const char *cmd);
 //--------------------------------------------------------------------------//
 //									Expension								//
 //20
+char			*extract_var_name_env(const char *value, size_t *i);
+void			append_env_value_env(t_exp_data *data,
+					const char *env_value);
+char			*expand_variables_in_value(const char *value, char **env);
+char			*clean_string(const char *str);
 void			process_token_values(t_token *token, char **env);
-char 			*clean_string(const char* str);
+//21
+t_exp_data		*init_expansion_data(const char *value);
+void			free_expansion_data(t_exp_data *data);
+//30
+void			print_chevron(t_token *tokens);
+t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
+void			append_chevron(t_token *token, t_chevron *chevron);
+char			*extract_clean_value(char *str);
+//31
+void			handle_out_chevron(char **ptr, t_token *current_token);
+void			handle_in_chevron(char **ptr, t_token *current_token);
+void			parse_token_value(t_token *current_token);
+void			parse_chevrons_and_files(t_token *token);
 
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
 void			main_exec(t_token *token, t_envp *envp);
 void			main_command(t_token *token, t_envp *envp);
+void			main_command_chevron(t_token *token, t_envp *envp);
+
 //01
 void			execute_execve(t_token *token, t_envp *envp);
 //02
@@ -114,6 +162,8 @@ void			handle_sigint(int sig);
 //20
 void			execute_pipes(t_token *token, t_envp *env);
 char			**free_token(char **str, int count);
+//30
+void			handle_redirections(t_token *token);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
@@ -142,6 +192,8 @@ void			exe_exit(char *str, t_envp *envp, t_token *token);
 //10
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envp *envp);
+void			builtin_selector_chevron(t_token *token, t_envp *envp);
+
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
