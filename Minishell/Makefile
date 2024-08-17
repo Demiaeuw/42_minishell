@@ -47,6 +47,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/11_pathing_gestion.c\
 		srcs/parsing/20_expanser_env1.c\
 		srcs/parsing/20_expanser_env2.c\
+		srcs/parsing/21_struct_expanser_gestion.c\
 		srcs/parsing/30_redirection.c\
 		srcs/parsing/31_parse_chevron.c
 

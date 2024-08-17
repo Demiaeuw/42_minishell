@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 19:09:03 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:33:05 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ typedef struct s_chevron
 	struct s_chevron	*next;
 }	t_chevron;
 
+typedef struct s_exp_data
+{
+	size_t	i;
+	size_t	j;
+	int		in_single_quotes;
+	int		in_double_quotes;
+	size_t	len;
+	char	*result;
+}	t_exp_data;
+
 typedef struct s_token
 {
 	t_token_type		type;
@@ -114,13 +124,14 @@ char			*get_command_path(const char *cmd);
 //									Expension								//
 //20
 char			*extract_var_name_env(const char *value, size_t *i);
-void			append_env_value_env(char **result, size_t *j,
+void			append_env_value_env(t_exp_data *data,
 					const char *env_value);
-void			start_exp(const char *va, char **r,
-					size_t *i, size_t *j, char **env);
 char			*expand_variables_in_value(const char *value, char **env);
-char			*clean_string(const char* str);
+char			*clean_string(const char *str);
 void			process_token_values(t_token *token, char **env);
+//21
+t_exp_data		*init_expansion_data(const char *value);
+void			free_expansion_data(t_exp_data *data);
 //30
 void			print_chevron(t_token *tokens);
 t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
