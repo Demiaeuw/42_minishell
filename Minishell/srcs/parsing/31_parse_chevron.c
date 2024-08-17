@@ -84,5 +84,4 @@ void	parse_chevrons_and_files(t_token *token)
 		parse_token_value(current_token);
 		current_token = current_token->next;
 	}
-	print_chevron(token);
 }

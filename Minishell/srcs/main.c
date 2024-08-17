@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 23:34:39 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:53:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//debut de test
-// static void	display_prompt(void)
-// {
-// 	write(STDOUT_FILENO, "minishell> ", 12);
-// }
-
-// static char	*read_input(void)
-// {
-// 	char *buffer = (char*)malloc(sizeof(char) * BUFFER_SIZE);
-// 	ssize_t bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1);
-// 	if (bytes_read < 0)
-// 	{
-// 		free(buffer);
-// 		return NULL;
-// 	}
-// 	buffer[bytes_read] = '\0';
-// 	return (buffer);
-// }
-//fin de test
 
 int	main(int ac, char **av, char **env)
 {
