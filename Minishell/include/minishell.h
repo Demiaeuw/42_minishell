@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 19:33:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:42:38 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
+typedef struct s_signal
+{
+	int	sigint;
+	int	sigquit;
+	int	sigterm;
+}	t_signal;
 typedef enum s_token_type
 {
 	TOKEN_COMMAND,
@@ -146,19 +152,22 @@ void			parse_chevrons_and_files(t_token *token);
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
-void			main_exec(t_token *token, t_envp *envp);
-void			main_command(t_token *token, t_envp *envp);
-void			main_command_chevron(t_token *token, t_envp *envp);
-
+void			main_exec(t_token *token, t_envp *envp, t_signal *handler);
+void			main_command(t_token *token, t_envp *envp, t_signal *handler);
+void			main_command_chevron(t_token *token, t_envp *envp, t_signal *handler);
 //01
-void			execute_execve(t_token *token, t_envp *envp);
+void			execute_execve(t_token *token, t_envp *envp, t_signal *handler);
 //02
 char			**split_command(const char *cmd);
+void			handle_signals_in_parent(t_signal *handler);
+void			cleanup_execution(char **split_args, char **args, char *cmd_path);
+pid_t			fork_and_execute(char *cmd_path, char **split_args, t_envp *envp);
 //03
 char			**convert_token(t_token *token);
 int				count_token(t_token *token);
 //10
-void			handle_sigint(int sig);
+void			signal_handler(int sig, siginfo_t *info, void *context);
+void			init_signal_handlers(t_signal *handler);
 //20
 void			execute_pipes(t_token *token, t_envp *env);
 char			**free_token(char **str, int count);
