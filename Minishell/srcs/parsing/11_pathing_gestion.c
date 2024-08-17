@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:46:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 00:53:46 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/18 01:02:40 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*join_path(const char *path, const char *cmd)
 /**
  *  Fonction pour récupérer le chemin absolu d'une commande
  */
-static char	*try_access_command(char **paths, const char *cmd)
+char	*try_access_command(char **paths, const char *cmd)
 {
 	char	*command_path;
 	int		i;

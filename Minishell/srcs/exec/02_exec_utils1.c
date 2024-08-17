@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_exec_utils.c                                    :+:      :+:    :+:   */
+/*   02_exec_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/18 00:53:46 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/18 01:02:02 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	count_tokens(const char *str, char delimiter)
+int	count_tokens(const char *str, char delimiter)
 {
 	int	count;
 	int	in_token;
@@ -33,20 +33,20 @@ static int	count_tokens(const char *str, char delimiter)
 	return (count);
 }
 
-static char	*allocate_token(const char *start, size_t len)
+char	*allocate_token(const char *start, size_t len)
 {
 	char	*token;
 
 	token = (char *)malloc(len + 1);
 	if (token)
 	{
-		ft_strncpy(token, start, len);
+		strncpy(token, start, len);
 		token[len] = '\0';
 	}
 	return (token);
 }
 
-static char	*get_next_token(const char **str, char delimiter)
+char	*get_next_token(const char **str, char delimiter)
 {
 	const char	*start;
 	char		*token;

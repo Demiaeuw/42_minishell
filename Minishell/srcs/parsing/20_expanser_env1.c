@@ -30,7 +30,7 @@ void	append_env_value_env(t_exp_data *data, const char *env_value)
 	char	*new_result;
 
 	env_len = ft_strlen(env_value);
-	new_result = realloc(data->result, data->j + env_len + 1);
+	new_result = realloc(data->result, data->j + env_len + 1); // probleme de ft_realloc mais attention ft_realloc marche tres bien pour le reste du programme donc ne pas mofier ft_realloc !!!
 	if (!new_result)
 		return ;
 	ft_memcpy(&new_result[data->j], env_value, env_len);
