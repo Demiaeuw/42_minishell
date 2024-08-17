@@ -12,54 +12,77 @@
 
 #include "../../include/minishell.h"
 
-void	parse_chevrons_and_files(t_token *token) 
+void	handle_out_chevron(char **ptr, t_token *current_token)
 {
-	t_token *current_token = token;
+	t_chevron_type	type;
+	char			*file_start;
+	char			*file_name;
 
-	while (current_token) 
+	type = OUT;
+	(*ptr)++;
+	if (**ptr == '>')
 	{
-		char *value = current_token->value;
-		char *ptr = value;
+		type = DOUBLE_OUT;
+		(*ptr)++;
+	}
+	while (**ptr == ' ')
+		(*ptr)++;
+	file_start = *ptr;
+	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
+		(*ptr)++;
+	file_name = strndup(file_start, *ptr - file_start);
+	append_chevron(current_token, create_chevron(type, file_name));
+	free(file_name);
+}
 
-		
-		while (*ptr) 
-		{
-			if (*ptr == '>') 
-			{
-				t_chevron_type type = OUT;
-				ptr++;
-				if (*ptr == '>') 
-				{
-					type = DOUBLE_OUT;
-					ptr++;
-				}
-				while (*ptr == ' ') ptr++;
-				char *file_start = ptr;
-				while (*ptr && *ptr != ' ' && *ptr != '>' && *ptr != '<') ptr++;
-				char *file_name = strndup(file_start, ptr - file_start);
-				append_chevron(current_token, create_chevron(type, file_name));
-				free(file_name);
-			} 
-			else if (*ptr == '<') 
-			{
-				t_chevron_type type = IN;
-				ptr++;
-				if (*ptr == '<') 
-				{
-					type = DOUBLE_IN;
-					ptr++;
-				}
-				while (*ptr == ' ') ptr++;
-				char *file_start = ptr;
-				while (*ptr && *ptr != ' ' && *ptr != '>' && *ptr != '<') ptr++;
-				char *file_name = strndup(file_start, ptr - file_start);
-				append_chevron(current_token, create_chevron(type, file_name));
-				free(file_name);
-			} 
-			else 
-				ptr++;
-		}
+void	handle_in_chevron(char **ptr, t_token *current_token)
+{
+	t_chevron_type	type;
+	char			*file_start;
+	char			*file_name;
+
+	type = IN;
+	(*ptr)++;
+	if (**ptr == '<')
+	{
+		type = DOUBLE_IN;
+		(*ptr)++;
+	}
+	while (**ptr == ' ')
+		(*ptr)++;
+	file_start = *ptr;
+	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
+		(*ptr)++;
+	file_name = strndup(file_start, *ptr - file_start);
+	append_chevron(current_token, create_chevron(type, file_name));
+	free(file_name);
+}
+
+void	parse_token_value(t_token *current_token)
+{
+	char	*ptr;
+
+	ptr = current_token->value;
+	while (*ptr)
+	{
+		if (*ptr == '>')
+			handle_out_chevron(&ptr, current_token);
+		else if (*ptr == '<')
+			handle_in_chevron(&ptr, current_token);
+		else
+			ptr++;
+	}
+}
+
+void	parse_chevrons_and_files(t_token *token)
+{
+	t_token	*current_token;
+
+	current_token = token;
+	while (current_token)
+	{
+		parse_token_value(current_token);
 		current_token = current_token->next;
 	}
-	//print_chevron(tokens); 
+	print_chevron(token);
 }

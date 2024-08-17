@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 14:56:04 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/17 19:09:03 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,24 @@ char			*get_command_path(const char *cmd);
 //--------------------------------------------------------------------------//
 //									Expension								//
 //20
+char			*extract_var_name_env(const char *value, size_t *i);
+void			append_env_value_env(char **result, size_t *j,
+					const char *env_value);
+void			start_exp(const char *va, char **r,
+					size_t *i, size_t *j, char **env);
+char			*expand_variables_in_value(const char *value, char **env);
+char			*clean_string(const char* str);
 void			process_token_values(t_token *token, char **env);
-char 			*clean_string(const char* str);
 //30
 void			print_chevron(t_token *tokens);
 t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
 void			append_chevron(t_token *token, t_chevron *chevron);
 char			*extract_clean_value(char *str);
 //31
-void 			parse_chevrons_and_files(t_token *tokens);
+void			handle_out_chevron(char **ptr, t_token *current_token);
+void			handle_in_chevron(char **ptr, t_token *current_token);
+void			parse_token_value(t_token *current_token);
+void			parse_chevrons_and_files(t_token *token);
 
 //--------------------------------------------------------------------------//
 //									Execution								//
