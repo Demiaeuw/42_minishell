@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 23:42:34 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:37:54 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	handle_memory_error(char **split_args, char **args)
+void	handle_memory_error(char **split_args, char **args)
 {
 	perror("Memory allocation failed");
 	if (split_args)
@@ -21,7 +21,7 @@ static void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
-static void	execute_child_process(char *ch, char **split_args, t_envp *envp)
+void	execute_child_process(char *ch, char **split_args, t_envp *envp)
 {
 	if (execve(ch, split_args, envp->env) == -1)
 	{
@@ -30,7 +30,7 @@ static void	execute_child_process(char *ch, char **split_args, t_envp *envp)
 	}
 }
 
-static int	prepare_command(char ***split_args, char ***args, t_token *token)
+int	prepare_command(char ***split_args, char ***args, t_token *token)
 {
 	*split_args = split_command(token->value);
 	if (!*split_args)
@@ -44,12 +44,12 @@ static int	prepare_command(char ***split_args, char ***args, t_token *token)
 	return (1);
 }
 
-static int	prepare_execution(char **split_args, char **args, char **cmd_path)
+int	prepare_execution(char **split_args, char **args, char **cmd_path)
 {
 	*cmd_path = get_command_path(split_args[0]);
 	if (!*cmd_path)
 	{
-		fprintf(stderr, "Command not found: %s\n", split_args[0]);
+		fprintf(stderr, "Command not found: %s\n", split_args[0]); // probleme de fonction pas autorisé
 		handle_memory_error(split_args, args);
 		return (0);
 	}

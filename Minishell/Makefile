@@ -33,7 +33,8 @@ SRCS = 	srcs/main.c\
 		srcs/envp/10_envp_utils.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
-		srcs/exec/02_exec_utils.c\
+		srcs/exec/02_exec_utils1.c\
+		srcs/exec/02_exec_utils2.c\
 		srcs/exec/03_tokenlst_to_tokenarray.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\

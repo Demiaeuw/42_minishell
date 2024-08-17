@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_create_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:02:28 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 14:56:04 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/18 00:00:42 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*create_command_node(char *input)
 	new_node = (t_token *)malloc(sizeof(t_token));
 	if (!new_node)
 		return (NULL);
-	new_node->value = strdup(input);
+	new_node->value = ft_strdup(input);
 	new_node->type = TOKEN_COMMAND;
 	new_node->is_builtin = check_builtin(input);
 	new_node->builtin_info = get_builtin_info(input);
@@ -42,7 +42,7 @@ t_token	*create_pipe_node(void)
 	new_node = (t_token *)malloc(sizeof(t_token));
 	if (!new_node)
 		return (NULL);
-	new_node->value = strdup("|");
+	new_node->value = ft_strdup("|");
 	new_node->type = TOKEN_PIPE;
 	new_node->is_builtin = false;
 	new_node->builtin_info = NULL;

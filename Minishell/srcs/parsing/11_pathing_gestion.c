@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:46:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:52:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:14:03 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ char	*join_path(const char *path, const char *cmd)
 	char	*full_path;
 	size_t	len;
 
-	len = strlen(path) + strlen(cmd) + 2;
+	len = ft_strlen(path) + ft_strlen(cmd) + 2;
 	full_path = (char *)malloc(len);
 	if (!full_path)
 		return (NULL);
-	strcpy(full_path, path);
-	strcat(full_path, "/");
-	strcat(full_path, cmd);
+	ft_strcpy(full_path, path);
+	ft_strcat(full_path, "/");
+	ft_strcat(full_path, cmd);
 	return (full_path);
 }
 
 /**
  *  Fonction pour récupérer le chemin absolu d'une commande
  */
-static char	*try_access_command(char **paths, const char *cmd)
+char	*try_access_command(char **paths, const char *cmd)
 {
 	char	*command_path;
 	int		i;

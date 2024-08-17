@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_mini_export1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 18:33:16 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:49:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*create_env_entry(const char *var, const char *value)
 }
 
 // Returns the size of the env (number of entries)
-static int	get_env_size(char **env)
+int	get_env_size(char **env)
 {
 	int	size;
 
@@ -41,7 +41,7 @@ static int	get_env_size(char **env)
 }
 
 // Allocates a new env array of size new_size and copies old_env into it
-static char	**allocate_env_array(char **old_env, int old_size, int new_size)
+char	**allocate_env_array(char **old_env, int old_size, int new_size)
 {
 	char	**new_env;
 	int		i;

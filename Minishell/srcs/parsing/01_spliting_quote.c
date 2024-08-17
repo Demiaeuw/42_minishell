@@ -6,18 +6,18 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:59:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:31:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:59:36 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*extract_token(const char *str, int start, int len)
+char	*extract_token(const char *str, int start, int len)
 {
 	return (ft_strndup(str + start, len));
 }
 
-static int	handle_quote(char c, bool *in_quotes, char *quote_char)
+int	handle_quote(char c, bool *in_quotes, char *quote_char)
 {
 	if ((c == '"' || c == '\'') && (!*in_quotes || *quote_char == c))
 	{
@@ -35,7 +35,7 @@ static int	handle_quote(char c, bool *in_quotes, char *quote_char)
 	return (*in_quotes);
 }
 
-static char	**process_split(const char *str, char **result, int *count)
+char	**process_split(const char *str, char **result, int *count)
 {
 	int		i;
 	int		start;

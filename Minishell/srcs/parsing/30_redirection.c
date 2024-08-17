@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:49:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 19:02:31 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:22:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_chevron	*create_chevron(t_chevron_type type, const char *file_name)
 	new_chevron->type = type;
 	new_chevron->is_last_open = false;
 	new_chevron->is_last_closed = false;
-	new_chevron->file_name = strdup(file_name);
+	new_chevron->file_name = ft_strdup(file_name);
 	new_chevron->clean_value = NULL;
 	new_chevron->next = NULL;
 	return (new_chevron);

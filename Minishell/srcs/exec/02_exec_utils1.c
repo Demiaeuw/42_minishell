@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   02_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/16 00:28:28 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:35:46 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	count_tokens(const char *str, char delimiter)
+int	count_tokens(const char *str, char delimiter)
 {
 	int	count;
 	int	in_token;
@@ -33,7 +33,7 @@ static int	count_tokens(const char *str, char delimiter)
 	return (count);
 }
 
-static char	*allocate_token(const char *start, size_t len)
+char	*allocate_token(const char *start, size_t len)
 {
 	char	*token;
 
@@ -46,7 +46,7 @@ static char	*allocate_token(const char *start, size_t len)
 	return (token);
 }
 
-static char	*get_next_token(const char **str, char delimiter)
+char	*get_next_token(const char **str, char delimiter)
 {
 	const char	*start;
 	char		*token;
