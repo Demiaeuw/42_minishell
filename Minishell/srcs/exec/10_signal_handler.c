@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 23:35:02 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:26:18 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ void	init_signal_handlers(t_signal *handler)
 {
 	struct sigaction	sa;
 
-	(void)handler;
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGINT, &sa, (void *)handler);
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
 	sa.sa_sigaction = signal_handler;
-	sigaction(SIGTERM, &sa, NULL);
+	sigaction(SIGTERM, &sa, (void *)handler);
 }

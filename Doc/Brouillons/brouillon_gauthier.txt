@@ -367,3 +367,77 @@ void	exe_export(t_envp *envp, char *args)
     }
 }
 
+////////////////////////ANCIEN CONVERT TOKEN//////////////////////////////////
+// char	**convert_token(t_token *token)
+// {
+// 	t_token	*current;
+// 	char	**str;
+// 	int		count;
+// 	int		i;
+
+// 	count = 0;
+// 	current = token;
+// 	while (current && current->type != TOKEN_PIPE)
+// 	{
+// 		count++;
+// 		current = current->next;
+// 	}
+// 	str = (char **)safe_malloc((count + 1) * sizeof(char *));
+// 	if (!str)
+// 		return (NULL);
+// 	i = 0;
+// 	current = token;
+// 	while (current && current->type != TOKEN_PIPE)
+// 	{
+// 		str[i] = ft_strdup(current->value);
+// 		i++;
+// 		current = current->next;
+// 	}
+// 	str[i] = NULL;
+// 	return (str);
+// }
+///////////////////////////////ANCIEN SPLIT COMMAND////////////////////////////
+// char	**split_command(const char *cmd)
+// {
+// 	char		**args;
+// 	int			count;
+// 	int			i;
+// 	const char	*cmd_ptr;
+// 	char		*token;
+
+// 	count = count_tokens(cmd, ' ');
+// 	args = (char **)malloc((count + 1) * sizeof(char *));
+// 	if (!args)
+// 		return (NULL);
+// 	cmd_ptr = cmd;
+// 	i = 0;
+// 	token = get_next_token(&cmd_ptr, ' ');
+// 	while (token != NULL)
+// 	{
+// 		args[i++] = token;
+// 		token = get_next_token(&cmd_ptr, ' ');
+// 	}
+// 	args[i] = NULL;
+// 	return (args);
+// }
+
+//////////////////////////ANCIEN TRY ACCESS COMMAND ADRI PARSING///////////////
+// char	*try_access_command(char **paths, const char *cmd)
+// {
+// 	char	*command_path;
+// 	int		i;
+
+// 	i = 0;
+// 	while (paths[i])
+// 	{
+// 		command_path = join_path(paths[i], cmd);
+// 		if (command_path && access(command_path, X_OK) == 0)
+// 		{
+// 			free(paths);
+// 			return (command_path);
+// 		}
+// 		free(command_path);
+// 		i++;
+// 	}
+// 	return (NULL);
+// }

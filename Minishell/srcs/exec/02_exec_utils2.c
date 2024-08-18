@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/18 16:49:11 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:50:44 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	handle_signals_in_parent(t_signal *handler)
 
 void	cleanup_execution(char **split_args, char **args, char *cmd_path)
 {
-	free(split_args);
-	free(args);
-	free(cmd_path);
+	if (split_args)
+		free_split_command(split_args);
+	if (args)
+		free_split_command(args);
+	if (cmd_path)
+		free(cmd_path);
 }

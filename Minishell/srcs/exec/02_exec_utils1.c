@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_exec_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/18 01:02:02 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/18 20:49:35 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,22 @@ char	*get_next_token(const char **str, char delimiter)
 	return (token);
 }
 
+void	free_split_command(char **args)
+{
+	int	i;
+
+	i = 0;
+	if (args)
+	{
+		while (args[i])
+		{
+			free(args[i]);
+			i++;
+		}
+		free(args);
+	}
+}
+
 char	**split_command(const char *cmd)
 {
 	char		**args;
@@ -83,7 +99,12 @@ char	**split_command(const char *cmd)
 	token = get_next_token(&cmd_ptr, ' ');
 	while (token != NULL)
 	{
-		args[i++] = token;
+		args[i] = token;
+		if (!args[i++])
+		{
+			free_split_command(args);
+			return (NULL);
+		}
 		token = get_next_token(&cmd_ptr, ' ');
 	}
 	args[i] = NULL;
