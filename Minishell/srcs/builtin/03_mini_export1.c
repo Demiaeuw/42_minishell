@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_mini_export1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 23:49:38 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:16:42 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,24 @@ void	add_env_variable(t_envp *envp, char *new_entry)
 	envp->env = new_env;
 	envp->env[old_size] = new_entry;
 	envp->env[old_size + 1] = NULL;
+}
+
+void	exe_export(t_envp *envp, char *args)
+{
+	char	*token;
+	char	*saveptr;
+
+	if (!args || ft_strcmp(args, "export") == 0)
+	{
+		print_sorted_env(envp->env);
+		return ;
+	}
+	if (ft_strncmp(args, "export ", 7) == 0)
+		args += 7;
+	token = ft_strtok(args, " ", &saveptr);
+	while (token != NULL)
+	{
+		process_export_token(envp, token);
+		token = ft_strtok(NULL, " ", &saveptr);
+	}
 }

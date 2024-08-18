@@ -79,3 +79,291 @@ char	*truncate_str_chevron(char *str)
 	new_str[i] = '\0';
 	return (new_str);
 }
+
+//////////////////////EXPORT FONCTIONNEL MAIS BORDEL///////////////////////////
+
+#include "../../include/minishell.h"
+// Sets a new env variable or updates an existing one
+// void	set_env_var(t_envp *envp, const char *var, const char *value)
+// {
+// 	int		var_len;
+// 	char	*new_entry;
+
+// 	var_len = ft_strlen(var);
+// 	new_entry = create_env_entry(var, value);
+// 	if (!new_entry)
+// 		return ;
+// 	update_env(envp, var, var_len, new_entry);
+// }
+// void set_env_var(t_envp *envp, const char *var, const char *value) {
+//     int var_len = ft_strlen(var);
+//     char *new_entry;
+
+//     if (!value) {
+//         value = "";
+//     }
+
+//     // Créer la nouvelle entrée (var=value)
+//     new_entry = create_env_entry(var, value);
+//     if (!new_entry) {
+//         return;
+//     }
+
+//     // Mettre à jour la variable si elle existe déjà
+//     for (int i = 0; envp->env[i]; i++) {
+//         if (ft_strncmp(envp->env[i], var, var_len) == 0 && envp->env[i][var_len] == '=') {
+//             // Remplacer l'ancienne valeur par la nouvelle
+//             free(envp->env[i]);
+//             envp->env[i] = new_entry;
+//             return;
+//         }
+//     }
+
+//     // Si la variable n'existe pas, l'ajouter
+//     add_env_variable(envp, new_entry);
+// }
+// void set_env_var(t_envp *envp, const char *var, const char *value) {
+//     int var_len;
+//     char *new_entry;
+
+//     if (!value) {
+//         // Si value est NULL, on veut juste ajouter la variable sans la valeur
+//         new_entry = ft_strdup(var);  // Crée une entrée sans '='
+//     } else {
+//         var_len = ft_strlen(var);
+//         new_entry = create_env_entry(var, value);
+//     }
+
+//     if (!new_entry)
+//         return;
+
+//     update_env(envp, var, var_len, new_entry);
+// }
+void set_env_var(t_envp *envp, const char *var, const char *value) {
+    int var_len;
+    char *new_entry;
+    int i = 0;
+
+    var_len = ft_strlen(var);
+
+    if (value == NULL) {
+        // Si value est NULL, on ne doit pas ajouter "=" après la variable
+        new_entry = ft_strdup(var);  // Crée une nouvelle entrée sans '='
+    } else {
+        new_entry = create_env_entry(var, value);  // Crée une entrée avec '=' et la valeur
+    }
+
+    if (!new_entry)
+        return;
+
+    // Rechercher si la variable existe déjà
+    while (envp->env[i]) {
+        // Comparer seulement le nom de la variable, pas la valeur
+        if (ft_strncmp(envp->env[i], var, var_len) == 0 && (envp->env[i][var_len] == '=' || envp->env[i][var_len] == '\0')) {
+            // Si elle existe, mettre à jour la variable existante
+            free(envp->env[i]);
+            envp->env[i] = new_entry;
+            return;
+        }
+        i++;
+    }
+
+    // Si la variable n'existe pas, l'ajouter
+    add_env_variable(envp, new_entry);
+}
+// Updates the env with the new entry or adds it if it doesn't exist
+void	update_env(t_envp *envp, const char *var, int var_len, char *new_entry)
+{
+	int	i;
+
+	i = 0;
+	while (envp->env[i])
+	{
+		if (ft_strncmp(envp->env[i], var, var_len) == 0
+			&& envp->env[i][var_len] == '=')
+		{
+			free(envp->env[i]);
+			envp->env[i] = new_entry;
+			return ;
+		}
+		i++;
+	}
+	add_env_variable(envp, new_entry);
+}
+
+// Processes an export token and adds or updates the corresponding env variable
+// void	process_export_token(t_envp *envp, char *token)
+// {
+// 	char	*equal_sign;
+// 	char	*var;
+// 	char	*value;
+
+// 	equal_sign = ft_strchr(token, '=');
+// 	if (!equal_sign)
+// 		return ;
+// 	var = ft_strndup(token, equal_sign - token);
+// 	value = equal_sign + 1;
+// 	if (var && *var)
+// 		set_env_var(envp, var, value);
+// 	free(var);
+// }
+int is_var_in_env(t_envp *envp, const char *var) {
+    int i = 0;
+    size_t var_len = ft_strlen(var);
+
+    while (envp->env[i]) {
+        if (ft_strncmp(envp->env[i], var, var_len) == 0 && envp->env[i][var_len] == '=') {
+            return 1; // La variable existe déjà
+        }
+        i++;
+    }
+    return 0; // La variable n'existe pas
+}
+void process_export_token(t_envp *envp, char *token) {
+    char *equal_sign = ft_strchr(token, '=');
+    char *var;
+
+    if (equal_sign) {
+        // S'il y a un signe égal, ajouter la variable avec la valeur donnée
+        var = ft_strndup(token, equal_sign - token);
+        if (var && *var) {
+            set_env_var(envp, var, equal_sign + 1);  // valeur après '=' ou ""
+        }
+        free(var);
+    } else {
+        // Sinon, juste ajouter la variable sans valeur
+        if (!is_var_in_env(envp, token)) {
+            set_env_var(envp, token, NULL);  // Pas de valeur pour 'salut'
+        }
+    }
+}
+// void process_export_token(t_envp *envp, char *token) {
+//     char *equal_sign = ft_strchr(token, '=');
+//     char *var;
+
+//     if (equal_sign) {
+//         // Si un signe égal est présent, traiter comme une variable avec une valeur
+//         var = ft_strndup(token, equal_sign - token);
+//         if (var && *var) {
+//             set_env_var(envp, var, equal_sign + 1);  // Mise à jour ou ajout de la variable
+//         }
+//         free(var);
+//     } else {
+//         // Pas de signe égal, ajouter la variable sans valeur (NULL)
+//         // Vérifier si la variable existe déjà
+//         if (is_var_in_env(envp, token)) {
+//             // Si la variable existe déjà sans valeur, ne rien faire
+//             return;
+//         }
+//         set_env_var(envp, token, NULL);  // Ajouter la variable sans valeur
+//     }
+// }
+// Executes the export command to add or update env variables
+// void	exe_export(t_envp *envp, char *args)
+// {
+// 	char	*token;
+// 	char	*saveptr;
+
+// 	if (!args)
+// 		return ;
+// 	if (ft_strncmp(args, "export ", 7) == 0)
+// 		args += 7;
+// 	token = ft_strtok(args, " ", &saveptr);
+// 	while (token != NULL)
+// 	{
+// 		process_export_token(envp, token);
+// 		token = ft_strtok(NULL, " ", &saveptr);
+// 	}
+// }
+
+int	compare_env_vars(const void *a, const void *b)
+{
+	const char *env1;
+	const char *env2;
+
+	env1 = *(const char **)a;
+	env2 = *(const char **)b;
+	return ft_strcmp(env1, env2);
+}
+
+// Function to print the env variables in the format `declare -x VAR="value"`
+// void	print_sorted_env(char **env)
+// {
+// 	int i, size;
+
+// 	size = get_env_size(env);
+
+// 	// Copy environment variables to a temporary array for sorting
+// 	char **sorted_env = malloc(size * sizeof(char *));
+// 	if (!sorted_env)
+// 		return;
+// 	for (i = 0; i < size; i++) {
+// 		sorted_env[i] = env[i];
+// 	}
+
+// 	// Sort the environment variables
+// 	qsort(sorted_env, size, sizeof(char *), compare_env_vars);
+
+// 	// Print each environment variable in the desired format
+// 	for (i = 0; i < size; i++) {
+// 		printf("declare -x %s\n", sorted_env[i]);
+// 	}
+
+// 	free(sorted_env);
+// }
+void print_sorted_env(char **env) {
+    int i, size;
+
+    size = get_env_size(env);
+
+    // Copier les variables d'environnement dans un tableau temporaire pour les trier
+    char **sorted_env = malloc(size * sizeof(char *));
+    if (!sorted_env)
+        return;
+    for (i = 0; i < size; i++) {
+        sorted_env[i] = env[i];
+    }
+
+    // Trier les variables d'environnement
+    qsort(sorted_env, size, sizeof(char *), compare_env_vars);
+
+    // Afficher chaque variable d'environnement dans le format désiré
+    for (i = 0; i < size; i++) {
+        char *equal_sign = ft_strchr(sorted_env[i], '=');
+
+        if (equal_sign == NULL) {
+            // Si aucun signe égal n'est trouvé, la variable n'a pas de valeur
+            printf("declare -x %s\n", sorted_env[i]);
+        } else if (equal_sign[1] == '\0') {
+            // Variable avec une valeur vide, afficher comme nom=""
+            printf("declare -x %.*s=\"\"\n", (int)(equal_sign - sorted_env[i]), sorted_env[i]);
+        } else {
+            // Afficher la variable avec sa valeur normale
+            printf("declare -x %s\n", sorted_env[i]);
+        }
+    }
+
+    free(sorted_env);
+}
+// Executes the export command to add or update env variables or list them
+void	exe_export(t_envp *envp, char *args)
+{
+	char *token;
+	char *saveptr;
+
+	if (!args || ft_strcmp(args, "export") == 0) {
+		// If no arguments are provided, list the environment variables
+		print_sorted_env(envp->env);
+		return;
+	}
+
+	if (ft_strncmp(args, "export ", 7) == 0)
+		args += 7;
+
+	token = ft_strtok(args, " ", &saveptr);
+	while (token != NULL) {
+		process_export_token(envp, token);
+		token = ft_strtok(NULL, " ", &saveptr);
+    }
+}
+

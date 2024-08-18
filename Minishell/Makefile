@@ -24,6 +24,7 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/02_mini_env.c\
 		srcs/builtin/03_mini_export1.c\
 		srcs/builtin/03_mini_export2.c\
+		srcs/builtin/03_mini_export3.c\
 		srcs/builtin/04_mini_unset.c\
 		srcs/builtin/05_mini_pwd.c\
 		srcs/builtin/06_mini_exit.c\
