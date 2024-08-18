@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 01:01:44 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/18 16:50:30 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	prepare_execution(char **split_args, char **args, char **cmd_path)
 	*cmd_path = get_command_path(split_args[0]);
 	if (!*cmd_path)
 	{
-		fprintf(stderr, "Command not found: %s\n", split_args[0]); // probleme de fonction pas autorisé
+		write(2, "Command not found: ", 19);
+		write(2, split_args[0], strlen(split_args[0]));
+		write(2, "\n", 1);
 		handle_memory_error(split_args, args);
 		return (0);
 	}
@@ -82,52 +84,3 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 	}
 	cleanup_execution(split_args, args, cmd_path);
 }
-
-// void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
-// {
-// 	pid_t pid;
-// 	int status;
-// 	char **args;
-// 	char *cmd_path;
-// 	char **split_args;
-
-// 	if (!prepare_command(&split_args, &args, token))
-// 		return;
-// 	if (!prepare_execution(split_args, args, &cmd_path))
-// 		return;
-
-// 	pid = fork();
-// 	if (pid == -1)
-// 	{
-// 		perror("fork");
-// 		handle_memory_error(split_args, args);
-// 		return;
-// 	}
-// 	if (pid == 0)
-// 	{
-// 		signal(SIGINT, SIG_DFL);
-// 		signal(SIGQUIT, SIG_DFL);
-// 		signal(SIGTERM, SIG_DFL);
-// 		execute_child_process(cmd_path, split_args, envp);
-// 	}
-// 	else
-// 	{
-// 		waitpid(pid, &status, 0);
-
-// 		// Traiter les signaux après l'exécution de la commande
-// 		if (handler->sigint)
-// 		{
-// 			write(1, "\n", 1); // Ajoute une nouvelle ligne après le Ctrl-C
-// 			handler->sigint = 0; // Réinitialiser le flag SIGINT
-// 		}
-// 		if (handler->sigquit)
-// 		{
-// 			write(1, "Quit: 3\n", 8);
-// 			handler->sigquit = 0; // Réinitialiser le flag SIGQUIT
-// 		}
-// 	}
-
-// 	free(split_args);
-// 	free(args);
-// 	free(cmd_path);
-// }

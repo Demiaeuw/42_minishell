@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/17 23:43:20 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:49:11 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	handle_signals_in_parent(t_signal *handler)
 	}
 	if (handler->sigquit)
 	{
-		write(1, "Quit: 3\n", 8);
 		handler->sigquit = 0;
 	}
 }
