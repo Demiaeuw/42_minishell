@@ -26,11 +26,7 @@ make
 - **Doc/** : Documentation et notes du projet.
 - **test_minishell/** : Scripts de test pour vérifier le comportement du shell.
 
-## Contributions
-
-Les contributions sont les bienvenues ! Veuillez soumettre un pull request pour toute amélioration ou nouvelle fonctionnalité.
-
-## License
+## Licence
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
