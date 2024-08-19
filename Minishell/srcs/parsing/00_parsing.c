@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/15 14:15:07 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/19 19:48:16 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

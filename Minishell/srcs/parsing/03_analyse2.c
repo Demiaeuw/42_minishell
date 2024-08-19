@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_analyse2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:33:42 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 00:02:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:47:32 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,15 @@ char	*clean_whitespace(char *str)
 
 void	finalize_parsing(t_token *new_node, char **tokenarray)
 {
-	if (new_node != NULL && new_node != NULL)
-		new_node->is_last_command = 1;
+	t_token	*current;
+
+	current = new_node;
+	while(current)
+	{
+		if (current != NULL && current->next == NULL)
+			current->is_last_command = 1;
+		current = current->next;
+	}
 	if (tokenarray != NULL)
 		free_token_array(tokenarray);
 }

@@ -3,86 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   20_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/19 18:26:09 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:02:17 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	close_pipes(int pipe_fd[2])
+void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 {
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-}
-
-void	execute_command(t_token *token, t_envp *env, t_signal *handler)
-{
-	if (token->file_in_out != NULL && token->file_in_out->clean_value != NULL)
-		main_command_chevron(token, env, handler);
-	else
-		main_command(token, env, handler);
-}
-
-void	child_process(t_token *current, int fd_in, int pipe_fd[2],
-					t_envp *env, t_signal *handler)
-{
-	if (fd_in != 0)
-	{
-		if (dup2(fd_in, 0) == -1)
-			exit(EXIT_FAILURE);
-	}
-	if (current->next && current->next->type == TOKEN_PIPE)
-	{
-		if (dup2(pipe_fd[1], 1) == -1)
-			exit(EXIT_FAILURE);
-	}
-	close_pipes(pipe_fd);
-	execute_command(current, env, handler);
-	exit(EXIT_FAILURE);
-}
-
-void	execute_pipes(t_token *token, t_envp *env, t_signal *handler)
-{
-	t_token	*current;
-	int		pipe_fd[2];
-	int		fd_in;
+	int		pipefd[2];
 	pid_t	pid;
+	int		fd_in; // Ce sera l'entrée pour le prochain processus
 
 	fd_in = 0;
-	current = token;
-	while (current)
+	while (token)
 	{
-		if (current->type == TOKEN_COMMAND)
+		// Si le token est une commande
+		if (token->type == TOKEN_COMMAND)
 		{
-			if (current->next && current->next->type == TOKEN_PIPE)
+			// Créer un pipe
+			if (token->next && token->next->type == TOKEN_PIPE)
 			{
-				if (pipe(pipe_fd) == -1)
+				if (pipe(pipefd) == -1)
 				{
 					perror("pipe");
-					return ;
+					exit(EXIT_FAILURE);
 				}
 			}
+			// Forker un processus
 			pid = fork();
 			if (pid == -1)
 			{
 				perror("fork");
-				return ;
+				exit(EXIT_FAILURE);
 			}
-			if (pid == 0)
-				child_process(current, fd_in, pipe_fd, env, handler);
-			else
+			else if (pid == 0) // Processus enfant
 			{
+				// Si ce n'est pas la première commande, on redirige l'entrée
+				if (fd_in != 0)
+				{
+					dup2(fd_in, 0);
+					close(fd_in);
+				}
+				// Si ce n'est pas la dernière commande, on redirige la sortie
+				if (token->next && token->next->type == TOKEN_PIPE)
+				{
+					close(pipefd[0]);
+					dup2(pipefd[1], 1);
+					close(pipefd[1]);
+				}
+				// Exécuter la commande (gérer les builtins et execve)
+				if (builtin_check(token))
+					builtin_selector(token, envp);
+				else
+					execute_execve(token, envp, handler);
+
+				exit(EXIT_SUCCESS);
+			}
+			else // Processus parent
+			{
+				// Attendre que l'enfant se termine
 				waitpid(pid, NULL, 0);
-				close(pipe_fd[1]);
-				fd_in = pipe_fd[0];
+				// Fermer le pipe
+				if (fd_in != 0)
+					close(fd_in);
+				if (token->next && token->next->type == TOKEN_PIPE)
+				{
+					close(pipefd[1]);
+					fd_in = pipefd[0]; // Sauvegarder l'entrée pour le prochain processus
+				}
 			}
 		}
-		current = current->next;
-		if (current && current->type == TOKEN_PIPE)
-			current = current->next;
+		// Passer au prochain token
+		token = token->next;
 	}
 }
-
