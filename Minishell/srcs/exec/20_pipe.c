@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/19 20:02:17 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:16:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 {
-	int		pipefd[2];
 	pid_t	pid;
+	int		pipefd[2];
 	int		fd_in; // Ce sera l'entrée pour le prochain processus
 
 	fd_in = 0;
@@ -67,6 +67,7 @@ void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 			{
 				// Attendre que l'enfant se termine
 				waitpid(pid, NULL, 0);
+
 				// Fermer le pipe
 				if (fd_in != 0)
 					close(fd_in);
