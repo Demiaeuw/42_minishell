@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 20:58:17 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:57:12 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,11 @@ char			**convert_token(t_token *token);
 void			signal_handler(int sig, siginfo_t *info, void *context);
 void			init_signal_handlers(t_signal *handler);
 //20
-void			execute_pipes(t_token *token, t_envp *env);
-char			**free_token(char **str, int count);
+void			close_pipes(int pipe_fd[2]);
+void			child_process(t_token *current, int fd_in, int pipe_fd[2],
+					t_envp *env, t_signal *handler);
+void			execute_command(t_token *token, t_envp *env, t_signal *handler);
+void			execute_pipes(t_token *token, t_envp *env, t_signal *handler);
 //30
 int				open_file(t_chevron *chevron);
 void			handle_redirections(t_token *token);

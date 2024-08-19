@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 23:43:18 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:25:01 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 		current = current->next;
 	}
 	if (pipe == 1)
-		execute_pipes(token, envp);
+		execute_pipes(token, envp, handler);
 	else if (token->file_in_out != NULL
 		&& token->file_in_out->clean_value != NULL)
 		main_command_chevron(token, envp, handler);
