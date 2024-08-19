@@ -6,13 +6,34 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:07:10 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/18 20:18:27 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:27:08 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**allocate_and_copy_env(char **env, int size)
+void	insertion_sort(char **array, int size)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 1;
+	while (i < size)
+	{
+		temp = array[i];
+		j = i - 1;
+		while (j >= 0 && ft_strcmp(array[j], temp) > 0)
+		{
+			array[j + 1] = array[j];
+			j--;
+		}
+		array[j + 1] = temp;
+		i++;
+	}
+}
+
+char	**copy_env(char **env, int size)
 {
 	char	**sorted_env;
 	int		i;
@@ -29,34 +50,29 @@ char	**allocate_and_copy_env(char **env, int size)
 	return (sorted_env);
 }
 
-void	print_env_var(char *env_var)
-{
-	char	*equal_sign;
-
-	equal_sign = ft_strchr(env_var, '=');
-	if (equal_sign == NULL)
-		printf("declare -x %s\n", env_var);
-	else if (equal_sign[1] == '\0')
-		printf("declare -x %.*s=\"\"\n", (int)(equal_sign - env_var), env_var);
-	else
-		printf("declare -x %s\n", env_var);
-}
-
 void	print_sorted_env(char **env)
 {
-	int		i;
-	int		size;
 	char	**sorted_env;
+	int		size;
+	int		i;
+	char	*equal_sign;
 
 	size = get_env_size(env);
-	sorted_env = allocate_and_copy_env(env, size);
+	sorted_env = copy_env(env, size);
 	if (!sorted_env)
 		return ;
-	qsort(sorted_env, size, sizeof(char *), compare_env_vars);
+	insertion_sort(sorted_env, size);
 	i = 0;
 	while (i < size)
 	{
-		print_env_var(sorted_env[i]);
+		equal_sign = strchr(sorted_env[i], '=');
+		if (equal_sign == NULL)
+			printf("declare -x %s\n", sorted_env[i]);
+		else if (equal_sign[1] == '\0')
+			printf("declare -x %.*s=\"\"\n",
+				(int)(equal_sign - sorted_env[i]), sorted_env[i]);
+		else
+			printf("declare -x %s\n", sorted_env[i]);
 		i++;
 	}
 	free(sorted_env);

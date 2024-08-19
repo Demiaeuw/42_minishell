@@ -396,48 +396,54 @@ void	exe_export(t_envp *envp, char *args)
 // 	str[i] = NULL;
 // 	return (str);
 // }
-///////////////////////////////ANCIEN SPLIT COMMAND////////////////////////////
-// char	**split_command(const char *cmd)
-// {
-// 	char		**args;
-// 	int			count;
-// 	int			i;
-// 	const char	*cmd_ptr;
-// 	char		*token;
 
-// 	count = count_tokens(cmd, ' ');
-// 	args = (char **)malloc((count + 1) * sizeof(char *));
-// 	if (!args)
-// 		return (NULL);
-// 	cmd_ptr = cmd;
-// 	i = 0;
-// 	token = get_next_token(&cmd_ptr, ' ');
-// 	while (token != NULL)
-// 	{
-// 		args[i++] = token;
-// 		token = get_next_token(&cmd_ptr, ' ');
-// 	}
-// 	args[i] = NULL;
-// 	return (args);
-// }
-
-//////////////////////////ANCIEN TRY ACCESS COMMAND ADRI PARSING///////////////
-// char	*try_access_command(char **paths, const char *cmd)
+//////////////////ANCIEN FILE export3//////////////////////////////////////////
+// char	**allocate_and_copy_env(char **env, int size)
 // {
-// 	char	*command_path;
+// 	char	**sorted_env;
 // 	int		i;
 
+// 	sorted_env = malloc(size * sizeof(char *));
+// 	if (!sorted_env)
+// 		return (NULL);
 // 	i = 0;
-// 	while (paths[i])
+// 	while (i < size)
 // 	{
-// 		command_path = join_path(paths[i], cmd);
-// 		if (command_path && access(command_path, X_OK) == 0)
-// 		{
-// 			free(paths);
-// 			return (command_path);
-// 		}
-// 		free(command_path);
+// 		sorted_env[i] = env[i];
 // 		i++;
 // 	}
-// 	return (NULL);
+// 	return (sorted_env);
+// }
+
+// void	print_env_var(char *env_var)
+// {
+// 	char	*equal_sign;
+
+// 	equal_sign = ft_strchr(env_var, '=');
+// 	if (equal_sign == NULL)
+// 		printf("declare -x %s\n", env_var);
+// 	else if (equal_sign[1] == '\0')
+// 		printf("declare -x %.*s=\"\"\n", (int)(equal_sign - env_var), env_var);
+// 	else
+// 		printf("declare -x %s\n", env_var);
+// }
+
+// void	print_sorted_env(char **env)
+// {
+// 	int		i;
+// 	int		size;
+// 	char	**sorted_env;
+
+// 	size = get_env_size(env);
+// 	sorted_env = allocate_and_copy_env(env, size);
+// 	if (!sorted_env)
+// 		return ;
+// 	qsort(sorted_env, size, sizeof(char *), compare_env_vars);
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		print_env_var(sorted_env[i]);
+// 		i++;
+// 	}
+// 	free(sorted_env);
 // }

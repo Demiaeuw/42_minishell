@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/19 17:57:12 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:28:34 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,10 +223,9 @@ void			update_env(t_envp *envp, const char *var, int var_len,
 					char *new_entry);
 int				is_var_in_env(t_envp *envp, const char *var);
 void			process_export_token(t_envp *envp, char *token);
-int				compare_env_vars(const void *a, const void *b);
 //03.3
-char			**allocate_and_copy_env(char **env, int size);
-void			print_env_var(char *env_var);
+void			insertion_sort(char **array, int size);
+char			**copy_env(char **env, int size);
 void			print_sorted_env(char **env);
 //04
 void			exe_unset(t_envp *envp, char *var);

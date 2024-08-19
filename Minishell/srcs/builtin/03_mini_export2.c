@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:45:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 20:16:35 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:25:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,15 @@ void	process_export_token(t_envp *envp, char *token)
 	{
 		var = ft_strndup(token, equal_sign - token);
 		if (var && *var)
-			set_env_var(envp, var, equal_sign + 1);
+		{
+			if (ft_strcmp(var, "_") != 0)
+				set_env_var(envp, var, equal_sign + 1);
+		}
 		free(var);
 	}
 	else
 	{
-		if (!is_var_in_env(envp, token))
+		if (ft_strcmp(token, "_") != 0 && !is_var_in_env(envp, token))
 			set_env_var(envp, token, NULL);
 	}
-}
-
-int	compare_env_vars(const void *a, const void *b)
-{
-	const char	*env1;
-	const char	*env2;
-
-	env1 = *(const char **)a;
-	env2 = *(const char **)b;
-	return (ft_strcmp(env1, env2));
 }
