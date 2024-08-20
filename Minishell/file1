@@ -1,0 +1,4 @@
+Executing builtin: echo test > file1
+test
+Executing builtin: echo test >> file1 < test
+test

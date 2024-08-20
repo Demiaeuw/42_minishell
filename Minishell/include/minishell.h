@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 14:49:55 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:09:35 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef enum s_chevron_type
 	IN,
 	DOUBLE_IN,
 	OUT,
-	DOUBLE_OUT
+	DOUBLE_OUT,
+	COMMAND
 }	t_chevron_type;
 
 typedef struct s_signal

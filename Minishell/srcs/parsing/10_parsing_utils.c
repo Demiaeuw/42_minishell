@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_parsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:39:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 15:58:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:36:06 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	print_token_list(t_token *head)
 	t_token	*current;
 	char	*is_builtin_str;
 	char	*is_last_command_str;
+	int		i;
 
+	i = 1;
 	current = head;
 	while (current != NULL)
 	{
@@ -35,13 +37,15 @@ void	print_token_list(t_token *head)
 			is_last_command_str = "Yes";
 		else
 			is_last_command_str = "No";
+		printf("\nt_token node n° %d\n", i);
 		printf("Value: %s\n", current->value);
 		printf("Type: %d\n", current->type);
 		printf("Is Builtin: %s\n", is_builtin_str);
 		printf("Builtin Info: %s\n", current->builtin_info);
 		printf("Is Last Command: %s\n", is_last_command_str);
-		printf("-----\n");
+		printf("---------------------------------------------\n");
 		print_chevron_node(current);
+		i++;
 		current = current->next;
 	}
 }

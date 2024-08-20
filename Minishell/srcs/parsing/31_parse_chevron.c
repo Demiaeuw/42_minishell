@@ -78,22 +78,28 @@ void	parse_chevrons(t_token *token)
 	char			*start;
 	t_chevron		*last_text_node;
 	bool			found_chevron;
+	t_token			*current_token;
 
-	ptr = token->value;
-	last_text_node = NULL;
-	found_chevron = false;
-	while (*ptr)
+	current_token = token;
+	while (current_token)
 	{
-		while (*ptr == ' ')
-			ptr++;
-		start = ptr;
-		if (*ptr == '>' || *ptr == '<')
+		ptr = current_token->value;
+		last_text_node = NULL;
+		found_chevron = false;
+		while (*ptr)
 		{
-			found_chevron = true;
-			handle_chevron(token, &ptr, start, &last_text_node);
+			while (*ptr == ' ')
+				ptr++;
+			start = ptr;
+			if (*ptr == '>' || *ptr == '<')
+			{
+				found_chevron = true;
+				handle_chevron(current_token, &ptr, start, &last_text_node);
+			}
+			else
+				handle_text(current_token, start, &ptr, &last_text_node);
 		}
-		else
-			handle_text(token, start, &ptr, &last_text_node);
+		check_and_free_file_in_out(current_token, found_chevron);
+		current_token = current_token->next;
 	}
-	check_and_free_file_in_out(token, found_chevron);
 }

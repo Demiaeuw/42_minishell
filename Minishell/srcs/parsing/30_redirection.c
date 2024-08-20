@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:49:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 01:39:59 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:41:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	print_chevron_node(t_token *tokens)
 		i = 1;
 		while (current_chevron)
 		{
-			printf("Node n°%d\n", i);
-			printf("Est ce que c'est un chevron : %d\n",
+			printf("\n	Node n°%d\n", i);
+			printf("	Est ce que c'est un chevron : %d\n",
 				current_chevron->chevron_check);
-			printf("Chevron  de type: %d\n", current_chevron->type);
-			printf("Value: %s\n\n", current_chevron->value);
+			printf("	Chevron  de type: %d\n", current_chevron->type);
+			printf("	Value: %s\n", current_chevron->value);
+			printf("	-------------\n");
 			current_chevron = current_chevron->next;
 			i++;
 		}
