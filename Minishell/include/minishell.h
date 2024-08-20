@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 01:40:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:49:55 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,8 @@ void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 void	handle_all_heredocs(t_token *token);
 void	handle_redirections(t_token *token);
 void	remove_heredoc_chevrons(t_token *token);
-
+void apply_redirection(int fd, int std_fd);
+int open_redirection_file(const char *filename, int flags, mode_t mode);
 
 
 //--------------------------------------------------------------------------//

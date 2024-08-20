@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_parsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:39:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 01:49:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:58:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	print_token_list(t_token *head)
 		printf("Builtin Info: %s\n", current->builtin_info);
 		printf("Is Last Command: %s\n", is_last_command_str);
 		printf("-----\n");
+		print_chevron_node(current);
 		current = current->next;
 	}
 }
