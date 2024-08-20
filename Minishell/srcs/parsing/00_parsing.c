@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/19 19:48:16 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:28:43 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	}
 	finalize_parsing(token_list, tokenarray);
 	process_token_values(token_list, env->env);
-	parse_chevrons_and_files(token_list);
+	parse_chevrons(token_list);
 	return (token_list);
 }
 

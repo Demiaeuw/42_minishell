@@ -12,76 +12,88 @@
 
 #include "../../include/minishell.h"
 
-void	handle_out_chevron(char **ptr, t_token *current_token)
+void	handle_chevron(t_token *token, char **ptr, char *start,
+			t_chevron **last_text_node)
 {
 	t_chevron_type	type;
-	char			*file_start;
-	char			*file_name;
 
-	type = OUT;
-	(*ptr)++;
 	if (**ptr == '>')
+		type = OUT;
+	else
+		type = IN;
+	if (*(*ptr + 1) == '>')
 	{
 		type = DOUBLE_OUT;
 		(*ptr)++;
 	}
-	while (**ptr == ' ')
-		(*ptr)++;
-	file_start = *ptr;
-	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
-		(*ptr)++;
-	file_name = ft_strndup(file_start, *ptr - file_start);
-	append_chevron(current_token, create_chevron(type, file_name));
-	free(file_name);
-}
-
-void	handle_in_chevron(char **ptr, t_token *current_token)
-{
-	t_chevron_type	type;
-	char			*file_start;
-	char			*file_name;
-
-	type = IN;
-	(*ptr)++;
-	if (**ptr == '<')
+	else if (*(*ptr + 1) == '<')
 	{
 		type = DOUBLE_IN;
 		(*ptr)++;
 	}
-	while (**ptr == ' ')
-		(*ptr)++;
-	file_start = *ptr;
+	append_chevron_node(&(token->file_in_out),
+		create_chevron_node(true, type, strndup(start, *ptr - start + 1)));
+	(*ptr)++;
+	*last_text_node = NULL;
+}
+
+void	handle_text(t_token *token, char *start, char **ptr,
+			t_chevron **last_text_node)
+{
+	char	*temp_value;
+	char	*new_value;
+	char	*temp;
+
 	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
 		(*ptr)++;
-	file_name = ft_strndup(file_start, *ptr - file_start);
-	append_chevron(current_token, create_chevron(type, file_name));
-	free(file_name);
+	temp_value = strndup(start, *ptr - start);
+	if (*last_text_node)
+	{
+		new_value = ft_strjoin((*last_text_node)->value, " ");
+		temp = ft_strjoin(new_value, temp_value);
+		free((*last_text_node)->value);
+		(*last_text_node)->value = temp;
+		free(new_value);
+		free(temp_value);
+	}
+	else
+	{
+		*last_text_node = create_chevron_node(false, 0, temp_value);
+		append_chevron_node(&(token->file_in_out), *last_text_node);
+	}
 }
 
-void	parse_token_value(t_token *current_token)
+void	check_and_free_file_in_out(t_token *token, bool found_chevron)
 {
-	char	*ptr;
+	if (!found_chevron && token->file_in_out)
+	{
+		free(token->file_in_out);
+		token->file_in_out = NULL;
+	}
+}
 
-	ptr = current_token->value;
+void	parse_chevrons(t_token *token)
+{
+	char			*ptr;
+	char			*start;
+	t_chevron		*last_text_node;
+	bool			found_chevron;
+
+	ptr = token->value;
+	last_text_node = NULL;
+	found_chevron = false;
 	while (*ptr)
 	{
-		if (*ptr == '>')
-			handle_out_chevron(&ptr, current_token);
-		else if (*ptr == '<')
-			handle_in_chevron(&ptr, current_token);
-		else
+		while (*ptr == ' ')
 			ptr++;
+		start = ptr;
+		if (*ptr == '>' || *ptr == '<')
+		{
+			found_chevron = true;
+			handle_chevron(token, &ptr, start, &last_text_node);
+		}
+		else
+			handle_text(token, start, &ptr, &last_text_node);
 	}
-}
-
-void	parse_chevrons_and_files(t_token *token)
-{
-	t_token	*current_token;
-
-	current_token = token;
-	while (current_token)
-	{
-		parse_token_value(current_token);
-		current_token = current_token->next;
-	}
+	check_and_free_file_in_out(token, found_chevron);
 }

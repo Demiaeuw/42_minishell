@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/19 21:16:46 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:40:28 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ typedef struct s_signal
 
 typedef struct s_chevron
 {
-	t_chevron_type		type;
-	bool				is_last_open;
-	bool				is_last_closed;
-	char				*file_name;
-	char				*clean_value;
-	struct s_chevron	*next;
+	bool			chevron_check;
+	t_chevron_type	type;
+	char			*value;
+	struct s_chevron		*next;
 }	t_chevron;
 
 typedef struct s_exp_data
@@ -145,15 +143,16 @@ void			process_token_values(t_token *token, char **env);
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
 //30
-void			print_chevron(t_token *tokens);
-t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
-void			append_chevron(t_token *token, t_chevron *chevron);
-char			*extract_clean_value(char *str);
+void			print_chevron_node(t_token *tokens);
+t_chevron		*create_chevron_node(bool c_c, t_chevron_type type,
+					char *value);
+void			append_chevron_node(t_chevron **head, t_chevron *new_node);
 //31
-void			handle_out_chevron(char **ptr, t_token *current_token);
-void			handle_in_chevron(char **ptr, t_token *current_token);
-void			parse_token_value(t_token *current_token);
-void			parse_chevrons_and_files(t_token *token);
+void			parse_chevrons(t_token *token);
+void			handle_chevron(t_token *token, char **ptr, char *start,
+					t_chevron **last_text_node);
+void			handle_text(t_token *token, char *start, char **ptr,
+					t_chevron **last_text_node);
 
 //--------------------------------------------------------------------------//
 //									Execution								//
@@ -195,8 +194,11 @@ void			init_signal_handlers(t_signal *handler);
 //20
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 //30
-int				open_file(t_chevron *chevron);
-void			handle_redirections(t_token *token);
+void	handle_all_heredocs(t_token *token);
+void	handle_redirections(t_token *token);
+void	remove_heredoc_chevrons(t_token *token);
+
+
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
