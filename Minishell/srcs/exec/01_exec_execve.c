@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 15:19:24 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:45:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void execute_execve(t_token *token, t_envp *envp, t_signal *handler)
         signal(SIGTERM, SIG_DFL); // Rétablir le comportement par défaut de SIGTERM
 
         // Appliquer les redirections dans le processus enfant
-        handle_redirections(token);
+        // handle_redirections(token);
         printf("Redirections applied in child process\n");  // Debugging
 
         // Test supplémentaire : vérifier si stdin est lu correctement

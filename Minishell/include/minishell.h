@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 18:09:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:22:27 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ typedef struct s_signal
 
 typedef struct s_chevron
 {
-	bool			chevron_check;
 	t_chevron_type	type;
 	char			*value;
-	struct s_chevron		*next;
+	struct s_chevron	*next;
 }	t_chevron;
+
 
 typedef struct s_exp_data
 {
@@ -144,16 +144,16 @@ void			process_token_values(t_token *token, char **env);
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
 //30
-void			print_chevron_node(t_token *tokens);
-t_chevron		*create_chevron_node(bool c_c, t_chevron_type type,
-					char *value);
-void			append_chevron_node(t_chevron **head, t_chevron *new_node);
+void	print_chevron_node(t_token *token);
+t_chevron	*create_chevron_node(t_chevron_type type, char *value);
+void	append_chevron_node(t_chevron **head, t_chevron *new_node);
 //31
-void			parse_chevrons(t_token *token);
-void			handle_chevron(t_token *token, char **ptr, char *start,
-					t_chevron **last_text_node);
-void			handle_text(t_token *token, char *start, char **ptr,
-					t_chevron **last_text_node);
+void	handle_chevron(t_token *token, char **ptr, char *start);
+void	handle_command(t_token *token, char *start, char **ptr);
+void	main_parse_chevrons(t_token *tokens);
+void	parse_chevrons(t_token *token);
+
+
 
 //--------------------------------------------------------------------------//
 //									Execution								//

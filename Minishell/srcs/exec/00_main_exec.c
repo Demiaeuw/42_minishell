@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 01:19:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:44:28 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,38 +78,39 @@ void	main_command(t_token *token, t_envp *envp, t_signal *handler)
 
 void	main_command_chevron(t_token *token, t_envp *envp, t_signal *handler)
 {
-	handle_all_heredocs(token);  // Gérer tous les heredocs d'abord
-	remove_heredoc_chevrons(token); // Supprimer les chevrons heredoc avant l'exécution
+	(void)token, (void)envp, (void)handler, printf("\n\nmain_command_chevron\n\n");
+	// handle_all_heredocs(token);  // Gérer tous les heredocs d'abord
+	// remove_heredoc_chevrons(token); // Supprimer les chevrons heredoc avant l'exécution
 
-	t_token	*current = token;
-	int		saved_stdin = dup(STDIN_FILENO);
-	int		saved_stdout = dup(STDOUT_FILENO);
+	// t_token	*current = token;
+	// int		saved_stdin = dup(STDIN_FILENO);
+	// int		saved_stdout = dup(STDOUT_FILENO);
 	
-	while (current != NULL)
-	{
-		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
-		{
-			printf("Before redirections: cmd = %s\n", current->value);  // Debugging
-			handle_redirections(current);  // Appliquer les redirections (hors heredocs)
+	// while (current != NULL)
+	// {
+	// 	if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
+	// 	{
+	// 		printf("Before redirections: cmd = %s\n", current->value);  // Debugging
+	// 		handle_redirections(current);  // Appliquer les redirections (hors heredocs)
 			
-			if (builtin_check(current))
-			{
-				printf("Executing builtin: %s\n", current->value);  // Debugging
-				builtin_selector_chevron(current, envp);
-			}
-			else
-			{
-				printf("Executing command: %s\n", current->value);  // Debugging
-				execute_execve(current, envp, handler);
-			}
+	// 		if (builtin_check(current))
+	// 		{
+	// 			printf("Executing builtin: %s\n", current->value);  // Debugging
+	// 			builtin_selector_chevron(current, envp);
+	// 		}
+	// 		else
+	// 		{
+	// 			printf("Executing command: %s\n", current->value);  // Debugging
+	// 			execute_execve(current, envp, handler);
+	// 		}
 			
-			dup2(saved_stdin, STDIN_FILENO);  // Restaurer stdin après exécution
-			dup2(saved_stdout, STDOUT_FILENO);  // Restaurer stdout après exécution
-		}
-		current = current->next;
-	}
+	// 		dup2(saved_stdin, STDIN_FILENO);  // Restaurer stdin après exécution
+	// 		dup2(saved_stdout, STDOUT_FILENO);  // Restaurer stdout après exécution
+	// 	}
+	// 	current = current->next;
+	// }
 	
-	close(saved_stdin);
-	close(saved_stdout);
+	// close(saved_stdin);
+	// close(saved_stdout);
 }
 

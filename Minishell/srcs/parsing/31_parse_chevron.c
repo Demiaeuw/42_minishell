@@ -12,10 +12,10 @@
 
 #include "../../include/minishell.h"
 
-void	handle_chevron(t_token *token, char **ptr, char *start,
-			t_chevron **last_text_node)
+void	handle_chevron(t_token *token, char **ptr, char *start)
 {
 	t_chevron_type	type;
+	char			*value;
 
 	if (**ptr == '>')
 		type = OUT;
@@ -31,44 +31,40 @@ void	handle_chevron(t_token *token, char **ptr, char *start,
 		type = DOUBLE_IN;
 		(*ptr)++;
 	}
-	append_chevron_node(&(token->file_in_out),
-		create_chevron_node(true, type, strndup(start, *ptr - start + 1)));
 	(*ptr)++;
-	*last_text_node = NULL;
+	while (**ptr == ' ')
+		(*ptr)++;
+	start = *ptr;
+	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
+		(*ptr)++;
+	value = strndup(start, *ptr - start);
+	append_chevron_node(&(token->file_in_out),
+		create_chevron_node(type, value));
 }
 
-void	handle_text(t_token *token, char *start, char **ptr,
-			t_chevron **last_text_node)
+void	handle_command(t_token *token, char *start, char **ptr)
 {
-	char	*temp_value;
-	char	*new_value;
-	char	*temp;
+	char			*value;
 
 	while (**ptr && **ptr != ' ' && **ptr != '>' && **ptr != '<')
 		(*ptr)++;
-	temp_value = strndup(start, *ptr - start);
-	if (*last_text_node)
-	{
-		new_value = ft_strjoin((*last_text_node)->value, " ");
-		temp = ft_strjoin(new_value, temp_value);
-		free((*last_text_node)->value);
-		(*last_text_node)->value = temp;
-		free(new_value);
-		free(temp_value);
-	}
-	else
-	{
-		*last_text_node = create_chevron_node(false, 0, temp_value);
-		append_chevron_node(&(token->file_in_out), *last_text_node);
-	}
+	value = strndup(start, *ptr - start);
+	append_chevron_node(&(token->file_in_out),
+		create_chevron_node(COMMAND, value));
 }
 
-void	check_and_free_file_in_out(t_token *token, bool found_chevron)
+void	main_parse_chevrons(t_token *tokens)
 {
-	if (!found_chevron && token->file_in_out)
+	t_token	*current_token;
+
+	current_token = tokens;
+	while (current_token)
 	{
-		free(token->file_in_out);
-		token->file_in_out = NULL;
+		if (current_token->type != TOKEN_PIPE)
+		{
+			parse_chevrons(current_token);
+		}
+		current_token = current_token->next;
 	}
 }
 
@@ -76,30 +72,43 @@ void	parse_chevrons(t_token *token)
 {
 	char			*ptr;
 	char			*start;
-	t_chevron		*last_text_node;
+	t_chevron		*last_command_node;
 	bool			found_chevron;
-	t_token			*current_token;
 
-	current_token = token;
-	while (current_token)
+	ptr = token->value;
+	last_command_node = NULL;
+	found_chevron = false;
+	while (*ptr)
 	{
-		ptr = current_token->value;
-		last_text_node = NULL;
-		found_chevron = false;
-		while (*ptr)
+		while (*ptr == ' ')
+			ptr++;
+		start = ptr;
+		if (*ptr == '>' || *ptr == '<')
 		{
-			while (*ptr == ' ')
-				ptr++;
-			start = ptr;
-			if (*ptr == '>' || *ptr == '<')
+			if (last_command_node)
 			{
-				found_chevron = true;
-				handle_chevron(current_token, &ptr, start, &last_text_node);
+				append_chevron_node(&(token->file_in_out), last_command_node);
+				last_command_node = NULL;
 			}
-			else
-				handle_text(current_token, start, &ptr, &last_text_node);
+			handle_chevron(token, &ptr, start);
+			found_chevron = true;
 		}
-		check_and_free_file_in_out(current_token, found_chevron);
-		current_token = current_token->next;
+		else
+		{
+			while (*ptr && *ptr != ' ' && *ptr != '>' && *ptr != '<')
+				ptr++;
+			if (!last_command_node)
+				last_command_node = create_chevron_node(COMMAND, strndup(start, ptr - start));
+			else
+			{
+				char *temp_value = ft_strjoin(last_command_node->value, " ");
+				char *new_value = ft_strjoin(temp_value, strndup(start, ptr - start));
+				free(last_command_node->value);
+				last_command_node->value = new_value;
+				free(temp_value);
+			}
+		}
 	}
+	if (found_chevron && last_command_node)
+		append_chevron_node(&(token->file_in_out), last_command_node);
 }

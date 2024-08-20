@@ -6,47 +6,55 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:49:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 17:41:59 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:22:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	print_chevron_node(t_token *tokens)
+
+const char	*get_chevron_type_str(t_chevron_type type)
 {
-	t_token		*current_token;
+	if (type == IN)
+		return ("IN");
+	else if (type == DOUBLE_IN)
+		return ("DOUBLE_IN");
+	else if (type == OUT)
+		return ("OUT");
+	else if (type == DOUBLE_OUT)
+		return ("DOUBLE_OUT");
+	else
+		return ("COMMAND");
+}
+
+void	print_chevron_node(t_token *token)
+{
 	t_chevron	*current_chevron;
 	int			i;
 
-	current_token = tokens;
-	while (current_token)
+	current_chevron = token->file_in_out;
+	i = 1;
+	while (current_chevron)
 	{
-		current_chevron = current_token->file_in_out;
-		i = 1;
-		while (current_chevron)
-		{
-			printf("\n	Node n°%d\n", i);
-			printf("	Est ce que c'est un chevron : %d\n",
-				current_chevron->chevron_check);
-			printf("	Chevron  de type: %d\n", current_chevron->type);
-			printf("	Value: %s\n", current_chevron->value);
-			printf("	-------------\n");
-			current_chevron = current_chevron->next;
-			i++;
-		}
-		current_token = current_token->next;
+		printf("\n	Node n°%d\n", i);
+		printf("	Type : %s\n", get_chevron_type_str(current_chevron->type));
+		printf("	Value: %s\n", current_chevron->value);
+		printf("	-------------\n");
+		current_chevron = current_chevron->next;
+		i++;
 	}
 }
 
+
+
 // c_c == chevron_check
-t_chevron	*create_chevron_node(bool c_c, t_chevron_type type, char *value)
+t_chevron	*create_chevron_node(t_chevron_type type, char *value)
 {
 	t_chevron	*new_chevron;
 
 	new_chevron = malloc(sizeof(t_chevron));
 	if (!new_chevron)
 		return (NULL);
-	new_chevron->chevron_check = c_c;
 	new_chevron->type = type;
 	new_chevron->value = value;
 	new_chevron->next = NULL;

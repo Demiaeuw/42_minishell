@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:39:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 17:36:06 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:51:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	print_token_list(t_token *head)
 		printf("Is Builtin: %s\n", is_builtin_str);
 		printf("Builtin Info: %s\n", current->builtin_info);
 		printf("Is Last Command: %s\n", is_last_command_str);
-		printf("---------------------------------------------\n");
 		print_chevron_node(current);
+		printf("---------------------------------------------\n");
 		i++;
 		current = current->next;
 	}
