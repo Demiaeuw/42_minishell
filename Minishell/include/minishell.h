@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 23:14:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:12:16 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void	handle_chevron(t_token *token, char **ptr, char *start);
 void	handle_command(t_token *token, char *start, char **ptr);
 void	main_parse_chevrons(t_token *tokens);
 void	parse_chevrons(t_token *token);
+int		contains_chevrons(const char *str); 
 
 
 

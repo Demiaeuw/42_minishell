@@ -40,7 +40,7 @@ t_chevron* parse_string_chevron(char *str)
     char *tokens[] = {">>", "<<", ">", "<"};
     t_chevron_type types[] = {DOUBLE_OUT, DOUBLE_IN, OUT, IN};
     t_chevron *head = NULL;
-    int found_chevron = 0;
+    t_chevron *last_command_node = NULL;
     
     char *current_position = str;
     
@@ -49,53 +49,55 @@ t_chevron* parse_string_chevron(char *str)
         int token_length = 0;
         int token_index = -1;
         
-        // Check for chevron tokens
+        // Trouver le premier chevron dans la chaîne
         for (int i = 0; i < 4; i++) {
-            if ((chevron = strstr(current_position, tokens[i])) != NULL) {
-                found_chevron = 1;
+            char *found = strstr(current_position, tokens[i]);
+            if (found && (chevron == NULL || found < chevron)) {
+                chevron = found;
                 token_length = strlen(tokens[i]);
                 token_index = i;
-                break;
             }
         }
         
-        if (token_index != -1) { // Chevron found
+        if (chevron) { // Chevron trouvé
             if (current_position != chevron) {
-                // Add the preceding command part
-                char command_part[chevron - current_position + 1];
-                strncpy(command_part, current_position, chevron - current_position);
-                command_part[chevron - current_position] = '\0';
-                append_chevron(&head, COMMAND, command_part);
+                // Ajouter la partie commande avant le chevron
+                char *command_part = strndup(current_position, chevron - current_position);
+                if (last_command_node == NULL && *command_part != '\0') {
+                    append_chevron(&head, COMMAND, command_part);
+                    last_command_node = head;
+                }
+                free(command_part);
             }
             
-            // Move past the chevron
+            // Avancer après le chevron
             current_position = chevron + token_length;
             
-            // Find the next word (value)
+            // Ignorer les espaces après le chevron
             while (*current_position == ' ') current_position++;
+            
+            // Trouver la fin de la valeur (jusqu'à un espace ou la fin de la chaîne)
             char *end_of_value = strchr(current_position, ' ');
             if (end_of_value == NULL) end_of_value = current_position + strlen(current_position);
             
-            char value_part[end_of_value - current_position + 1];
-            strncpy(value_part, current_position, end_of_value - current_position);
-            value_part[end_of_value - current_position] = '\0';
-            
+            char *value_part = strndup(current_position, end_of_value - current_position);
             append_chevron(&head, types[token_index], value_part);
+            free(value_part);
             
             current_position = end_of_value;
         } else {
-            // No more chevrons, add remaining as command
-            append_chevron(&head, COMMAND, current_position);
+            // Aucun autre chevron trouvé, ajouter le reste comme commande s'il y a une commande valide
+            if (*current_position != '\0') {
+                append_chevron(&head, COMMAND, current_position);
+            }
             break;
         }
     }
     
-    if (!found_chevron) {
-        return NULL;
-    }
-    
     return head;
 }
+
+
 
 void free_chevron_list(t_chevron *head)
 {
@@ -156,7 +158,22 @@ void	main_parse_string_chevron(t_token *token)
 	current = token;
 	while(current)
 	{
-		current->file_in_out = parse_string_chevron(current->value);
+		if (current->type == TOKEN_COMMAND)
+			if(contains_chevrons(current->value))
+				current->file_in_out = parse_string_chevron(current->value);
 		current = current->next;
 	}
+ }
+
+ int	contains_chevrons(const char *str) 
+ {
+    while (*str) 
+	{
+        if (*str == '<' || *str == '>') 
+		{
+            return 1;  // Chevron trouvé, on renvoie 1
+        }
+        str++;
+    }
+    return 0;  // Aucun chevron trouvé, on renvoie 0
 }
