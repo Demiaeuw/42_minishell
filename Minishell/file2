@@ -1,7 +1,0 @@
-Redirections applied in child process
-Attempting to read from stdin after redirection...
-Read from stdin before execve: test > file1
-
-Child process about to execute command: /usr/bin/cat
-Executing builtin: echo test > file1
-test
