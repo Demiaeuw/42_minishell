@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 00:28:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:07:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	}
 	finalize_parsing(token_list, tokenarray);
 	process_token_values(token_list, env->env);
-	parse_chevrons(token_list);
+	main_parse_string_chevron(token_list);
 	return (token_list);
 }
 

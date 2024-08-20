@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 19:22:27 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:14:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,11 +195,15 @@ void			init_signal_handlers(t_signal *handler);
 //20
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 //30
-void	handle_all_heredocs(t_token *token);
-void	handle_redirections(t_token *token);
-void	remove_heredoc_chevrons(t_token *token);
-void apply_redirection(int fd, int std_fd);
-int open_redirection_file(const char *filename, int flags, mode_t mode);
+//31
+t_chevron* create_chevron(t_chevron_type type, const char *value);
+void append_chevron(t_chevron **head, t_chevron_type type, const char *value);
+t_chevron* parse_string_chevron(char *str);
+void free_chevron_list(t_chevron *head);
+// void print_chevron_list(t_chevron *head);
+void	main_parse_string_chevron(t_token *token);
+char	*get_chevron_type_str(t_chevron_type type);
+void	print_chevron_node(t_token *token);
 
 
 //--------------------------------------------------------------------------//
