@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_parsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:39:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 23:10:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:03:26 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,37 @@
  * 2. Free de la liste.
  * 3. Free du tableau de tableau
  */
-void	print_token_list(t_token *head)
-{
-	t_token	*current;
-	char	*is_builtin_str;
-	char	*is_last_command_str;
-	int		i;
+// void	print_token_list(t_token *head)
+// {
+// 	t_token	*current;
+// 	char	*is_builtin_str;
+// 	char	*is_last_command_str;
+// 	int		i;
 
-	i = 1;
-	current = head;
-	while (current != NULL)
-	{
-		if (current->is_builtin)
-			is_builtin_str = "Yes";
-		else
-			is_builtin_str = "No";
-		if (current->is_last_command)
-			is_last_command_str = "Yes";
-		else
-			is_last_command_str = "No";
-		printf("\nt_token node n° %d\n", i);
-		printf("Value: %s\n", current->value);
-		printf("Type: %d\n", current->type);
-		printf("Is Builtin: %s\n", is_builtin_str);
-		printf("Builtin Info: %s\n", current->builtin_info);
-		printf("Is Last Command: %s\n", is_last_command_str);
-		print_chevron_node(current);
-		printf("---------------------------------------------\n");
-		i++;
-		current = current->next;
-	}
-}
+// 	i = 1;
+// 	current = head;
+// 	while (current != NULL)
+// 	{
+// 		if (current->is_builtin)
+// 			is_builtin_str = "Yes";
+// 		else
+// 			is_builtin_str = "No";
+// 		if (current->is_last_command)
+// 			is_last_command_str = "Yes";
+// 		else
+// 			is_last_command_str = "No";
+// 		printf("\nt_token node n° %d\n", i);
+// 		printf("Value: %s\n", current->value);
+// 		printf("Type: %d\n", current->type);
+// 		printf("Is Builtin: %s\n", is_builtin_str);
+// 		printf("Builtin Info: %s\n", current->builtin_info);
+// 		printf("Is Last Command: %s\n", is_last_command_str);
+// 		print_chevron_node(current);
+// 		printf("---------------------------------------------\n");
+// 		i++;
+// 		current = current->next;
+// 	}
+// }
 
 void	free_token_list(t_token *token_list)
 {

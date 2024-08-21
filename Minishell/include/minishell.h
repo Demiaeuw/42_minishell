@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/21 00:12:16 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:27:29 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	handle_chevron(t_token *token, char **ptr, char *start);
 void	handle_command(t_token *token, char *start, char **ptr);
 void	main_parse_chevrons(t_token *tokens);
 void	parse_chevrons(t_token *token);
-int		contains_chevrons(const char *str); 
+int		contains_chevrons(const char *str);
 
 
 
@@ -181,7 +181,6 @@ char			**split_command(const char *cmd);
 //02.2
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
-void			handle_signals_in_parent(t_signal *handler);
 void			cleanup_execution(char **split_args,
 					char **args, char *cmd_path);
 //03
@@ -191,11 +190,17 @@ int				count_tokens_before_pipe(t_token *token);
 char			**allocate_and_fill_tokens(t_token *token, int count);
 char			**convert_token(t_token *token);
 //10
+void			handle_signals_in_parent(t_signal *handler);
 void			signal_handler(int sig, siginfo_t *info, void *context);
 void			init_signal_handlers(t_signal *handler);
 //20
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 //30
+int				open_infile(char *filename);
+int				open_outfile(char *filename, int flags);
+void			redirect_infile(char *filename);
+void			redirect_outfile(char *filename, int append);
+void			handle_redirections(t_chevron *chevron_list);
 //31
 t_chevron* create_chevron(t_chevron_type type, const char *value);
 void append_chevron(t_chevron **head, t_chevron_type type, const char *value);

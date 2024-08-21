@@ -6,11 +6,24 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 20:26:18 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:27:37 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	handle_signals_in_parent(t_signal *handler)
+{
+	if (handler->sigint)
+	{
+		write(1, "\n", 1);
+		handler->sigint = 0;
+	}
+	if (handler->sigquit)
+	{
+		handler->sigquit = 0;
+	}
+}
 
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
