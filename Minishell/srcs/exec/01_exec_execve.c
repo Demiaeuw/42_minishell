@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/21 17:27:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:30:48 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	handle_memory_error(char **split_args, char **args)
 {
-	perror("Memory allocation failed");
 	if (split_args)
 		free(split_args);
 	if (args)
