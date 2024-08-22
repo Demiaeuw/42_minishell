@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/22 16:44:17 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/22 23:21:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,4 +281,8 @@ void			set_env_value(char **env, char *key, char *new_value);
 void			free_array(char **array);
 void			free_t_envp(t_envp *envp);
 
+//
+void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out);
+void	file_descriptor_handler(int in, int out);
+//
 #endif

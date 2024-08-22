@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/21 17:30:48 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/22 23:21:10 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,21 @@ void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
-void	execute_child_process(char *ch, char **split_args, t_envp *envp)
+void execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 {
-	if (execve(ch, split_args, envp->env) == -1)
-	{
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
+    // Vérification des arguments avant execve
+    printf("Chemin de la commande: %s\n", cmd_path);
+    for (int i = 0; split_args[i] != NULL; i++)
+    {
+        printf("Argument %d: %s\n", i, split_args[i]);
+    }
+
+    // Appel de execve
+    if (execve(cmd_path, split_args, envp->env) == -1)
+    {
+        perror("execve error");
+        exit(EXIT_FAILURE);
+    }
 }
 
 int	prepare_command(char ***split_args, char ***args, t_token *token)
@@ -77,11 +85,7 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 		return ;
 	}
 	else if (pid == 0)
-	{
-		if (token->file_in_out)
-			handle_redirections(token->file_in_out);
 		execute_child_process(cmd_path, split_args, envp);
-	}
 	else
 	{
 		waitpid(pid, &status, 0);
