@@ -34,5 +34,5 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 - [Yoan Onieva](https://github.com/Yonieva)
 - [Gauthier Esteve](https://github.com/gaesteve42)
-- [Kévin Pourcel](https://github.com/Middle-555/Middle-555)
+- [Kévin Pourcel](https://github.com/Middle-555)
 - [Adrien Cabarbaye](https://github.com/Demiaeuw)
