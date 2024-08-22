@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/21 17:27:39 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/23 00:55:35 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,60 @@ void	cleanup_execution(char **split_args, char **args, char *cmd_path)
 		free_split_command(args);
 	if (cmd_path)
 		free(cmd_path);
+}
+
+void file_descriptor_handler(int in, int out)
+{
+	if (in != STDIN_FILENO)
+	{
+		if (dup2(in, STDIN_FILENO) < 0)
+		{
+			perror("dup2 error in file_descriptor_handler for stdin");
+			exit(EXIT_FAILURE);
+		}
+		close(in);
+	}
+	if (out != STDOUT_FILENO)
+	{
+		if (dup2(out, STDOUT_FILENO) < 0)
+		{
+			perror("dup2 error in file_descriptor_handler for stdout");
+			exit(EXIT_FAILURE);
+		}
+		close(out);
+	}
+}
+
+void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out)
+{
+	pid_t	pid;
+
+	if (builtin_check(token))
+	{
+		builtin_selector_chevron(token, envp);
+	}
+	else
+	{
+		pid = fork();
+		if (pid < 0)
+		{
+			perror("fork error");
+			exit(EXIT_FAILURE);
+		}
+		else if (pid == 0)
+		{
+			file_descriptor_handler(in, out);
+			execute_execve(token, envp, handler);
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			waitpid(pid, &handler->sigterm, WUNTRACED);
+			handle_signals_in_parent(handler);
+			if (WIFSIGNALED(handler->sigterm))
+				handler->sigterm = WTERMSIG(handler->sigterm) + 128;
+			else if (WIFEXITED(handler->sigterm))
+				handler->sigterm = WEXITSTATUS(handler->sigterm);
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/22 23:21:15 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/23 00:53:06 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void			parse_after_chevron(t_chevron_data *data);
 char			*get_chevron_type_str(t_chevron_type type);
 void			print_chevron_node(t_token *token);
 int				contains_chevrons(const char *str);
-;
+
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
@@ -205,6 +205,9 @@ pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 void			cleanup_execution(char **split_args,
 					char **args, char *cmd_path);
+void			create_child_process(t_token *token, t_envp *envp,
+					t_signal *handler, int in, int out);
+void			file_descriptor_handler(int in, int out);
 //03
 char			**free_token(char **str, int count);
 int				count_token(t_token *token);
@@ -220,8 +223,8 @@ void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 //30
 int				open_infile(char *filename);
 int				open_outfile(char *filename, int flags);
-void			redirect_infile(char *filename);
-void			redirect_outfile(char *filename, int append);
+int				redirect_infile(char *filename);
+int				redirect_outfile(char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
 
 //--------------------------------------------------------------------------//
@@ -281,8 +284,4 @@ void			set_env_value(char **env, char *key, char *new_value);
 void			free_array(char **array);
 void			free_t_envp(t_envp *envp);
 
-//
-void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out);
-void	file_descriptor_handler(int in, int out);
-//
 #endif

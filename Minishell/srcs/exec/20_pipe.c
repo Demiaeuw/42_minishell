@@ -6,12 +6,12 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/21 17:23:15 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/23 00:56:04 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+//en attente
 void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 {
 	pid_t	pid;
