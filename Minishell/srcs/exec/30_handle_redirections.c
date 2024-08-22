@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/22 22:40:12 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/22 23:44:21 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,41 @@ int	open_outfile(char *filename, int flags)
 	return (fd);
 }
 
-void	redirect_infile(char *filename)
+int redirect_infile(char *filename)
 {
-	int	fd;
-
-	fd = open_infile(filename);
-	if (fd >= 0)
-	{
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-	}
+    int fd = open(filename, O_RDONLY);
+    if (fd < 0)
+    {
+        perror("open (input file)");
+        return -1;
+    }
+    if (dup2(fd, STDIN_FILENO) < 0)
+    {
+        perror("dup2 (input redirection)");
+        close(fd);
+        return -1;
+    }
+    close(fd);
+    return 0;
 }
 
-void	redirect_outfile(char *filename, int append)
+int redirect_outfile(char *filename, int append)
 {
-	int	flags;
-	int	fd;
-
-	flags = O_WRONLY | O_CREAT | (append ? O_APPEND : O_TRUNC);
-	fd = open_outfile(filename, flags);
-	if (fd >= 0)
-	{
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-	}
+    int flags = O_WRONLY | O_CREAT | (append ? O_APPEND : O_TRUNC);
+    int fd = open(filename, flags, 0644);
+    if (fd < 0)
+    {
+        perror("open (output file)");
+        return -1;
+    }
+    if (dup2(fd, STDOUT_FILENO) < 0)
+    {
+        perror("dup2 (output redirection)");
+        close(fd);
+        return -1;
+    }
+    close(fd);
+    return 0;
 }
 
 void	handle_redirections(t_chevron *chevron_list)
