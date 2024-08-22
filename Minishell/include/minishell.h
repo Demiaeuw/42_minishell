@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/21 17:27:29 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:44:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,6 @@ typedef enum s_chevron_type
 	COMMAND
 }	t_chevron_type;
 
-typedef struct s_signal
-{
-	int	sigint;
-	int	sigquit;
-	int	sigterm;
-}	t_signal;
-
-typedef struct s_chevron
-{
-	t_chevron_type	type;
-	char			*value;
-	struct s_chevron	*next;
-}	t_chevron;
-
-
-typedef struct s_exp_data
-{
-	size_t	i;
-	size_t	j;
-	int		in_single_quotes;
-	int		in_double_quotes;
-	size_t	len;
-	char	*result;
-}	t_exp_data;
-
 typedef struct s_token
 {
 	t_token_type		type;
@@ -90,10 +65,48 @@ typedef struct s_token
 	struct s_token		*next;
 }	t_token;
 
+typedef struct s_chevron
+{
+	t_chevron_type		type;
+	char				*value;
+	struct s_chevron	*next;
+}	t_chevron;
+
 typedef struct s_envp
 {
 	char	**env;
 }	t_envp;
+
+typedef struct s_signal
+{
+	int	sigint;
+	int	sigquit;
+	int	sigterm;
+}	t_signal;
+
+/**
+ * Creation de structure pour la norme
+ */
+typedef struct s_chevron_data
+{
+	char			**current_position;
+	t_chevron		**head;
+	t_chevron		**last_command_node;
+	char			*chevron;
+	int				token_length;
+	int				token_index;
+	t_chevron_type	*types;
+}	t_chevron_data;
+
+typedef struct s_exp_data
+{
+	size_t	i;
+	size_t	j;
+	int		in_single_quotes;
+	int		in_double_quotes;
+	size_t	len;
+	char	*result;
+}	t_exp_data;
 
 //--------------------------------------------------------------------------//
 //									Parsing									//
@@ -144,18 +157,27 @@ void			process_token_values(t_token *token, char **env);
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
 //30
-void	print_chevron_node(t_token *token);
-t_chevron	*create_chevron_node(t_chevron_type type, char *value);
-void	append_chevron_node(t_chevron **head, t_chevron *new_node);
+t_chevron		*create_chevron(t_chevron_type type, const char *value);
+void			append_chevron(t_chevron **head, t_chevron_type type,
+					const char *value);
+void			free_chevron_list(t_chevron *head);
+void			print_chevron_list(t_chevron *head);
+void			main_parse_string_chevron(t_token *token);
 //31
-void	handle_chevron(t_token *token, char **ptr, char *start);
-void	handle_command(t_token *token, char *start, char **ptr);
-void	main_parse_chevrons(t_token *tokens);
-void	parse_chevrons(t_token *token);
-int		contains_chevrons(const char *str);
-
-
-
+t_chevron		*parse_string_chevron(char *str);
+void			parse_chevron_token(char **current_position, t_chevron **head,
+					t_chevron **last_command_node);
+void			initialize_tokens_types(char **tokens, t_chevron_type *types);
+//32
+void			find_chevron_in_str(char *current_position, char **tokens,
+					t_chevron_data *data);
+void			parse_before_chevron(t_chevron_data *data);
+void			parse_after_chevron(t_chevron_data *data);
+//33
+char			*get_chevron_type_str(t_chevron_type type);
+void			print_chevron_node(t_token *token);
+int				contains_chevrons(const char *str);
+;
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
@@ -201,16 +223,6 @@ int				open_outfile(char *filename, int flags);
 void			redirect_infile(char *filename);
 void			redirect_outfile(char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
-//31
-t_chevron* create_chevron(t_chevron_type type, const char *value);
-void append_chevron(t_chevron **head, t_chevron_type type, const char *value);
-t_chevron* parse_string_chevron(char *str);
-void free_chevron_list(t_chevron *head);
-// void print_chevron_list(t_chevron *head);
-void	main_parse_string_chevron(t_token *token);
-char	*get_chevron_type_str(t_chevron_type type);
-void	print_chevron_node(t_token *token);
-
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
