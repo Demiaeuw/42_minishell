@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/26 20:27:26 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:55:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,52 +75,124 @@ int	redirect_outfile(char *filename, int append)
 	return 0;
 }
 //EN COURS
+//pipefd c est un tableau de descripteur de fichier en gros.
+//pipefd0 c est pour la lecture depuis le pipe
+//pipefd1 c est pour l ecrite dans le pipe
+// void	handle_heredoc(char *delimiter)
+// {
+// 	int		pipefd[2];
+// 	char	*line;
+
+// 	if (pipe(pipefd) == -1)
+// 	{
+// 		perror("pipe");
+// 		return ;
+// 	}
+
+// 	// En attente du delimiteur comme "fin" dans cat << fin.
+// 	while (1)
+// 	{
+// 		line = readline("> "); // pour afficher le > comme dans le bash
+// 		if (!line || ft_strcmp(line, delimiter) == 0)
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		write(pipefd[1], line, ft_strlen(line));
+// 		write(pipefd[1], "\n", 1);
+// 		free(line);
+// 	}
+// 	close(pipefd[1]); // Fermer l'écriture dans le pipe
+
+// 	// Rediriger stdin pour lire depuis le pipe
+// 	dup2(pipefd[0], STDIN_FILENO);
+// 	close(pipefd[0]);
+// }
+
+// void	handle_redirections(t_chevron *chevron_list)
+// {
+// 	t_chevron	*current;
+
+// 	current = chevron_list;
+// 	while (current)
+// 	{
+// 		if (current->type == IN)
+// 			redirect_infile(current->value);
+// 		else if (current->type == OUT)
+// 			redirect_outfile(current->value, 0);
+// 		else if (current->type == DOUBLE_OUT)
+// 			redirect_outfile(current->value, 1);
+// 		else if (current->type == DOUBLE_IN)
+// 			handle_heredoc(current->value);
+// 		current = current->next;
+// 	}
+// }
+
+///// Debogage
+
+void	handle_redirections(t_chevron *chevron_list)
+{
+	t_chevron *current = chevron_list;
+	while (current)
+	{
+		if (current->type == IN)
+		{
+			printf("Redirecting input from file: %s\n", current->value);
+			redirect_infile(current->value);
+		}
+		else if (current->type == OUT)
+		{
+			printf("Redirecting output to file: %s\n", current->value);
+			redirect_outfile(current->value, 0);
+		}
+		else if (current->type == DOUBLE_OUT)
+		{
+			printf("Appending output to file: %s\n", current->value);
+			redirect_outfile(current->value, 1);
+		}
+		else if (current->type == DOUBLE_IN)
+		{
+			printf("Handling heredoc with delimiter: %s\n", current->value);
+			handle_heredoc(current->value);
+		}
+		current = current->next;
+	}
+}
+
 void	handle_heredoc(char *delimiter)
 {
-	int		pipefd[2];
-	char	*line;
+	int pipefd[2];
+	char *line;
 
 	if (pipe(pipefd) == -1)
 	{
 		perror("pipe");
-		return ;
+		return;
 	}
 
-	// En attente du delimiteur comme "fin" dans cat << fin.
+	// Lire l'entrée jusqu'à atteindre le delimiter
 	while (1)
 	{
-		line = readline("> "); // pour afficher le > comme dans le bash
-		if (!line || ft_strcmp(line, delimiter) == 0)
+		line = readline("> "); // Prompt pour l'utilisateur
+		if (!line || strcmp(line, delimiter) == 0) // Arrêter à la délimitation
 		{
+			printf("Reached delimiter: %s\n", delimiter);
 			free(line);
-			break ;
+			break;
 		}
-		write(pipefd[1], line, ft_strlen(line));
+		write(pipefd[1], line, strlen(line)); // Écrire dans le pipe
 		write(pipefd[1], "\n", 1);
 		free(line);
 	}
-	close(pipefd[1]); // Fermer l'écriture dans le pipe
+	close(pipefd[1]); // Fin de l'écriture
 
 	// Rediriger stdin pour lire depuis le pipe
-	dup2(pipefd[0], STDIN_FILENO);
-	close(pipefd[0]);
-}
-
-void	handle_redirections(t_chevron *chevron_list)
-{
-	t_chevron	*current;
-
-	current = chevron_list;
-	while (current)
-	{
-		if (current->type == IN)
-			redirect_infile(current->value);
-		else if (current->type == OUT)
-			redirect_outfile(current->value, 0);
-		else if (current->type == DOUBLE_OUT)
-			redirect_outfile(current->value, 1);
-		else if (current->type == DOUBLE_IN)
-			handle_heredoc(current->value);
-		current = current->next;
+	if (dup2(pipefd[0], STDIN_FILENO) == -1) {
+		perror("dup2 (heredoc redirection)");
+		close(pipefd[0]);
+		return;
 	}
+	close(pipefd[0]);
+
+	printf("Heredoc redirection to stdin done\n");
 }

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/26 20:34:24 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:49:14 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,46 @@ void file_descriptor_handler(int in, int out)
 	}
 }
 
+// void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out)
+// {
+// 	pid_t	pid;
+
+// 	if (builtin_check(token))
+// 	{
+// 		builtin_selector_chevron(token, envp);
+// 	}
+// 	else
+// 	{
+// 		pid = fork();
+// 		if (pid < 0)
+// 		{
+// 			perror("fork error");
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		else if (pid == 0)
+// 		{
+// 			file_descriptor_handler(in, out);
+// 			handle_redirections(token->file_in_out);
+// 			execute_execve(token, envp, handler);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		else
+// 		{
+// 			waitpid(pid, &handler->sigterm, WUNTRACED);
+// 			handle_signals_in_parent(handler);
+// 			if (WIFSIGNALED(handler->sigterm))
+// 				handler->sigterm = WTERMSIG(handler->sigterm) + 128;
+// 			else if (WIFEXITED(handler->sigterm))
+// 				handler->sigterm = WEXITSTATUS(handler->sigterm);
+// 		}
+// 	}
+// }
+
+/// debogage
+
 void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out)
 {
-	pid_t	pid;
+	pid_t pid;
 
 	if (builtin_check(token))
 	{
@@ -78,7 +115,17 @@ void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int i
 		else if (pid == 0)
 		{
 			file_descriptor_handler(in, out);
+
+			// Gérer toutes les redirections ici, y compris heredoc
 			handle_redirections(token->file_in_out);
+
+			// Afficher les arguments de la commande avant l'exécution
+			char **cmd_args = split_command(token->value);
+			printf("Executing command: %s\n", cmd_args[0]);
+			for (int i = 1; cmd_args[i] != NULL; i++) {
+				printf("Argument %d: %s\n", i, cmd_args[i]);
+			}
+
 			execute_execve(token, envp, handler);
 			exit(EXIT_FAILURE);
 		}
