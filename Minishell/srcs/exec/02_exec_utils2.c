@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/23 00:55:35 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:34:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int i
 		else if (pid == 0)
 		{
 			file_descriptor_handler(in, out);
+			handle_redirections(token->file_in_out);
 			execute_execve(token, envp, handler);
 			exit(EXIT_FAILURE);
 		}

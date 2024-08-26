@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/23 00:53:06 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:08:34 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ int				open_outfile(char *filename, int flags);
 int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
+void			handle_heredoc(char *delimiter); //test
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/23 00:53:15 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:27:38 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	main_command_chevron(t_token *token, t_envp *envp, t_signal *handler)
 	int		saved_stdin = dup(STDIN_FILENO);
 	int		saved_stdout = dup(STDOUT_FILENO);
 
-	handle_redirections(token->file_in_out);
 	t_token	*current = token;
 	while (current != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/22 23:20:44 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:34:21 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void	init_signal_handlers(t_signal *handler)
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, (void *)handler);
+
 	sa.sa_handler = SIG_IGN;
+	sa.sa_flags = 0;
 	sigaction(SIGQUIT, &sa, NULL);
+
 	sa.sa_sigaction = signal_handler;
+	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGTERM, &sa, (void *)handler);
 }

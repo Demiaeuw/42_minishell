@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/22 16:17:50 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:27:21 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 			t_token *token_list = main_parsing(input, envp);
 			free(input);
-			// print_token_list(token_list);
+			//print_token_list(token_list); // test parsing
 			main_exec(token_list, envp, &handler);  // Passe le handler ici
 			free_token_list(token_list);
 		}

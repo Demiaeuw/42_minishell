@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/23 00:55:52 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 20:27:26 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,37 @@ int	redirect_outfile(char *filename, int append)
 	close(fd);
 	return 0;
 }
+//EN COURS
+void	handle_heredoc(char *delimiter)
+{
+	int		pipefd[2];
+	char	*line;
+
+	if (pipe(pipefd) == -1)
+	{
+		perror("pipe");
+		return ;
+	}
+
+	// En attente du delimiteur comme "fin" dans cat << fin.
+	while (1)
+	{
+		line = readline("> "); // pour afficher le > comme dans le bash
+		if (!line || ft_strcmp(line, delimiter) == 0)
+		{
+			free(line);
+			break ;
+		}
+		write(pipefd[1], line, ft_strlen(line));
+		write(pipefd[1], "\n", 1);
+		free(line);
+	}
+	close(pipefd[1]); // Fermer l'écriture dans le pipe
+
+	// Rediriger stdin pour lire depuis le pipe
+	dup2(pipefd[0], STDIN_FILENO);
+	close(pipefd[0]);
+}
 
 void	handle_redirections(t_chevron *chevron_list)
 {
@@ -88,6 +119,8 @@ void	handle_redirections(t_chevron *chevron_list)
 			redirect_outfile(current->value, 0);
 		else if (current->type == DOUBLE_OUT)
 			redirect_outfile(current->value, 1);
+		else if (current->type == DOUBLE_IN)
+			handle_heredoc(current->value);
 		current = current->next;
 	}
 }
