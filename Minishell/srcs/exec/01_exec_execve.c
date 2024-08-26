@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/23 00:55:23 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:08:40 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@ void	handle_memory_error(char **split_args, char **args)
 	if (args)
 		free(args);
 }
-//debogage dans cette fonction
+
 void execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 {
-	printf("Chemin de la commande: %s\n", cmd_path);
-	for (int i = 0; split_args[i] != NULL; i++)
-	{
-		printf("Argument %d: %s\n", i, split_args[i]);
-	}
 	if (execve(cmd_path, split_args, envp->env) == -1)
 	{
 		perror("execve error");
