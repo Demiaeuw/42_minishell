@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/26 20:55:20 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/26 21:55:06 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,30 @@ void execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 	}
 }
 
-// int	prepare_command(char ***split_args, char ***args, t_token *token)
-// {
-// 	*split_args = split_command(token->value);
-// 	if (!*split_args)
-// 		return (0);
-// 	*args = convert_token(token);
-// 	if (!*args)
-// 	{
-// 		handle_memory_error(*split_args, NULL);
-// 		return (0);
-// 	}
-// 	return (1);
-// }
+int	prepare_command(char ***split_args, char ***args, t_token *token)
+{
+	*split_args = split_command(token->value);
+
+	if (!*split_args)
+		return (0);
+	for (int i = 0; (*split_args)[i] != NULL; i++)
+	{
+		if ((ft_strcmp((*split_args)[i], "<<") == 0) ||
+			(token->file_in_out != NULL && token->file_in_out->value != NULL &&
+				ft_strcmp((*split_args)[i], token->file_in_out->value) == 0))
+		{
+			(*split_args)[i] = NULL;
+			break ;
+		}
+	}
+	*args = convert_token(token);
+	if (!*args)
+	{
+		handle_memory_error(*split_args, NULL);
+		return 0;
+	}
+	return 1;
+}
 
 int	prepare_execution(char **split_args, char **args, char **cmd_path)
 {
@@ -84,33 +95,4 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 		handle_signals_in_parent(handler);
 	}
 	cleanup_execution(split_args, args, cmd_path);
-}
-
-/// debugage
-
-int	prepare_command(char ***split_args, char ***args, t_token *token)
-{
-	// Séparer uniquement les arguments nécessaires pour la commande
-	*split_args = split_command(token->value);
-	if (!*split_args)
-		return 0;
-
-	// Vérifiez et excluez les tokens de redirection
-	for (int i = 0; (*split_args)[i] != NULL; i++)
-	{
-		if (ft_strcmp((*split_args)[i], "<<") == 0 || ft_strcmp((*split_args)[i], token->file_in_out->value) == 0)
-		{
-			// Exclure << et le délimiteur de l'heredoc
-			(*split_args)[i] = NULL; // Terminer la liste d'arguments
-			break;
-		}
-	}
-
-	*args = convert_token(token); // Convertir les tokens pour l'exécution
-	if (!*args)
-	{
-		handle_memory_error(*split_args, NULL);
-		return 0;
-	}
-	return 1;
 }
