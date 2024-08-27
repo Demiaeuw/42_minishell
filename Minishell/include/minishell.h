@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/27 15:17:45 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:27:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,27 +195,27 @@ void			main_command_chevron(t_token *token, t_envp *envp,
 					t_signal *handler);
 //01
 void			handle_memory_error(char **split_args, char **args);
-void			execute_child_process(char *ch,
+void			execute_child_process(char *cmd_path,
 					char **split_args, t_envp *envp);
 int				prepare_command(char ***split_args, char ***args,
 					t_token *token);
 int				prepare_execution(char **split_args,
 					char **args, char **cmd_path);
 void			execute_execve(t_token *token, t_envp *envp, t_signal *handler);
-//02.1
+//02
 int				count_tokens(const char *str, char delimiter);
 char			*allocate_token(const char *start, size_t len);
 char			*get_next_token(const char **str, char delimiter);
 void			free_split_command(char **args);
 char			**split_command(const char *cmd);
-//02.2
+//03
 void			cleanup_execution(char **split_args,
 					char **args, char *cmd_path);
 void			file_descriptor_handler(int in, int out);
 void			handle_parent_process(pid_t pid, t_signal *handler);
 void			handle_child_process(t_process_data *args);
 void			create_child_process(t_process_data *args);
-//03
+//04
 char			**free_token(char **str, int count);
 int				count_token(t_token *token);
 int				count_tokens_before_pipe(t_token *token);
@@ -228,7 +228,16 @@ void			init_signal_handlers(t_signal *handler);
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 //20
+void			create_and_handle(t_process_data *args,
+					int *fd_in, int *pipefd);
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
+//21
+void			setup_process_args(t_process_data *args,
+					int fd_in, int *pipefd);
+void			setup_redirections(int fd_in, int fd_out);
+void			create_pipe_if_needed(int *pipefd, t_token *token);
+void			handle_pipe_child_process(t_process_data *args, int *pipefd);
+void			handle_pipe_parent_process(pid_t pid, int *fd_in, int *pipefd);
 //30
 int				open_infile(char *filename);
 int				open_outfile(char *filename, int flags);

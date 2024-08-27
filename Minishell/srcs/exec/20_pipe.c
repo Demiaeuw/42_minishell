@@ -6,79 +6,48 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/26 21:56:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:28:16 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-//en attente
-void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
+
+// Fonction pour gérer la création et l'exécution des processus
+void	create_and_handle(t_process_data *args, int *fd_in, int *pipefd)
 {
 	pid_t	pid;
-	int		pipefd[2];
-	int		fd_in; // Ce sera l'entrée pour le prochain processus
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+		handle_pipe_child_process(args, pipefd);
+	else
+		handle_pipe_parent_process(pid, fd_in, pipefd);
+}
+
+// Fonction principale de gestion des pipes
+void	execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
+{
+	int				pipefd[2];
+	int				fd_in;
+	t_process_data	args;
 
 	fd_in = 0;
+	args.envp = envp;
+	args.handler = handler;
 	while (token)
 	{
-		// Si le token est une commande
 		if (token->type == TOKEN_COMMAND)
 		{
-			// Créer un pipe
-			if (token->next && token->next->type == TOKEN_PIPE)
-			{
-				if (pipe(pipefd) == -1)
-				{
-					perror("pipe");
-					exit(EXIT_FAILURE);
-				}
-			}
-			// Forker un processus
-			pid = fork();
-			if (pid == -1)
-			{
-				perror("fork");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid == 0) // Processus enfant
-			{
-				// Si ce n'est pas la première commande, on redirige l'entrée
-				if (fd_in != 0)
-				{
-					dup2(fd_in, 0);
-					close(fd_in);
-				}
-				// Si ce n'est pas la dernière commande, on redirige la sortie
-				if (token->next && token->next->type == TOKEN_PIPE)
-				{
-					close(pipefd[0]);
-					dup2(pipefd[1], 1);
-					close(pipefd[1]);
-				}
-				// Exécuter la commande (gérer les builtins et execve)
-				if (builtin_check(token))
-					builtin_selector(token, envp);
-				else
-					execute_execve(token, envp, handler);
-
-				exit(EXIT_SUCCESS);
-			}
-			else // Processus parent
-			{
-				// Attendre que l'enfant se termine
-				waitpid(pid, NULL, 0);
-
-				// Fermer le pipe
-				if (fd_in != 0)
-					close(fd_in);
-				if (token->next && token->next->type == TOKEN_PIPE)
-				{
-					close(pipefd[1]);
-					fd_in = pipefd[0]; // Sauvegarder l'entrée pour le prochain processus
-				}
-			}
+			args.token = token;
+			create_pipe_if_needed(pipefd, token);
+			setup_process_args(&args, fd_in, pipefd);
+			create_and_handle(&args, &fd_in, pipefd);
 		}
-		// Passer au prochain token
 		token = token->next;
 	}
 }
