@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/26 20:27:38 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:21:31 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 		if (current->type == TOKEN_PIPE)
 		{
 			pipe = 1;
-			break;
+			break ;
 		}
 		else if (current->file_in_out != NULL)
 			redirection = 1;
@@ -60,15 +60,24 @@ void	main_command(t_token *token, t_envp *envp, t_signal *handler)
 
 void	main_command_chevron(t_token *token, t_envp *envp, t_signal *handler)
 {
-	int		saved_stdin = dup(STDIN_FILENO);
-	int		saved_stdout = dup(STDOUT_FILENO);
+	t_token			*current;
+	int				saved_stdin;
+	int				saved_stdout;
+	t_process_data	args;
 
-	t_token	*current = token;
+	current = token;
+	saved_stdin = dup(STDIN_FILENO);
+	saved_stdout = dup(STDOUT_FILENO);
 	while (current != NULL)
 	{
 		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
 		{
-			create_child_process(current, envp, handler, saved_stdin, saved_stdout);
+			args.token = current;
+			args.envp = envp;
+			args.handler = handler;
+			args.in = saved_stdin;
+			args.out = saved_stdout;
+			create_child_process(&args);
 			dup2(saved_stdin, STDIN_FILENO);
 			dup2(saved_stdout, STDOUT_FILENO);
 		}

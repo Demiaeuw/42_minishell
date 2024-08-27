@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/26 20:08:34 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:17:45 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,14 @@ typedef struct s_exp_data
 	char	*result;
 }	t_exp_data;
 
+typedef struct s_process_data
+{
+	t_token		*token;
+	t_envp		*envp;
+	t_signal	*handler;
+	int			in;
+	int			out;
+}	t_process_data;
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
@@ -201,13 +209,12 @@ char			*get_next_token(const char **str, char delimiter);
 void			free_split_command(char **args);
 char			**split_command(const char *cmd);
 //02.2
-pid_t			fork_and_execute(char *cmd_path,
-					char **split_args, t_envp *envp);
 void			cleanup_execution(char **split_args,
 					char **args, char *cmd_path);
-void			create_child_process(t_token *token, t_envp *envp,
-					t_signal *handler, int in, int out);
 void			file_descriptor_handler(int in, int out);
+void			handle_parent_process(pid_t pid, t_signal *handler);
+void			handle_child_process(t_process_data *args);
+void			create_child_process(t_process_data *args);
 //03
 char			**free_token(char **str, int count);
 int				count_token(t_token *token);
@@ -218,6 +225,8 @@ char			**convert_token(t_token *token);
 void			handle_signals_in_parent(t_signal *handler);
 void			signal_handler(int sig, siginfo_t *info, void *context);
 void			init_signal_handlers(t_signal *handler);
+pid_t			fork_and_execute(char *cmd_path,
+					char **split_args, t_envp *envp);
 //20
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 //30
@@ -226,7 +235,9 @@ int				open_outfile(char *filename, int flags);
 int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
-void			handle_heredoc(char *delimiter); //test
+//31
+void			handle_heredoc_input(int pipefd[2], char *delimiter);
+void			handle_heredoc(char *delimiter);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

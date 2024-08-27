@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/26 21:55:06 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:27:50 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
-void execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
+void	execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 {
 	if (execve(cmd_path, split_args, envp->env) == -1)
 	{
@@ -31,11 +31,13 @@ void execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 
 int	prepare_command(char ***split_args, char ***args, t_token *token)
 {
-	*split_args = split_command(token->value);
+	int	i;
 
+	*split_args = split_command(token->value);
 	if (!*split_args)
 		return (0);
-	for (int i = 0; (*split_args)[i] != NULL; i++)
+	i = 0;
+	while ((*split_args)[i] != NULL)
 	{
 		if ((ft_strcmp((*split_args)[i], "<<") == 0) ||
 			(token->file_in_out != NULL && token->file_in_out->value != NULL &&
@@ -44,14 +46,15 @@ int	prepare_command(char ***split_args, char ***args, t_token *token)
 			(*split_args)[i] = NULL;
 			break ;
 		}
+		i++;
 	}
 	*args = convert_token(token);
 	if (!*args)
 	{
 		handle_memory_error(*split_args, NULL);
-		return 0;
+		return (0);
 	}
-	return 1;
+	return (1);
 }
 
 int	prepare_execution(char **split_args, char **args, char **cmd_path)

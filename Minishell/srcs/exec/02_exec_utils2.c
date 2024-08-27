@@ -6,26 +6,11 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/26 21:39:01 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:29:13 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGTERM, SIG_DFL);
-		execute_child_process(cmd_path, split_args, envp);
-	}
-	return (pid);
-}
 
 void	cleanup_execution(char **split_args, char **args, char *cmd_path)
 {
@@ -37,7 +22,7 @@ void	cleanup_execution(char **split_args, char **args, char *cmd_path)
 		free(cmd_path);
 }
 
-void file_descriptor_handler(int in, int out)
+void	file_descriptor_handler(int in, int out)
 {
 	if (in != STDIN_FILENO)
 	{
@@ -59,12 +44,30 @@ void file_descriptor_handler(int in, int out)
 	}
 }
 
-void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out)
+void	handle_parent_process(pid_t pid, t_signal *handler)
 {
-	pid_t pid;
+	waitpid(pid, &handler->sigterm, WUNTRACED);
+	handle_signals_in_parent(handler);
+	if (WIFSIGNALED(handler->sigterm))
+		handler->sigterm = WTERMSIG(handler->sigterm) + 128;
+	else if (WIFEXITED(handler->sigterm))
+		handler->sigterm = WEXITSTATUS(handler->sigterm);
+}
 
-	if (builtin_check(token))
-		builtin_selector_chevron(token, envp);
+void	handle_child_process(t_process_data *args)
+{
+	file_descriptor_handler(args->in, args->out);
+	handle_redirections(args->token->file_in_out);
+	execute_execve(args->token, args->envp, args->handler);
+	exit(EXIT_FAILURE);
+}
+
+void	create_child_process(t_process_data *args)
+{
+	pid_t	pid;
+
+	if (builtin_check(args->token))
+		builtin_selector_chevron(args->token, args->envp);
 	else
 	{
 		pid = fork();
@@ -74,20 +77,8 @@ void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int i
 			exit(EXIT_FAILURE);
 		}
 		else if (pid == 0)
-		{
-			file_descriptor_handler(in, out);
-			handle_redirections(token->file_in_out);
-			execute_execve(token, envp, handler);
-			exit(EXIT_FAILURE);
-		}
+			handle_child_process(args);
 		else
-		{
-			waitpid(pid, &handler->sigterm, WUNTRACED);
-			handle_signals_in_parent(handler);
-			if (WIFSIGNALED(handler->sigterm))
-				handler->sigterm = WTERMSIG(handler->sigterm) + 128;
-			else if (WIFEXITED(handler->sigterm))
-				handler->sigterm = WEXITSTATUS(handler->sigterm);
-		}
+			handle_parent_process(pid, args->handler);
 	}
 }

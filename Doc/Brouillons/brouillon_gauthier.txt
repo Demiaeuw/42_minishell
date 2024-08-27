@@ -467,3 +467,90 @@ void	exe_export(t_envp *envp, char *args)
 // 	else if (!ft_strcmp("exit", token->builtin_info))
 // 		exe_exit(token->file_in_out->value, envp, token);
 // }
+
+////// ANCIEN CREATE CHILD PROCESS ////////////
+
+// void	create_child_process(t_token *token, t_envp *envp, t_signal *handler, int in, int out)
+// {
+// 	pid_t pid;
+
+// 	if (builtin_check(token))
+// 		builtin_selector_chevron(token, envp);
+// 	else
+// 	{
+// 		pid = fork();
+// 		if (pid < 0)
+// 		{
+// 			perror("fork error");
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		else if (pid == 0)
+// 		{
+// 			file_descriptor_handler(in, out);
+// 			handle_redirections(token->file_in_out);
+// 			execute_execve(token, envp, handler);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		else
+// 		{
+// 			waitpid(pid, &handler->sigterm, WUNTRACED);
+// 			handle_signals_in_parent(handler);
+// 			if (WIFSIGNALED(handler->sigterm))
+// 				handler->sigterm = WTERMSIG(handler->sigterm) + 128;
+// 			else if (WIFEXITED(handler->sigterm))
+// 				handler->sigterm = WEXITSTATUS(handler->sigterm);
+// 		}
+// 	}
+// }
+
+////////ancien main command chevron//////////////////
+
+// void	main_command_chevron(t_token *token, t_envp *envp, t_signal *handler)
+// {
+// 	t_token	*current;
+// 	int		saved_stdin;
+// 	int		saved_stdout;
+
+// 	current = token;
+// 	saved_stdin = dup(STDIN_FILENO);
+// 	saved_stdout = dup(STDOUT_FILENO);
+// 	while (current != NULL)
+// 	{
+// 		if (current->type == TOKEN_COMMAND || current->type == TOKEN_PIPE)
+// 		{
+// 			create_child_process(current, envp, handler, saved_stdin, saved_stdout);
+// 			dup2(saved_stdin, STDIN_FILENO);
+// 			dup2(saved_stdout, STDOUT_FILENO);
+// 		}
+// 		current = current->next;
+// 	}
+// 	close(saved_stdin);
+// 	close(saved_stdout);
+// }
+
+//////////////////ancien prepare command//////////////
+
+
+// int	prepare_command(char ***split_args, char ***args, t_token *token)
+// {
+// 	*split_args = split_command(token->value);
+// 	if (!*split_args)
+// 		return (0);
+// 	for (int i = 0; (*split_args)[i] != NULL; i++)
+// 	{
+// 		if ((ft_strcmp((*split_args)[i], "<<") == 0) ||
+// 			(token->file_in_out != NULL && token->file_in_out->value != NULL &&
+// 				ft_strcmp((*split_args)[i], token->file_in_out->value) == 0))
+// 		{
+// 			(*split_args)[i] = NULL;
+// 			break ;
+// 		}
+// 	}
+// 	*args = convert_token(token);
+// 	if (!*args)
+// 	{
+// 		handle_memory_error(*split_args, NULL);
+// 		return (0);
+// 	}
+// 	return (1);
+// }
