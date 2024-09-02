@@ -3,78 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   31_parse_chevron.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:05:59 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/22 16:36:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:56:19 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// t_chevron	*parse_string_chevron(char *str)
-// {
-//     char *tokens[] = {">>", "<<", ">", "<"};
-//     t_chevron_type types[] = {DOUBLE_OUT, DOUBLE_IN, OUT, IN};
-//     t_chevron *head = NULL;
-//     t_chevron *last_command_node = NULL;
-
-//     char *current_position = str;
-
-//     while (*current_position) {
-//         char *chevron = NULL;
-//         int token_length = 0;
-//         int token_index = -1;
-
-//         // Trouver le premier chevron dans la chaîne
-//         for (int i = 0; i < 4; i++) {
-//             char *found = strstr(current_position, tokens[i]);
-//             if (found && (chevron == NULL || found < chevron)) {
-//                 chevron = found;
-//                 token_length = strlen(tokens[i]);
-//                 token_index = i;
-//             }
-//         }
-
-//         if (chevron) { // Chevron trouvé
-//             if (current_position != chevron) {
-//                 // Ajouter la partie commande avant le chevron
-//                 char *command_part = strndup(current_position,
-//						chevron - current_position);
-//                 if (last_command_node == NULL && *command_part != '\0') {
-//                     append_chevron(&head, COMMAND, command_part);
-//                     last_command_node = head;
-//                 }
-//                 free(command_part);
-//             }
-
-//             // Avancer après le chevron
-//             current_position = chevron + token_length;
-
-//             // Ignorer les espaces après le chevron
-//             while (*current_position == ' ') current_position++;
-
-//             // Trouver la fin de la valeur (jusqu'à un espace ou la fin de la chaîne)
-//             char *end_of_value = strchr(current_position, ' ');
-//           if (end_of_value == NULL) 
-//				end_of_value = current_position + strlen(current_position);
-
-//             char *value_part = strndup(current_position, end_of_value - current_position);
-//             append_chevron(&head, types[token_index], value_part);
-//             free(value_part);
-
-//             current_position = end_of_value;
-//         } else {
-//             // Aucun autre chevron trouvé, ajouter le reste comme commande s'il y a une commande valide
-//             if (*current_position != '\0') {
-//                 append_chevron(&head, COMMAND, current_position);
-//             }
-//             break;
-//         }
-//     }
-
-//     return (head);
-// }
 
 t_chevron	*parse_string_chevron(char *str)
 {
