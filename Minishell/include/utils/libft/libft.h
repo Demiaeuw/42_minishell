@@ -72,8 +72,6 @@ void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
 void	*safe_malloc(size_t bytes);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-
-
 /*				STRUCT					*/
 typedef struct s_list
 {

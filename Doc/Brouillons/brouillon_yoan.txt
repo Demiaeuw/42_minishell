@@ -1,8 +1,63 @@
-	
-	
-	
-	
-	else if (ft_strcmp(arg, "-l") == 0 || ft_strcmp(arg, "-a") == 0
-		|| ft_strcmp(arg, "-n") == 0 || ft_strcmp(arg, "-p") == 0
-		|| ft_strcmp(arg, "-i") == 0 || ft_strcmp(arg, "-v") == 0
-		|| ft_strcmp(arg, "-r") == 0 || ft_strcmp(arg, "-f") == 0)
+// t_chevron	*parse_string_chevron(char *str)
+// {
+//     char *tokens[] = {">>", "<<", ">", "<"};
+//     t_chevron_type types[] = {DOUBLE_OUT, DOUBLE_IN, OUT, IN};
+//     t_chevron *head = NULL;
+//     t_chevron *last_command_node = NULL;
+
+//     char *current_position = str;
+
+//     while (*current_position) {
+//         char *chevron = NULL;
+//         int token_length = 0;
+//         int token_index = -1;
+
+//         // Trouver le premier chevron dans la chaîne
+//         for (int i = 0; i < 4; i++) {
+//             char *found = strstr(current_position, tokens[i]);
+//             if (found && (chevron == NULL || found < chevron)) {
+//                 chevron = found;
+//                 token_length = strlen(tokens[i]);
+//                 token_index = i;
+//             }
+//         }
+
+//         if (chevron) { // Chevron trouvé
+//             if (current_position != chevron) {
+//                 // Ajouter la partie commande avant le chevron
+//                 char *command_part = strndup(current_position,
+//						chevron - current_position);
+//                 if (last_command_node == NULL && *command_part != '\0') {
+//                     append_chevron(&head, COMMAND, command_part);
+//                     last_command_node = head;
+//                 }
+//                 free(command_part);
+//             }
+
+//             // Avancer après le chevron
+//             current_position = chevron + token_length;
+
+//             // Ignorer les espaces après le chevron
+//             while (*current_position == ' ') current_position++;
+
+//             
+//             char *end_of_value = strchr(current_position, ' ');
+//           if (end_of_value == NULL) 
+//				end_of_value = current_position + strlen(current_position);
+
+//             char *value_part = strndup(current_position, end_of_value - current_position);
+//             append_chevron(&head, types[token_index], value_part);
+//             free(value_part);
+
+//             current_position = end_of_value;
+//         } else {
+//             // Aucun autre chevron trouvé, ajouter le reste comme commande s'il y a une commande valide
+//             if (*current_position != '\0') {
+//                 append_chevron(&head, COMMAND, current_position);
+//             }
+//             break;
+//         }
+//     }
+
+//     return (head);
+// }
