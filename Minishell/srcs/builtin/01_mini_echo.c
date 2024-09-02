@@ -55,6 +55,7 @@ int	exe_echo(char *str)
 	option = 0;
 	i = 0;
 	start_index = 0;
+	str = clean_string(str);
 	while (str[i] == ' ')
 		i++;
 	i += 4;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/22 15:31:30 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:15:03 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	t_token	*token_list;
 
 	token_list = NULL;
-	tokenarray = ft_split_quoted(input);
+	tokenarray = ft_split(input, 124);
 	if (!tokenarray)
 		return (NULL);
 	if (!parse_tokens(tokenarray, &token_list))
