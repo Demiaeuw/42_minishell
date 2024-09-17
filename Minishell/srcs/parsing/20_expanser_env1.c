@@ -30,7 +30,7 @@ void	append_env_value_env(t_exp_data *data, const char *env_value)
 	char	*new_result;
 
 	env_len = ft_strlen(env_value);
-	new_result = realloc(data->result, data->j + env_len + 1);
+	new_result = ft_realloc(data->result, data->j, data->j + env_len + 1);
 	if (!new_result)
 		return ;
 	ft_memcpy(&new_result[data->j], env_value, env_len);

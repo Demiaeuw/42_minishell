@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/15 14:15:07 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/02 15:15:03 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	t_token	*token_list;
 
 	token_list = NULL;
-	tokenarray = ft_split_quoted(input);
+	tokenarray = ft_split(input, 124);
 	if (!tokenarray)
 		return (NULL);
 	if (!parse_tokens(tokenarray, &token_list))
@@ -29,7 +29,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	}
 	finalize_parsing(token_list, tokenarray);
 	process_token_values(token_list, env->env);
-	parse_chevrons_and_files(token_list);
+	main_parse_string_chevron(token_list);
 	return (token_list);
 }
 

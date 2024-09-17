@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 18:33:16 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:27:05 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*create_env_entry(const char *var, const char *value)
 }
 
 // Returns the size of the env (number of entries)
-static int	get_env_size(char **env)
+int	get_env_size(char **env)
 {
 	int	size;
 
@@ -41,7 +41,7 @@ static int	get_env_size(char **env)
 }
 
 // Allocates a new env array of size new_size and copies old_env into it
-static char	**allocate_env_array(char **old_env, int old_size, int new_size)
+char	**allocate_env_array(char **old_env, int old_size, int new_size)
 {
 	char	**new_env;
 	int		i;
@@ -75,4 +75,24 @@ void	add_env_variable(t_envp *envp, char *new_entry)
 	envp->env = new_env;
 	envp->env[old_size] = new_entry;
 	envp->env[old_size + 1] = NULL;
+}
+
+void	exe_export(t_envp *envp, char *args)
+{
+	char	*token;
+	char	*saveptr;
+
+	if (!args || ft_strcmp(args, "export") == 0)
+	{
+		print_sorted_env(envp->env);
+		return ;
+	}
+	if (ft_strncmp(args, "export ", 7) == 0)
+		args += 7;
+	token = ft_strtok(args, " ", &saveptr);
+	while (token != NULL)
+	{
+		process_export_token(envp, token);
+		token = ft_strtok(NULL, " ", &saveptr);
+	}
 }

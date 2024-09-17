@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/17 19:33:05 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:27:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,9 @@ typedef enum s_chevron_type
 	IN,
 	DOUBLE_IN,
 	OUT,
-	DOUBLE_OUT
+	DOUBLE_OUT,
+	COMMAND
 }	t_chevron_type;
-
-typedef struct s_chevron
-{
-	t_chevron_type	type;
-	bool	is_last_open;
-	bool	is_last_closed;
-	char	*file_name;
-	char	*clean_value;
-	struct s_chevron	*next;
-}	t_chevron;
-
-typedef struct s_exp_data
-{
-	size_t	i;
-	size_t	j;
-	int		in_single_quotes;
-	int		in_double_quotes;
-	size_t	len;
-	char	*result;
-}	t_exp_data;
 
 typedef struct s_token
 {
@@ -84,11 +65,57 @@ typedef struct s_token
 	struct s_token		*next;
 }	t_token;
 
+typedef struct s_chevron
+{
+	t_chevron_type		type;
+	char				*value;
+	struct s_chevron	*next;
+}	t_chevron;
+
 typedef struct s_envp
 {
 	char	**env;
 }	t_envp;
 
+typedef struct s_signal
+{
+	int	sigint;
+	int	sigquit;
+	int	sigterm;
+}	t_signal;
+
+/**
+ * Creation de structure pour la norme
+ */
+typedef struct s_chevron_data
+{
+	char			**current_position;
+	t_chevron		**head;
+	t_chevron		**last_command_node;
+	char			*chevron;
+	int				token_length;
+	int				token_index;
+	t_chevron_type	*types;
+}	t_chevron_data;
+
+typedef struct s_exp_data
+{
+	size_t	i;
+	size_t	j;
+	int		in_single_quotes;
+	int		in_double_quotes;
+	size_t	len;
+	char	*result;
+}	t_exp_data;
+
+typedef struct s_process_data
+{
+	t_token		*token;
+	t_envp		*envp;
+	t_signal	*handler;
+	int			in;
+	int			out;
+}	t_process_data;
 //--------------------------------------------------------------------------//
 //									Parsing									//
 //00
@@ -97,9 +124,10 @@ int				parse_tokens(char **tokenarray, t_token **token_list);
 int				process_single_token(char *token, t_token **token_list);
 int				add_pipe_to_list(t_token **token_list);
 int				process_token(char *token, t_token **token_list);
-void			finalize_parsing(t_token *new_node, char **tokenarray);
-
 //01
+char			*extract_token(const char *str, int start, int len);
+int				handle_quote(char c, bool *in_quotes, char *quote_char);
+char			**process_split(const char *str, char **result, int *count);
 char			**ft_split_quoted(const char *str);
 //02
 t_token			*create_command_node(char *input);
@@ -109,8 +137,10 @@ void			add_token_node(t_token **head, t_token *new_node);
 bool			is_builtin_command(char *com);
 bool			check_builtin(char *value);
 char			*get_builtin_info(char *value);
+void			check_quotes(const char *str, bool *s_q_open, bool *d_q_open);
 char			*close_quotes_if_needed(char *str);
 char			*clean_whitespace(char *str);
+void			finalize_parsing(t_token *new_node, char **tokenarray);
 //10
 void			print_token_list(t_token *head);
 void			free_token_list(t_token *token_list);
@@ -118,6 +148,8 @@ void			free_token_array(char **tokenarray);
 void			free_tokens(char **tokens);
 //11
 char			*join_path(const char *path, const char *cmd);
+void			free_paths(char **paths);
+char			*try_access_command(char **paths, const char *cmd);
 char			*get_command_path(const char *cmd);
 
 //--------------------------------------------------------------------------//
@@ -133,37 +165,88 @@ void			process_token_values(t_token *token, char **env);
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
 //30
-void			print_chevron(t_token *tokens);
-t_chevron		*create_chevron(t_chevron_type type, const char *file_name);
-void			append_chevron(t_token *token, t_chevron *chevron);
-char			*extract_clean_value(char *str);
+t_chevron		*create_chevron(t_chevron_type type, const char *value);
+void			append_chevron(t_chevron **head, t_chevron_type type,
+					const char *value);
+void			free_chevron_list(t_chevron *head);
+void			print_chevron_list(t_chevron *head);
+void			main_parse_string_chevron(t_token *token);
 //31
-void			handle_out_chevron(char **ptr, t_token *current_token);
-void			handle_in_chevron(char **ptr, t_token *current_token);
-void			parse_token_value(t_token *current_token);
-void			parse_chevrons_and_files(t_token *token);
+t_chevron		*parse_string_chevron(char *str);
+void			parse_chevron_token(char **current_position, t_chevron **head,
+					t_chevron **last_command_node);
+void			initialize_tokens_types(char **tokens, t_chevron_type *types);
+//32
+void			find_chevron_in_str(char *current_position, char **tokens,
+					t_chevron_data *data);
+void			parse_before_chevron(t_chevron_data *data);
+void			parse_after_chevron(t_chevron_data *data);
+//33
+char			*get_chevron_type_str(t_chevron_type type);
+void			print_chevron_node(t_token *token);
+int				contains_chevrons(const char *str);
 
 //--------------------------------------------------------------------------//
 //									Execution								//
 //00
-void			main_exec(t_token *token, t_envp *envp);
-void			main_command(t_token *token, t_envp *envp);
-void			main_command_chevron(t_token *token, t_envp *envp);
-
+void			main_exec(t_token *token, t_envp *envp, t_signal *handler);
+void			main_command(t_token *token, t_envp *envp, t_signal *handler);
+void			main_command_chevron(t_token *token, t_envp *envp,
+					t_signal *handler);
 //01
-void			execute_execve(t_token *token, t_envp *envp);
+void			handle_memory_error(char **split_args, char **args);
+void			execute_child_process(char *cmd_path,
+					char **split_args, t_envp *envp);
+int				prepare_command(char ***split_args, char ***args,
+					t_token *token);
+int				prepare_execution(char **split_args,
+					char **args, char **cmd_path);
+void			execute_execve(t_token *token, t_envp *envp, t_signal *handler);
 //02
+int				count_tokens(const char *str, char delimiter);
+char			*allocate_token(const char *start, size_t len);
+char			*get_next_token(const char **str, char delimiter);
+void			free_split_command(char **args);
 char			**split_command(const char *cmd);
 //03
-char			**convert_token(t_token *token);
-int				count_token(t_token *token);
-//10
-void			handle_sigint(int sig);
-//20
-void			execute_pipes(t_token *token, t_envp *env);
+void			cleanup_execution(char **split_args,
+					char **args, char *cmd_path);
+void			file_descriptor_handler(int in, int out);
+void			handle_parent_process(pid_t pid, t_signal *handler);
+void			handle_child_process(t_process_data *args);
+void			create_child_process(t_process_data *args);
+//04
 char			**free_token(char **str, int count);
+int				count_token(t_token *token);
+int				count_tokens_before_pipe(t_token *token);
+char			**allocate_and_fill_tokens(t_token *token, int count);
+char			**convert_token(t_token *token);
+//10
+void			handle_signals_in_parent(t_signal *handler);
+void			signal_handler(int sig, siginfo_t *info, void *context);
+void			init_signal_handlers(t_signal *handler);
+pid_t			fork_and_execute(char *cmd_path,
+					char **split_args, t_envp *envp);
+//20
+void			create_and_handle(t_process_data *args,
+					int *fd_in, int *pipefd);
+void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
+//21
+void			setup_process_args(t_process_data *args,
+					int fd_in, int *pipefd);
+void			setup_redirections(int fd_in, int fd_out);
+void			create_pipe_if_needed(int *pipefd, t_token *token);
+void			handle_pipe_child_process(t_process_data *args, int *pipefd);
+void			handle_pipe_parent_process(pid_t pid, int *fd_in, int *pipefd);
 //30
-void			handle_redirections(t_token *token);
+int				open_infile(char *filename);
+int				open_outfile(char *filename, int flags);
+int				redirect_infile(char *filename);
+int				redirect_outfile(char *filename, int append);
+void			handle_redirections(t_chevron *chevron_list);
+//31
+void			handle_heredoc_input(int pipefd[2], char *delimiter);
+void			handle_heredoc(char *delimiter);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
@@ -173,27 +256,36 @@ int				exe_cd(char *input, t_envp *envp);
 int				exe_echo(char *str);
 //02
 void			mini_env(t_envp *envp);
-//03
+//03.1
 char			*create_env_entry(const char *var, const char *value);
+int				get_env_size(char **env);
+char			**allocate_env_array(char **old_env,
+					int old_size, int new_size);
 void			add_env_variable(t_envp *envp, char *new_entry);
+void			exe_export(t_envp *envp, char *args);
+//03.2
 void			set_env_var(t_envp *envp, const char *var, const char *value);
 void			update_env(t_envp *envp, const char *var, int var_len,
 					char *new_entry);
+int				is_var_in_env(t_envp *envp, const char *var);
 void			process_export_token(t_envp *envp, char *token);
-void			exe_export(t_envp *envp, char *args);
+//03.3
+void			insertion_sort(char **array, int size);
+char			**copy_env(char **env, int size);
+void			print_sorted_env(char **env);
 //04
-void			unset_variable(t_envp *envp, const char *var);
 void			exe_unset(t_envp *envp, char *var);
+void			unset_variable(t_envp *envp, const char *var);
 //05
+int				string_to_int(const char *str, int *result);
 int				exe_pwd(void);
 //06
+int				string_to_int(const char *str, int *result);
 void			exe_exit(char *str, t_envp *envp, t_token *token);
-
 //10
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envp *envp);
 void			builtin_selector_chevron(t_token *token, t_envp *envp);
-
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);

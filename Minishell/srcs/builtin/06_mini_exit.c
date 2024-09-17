@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-static int	string_to_int(const char *str, int *result)
+int	string_to_int(const char *str, int *result)
 {
 	int	value;
 	int	sign;

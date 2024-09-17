@@ -3,45 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/16 15:30:37 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/08/26 21:39:07 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//debut de test
-// static void	display_prompt(void)
-// {
-// 	write(STDOUT_FILENO, "minishell> ", 12);
-// }
-
-// static char	*read_input(void)
-// {
-// 	char *buffer = (char*)malloc(sizeof(char) * BUFFER_SIZE);
-// 	ssize_t bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1);
-// 	if (bytes_read < 0)
-// 	{
-// 		free(buffer);
-// 		return NULL;
-// 	}
-// 	buffer[bytes_read] = '\0';
-// 	return (buffer);
-// }
-//fin de test
-
 int	main(int ac, char **av, char **env)
 {
-	t_token	*token_list;
-	t_envp	*envp;
-	char	*input;
+	t_signal			handler;
+	t_envp				*envp;
 
-	signal(SIGINT, handle_sigint);
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
+
+	// Initialisation des signaux
+	init_signal_handlers(&handler);
+
+	// Initialisation de l'environnement
 	envp = (t_envp *)malloc(sizeof(t_envp));
 	if (envp == NULL)
 		exit(EXIT_FAILURE);
@@ -49,17 +32,28 @@ int	main(int ac, char **av, char **env)
 	init_terminal(envp);
 	while (1)
 	{
-		input = readline("minishell> ");
+		// Lire et gérer l'entrée de l'utilisateur
+		char *input = readline("minishell> ");
 		if (input == NULL)
-			break ;
+		{
+			write(1, "exit\n", 5);
+			break;
+		}
 		if (*input)
+		{
 			add_history(input);
-		token_list = main_parsing(input, envp);
-		free(input);
-		main_exec(token_list, envp);
-		free_token_list(token_list);
+			t_token *token_list = main_parsing(input, envp);
+			free(input);
+			//print_token_list(token_list); // test parsing
+			main_exec(token_list, envp, &handler);  // Passe le handler ici
+			free_token_list(token_list);
+		}
+		else
+		{
+			free(input);
+		}
 	}
 	clear_history();
-	// free_t_envp(envp);
-	return (0);  
+	free_t_envp(envp);
+	return (0);
 }

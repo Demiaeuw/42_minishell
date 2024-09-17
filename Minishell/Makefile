@@ -24,6 +24,7 @@ SRCS = 	srcs/main.c\
 		srcs/builtin/02_mini_env.c\
 		srcs/builtin/03_mini_export1.c\
 		srcs/builtin/03_mini_export2.c\
+		srcs/builtin/03_mini_export3.c\
 		srcs/builtin/04_mini_unset.c\
 		srcs/builtin/05_mini_pwd.c\
 		srcs/builtin/06_mini_exit.c\
@@ -34,10 +35,13 @@ SRCS = 	srcs/main.c\
 		srcs/exec/00_main_exec.c\
 		srcs/exec/01_exec_execve.c\
 		srcs/exec/02_exec_utils.c\
-		srcs/exec/03_tokenlst_to_tokenarray.c\
+		srcs/exec/03_exec_utils.c\
+		srcs/exec/04_exec_utils.c\
 		srcs/exec/10_signal_handler.c\
 		srcs/exec/20_pipe.c\
-		srcs/exec/30_handle_redirections.c\
+		srcs/exec/21_pipe_utils.c\
+		srcs/exec/30_redirections.c\
+		srcs/exec/31_redirections_utils.c\
 		srcs/parsing/00_parsing.c\
 		srcs/parsing/01_spliting_quote.c\
 		srcs/parsing/02_create_node.c\
@@ -48,8 +52,10 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/20_expanser_env1.c\
 		srcs/parsing/20_expanser_env2.c\
 		srcs/parsing/21_struct_expanser_gestion.c\
-		srcs/parsing/30_redirection.c\
-		srcs/parsing/31_parse_chevron.c
+		srcs/parsing/30_create_chevron.c\
+		srcs/parsing/31_parse_chevron.c\
+		srcs/parsing/32_parse_chevron.c\
+		srcs/parsing/33_chevron_utils.c
 
 
 # Fichiers objets

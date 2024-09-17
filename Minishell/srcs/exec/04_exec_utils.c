@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:53:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 23:40:53 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:51:07 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int	count_token(t_token *token)
 	return (count);
 }
 
-char	**convert_token(t_token *token)
+int	count_tokens_before_pipe(t_token *token)
 {
-	t_token	*current;
-	char	**str;
 	int		count;
-	int		i;
+	t_token	*current;
 
 	count = 0;
 	current = token;
@@ -55,17 +53,41 @@ char	**convert_token(t_token *token)
 		count++;
 		current = current->next;
 	}
+	return (count);
+}
+
+char	**allocate_and_fill_tokens(t_token *token, int count)
+{
+	char		**str;
+	int			i;
+	t_token		*current;
+
+	i = 0;
 	str = (char **)safe_malloc((count + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
-	i = 0;
 	current = token;
 	while (current && current->type != TOKEN_PIPE)
 	{
 		str[i] = ft_strdup(current->value);
+		if (!str[i])
+		{
+			free_token(str, i);
+			return (NULL);
+		}
 		i++;
 		current = current->next;
 	}
 	str[i] = NULL;
+	return (str);
+}
+
+char	**convert_token(t_token *token)
+{
+	int		count;
+	char	**str;
+
+	count = count_tokens_before_pipe(token);
+	str = allocate_and_fill_tokens(token, count);
 	return (str);
 }

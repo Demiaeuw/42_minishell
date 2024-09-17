@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_mini_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/14 00:18:53 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:16:44 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,15 @@
 
 void	mini_env(t_envp *envp)
 {
-	print_env(envp->env);
+	int		i;
+	char	*equal_sign;
+
+	i = 0;
+	while (envp->env[i])
+	{
+		equal_sign = ft_strchr(envp->env[i], '=');
+		if (equal_sign && equal_sign[1] != '\0')
+			printf("%s\n", envp->env[i]);
+		i++;
+	}
 }

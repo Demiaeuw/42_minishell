@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-/** 
+/**
  * check_option : Vérifie si un argument est une option '-n' valide.
  * exe_echo : gère l'option -n pour ne pas ajouter de nouvelle ligne et affiche
  * les arguments avec des espaces entre eux. return 0 si ok.
@@ -55,6 +55,7 @@ int	exe_echo(char *str)
 	option = 0;
 	i = 0;
 	start_index = 0;
+	str = clean_string(str);
 	while (str[i] == ' ')
 		i++;
 	i += 4;

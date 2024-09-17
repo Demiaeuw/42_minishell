@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:39:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 01:00:15 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:41:00 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	print_token_list(t_token *head)
 {
 	t_token	*current;
 	char	*is_builtin_str;
-	char	*is_last_command_str;
+	int		i;
 
+	i = 1;
 	current = head;
 	while (current != NULL)
 	{
@@ -31,16 +32,13 @@ void	print_token_list(t_token *head)
 			is_builtin_str = "Yes";
 		else
 			is_builtin_str = "No";
-		if (current->is_last_command)
-			is_last_command_str = "Yes";
-		else
-			is_last_command_str = "No";
-		printf("Value: %s\n", current->value);
-		printf("Type: %d\n", current->type);
-		printf("Is Builtin: %s\n", is_builtin_str);
-		printf("Builtin Info: %s\n", current->builtin_info);
-		printf("Is Last Command: %s\n", is_last_command_str);
-		printf("-----\n");
+		printf("\nt_token node n° %d\nValue: %s\nType: %d\nIs Builtin: %s\n"
+			"Builtin Info: %s\nIs Last Command: %d\n", i, current->value,
+			current->type, is_builtin_str, current->builtin_info,
+			current->is_last_command);
+		print_chevron_node(current);
+		printf("---------------------------------------------\n");
+		i++;
 		current = current->next;
 	}
 }

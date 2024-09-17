@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   11_pathing_gestion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:46:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:52:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:52:22 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,33 @@ char	*join_path(const char *path, const char *cmd)
 	char	*full_path;
 	size_t	len;
 
-	len = strlen(path) + strlen(cmd) + 2;
+	len = ft_strlen(path) + ft_strlen(cmd) + 2;
 	full_path = (char *)malloc(len);
 	if (!full_path)
 		return (NULL);
-	strcpy(full_path, path);
-	strcat(full_path, "/");
-	strcat(full_path, cmd);
+	ft_strcpy(full_path, path);
+	ft_strcat(full_path, "/");
+	ft_strcat(full_path, cmd);
 	return (full_path);
+}
+
+void	free_paths(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+	{
+		free(paths[i]);
+		i++;
+	}
+	free(paths);
 }
 
 /**
  *  Fonction pour récupérer le chemin absolu d'une commande
  */
-static char	*try_access_command(char **paths, const char *cmd)
+char	*try_access_command(char **paths, const char *cmd)
 {
 	char	*command_path;
 	int		i;
@@ -44,12 +57,13 @@ static char	*try_access_command(char **paths, const char *cmd)
 		command_path = join_path(paths[i], cmd);
 		if (command_path && access(command_path, X_OK) == 0)
 		{
-			free(paths);
+			free_paths(paths);
 			return (command_path);
 		}
 		free(command_path);
 		i++;
 	}
+	free_paths(paths);
 	return (NULL);
 }
 

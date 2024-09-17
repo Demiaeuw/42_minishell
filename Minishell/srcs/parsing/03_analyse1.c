@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_analyse1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:08:57 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:38:24 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:18:14 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
  */
 bool	is_builtin_command(char *com)
 {
-	return (!strcmp(com, "cd") || !strcmp(com, "echo") || !strcmp(com, "pwd")
-		|| !strcmp(com, "env") || !strcmp(com, "export")
-		|| !strcmp(com, "unset") || !strcmp(com, "exit"));
+	return (!ft_strcmp(com, "cd") || !ft_strcmp(com, "echo")
+		|| !ft_strcmp(com, "pwd") || !ft_strcmp(com, "env")
+		|| !ft_strcmp(com, "export") || !ft_strcmp(com, "unset")
+		|| !ft_strcmp(com, "exit"));
 }
 
 bool	check_builtin(char *value)

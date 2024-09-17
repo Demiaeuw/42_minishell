@@ -6,13 +6,13 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/16 00:28:28 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:37:10 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	count_tokens(const char *str, char delimiter)
+int	count_tokens(const char *str, char delimiter)
 {
 	int	count;
 	int	in_token;
@@ -33,7 +33,7 @@ static int	count_tokens(const char *str, char delimiter)
 	return (count);
 }
 
-static char	*allocate_token(const char *start, size_t len)
+char	*allocate_token(const char *start, size_t len)
 {
 	char	*token;
 
@@ -46,7 +46,7 @@ static char	*allocate_token(const char *start, size_t len)
 	return (token);
 }
 
-static char	*get_next_token(const char **str, char delimiter)
+char	*get_next_token(const char **str, char delimiter)
 {
 	const char	*start;
 	char		*token;
@@ -66,6 +66,22 @@ static char	*get_next_token(const char **str, char delimiter)
 	return (token);
 }
 
+void	free_split_command(char **args)
+{
+	int	i;
+
+	i = 0;
+	if (args)
+	{
+		while (args[i])
+		{
+			free(args[i]);
+			i++;
+		}
+		free(args);
+	}
+}
+
 char	**split_command(const char *cmd)
 {
 	char		**args;
@@ -83,7 +99,12 @@ char	**split_command(const char *cmd)
 	token = get_next_token(&cmd_ptr, ' ');
 	while (token != NULL)
 	{
-		args[i++] = token;
+		args[i] = token;
+		if (!args[i++])
+		{
+			free_split_command(args);
+			return (NULL);
+		}
 		token = get_next_token(&cmd_ptr, ' ');
 	}
 	args[i] = NULL;

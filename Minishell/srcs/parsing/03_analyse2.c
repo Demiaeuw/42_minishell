@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:33:42 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/14 12:50:14 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:40:50 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * 2. retirer les espaces qui ne devrai pas etre present.
  */
 
-static void	check_quotes(const char *str, bool *s_q_open, bool *d_q_open)
+void	check_quotes(const char *str, bool *s_q_open, bool *d_q_open)
 {
 	int		i;
 
@@ -85,8 +85,15 @@ char	*clean_whitespace(char *str)
 
 void	finalize_parsing(t_token *new_node, char **tokenarray)
 {
-	if (new_node != NULL && new_node != NULL)
-		new_node->is_last_command = 1;
+	t_token	*current;
+
+	current = new_node;
+	while (current)
+	{
+		if (current != NULL && current->next == NULL)
+			current->is_last_command = 1;
+		current = current->next;
+	}
 	if (tokenarray != NULL)
 		free_token_array(tokenarray);
 }
