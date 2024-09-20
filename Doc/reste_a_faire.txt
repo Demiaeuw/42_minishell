@@ -1,0 +1,17 @@
+echo :
+-	gestion de 'echo $?'
+
+$PATH :
+-	gestion du de la suppression de $PATH qui doit donc dans la logique rendre 
+	l'utilisation de ls / cd et autres commandes inutilisable (sauf 'pwd' qui 
+	passe par getcwd et non par l'environnement).
+-	gestion de l'utilisation de plusieurs repertoire dans path (ça je sais pas 
+	faire quand je comprend pas la demande de l'ennoncé).
+
+redirections
+-	< ne fonctionne pas. a voir si le 'no files directory' fous pas la merde 
+
+child
+-	gestion de 'cat | cat | ls' cela correspond a l'ordre d'execution des
+	enfants et autres
+
