@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:59:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 14:02:39 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:53:16 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*main_parsing(char *input, t_envp *env)
 	t_token	*token_list;
 
 	token_list = NULL;
-	tokenarray = ft_split_quoted(input);  // Utiliser la nouvelle fonction
+	tokenarray = ft_split_quoted(input);
 	if (!tokenarray)
 		return (NULL);
 	if (!parse_tokens(tokenarray, &token_list))
@@ -32,7 +32,6 @@ t_token	*main_parsing(char *input, t_envp *env)
 	main_parse_string_chevron(token_list);
 	return (token_list);
 }
-
 
 int	parse_tokens(char **tokenarray, t_token **token_list)
 {

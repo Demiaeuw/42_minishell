@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 13:43:40 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:53:32 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_signal			handler;
 	t_envp				*envp;
+	t_cmd_state			cmd_state;
 
 	if (ac != 1)
 		exit(EXIT_FAILURE);
@@ -23,6 +24,8 @@ int	main(int ac, char **av, char **env)
 
 	// Initialisation des signaux
 	init_signal_handlers(&handler);
+	cmd_state = init_cmd_state();
+	
 
 	// Initialisation de l'environnement
 	envp = (t_envp *)malloc(sizeof(t_envp));
@@ -44,7 +47,7 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 			t_token *token_list = main_parsing(input, envp);
 			free(input);
-			print_token_list(token_list); // test parsing
+			// print_token_list(token_list); // test parsing
 			main_exec(token_list, envp, &handler);  // Passe le handler ici
 			free_token_list(token_list);
 		}

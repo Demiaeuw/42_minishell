@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_expanser_env2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:34:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/02 15:53:51 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/20 14:50:16 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,12 @@ void	process_token_values(t_token *token, char **env)
 		}
 	}
 }
+
+t_cmd_state	init_cmd_state()
+{
+	t_cmd_state	state;
+
+	state.last_exit_code = 0;
+	return (state);
+}
+
