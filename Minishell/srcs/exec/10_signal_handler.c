@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 14:54:10 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:11:28 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	{
 		handler->sigint = 1;
 		rl_replace_line("", 0);
-		rl_on_new_line();
 		write(1, "\n", 1);
-		rl_redisplay();
+		rl_on_new_line();
 	}
 	else if (sig == SIGTERM)
 	{
@@ -56,7 +55,7 @@ void	init_signal_handlers(t_signal *handler)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, (void *)handler);
 	sa.sa_handler = SIG_IGN;
-	sa.sa_flags = 0;
+	//sa.sa_flags = 0;
 	sigaction(SIGQUIT, &sa, NULL);
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
