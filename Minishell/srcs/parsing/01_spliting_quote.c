@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:59:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 13:45:37 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:10:36 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**process_split(const char *str, char **result, int *count)
 	while (str[i])
 	{
 		handle_quote(str[i], &in_quotes, &quote_char);
-		if ((str[i] == '|' && !in_quotes) || str[i + 1] == '\0')
+		if ((str[i] == '|' && !is_pipe_inside_quotes(str, i)) || str[i + 1] == '\0')
 		{
 			result[*count] = extract_token(str, start, i - start
 					+ (str[i + 1] == '\0'));
@@ -61,6 +61,7 @@ char	**process_split(const char *str, char **result, int *count)
 	}
 	return (result);
 }
+
 
 char	**ft_split_quoted(const char *str)
 {
@@ -75,4 +76,33 @@ char	**ft_split_quoted(const char *str)
 		return (NULL);
 	result[count] = NULL;
 	return (result);
+}
+
+bool	is_pipe_inside_quotes(const char *input, int index)
+{
+	bool	iq;
+	char	qchar;
+	int		i;
+
+	iq = false;
+	qchar = '\0';
+	i = 0;
+	while (i < index)
+	{
+		if ((input[i] == '"' || input[i] == '\'') && (!iq || qchar == input[i]))
+		{
+			if (iq)
+			{
+				iq = false;
+				qchar = '\0';
+			}
+			else
+			{
+				iq = true;
+				qchar = input[i];
+			}
+		}
+		i++;
+	}
+	return (iq);
 }

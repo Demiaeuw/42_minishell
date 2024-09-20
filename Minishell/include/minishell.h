@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 13:07:20 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:11:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ char			*extract_token(const char *str, int start, int len);
 int				handle_quote(char c, bool *in_quotes, char *quote_char);
 char			**process_split(const char *str, char **result, int *count);
 char			**ft_split_quoted(const char *str);
+bool			is_pipe_inside_quotes(const char *input, int index);
+
 //02
 t_token			*create_command_node(char *input);
 t_token			*create_pipe_node(void);
