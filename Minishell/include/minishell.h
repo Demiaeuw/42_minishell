@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/27 16:27:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:07:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void			check_quotes(const char *str, bool *s_q_open, bool *d_q_open);
 char			*close_quotes_if_needed(char *str);
 char			*clean_whitespace(char *str);
 void			finalize_parsing(t_token *new_node, char **tokenarray);
+int				check_onlyspace(char *str);
 //10
 void			print_token_list(t_token *head);
 void			free_token_list(t_token *token_list);

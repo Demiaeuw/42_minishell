@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:33:42 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/20 01:40:50 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:30:15 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,18 @@ void	finalize_parsing(t_token *new_node, char **tokenarray)
 	}
 	if (tokenarray != NULL)
 		free_token_array(tokenarray);
+}
+
+int	check_onlyspace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 32 && str[i] != 9)
+			return (0);
+		i++;
+	}
+	return (1);
 }
