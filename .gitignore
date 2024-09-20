@@ -10,7 +10,7 @@
 !testing/*.txt
 
 # Ignorer les fichiers spécifiques déjà mentionnés
-Minishell/include/utils/ft_printf/libftprintf.a
-Minishell/include/utils/gnl/libgnl.a
-Minishell/include/utils/libft/libft.a
-Minishell/minishell
+minishell/include/utils/ft_printf/libftprintf.a
+minishell/include/utils/gnl/libgnl.a
+minishell/include/utils/libft/libft.a
+minishell/minishell
