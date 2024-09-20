@@ -2,7 +2,7 @@
 *.o
 *.a
 *.exe
-minishell
+
 
 # Ignorer les fichiers texte sauf ceux dans Doc ou testing
 *.txt
