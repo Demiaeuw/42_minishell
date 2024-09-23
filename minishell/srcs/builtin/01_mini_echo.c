@@ -36,7 +36,7 @@ static int	check_option_echo(char *str, int *start_index)
 	return (0);
 }
 
-static void	ft_fflush_stdout(void)
+void	ft_fflush_stdout(void)
 {
 	if (stdout->_IO_write_ptr > stdout->_IO_write_base)
 	{

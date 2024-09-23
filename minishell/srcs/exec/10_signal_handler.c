@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 16:50:00 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:31:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
+		ft_fflush_stdout();
+		if (rl_line_buffer[0] == '\0')
+			rl_redisplay();
 	}
 	else if (sig == SIGTERM)
 	{

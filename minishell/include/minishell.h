@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 17:09:56 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:18:56 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,7 @@ void			handle_heredoc(char *delimiter);
 int				exe_cd(char *input, t_envp *envp);
 //01
 int				exe_echo(char *str);
+void			ft_fflush_stdout(void);
 //02
 void			mini_env(t_envp *envp);
 //03.1
