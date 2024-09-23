@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 17:31:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:59:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	handle_signals_in_parent(t_signal *handler)
 	if (handler->sigint)
 	{
 		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
 		handler->sigint = 0;
 	}
 	if (handler->sigquit)
