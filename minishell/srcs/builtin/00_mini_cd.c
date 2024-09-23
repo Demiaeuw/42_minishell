@@ -30,13 +30,11 @@ int	exe_cd(char *input, t_envp *envp)
 	if (*path == '\0' || ft_strcmp(path, "~") == 0)
 		path = get_env_value("HOME", envp->env);
 	old_pwd = getcwd(cwd, sizeof(cwd));
-	if (!old_pwd)
-		return (1);
-	if (chdir(path) != 0)
-		return (1);
+	if (!old_pwd || chdir(path) != 0)
+		return (error_flag(), 1);
 	new_pwd = getcwd(cwd, sizeof(cwd));
 	if (!new_pwd)
-		return (1);
+		return (error_flag(), 1);
 	set_env_value(envp->env, "OLDPWD", old_pwd);
 	set_env_value(envp->env, "PWD", new_pwd);
 	return (0);

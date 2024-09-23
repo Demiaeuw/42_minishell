@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 17:18:56 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:58:50 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ extern int g_status_cmd;
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
+/**
+ * Variable global pour la gestion du PID et du code erreur (echo $?)
+ */
+//int			exit_val;
+
+/* Variable global devoir yo.
+
+*/
+
+extern pid_t	g_status_cmd;
 /**
  * Enum pour les liste chainé.
  */
@@ -310,6 +320,7 @@ void			builtin_selector_chevron(t_token *token, t_envp *envp);
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
+int				error_flag(void);
 //--------------------------------------------------------------------------//
 //									Environement							//
 //00

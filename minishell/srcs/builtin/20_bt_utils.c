@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_bt_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/09 16:31:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:53:46 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ int	is_proper_env(char *env_name)
 		return (1);
 	else
 		return (0);
+}
+
+int	error_flag(void)
+{
+	g_status_cmd = 1;
+	return (1);
 }
