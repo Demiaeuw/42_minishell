@@ -20,6 +20,8 @@ char	*extract_var_name_env(const char *value, size_t *i)
 	start = *i;
 	while (ft_isalnum(value[*i]) || value[*i] == '_')
 		(*i)++;
+	if (*i == start)
+		return ft_strdup("");
 	var_name = ft_strndup(&value[start], *i - start);
 	return (var_name);
 }
@@ -54,6 +56,7 @@ char	*expand_variables_in_value(const char *value, char **env)
 {
 	t_exp_data	*data;
 	char		*result;
+	char		*pid_str;
 
 	data = init_expansion_data(value);
 	if (!data)
@@ -68,7 +71,20 @@ char	*expand_variables_in_value(const char *value, char **env)
 		else if (value[data->i] == '$' && !data->in_single_quotes)
 		{
 			data->i++;
-			start_exp(value, data, env);
+			if (value[data->i] == '$')
+			{
+				pid_str = ft_itoa(getpid());
+				insert_string_into_result(data, pid_str);
+				free(pid_str);
+			}
+			else if (value[data->i] == '!')
+			{
+				pid_str = ft_itoa(g_status_cmd);
+				insert_string_into_result(data, pid_str);
+				free(pid_str);
+			}
+			else
+				start_exp(value, data, env);
 		}
 		else
 			data->result[data->j++] = value[data->i++];

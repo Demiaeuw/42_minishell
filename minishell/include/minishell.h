@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 14:01:07 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:56:56 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
-
-/**
- * Variable global pour la gestion du PID et du code erreur (echo $?)
- */
-int			exit_val;
 
 /**
  * Enum pour les liste chainé.
@@ -183,6 +178,7 @@ void			append_env_value_env(t_exp_data *data,
 char			*expand_variables_in_value(const char *value, char **env);
 char			*clean_string(const char *str);
 void			process_token_values(t_token *token, char **env);
+void			insert_string_into_result(t_exp_data *data, const char *str);
 //21
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
