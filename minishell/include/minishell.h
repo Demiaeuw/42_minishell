@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 17:00:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:09:56 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ void			free_expansion_data(t_exp_data *data);
 t_chevron		*create_chevron(t_chevron_type type, const char *value);
 void			append_chevron(t_chevron **head, t_chevron_type type,
 					const char *value);
-void			free_chevron_list(t_chevron *head);
 void			print_chevron_list(t_chevron *head);
 void			main_parse_string_chevron(t_token *token);
 //31
