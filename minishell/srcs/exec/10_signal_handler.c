@@ -6,12 +6,12 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 14:01:50 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:50:00 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-/*	CTRL C ne marche pas comme on veut, mais CTRL D et CTRL \ OK	*/
+
 //Traite et réinitialise les signaux dans le processus parent après
 //l'exécution d'une commande.
 void	handle_signals_in_parent(t_signal *handler)
