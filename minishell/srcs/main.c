@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 16:56:56 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:09:08 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-pid_t	g_status_cmd;
+int	g_status_cmd = 0;
 
 int	main(int ac, char **av, char **env)
 {
@@ -26,7 +26,6 @@ int	main(int ac, char **av, char **env)
 	envp = (t_envp *)malloc(sizeof(t_envp));
 	if (envp == NULL)
 		exit(EXIT_FAILURE);
-	g_status_cmd = 0;
 	envp->env = env_dup(env).env;
 	init_terminal(envp);
 	while (1)

@@ -40,19 +40,6 @@ void	append_chevron(t_chevron **head, t_chevron_type type, const char *value)
 	}
 }
 
-void	free_chevron_list(t_chevron *head)
-{
-	t_chevron	*tmp;
-
-	while (head != NULL)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp->value);
-		free(tmp);
-	}
-}
-
 void	print_chevron_list(t_chevron *head)
 {
 	t_chevron	*current;
