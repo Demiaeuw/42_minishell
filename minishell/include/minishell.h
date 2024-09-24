@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 14:10:58 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:12:28 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,8 +302,12 @@ void			insertion_sort(char **array, int size);
 char			**copy_env(char **env, int size);
 void			print_sorted_env(char **env);
 //04
-void			exe_unset(t_envp *envp, char *var);
-void			unset_variable(t_envp *envp, const char *var);
+// void			exe_unset(t_envp *envp, char *var);
+// void			unset_variable(t_envp *envp, const char *var);
+// void			shift_env_vars(char **env, int start);
+char	**copy_env_without_var(char **env, const char *var);
+void	exe_unset(t_envp *envp, char *args);
+void	free_env(char **env);
 //05
 int				string_to_int(const char *str, int *result);
 int				exe_pwd(void);

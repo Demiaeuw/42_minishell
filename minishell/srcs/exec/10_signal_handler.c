@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 13:05:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:55:56 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-//Traite et réinitialise les signaux dans le processus parent après
-//l'exécution d'une commande.
+/**
+ * Traite et réinitialise les signaux dans le processus parent après
+ * l'exécution d'une commande.
+ */
 void	handle_signals_in_parent(t_signal *handler)
 {
 	if (handler->sigint)
@@ -27,7 +29,10 @@ void	handle_signals_in_parent(t_signal *handler)
 		handler->sigterm = 0;
 }
 
-//Intercepte immédiatement le signal lorsqu'il est reçu (comme CTRL+C, SIGTERM).
+/**
+ * Intercepte immédiatement le signal lorsqu'il est reçu 
+ * (comme CTRL+C, SIGTERM).
+ */
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	t_signal	*handler;
@@ -53,8 +58,10 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	}
 }
 
-//initialise des signaux qui enregistre les gestionnaires pour les signaux que
-//tu veux capturer (comme SIGINT, SIGQUIT, SIGTERM).
+/**
+ * initialise des signaux qui enregistre les gestionnaires pour les signaux que
+ * tu veux capturer (comme SIGINT, SIGQUIT, SIGTERM).
+ */
 void	init_signal_handlers(t_signal *handler)
 {
 	struct sigaction	sa;
@@ -69,8 +76,10 @@ void	init_signal_handlers(t_signal *handler)
 	sigaction(SIGTERM, &sa, (void *)handler);
 }
 
-//lance un processus enfant avec fork() et redéfinit les signaux dans le
-//processus enfant.
+/**
+ * lance un processus enfant avec fork() et redéfinit les signaux dans le
+ * processus enfant.
+ */
 pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 {
 	pid_t	pid;

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/20 18:18:44 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:26:18 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	mini_env(t_envp *envp)
 			printf("%s\n", envp->env[i]);
 		i++;
 	}
+	printf("\n%p\n\n", *envp->env);
 }
