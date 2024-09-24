@@ -68,7 +68,7 @@ char	*expand_variables_in_value(const char *value, char **env)
 			data->in_single_quotes = !data->in_single_quotes;
 			data->result[data->j++] = value[data->i++];
 		}
-		else if (value[data->i] == '$' && !data->in_single_quotes)
+		else if (value[data->i] == '$' && value[data->i + 1] && !data->in_single_quotes)
 		{
 			data->i++;
 			if (value[data->i] == '$')
@@ -76,12 +76,14 @@ char	*expand_variables_in_value(const char *value, char **env)
 				pid_str = ft_itoa(getpid());
 				insert_string_into_result(data, pid_str);
 				free(pid_str);
+				data->i++;
 			}
-			else if (value[data->i] == '!')
+			else if (value[data->i] == '?')
 			{
 				pid_str = ft_itoa(g_status_cmd);
 				insert_string_into_result(data, pid_str);
 				free(pid_str);
+				data->i++;
 			}
 			else
 				start_exp(value, data, env);
