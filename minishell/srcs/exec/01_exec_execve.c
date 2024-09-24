@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 13:05:21 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:34:25 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	prepare_command(char ***split_args, char ***args, t_token *token)
 	return (1);
 }
 
-int	prepare_execution(char **split_args, char **args, char **cmd_path)
+int	prepare_execution(char **split_args, char **args, char **cmd_path, t_envp *envp)
 {
-	*cmd_path = get_command_path(split_args[0]);
+	*cmd_path = get_command_path(split_args[0], envp);
 	if (!*cmd_path)
 	{
 		write(2, "Command not found: ", 19);
@@ -81,7 +81,7 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 
 	if (!prepare_command(&split_args, &args, token))
 		return ;
-	if (!prepare_execution(split_args, args, &cmd_path))
+	if (!prepare_execution(split_args, args, &cmd_path, envp))
 		return ;
 	pid = fork();
 	if (pid == -1)

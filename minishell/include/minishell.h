@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 17:12:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:36:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,9 @@ void			free_chevron_list(t_chevron *chevron_list);
 char			*join_path(const char *path, const char *cmd);
 void			free_paths(char **paths);
 char			*try_access_command(char **paths, const char *cmd);
-char			*get_command_path(const char *cmd);
+char			*get_command_path(const char *cmd, t_envp *envp);
+char			*ft_getenv(t_envp *envp, const char *path);
+
 
 //--------------------------------------------------------------------------//
 //									Expension								//
@@ -227,7 +229,7 @@ void			execute_child_process(char *cmd_path,
 int				prepare_command(char ***split_args, char ***args,
 					t_token *token);
 int				prepare_execution(char **split_args,
-					char **args, char **cmd_path);
+					char **args, char **cmd_path, t_envp *envp);
 void			execute_execve(t_token *token, t_envp *envp, t_signal *handler);
 //02
 int				count_tokens(const char *str, char delimiter);
