@@ -6,7 +6,7 @@
 /*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 15:58:50 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:02:46 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define MINISHELL_H
 
 # define BUFFER_SIZE 1024
-
-extern int g_status_cmd;
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -45,7 +43,7 @@ extern int g_status_cmd;
  * Variable global pour la gestion du PID et du code erreur (echo $?)
  */
 //int			exit_val;
-
+//extern int g_status_cmd;
 /* Variable global devoir yo.
 
 */
