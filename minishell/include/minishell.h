@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 17:36:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:42:41 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,6 @@ char			*try_access_command(char **paths, const char *cmd);
 char			*get_command_path(const char *cmd, t_envp *envp);
 char			*ft_getenv(t_envp *envp, const char *path);
 
-
 //--------------------------------------------------------------------------//
 //									Expension								//
 //20
@@ -307,9 +306,9 @@ void			print_sorted_env(char **env);
 // void			exe_unset(t_envp *envp, char *var);
 // void			unset_variable(t_envp *envp, const char *var);
 // void			shift_env_vars(char **env, int start);
-char	**copy_env_without_var(char **env, const char *var);
-void	exe_unset(t_envp *envp, char *args);
-void	free_env(char **env);
+char			**copy_env_without_var(char **env, const char *var);
+void			exe_unset(t_envp *envp, char *args);
+void			free_env(char **env);
 //05
 int				string_to_int(const char *str, int *result);
 int				exe_pwd(void);
