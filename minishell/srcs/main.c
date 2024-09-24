@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 18:13:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:57:25 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **env)
 	init_terminal(envp);
 	while (1)
 	{
+		g_status_cmd = 0;
 		char *input = readline("minishell> ");
 		if (input == NULL)
 		{
