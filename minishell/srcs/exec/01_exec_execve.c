@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 18:00:32 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:05:21 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,20 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 		return ;
 	}
 	else if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGTERM, SIG_DFL);
 		execute_child_process(cmd_path, split_args, envp);
+	}
 	else
 	{
 		waitpid(pid, &status, 0);
+		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		{
+			write(1, "\n", 1);  // Avoid duplicate prompts after CTRL+C
+			g_status_cmd = 130;  // Update global status for SIGINT interrupt
+		}
 		handle_signals_in_parent(handler);
 	}
 	cleanup_execution(split_args, args, cmd_path);

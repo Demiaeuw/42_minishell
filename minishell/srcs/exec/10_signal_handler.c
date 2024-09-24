@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 12:57:51 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:05:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	handler = (t_signal *)context;
 	if (sig == SIGINT)
 	{
-		g_status_cmd = 130;
 		handler->sigint = 1;
+		g_status_cmd = 130;
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_redisplay();
+		if (rl_line_buffer[0] == '\0')
+			rl_redisplay();
 	}
 	else if (sig == SIGTERM)
 	{
