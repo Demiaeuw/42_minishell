@@ -6,7 +6,7 @@
 /*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/23 13:53:46 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:19:07 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ int	error_flag(void)
 {
 	g_status_cmd = 1;
 	return (1);
+}
+
+int	skip_spaces(const char *str, int index)
+{
+	while (str[index] == ' ')
+		index++;
+	return (index);
 }

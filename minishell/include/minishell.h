@@ -6,7 +6,7 @@
 /*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 16:02:46 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:10:58 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,7 @@ int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
 int				error_flag(void);
+int				skip_spaces(const char *str, int index);
 //--------------------------------------------------------------------------//
 //									Environement							//
 //00

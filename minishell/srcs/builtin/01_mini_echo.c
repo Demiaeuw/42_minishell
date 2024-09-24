@@ -56,17 +56,14 @@ int	exe_echo(char *str)
 	i = 0;
 	start_index = 0;
 	str = clean_string(str);
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str, i);
 	i += 4;
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str, i);
 	while (check_option_echo(&str[i], &start_index))
 	{
 		option = 1;
 		i += start_index;
-		while (str[i] == ' ')
-			i++;
+		i = skip_spaces(str, i);
 	}
 	if (str[i] != '\0')
 		printf("%s", &str[i]);
