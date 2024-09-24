@@ -33,10 +33,7 @@ int	exe_cd(char *input, t_envp *envp)
 	if (!old_pwd)
 		return (error_flag(), 1);
 	if (chdir(path) != 0)
-	{
-		ft_printf("cd: no such file or directory : %s\n", path);
-		return (1);
-	}
+		return (ft_printf("cd: no such file or directory: %s\n", path), 1);
 	new_pwd = getcwd(cwd, sizeof(cwd));
 	if (!new_pwd)
 		return (error_flag(), 1);
