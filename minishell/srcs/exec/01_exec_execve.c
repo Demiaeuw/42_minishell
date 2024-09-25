@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 16:32:07 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:15:48 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 		return ;
 	if (!prepare_exec(split_args, args, &cmd_path, envp))
 		return ;
-	fork_and_exec(cmd_path, split_args, envp);
+	fork_and_execute(cmd_path, split_args, envp);
 	cleanup_execution(split_args, args, cmd_path);
 }

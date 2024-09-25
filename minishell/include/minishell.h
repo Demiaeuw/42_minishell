@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 17:55:07 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:15:12 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,8 @@ void			init_mask(struct sigaction *sig);
 void			signal_handler(int signum, siginfo_t *siginfo, void *context);
 void			init_sigaction(struct sigaction *sig);
 void			init_signal(void);
-pid_t			fork_and_exec(char *cmd_path, char **split_args, t_envp *envp);
+pid_t			fork_and_execute(char *cmd_path,
+					char **split_args, t_envp *envp);
 //20
 void			create_and_handle(t_process_data *args,
 					int *fd_in, int *pipefd);
