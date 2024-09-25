@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 17:58:12 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:31:17 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	main_command(t_token *token, t_envp *envp, t_signal *handler)
 			if (builtin_check(current))
 				builtin_selector(current, envp);
 			else
+			{
 				execute_execve(current, envp, handler);
+			}
 		}
 		current = current->next;
 	}

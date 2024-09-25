@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 12:54:36 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:32:05 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void			execute_child_process(char *cmd_path,
 					char **split_args, t_envp *envp);
 int				prepare_command(char ***split_args, char ***args,
 					t_token *token);
-int				prepare_execution(char **split_args,
+int				prepare_exec(char **split_args,
 					char **args, char **cmd_path, t_envp *envp);
 void			execute_execve(t_token *token, t_envp *envp, t_signal *handler);
 //02
@@ -250,11 +250,11 @@ int				count_tokens_before_pipe(t_token *token);
 char			**allocate_and_fill_tokens(t_token *token, int count);
 char			**convert_token(t_token *token);
 //10
-void			handle_signals_in_parent(t_signal *handler);
-void			signal_handler(int sig, siginfo_t *info, void *context);
-void			init_signal_handlers(t_signal *handler);
-pid_t			fork_and_execute(char *cmd_path,
-					char **split_args, t_envp *envp);
+void			init_mask(struct sigaction *sig);
+void			signal_handler(int signum, siginfo_t *siginfo, void *context);
+void			init_sigaction(struct sigaction *sig);
+void			init_signal(void);
+pid_t			fork_and_exec(char *cmd_path, char **split_args, t_envp *envp);
 //20
 void			create_and_handle(t_process_data *args,
 					int *fd_in, int *pipefd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 17:34:25 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:32:07 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	prepare_command(char ***split_args, char ***args, t_token *token)
 	return (1);
 }
 
-int	prepare_execution(char **split_args, char **args, char **cmd_path, t_envp *envp)
+int	prepare_exec(char **split_args, char **args, char **cmd_path, t_envp *envp)
 {
 	*cmd_path = get_command_path(split_args[0], envp);
 	if (!*cmd_path)
@@ -73,39 +73,15 @@ int	prepare_execution(char **split_args, char **args, char **cmd_path, t_envp *e
 
 void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 {
-	pid_t	pid;
-	int		status;
 	char	**args;
 	char	*cmd_path;
 	char	**split_args;
 
+	(void)handler;
 	if (!prepare_command(&split_args, &args, token))
 		return ;
-	if (!prepare_execution(split_args, args, &cmd_path, envp))
+	if (!prepare_exec(split_args, args, &cmd_path, envp))
 		return ;
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		handle_memory_error(split_args, args);
-		return ;
-	}
-	else if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGTERM, SIG_DFL);
-		execute_child_process(cmd_path, split_args, envp);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
-		{
-			write(1, "\n", 1);  // Avoid duplicate prompts after CTRL+C
-			g_status_cmd = 130;  // Update global status for SIGINT interrupt
-		}
-		handle_signals_in_parent(handler);
-	}
+	fork_and_exec(cmd_path, split_args, envp);
 	cleanup_execution(split_args, args, cmd_path);
 }

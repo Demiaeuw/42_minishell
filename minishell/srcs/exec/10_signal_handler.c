@@ -3,77 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 15:55:56 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:33:55 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/**
- * Traite et réinitialise les signaux dans le processus parent après
- * l'exécution d'une commande.
- */
-void	handle_signals_in_parent(t_signal *handler)
+void	init_mask(struct sigaction *sig)
 {
-	if (handler->sigint)
-	{
-		write(1, "\n", 1);
-		handler->sigint = 0;
-	}
-	if (handler->sigquit)
-		handler->sigquit = 0;
-	if (handler->sigterm)
-		handler->sigterm = 0;
+	sigemptyset(&sig->sa_mask);
+	sigaddset(&sig->sa_mask, SIGINT);
+	sigaddset(&sig->sa_mask, SIGQUIT);
 }
 
-/**
- * Intercepte immédiatement le signal lorsqu'il est reçu 
- * (comme CTRL+C, SIGTERM).
- */
-void	signal_handler(int sig, siginfo_t *info, void *context)
+void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 {
-	t_signal	*handler;
-
-	(void)info;
-	handler = (t_signal *)context;
-	if (sig == SIGINT)
+	(void)siginfo;
+	(void)context;
+	if (signum == SIGINT)
 	{
-		handler->sigint = 1;
-		g_status_cmd = 130;
-		rl_replace_line("", 0);
-		write(1, "\n", 1);
-		rl_on_new_line();
-		if (rl_line_buffer[0] == '\0')
+		if (g_status_cmd == 0)
+		{
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			write(1, "\n", 1);
 			rl_redisplay();
-	}
-	else if (sig == SIGTERM)
-	{
-		handler->sigterm = 1;
-		g_status_cmd = 143;
-		write(1, "Exit shell\n", 11);
-		exit(0);
+		}
+		else if (g_status_cmd == 1)
+		{
+			write(1, "\n", 1);
+		}
 	}
 }
 
-/**
- * initialise des signaux qui enregistre les gestionnaires pour les signaux que
- * tu veux capturer (comme SIGINT, SIGQUIT, SIGTERM).
- */
-void	init_signal_handlers(t_signal *handler)
+void	init_sigaction(struct sigaction *sig)
 {
-	struct sigaction	sa;
+	sigaction(SIGINT, sig, NULL);
+	sig->sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, sig, NULL);
+}
 
-	sa.sa_sigaction = signal_handler;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	sigaction(SIGINT, &sa, (void *)handler);
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sa, NULL);
-	sa.sa_sigaction = signal_handler;
-	sigaction(SIGTERM, &sa, (void *)handler);
+void	init_signal(void)
+{
+	struct sigaction	sig;
+
+	ft_memset(&sig, 0, sizeof(struct sigaction));
+	init_mask(&sig);
+	sig.sa_flags = SA_SIGINFO;
+	sig.sa_sigaction = &signal_handler;
+	init_sigaction(&sig);
 }
 
 /**
@@ -91,6 +72,17 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGTERM, SIG_DFL);
 		execute_child_process(cmd_path, split_args, envp);
+	}
+	else if (pid > 0)
+	{
+		g_status_cmd = 1;
+		waitpid(pid, NULL, 0);
+		g_status_cmd = 0;
+	}
+	else
+	{
+		perror("fork error");
+		exit(EXIT_FAILURE);
 	}
 	return (pid);
 }

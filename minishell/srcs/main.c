@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 19:42:33 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:19:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		exit(EXIT_FAILURE);
 	(void)av;
-	init_signal_handlers(&handler);
+	init_signal();
 	envp = (t_envp *)malloc(sizeof(t_envp));
 	if (envp == NULL)
 		exit(EXIT_FAILURE);

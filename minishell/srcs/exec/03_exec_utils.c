@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_exec_utils2.c                                   :+:      :+:    :+:   */
+/*   03_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/27 15:29:13 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:31:12 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	file_descriptor_handler(int in, int out)
 
 void	handle_parent_process(pid_t pid, t_signal *handler)
 {
+	(void)handler;
 	waitpid(pid, &handler->sigterm, WUNTRACED);
-	handle_signals_in_parent(handler);
 	if (WIFSIGNALED(handler->sigterm))
 		handler->sigterm = WTERMSIG(handler->sigterm) + 128;
 	else if (WIFEXITED(handler->sigterm))
