@@ -6,7 +6,7 @@
 /*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 15:42:41 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:54:36 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,6 +309,10 @@ void			print_sorted_env(char **env);
 char			**copy_env_without_var(char **env, const char *var);
 void			exe_unset(t_envp *envp, char *args);
 void			free_env(char **env);
+bool			should_copy_env_var(const char *env_var,
+					const char *var, int var_len);
+void			fill_new_env(char **env, char **new_env,
+					const char *var, int var_len);
 //05
 int				string_to_int(const char *str, int *result);
 int				exe_pwd(void);
