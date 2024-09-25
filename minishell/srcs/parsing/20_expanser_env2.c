@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_expanser_env2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:34:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 16:50:50 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/25 17:57:51 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	process_token_values(t_token *token, char **env)
 	}
 }
 
-void	insert_string_into_result(t_exp_data *data, const char *str) 
+void	insert_string_into_result(t_exp_data *data, const char *str)
 {
-    while (*str) 
+	while (*str)
 	{
-        data->result[data->j++] = *str++;
-    }
+		data->result[data->j++] = *str++;
+	}
 }

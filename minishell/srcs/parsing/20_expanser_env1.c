@@ -21,7 +21,7 @@ char	*extract_var_name_env(const char *value, size_t *i)
 	while (ft_isalnum(value[*i]) || value[*i] == '_')
 		(*i)++;
 	if (*i == start)
-		return ft_strdup("");
+		return (ft_strdup(""));
 	var_name = ft_strndup(&value[start], *i - start);
 	return (var_name);
 }

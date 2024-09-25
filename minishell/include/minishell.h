@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 16:32:05 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:55:07 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,8 @@
 /**
  * Variable global pour la gestion du PID et du code erreur (echo $?)
  */
-//int			exit_val;
-//extern int g_status_cmd;
-/* Variable global devoir yo.
-
-*/
-
 extern pid_t	g_status_cmd;
+
 /**
  * Enum pour les liste chainé.
  */
@@ -329,6 +324,7 @@ int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
 int				error_flag(void);
 int				skip_spaces(const char *str, int index);
+
 //--------------------------------------------------------------------------//
 //									Environement							//
 //00

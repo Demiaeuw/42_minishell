@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:46:07 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/24 17:37:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:01:54 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,13 @@ char	*ft_getenv(t_envp *envp, const char *path)
 
 	if (!envp || !envp->env || !path)
 		return (NULL);
-
 	len = ft_strlen(path);
 	i = 0;
 	while (envp->env[i])
 	{
-		// Chercher si l'entrée commence par 'path' suivi de '='
-		if (ft_strncmp(envp->env[i], path, len) == 0 && envp->env[i][len] == '=')
+		if (ft_strncmp(envp->env[i], path, len) == 0
+			&& envp->env[i][len] == '=')
 		{
-			// Retourner le contenu après le '='
 			return (envp->env[i] + len + 1);
 		}
 		i++;
