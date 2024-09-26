@@ -130,10 +130,6 @@ int	exe_cd(char *input, t_envp *envp)
 		return (1);
 	new_pwd = getcwd(cwd, sizeof(cwd));
 	if (!new_pwd)
-	{
-		if (home_path)
-			free(home_path);
-		return (error_flag(envp), 1);
-	}
+		return ((handle_new_pwd_error(home_path, envp)));
 	return (update_pwd_env(envp, old_pwd, new_pwd, home_path));
 }

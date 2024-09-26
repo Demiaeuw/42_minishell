@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 17:55:11 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/26 17:05:28 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,13 +178,15 @@ char			*ft_getenv(t_envp *envp, const char *path);
 char			*extract_var_name_env(const char *value, size_t *i);
 void			append_env_value_env(t_exp_data *data,
 					const char *env_value);
-char			*expand_variables_in_value(const char *value, char **env, t_envp *envp);
+char			*expand_variables_in_value(const char *value,
+					char **env, t_envp *envp);
 char			*clean_string(const char *str);
 void			start_exp(const char *va, t_exp_data *data, char **env);
 void			process_token_values(t_token *token, char **env, t_envp *envp);
 void			insert_string_into_result(t_exp_data *data, const char *str);
 void			is_single_quotes(const char *value, t_exp_data *data);
-void			handle_variable_expansion(const char *value, t_exp_data *data, char **env, t_envp *envp);
+void			handle_variable_expansion(const char *value,
+					t_exp_data *data, char **env, t_envp *envp);
 //21
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
@@ -281,6 +283,7 @@ char			*handle_home_directory(char *path, t_envp *envp);
 int				change_directory(char *path);
 int				update_env_variables(t_envp *envp,
 					char *old_pwd, char *new_pwd);
+int				handle_new_pwd_error(char *home_path, t_envp *envp);
 char			*get_current_working_directory(char *cwd, size_t size);
 //01
 int				exe_echo(char *str);

@@ -20,6 +20,7 @@ OBJDIR = obj
 # Fichiers source
 SRCS = 	srcs/main.c\
 		srcs/builtin/00_mini_cd.c\
+		srcs/builtin/00_mini_cd2.c\
 		srcs/builtin/01_mini_echo.c\
 		srcs/builtin/02_mini_env.c\
 		srcs/builtin/03_mini_export1.c\
