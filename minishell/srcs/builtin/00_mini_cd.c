@@ -39,5 +39,6 @@ int	exe_cd(char *input, t_envp *envp)
 		return (error_flag(), 1);
 	set_env_value(envp->env, "OLDPWD", old_pwd);
 	set_env_value(envp->env, "PWD", new_pwd);
+	free(path);
 	return (0);
 }
