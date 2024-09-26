@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_expanser_env2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:34:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 17:57:51 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:10:46 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,35 @@ void	insert_string_into_result(t_exp_data *data, const char *str)
 	{
 		data->result[data->j++] = *str++;
 	}
+}
+
+void	is_single_quotes(const char *value, t_exp_data *data)
+{
+	data->in_single_quotes = !data->in_single_quotes;
+	data->result[data->j++] = value[data->i++];
+}
+
+void	handle_variable_expansion(const char *value,
+								t_exp_data *data,
+								char **env)
+{
+	char	*pid_str;
+
+	data->i++;
+	if (value[data->i] == '$')
+	{
+		pid_str = ft_itoa(getpid());
+		insert_string_into_result(data, pid_str);
+		free(pid_str);
+		data->i++;
+	}
+	else if (value[data->i] == '?')
+	{
+		pid_str = ft_itoa(g_status_cmd);
+		insert_string_into_result(data, pid_str);
+		free(pid_str);
+		data->i++;
+	}
+	else
+		start_exp(value, data, env);
 }

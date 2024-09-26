@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 19:15:12 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:19:53 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,13 @@ void			append_env_value_env(t_exp_data *data,
 					const char *env_value);
 char			*expand_variables_in_value(const char *value, char **env);
 char			*clean_string(const char *str);
+void			start_exp(const char *va, t_exp_data *data, char **env);
 void			process_token_values(t_token *token, char **env);
 void			insert_string_into_result(t_exp_data *data, const char *str);
+void			is_single_quotes(const char *value, t_exp_data *data);
+void			handle_variable_expansion(const char *value, 
+                                 		t_exp_data *data, 
+                                 		char **env);
 //21
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
