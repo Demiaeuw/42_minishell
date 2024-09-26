@@ -77,7 +77,7 @@ char	*expand_variables_in_value(const char *value, char **env)
 	return (result);
 }
 
-char	*clean_string(const char *str)
+char *clean_string(const char *str)
 {
 	t_exp_data	*data;
 	char		*cleaned_str;
@@ -98,7 +98,9 @@ char	*clean_string(const char *str)
 		data->i++;
 	}
 	data->result[data->j] = '\0';
-	cleaned_str = data->result;
+	cleaned_str = ft_strdup(data->result);
+	free(data->result);
 	free(data);
 	return (cleaned_str);
 }
+

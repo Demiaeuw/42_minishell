@@ -70,5 +70,6 @@ int	exe_echo(char *str)
 	if (!option)
 		printf("\n");
 	ft_fflush_stdout();
+	free(str);
 	return (0);
 }
