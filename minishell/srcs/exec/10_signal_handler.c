@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 16:33:55 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:01:05 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,20 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 	(void)context;
 	if (signum == SIGINT)
 	{
-		if (g_status_cmd == 0)
+		if (g_status_cmd == 0 || g_status_cmd == 130)
 		{
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			write(1, "\n", 1);
 			rl_redisplay();
+			g_status_cmd = 130;
 		}
 		else if (g_status_cmd == 1)
 		{
 			write(1, "\n", 1);
 		}
+		else if (g_status_cmd == 130)
+			g_status_cmd = 0;
 	}
 }
 
