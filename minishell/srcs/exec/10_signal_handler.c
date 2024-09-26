@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 17:26:16 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/26 19:13:56 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,17 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 	(void)context;
 	if (signum == SIGINT)
 	{
-		if (g_status_cmd == 0 || g_status_cmd == 130)
+		if (g_status_cmd == 0)
 		{
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			write(1, "\n", 1);
 			rl_redisplay();
-			g_status_cmd = 130;
 		}
 		else if (g_status_cmd == 1)
 		{
 			write(1, "\n", 1);
 		}
-		else if (g_status_cmd == 130)
-			g_status_cmd = 0;
 	}
 }
 
@@ -71,18 +68,18 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 	pid_t	pid;
 
 	pid = fork();
-	if (pid == 0)
+	if (pid == 0)  // Processus enfant
 	{
-		signal(SIGINT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);  // Réinitialiser SIGINT dans l'enfant
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGTERM, SIG_DFL);
 		execute_child_process(cmd_path, split_args, envp);
 	}
-	else if (pid > 0)
+	else if (pid > 0)  // Parent
 	{
-		g_status_cmd = 1;
+		g_status_cmd = 1;  // Mode exécution
 		waitpid(pid, NULL, 0);
-		g_status_cmd = 0;
+		g_status_cmd = 0;  // Revenir en mode prompt
 	}
 	else
 	{

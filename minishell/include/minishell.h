@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 17:05:28 by kpourcel         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/09/26 19:13:23 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -254,9 +255,10 @@ void			init_signal(void);
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 //20
-void			create_and_handle(t_process_data *args,
-					int *fd_in, int *pipefd);
+void			handle_p(t_process_data *args,
+					int *fd_in, int *pipefd, int *last_pid);
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
+void			wait_for_children();
 //21
 void			setup_process_args(t_process_data *args,
 					int fd_in, int *pipefd);
