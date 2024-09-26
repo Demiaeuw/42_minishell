@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 15:24:01 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:17:07 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	init_minishell(t_envp **envp, char **env)
 	if (*envp == NULL)
 		exit(EXIT_FAILURE);
 	(*envp)->env = env_dup(env).env;
+	(*envp)->status = 0;
 	init_terminal(*envp);
 }
 
