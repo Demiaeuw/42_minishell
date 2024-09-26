@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 18:23:56 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:16:34 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	builtin_selector(t_token *token, t_envp *envp)
 	else if (!ft_strcmp("unset", token->builtin_info))
 		exe_unset(envp, token->value);
 	else if (!ft_strcmp("pwd", token->builtin_info))
-		exe_pwd();
+		exe_pwd(envp);
 	else if (!ft_strcmp("exit", token->builtin_info))
 		exe_exit(token->value, envp, token);
 }
@@ -59,7 +59,7 @@ void	builtin_selector_chevron(t_token *token, t_envp *envp)
 	else if (!ft_strcmp("unset", token->builtin_info))
 		exe_unset(envp, token->file_in_out->value);
 	else if (!ft_strcmp("pwd", token->builtin_info))
-		exe_pwd();
+		exe_pwd(envp);
 	else if (!ft_strcmp("exit", token->builtin_info))
 		exe_exit(token->file_in_out->value, envp, token);
 	dup2(saved_stdin, STDIN_FILENO);

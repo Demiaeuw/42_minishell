@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 16:18:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:55:11 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
-
-/**
- * Variable global pour la gestion du PID et du code erreur (echo $?)
- */
-extern pid_t	g_status_cmd;
 
 /**
  * Enum pour les liste chainé.
@@ -90,7 +85,7 @@ typedef struct s_chevron
 typedef struct s_envp
 {
 	char	**env;
-	int		status;
+	int		status_cmd;
 }	t_envp;
 
 /**
@@ -183,14 +178,13 @@ char			*ft_getenv(t_envp *envp, const char *path);
 char			*extract_var_name_env(const char *value, size_t *i);
 void			append_env_value_env(t_exp_data *data,
 					const char *env_value);
-char			*expand_variables_in_value(const char *value, char **env);
+char			*expand_variables_in_value(const char *value, char **env, t_envp *envp);
 char			*clean_string(const char *str);
 void			start_exp(const char *va, t_exp_data *data, char **env);
-void			process_token_values(t_token *token, char **env);
+void			process_token_values(t_token *token, char **env, t_envp *envp);
 void			insert_string_into_result(t_exp_data *data, const char *str);
 void			is_single_quotes(const char *value, t_exp_data *data);
-void			handle_variable_expansion(const char *value,
-					t_exp_data *data, char **env);
+void			handle_variable_expansion(const char *value, t_exp_data *data, char **env, t_envp *envp);
 //21
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
@@ -323,7 +317,7 @@ void			fill_new_env(char **env, char **new_env,
 					const char *var, int var_len);
 //05
 int				string_to_int(const char *str, int *result);
-int				exe_pwd(void);
+int				exe_pwd(t_envp *envp);
 //06
 int				string_to_int(const char *str, int *result);
 void			exe_exit(char *str, t_envp *envp, t_token *token);
@@ -335,7 +329,7 @@ void			builtin_selector_chevron(t_token *token, t_envp *envp);
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
 int				is_proper_env(char *env_name);
-int				error_flag(void);
+int				error_flag(t_envp *envp);
 int				skip_spaces(const char *str, int index);
 
 //--------------------------------------------------------------------------//

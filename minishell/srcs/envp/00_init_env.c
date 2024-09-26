@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 18:25:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:27:09 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	edit_shlvl(char **env)
 void	init_terminal(t_envp *envp)
 {
 	edit_shlvl(envp->env);
+	envp->status_cmd = 0;
 }
 
 int	count_env_vars(char **env)

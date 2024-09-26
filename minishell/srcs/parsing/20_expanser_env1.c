@@ -52,7 +52,7 @@ void	start_exp(const char *va, t_exp_data *data, char **env)
 		append_env_value_env(data, env_value);
 }
 
-char	*expand_variables_in_value(const char *value, char **env)
+char	*expand_variables_in_value(const char *value, char **env, t_envp *envp)
 {
 	t_exp_data	*data;
 	char		*result;
@@ -67,7 +67,7 @@ char	*expand_variables_in_value(const char *value, char **env)
 		else if (value[data->i] == '$'
 			&& value[data->i + 1]
 			&& !data->in_single_quotes)
-			handle_variable_expansion(value, data, env);
+			handle_variable_expansion(value, data, env, envp);
 		else
 			data->result[data->j++] = value[data->i++];
 	}

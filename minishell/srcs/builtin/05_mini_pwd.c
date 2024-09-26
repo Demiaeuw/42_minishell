@@ -16,12 +16,12 @@
  * permet de recuperer le path 
  * sans passer par l'env car utilisation de la fonction 'getcwd'
  */
-int	exe_pwd(void)
+int	exe_pwd(t_envp *envp)
 {
 	char	temp[1024];
 
 	if (getcwd(temp, sizeof(temp)) == NULL)
-		return (error_flag(), 1);
+		return (error_flag(envp), 1);
 	printf("%s\n", temp);
 	return (0);
 }

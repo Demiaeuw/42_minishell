@@ -119,13 +119,13 @@ int	exe_cd(char *input, t_envp *envp)
 	home_path = NULL;
 	path = parse_cd_path(input);
 	if (!path)
-		return ((error_flag(), -1));
+		return ((error_flag(envp), -1));
 	path = handle_home_path(path, envp, &home_path);
 	if (!path)
-		return (error_flag(), 1);
+		return (error_flag(envp), 1);
 	old_pwd = getcwd(cwd, sizeof(cwd));
 	if (!old_pwd)
-		return (error_flag(), 1);
+		return (error_flag(envp), 1);
 	if (check_directory(path, home_path) != 0)
 		return (1);
 	new_pwd = getcwd(cwd, sizeof(cwd));
@@ -133,7 +133,7 @@ int	exe_cd(char *input, t_envp *envp)
 	{
 		if (home_path)
 			free(home_path);
-		return (error_flag(), 1);
+		return (error_flag(envp), 1);
 	}
 	return (update_pwd_env(envp, old_pwd, new_pwd, home_path));
 }

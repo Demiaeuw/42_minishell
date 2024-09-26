@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 16:17:07 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:23:24 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	g_status_cmd;
 /*
 int	main(int ac, char **av, char **env)
 {
@@ -68,7 +67,6 @@ int	main(int ac, char **av, char **env)
 	init_signal();
 	envp = NULL;
 	init_minishell(&envp, env);
-	g_status_cmd = 0;
 	main_loop(envp, &handler);
 	cleanup_and_exit(envp);
 	return (0);
@@ -80,7 +78,7 @@ void	init_minishell(t_envp **envp, char **env)
 	if (*envp == NULL)
 		exit(EXIT_FAILURE);
 	(*envp)->env = env_dup(env).env;
-	(*envp)->status = 0;
+	//(*envp)->status_cmd = 0;
 	init_terminal(*envp);
 }
 

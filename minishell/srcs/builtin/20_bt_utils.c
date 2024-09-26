@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_bt_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:03 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/24 14:19:07 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:20:12 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	is_proper_env(char *env_name)
 		return (0);
 }
 
-int	error_flag(void)
+int	error_flag(t_envp *envp)
 {
-	g_status_cmd = 1;
+	envp->status_cmd = 1;
 	return (1);
 }
 
