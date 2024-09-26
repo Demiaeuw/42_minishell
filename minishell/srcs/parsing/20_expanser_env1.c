@@ -77,7 +77,7 @@ char	*expand_variables_in_value(const char *value, char **env)
 	return (result);
 }
 
-char *clean_string(const char *str)
+char	*clean_string(const char *str)
 {
 	t_exp_data	*data;
 	char		*cleaned_str;
@@ -103,4 +103,3 @@ char *clean_string(const char *str)
 	free(data);
 	return (cleaned_str);
 }
-

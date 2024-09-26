@@ -6,7 +6,7 @@
 /*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 12:35:50 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:37:35 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,4 +352,11 @@ void			free_t_envp(t_envp *envp);
 void			cleanup_and_exit(t_envp *envp);
 void			main_loop(t_envp *envp, t_signal *handler);
 void			init_minishell(t_envp **envp, char **env);
+
+//TEST
+char	*parse_input_and_path(char *input);
+char	*handle_home_directory(char *path, t_envp *envp);
+int	change_directory(char *path);
+int	update_env_variables(t_envp *envp, char *old_pwd, char *new_pwd);
+char	*get_current_working_directory(char *cwd, size_t size);
 #endif
