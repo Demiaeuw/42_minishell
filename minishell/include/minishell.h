@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:43:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 14:19:53 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:35:50 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,8 @@ void			start_exp(const char *va, t_exp_data *data, char **env);
 void			process_token_values(t_token *token, char **env);
 void			insert_string_into_result(t_exp_data *data, const char *str);
 void			is_single_quotes(const char *value, t_exp_data *data);
-void			handle_variable_expansion(const char *value, 
-                                 		t_exp_data *data, 
-                                 		char **env);
+void			handle_variable_expansion(const char *value,
+					t_exp_data *data, char **env);
 //21
 t_exp_data		*init_expansion_data(const char *value);
 void			free_expansion_data(t_exp_data *data);
@@ -346,4 +345,11 @@ void			set_env_value(char **env, char *key, char *new_value);
 void			free_array(char **array);
 void			free_t_envp(t_envp *envp);
 
+//--------------------------------------------------------------------------//
+//									MAIN							//
+//00
+
+void			cleanup_and_exit(t_envp *envp);
+void			main_loop(t_envp *envp, t_signal *handler);
+void			init_minishell(t_envp **envp, char **env);
 #endif
