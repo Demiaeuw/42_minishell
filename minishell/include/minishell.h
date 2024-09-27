@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/27 15:20:18 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/27 21:06:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # include "../include/utils/libft/libft.h"
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
+
+extern int g_status_cmd;
 
 /**
  * Enum pour les liste chainé.
@@ -255,17 +257,14 @@ void			init_signal(void);
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 //20
-void			handle_p(t_process_data *args,
-					int *fd_in, int *pipefd, int *last_pid);
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
-void			wait_for_children();
 //21
 void			setup_process_args(t_process_data *args,
 					int fd_in, int *pipefd);
-void			setup_redirections(int fd_in, int fd_out);
 void			create_pipe_if_needed(int *pipefd, t_token *token);
-void			handle_pipe_child_process(t_process_data *args, int *pipefd);
-void			handle_pipe_parent_process(pid_t pid, int *fd_in, int *pipefd);
+void			wait_for_children();
+void			handle_p(t_process_data *args,
+					int *fd_in, int *pipefd, int *last_pid);
 //30
 int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
