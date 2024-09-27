@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_mini_export1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:41:27 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 18:20:16 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:24:28 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void	exe_export(t_envp *envp, char *args)
 		process_export_token(envp, token);
 		token = ft_strtok(NULL, " ", &saveptr);
 	}
+	envp->status_cmd = 0;
 }

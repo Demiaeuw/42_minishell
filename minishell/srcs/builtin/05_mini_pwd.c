@@ -23,5 +23,6 @@ int	exe_pwd(t_envp *envp)
 	if (getcwd(temp, sizeof(temp)) == NULL)
 		return (error_flag(envp), 1);
 	printf("%s\n", temp);
+	envp->status_cmd = 0;
 	return (0);
 }

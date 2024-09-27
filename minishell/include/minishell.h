@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/27 14:42:44 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:20:18 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ int				update_env_variables(t_envp *envp,
 int				handle_new_pwd_error(char *home_path, t_envp *envp);
 char			*get_current_working_directory(char *cwd, size_t size);
 //01
-int				exe_echo(char *str);
+int				exe_echo(char *str, t_envp *envp);
 void			ft_fflush_stdout(void);
 //02
 void			mini_env(t_envp *envp);

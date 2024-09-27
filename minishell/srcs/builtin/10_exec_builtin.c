@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 17:16:34 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/27 15:21:29 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	builtin_selector(t_token *token, t_envp *envp)
 	if (!ft_strcmp("cd", token->builtin_info))
 		exe_cd(token->value, envp);
 	if (!ft_strcmp("echo", token->builtin_info))
-		exe_echo(token->value);
+		exe_echo(token->value, envp);
 	else if (!ft_strcmp("env", token->builtin_info))
 		mini_env(envp);
 	else if (!ft_strcmp("export", token->builtin_info))
@@ -51,7 +51,7 @@ void	builtin_selector_chevron(t_token *token, t_envp *envp)
 	if (!ft_strcmp("cd", token->builtin_info))
 		exe_cd(token->file_in_out->value, envp);
 	else if (!ft_strcmp("echo", token->builtin_info))
-		exe_echo(token->file_in_out->value);
+		exe_echo(token->file_in_out->value, envp);
 	else if (!ft_strcmp("env", token->builtin_info))
 		mini_env(envp);
 	else if (!ft_strcmp("export", token->builtin_info))

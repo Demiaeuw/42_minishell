@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_mini_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:02:26 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/24 17:39:17 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:24:28 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	mini_env(t_envp *envp)
 			printf("%s\n", envp->env[i]);
 		i++;
 	}
+	envp->status_cmd = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_mini_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:55:21 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 12:54:10 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:24:28 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,7 @@ void	exe_unset(t_envp *envp, char *args)
 	while (vars[i])
 		free(vars[i++]);
 	free(vars);
+	envp->status_cmd = 0;
 }
 
 void	free_env(char **env)

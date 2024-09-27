@@ -46,7 +46,7 @@ void	ft_fflush_stdout(void)
 	}
 }
 
-int	exe_echo(char *str)
+int	exe_echo(char *str, t_envp *envp)
 {
 	int	option;
 	int	i;
@@ -71,5 +71,5 @@ int	exe_echo(char *str)
 		printf("\n");
 	ft_fflush_stdout();
 	free(str);
-	return (0);
+	return (envp->status_cmd = 0, 0);
 }

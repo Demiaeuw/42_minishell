@@ -127,9 +127,10 @@ int	exe_cd(char *input, t_envp *envp)
 	if (!old_pwd)
 		return (error_flag(envp), 1);
 	if (check_directory(path, home_path) != 0)
-		return (1);
+		return (error_flag(envp), 1);
 	new_pwd = getcwd(cwd, sizeof(cwd));
 	if (!new_pwd)
 		return ((handle_new_pwd_error(home_path, envp)));
+	envp->status_cmd = 0;
 	return (update_pwd_env(envp, old_pwd, new_pwd, home_path));
 }
