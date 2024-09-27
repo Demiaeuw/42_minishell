@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/26 19:13:23 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:42:44 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,14 +267,11 @@ void			create_pipe_if_needed(int *pipefd, t_token *token);
 void			handle_pipe_child_process(t_process_data *args, int *pipefd);
 void			handle_pipe_parent_process(pid_t pid, int *fd_in, int *pipefd);
 //30
-int				open_infile(char *filename);
-int				open_outfile(char *filename, int flags);
 int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
-void			handle_redirections(t_chevron *chevron_list);
-//31
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 void			handle_heredoc(char *delimiter);
+void			handle_redirections(t_chevron *chevron_list);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
