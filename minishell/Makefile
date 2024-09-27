@@ -42,7 +42,6 @@ SRCS = 	srcs/main.c\
 		srcs/exec/20_pipe.c\
 		srcs/exec/21_pipe_utils.c\
 		srcs/exec/30_redirections.c\
-		srcs/exec/31_redirections_utils.c\
 		srcs/parsing/00_parsing.c\
 		srcs/parsing/01_spliting_quote.c\
 		srcs/parsing/02_create_node.c\
