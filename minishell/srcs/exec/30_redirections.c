@@ -6,37 +6,11 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/27 14:42:46 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/28 02:51:43 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// int	open_infile(char *filename)
-// {
-// 	int	fd;
-
-// 	fd = open(filename, O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("open");
-// 		return (-1);
-// 	}
-// 	return (fd);
-// }
-
-// int	open_outfile(char *filename, int flags)
-// {
-// 	int	fd;
-
-// 	fd = open(filename, flags, 0644);
-// 	if (fd < 0)
-// 	{
-// 		perror("open");
-// 		return (-1);
-// 	}
-// 	return (fd);
-// }
 
 int	redirect_infile(char *filename)
 {
@@ -45,12 +19,12 @@ int	redirect_infile(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("open (input file)");
+		perror("Erreur d'ouverture du fichier");
 		return (-1);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
 	{
-		perror("dup2 (input redirection)");
+		perror("Erreur de dup2 (redirection d'entrée)");
 		close(fd);
 		return (-1);
 	}
@@ -82,44 +56,6 @@ int	redirect_outfile(char *filename, int append)
 	}
 	close(fd);
 	return (0);
-}
-
-void	handle_heredoc_input(int pipefd[2], char *delimiter)
-{
-	char	*line;
-
-	while (1)
-	{
-		line = readline("> ");
-		if (!line || strcmp(line, delimiter) == 0)
-		{
-			free(line);
-			break ;
-		}
-		write(pipefd[1], line, strlen(line));
-		write(pipefd[1], "\n", 1);
-		free(line);
-	}
-}
-
-void	handle_heredoc(char *delimiter)
-{
-	int	pipefd[2];
-
-	if (pipe(pipefd) == -1)
-	{
-		perror("pipe");
-		return ;
-	}
-	handle_heredoc_input(pipefd, delimiter);
-	close(pipefd[1]);
-	if (dup2(pipefd[0], STDIN_FILENO) == -1)
-	{
-		perror("dup2 (heredoc redirection)");
-		close(pipefd[0]);
-		return ;
-	}
-	close(pipefd[0]);
 }
 
 void	handle_redirections(t_chevron *chevron_list)

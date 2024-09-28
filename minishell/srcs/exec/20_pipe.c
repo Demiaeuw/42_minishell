@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/27 21:06:55 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/28 02:50:58 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 	last_pid = 0;
 	args.envp = envp;
 	args.handler = handler;
-	g_status_cmd = 1;
+	g_shell_mode = 1;
 	while (token)
 	{
 		if (token->type == TOKEN_COMMAND)
@@ -37,5 +37,5 @@ void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 		token = token->next;
 	}
 	wait_for_children();
-	g_status_cmd = 0;
+	g_shell_mode = 0;
 }

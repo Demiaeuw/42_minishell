@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/27 21:06:09 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/28 02:52:22 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
-extern int g_status_cmd;
+extern int g_shell_mode;
 
 /**
  * Enum pour les liste chainé.
@@ -268,9 +268,13 @@ void			handle_p(t_process_data *args,
 //30
 int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
+void			handle_redirections(t_chevron *chevron_list);
+//31
+void			heredoc_signal_handler(int signum);
+void			setup_heredoc_signals(void);
+void			reset_signals(void);
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 void			handle_heredoc(char *delimiter);
-void			handle_redirections(t_chevron *chevron_list);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

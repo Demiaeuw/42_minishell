@@ -6,39 +6,19 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 19:13:56 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/28 02:51:05 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	g_status_cmd = 0;
+int	g_shell_mode = 0;
 
 void	init_mask(struct sigaction *sig)
 {
 	sigemptyset(&sig->sa_mask);
 	sigaddset(&sig->sa_mask, SIGINT);
 	sigaddset(&sig->sa_mask, SIGQUIT);
-}
-
-void	signal_handler(int signum, siginfo_t *siginfo, void *context)
-{
-	(void)siginfo;
-	(void)context;
-	if (signum == SIGINT)
-	{
-		if (g_status_cmd == 0)
-		{
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			write(1, "\n", 1);
-			rl_redisplay();
-		}
-		else if (g_status_cmd == 1)
-		{
-			write(1, "\n", 1);
-		}
-	}
 }
 
 void	init_sigaction(struct sigaction *sig)
@@ -59,6 +39,26 @@ void	init_signal(void)
 	init_sigaction(&sig);
 }
 
+void	signal_handler(int signum, siginfo_t *siginfo, void *context)
+{
+	(void)siginfo;
+	(void)context;
+	if (signum == SIGINT)
+	{
+		if (g_shell_mode == 0)
+		{
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			write(1, "\n", 1);
+			rl_redisplay();
+		}
+		else if (g_shell_mode == 1)
+		{
+			write(1, "\n", 1);
+		}
+	}
+}
+
 /**
  * lance un processus enfant avec fork() et redéfinit les signaux dans le
  * processus enfant.
@@ -77,9 +77,9 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 	}
 	else if (pid > 0)  // Parent
 	{
-		g_status_cmd = 1;  // Mode exécution
+		g_shell_mode = 1;  // Mode exécution
 		waitpid(pid, NULL, 0);
-		g_status_cmd = 0;  // Revenir en mode prompt
+		g_shell_mode = 0;  // Revenir en mode prompt
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 19:15:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/28 02:51:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	prepare_command(char ***split_args, char ***args, t_token *token)
 	while ((*split_args)[i] != NULL)
 	{
 		if ((ft_strcmp((*split_args)[i], "<<") == 0) ||
-			(token->file_in_out != NULL && token->file_in_out->value != NULL &&
-				ft_strcmp((*split_args)[i], token->file_in_out->value) == 0))
+				ft_strcmp((*split_args)[i], "<") == 0)
 		{
 			(*split_args)[i] = NULL;
 			break ;
