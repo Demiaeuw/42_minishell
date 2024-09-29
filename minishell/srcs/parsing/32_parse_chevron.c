@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   32_parse_chevron.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:08:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 18:12:04 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/29 22:28:05 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	parse_after_chevron(t_chevron_data *data)
 
 	*(data->current_position) = data->chevron + data->token_length;
 	while (**(data->current_position) == ' ')
-		(*(data->current_position))++;
+		data->current_position++;
 	end_of_value = ft_strchr(*(data->current_position), ' ');
 	if (end_of_value == NULL)
 		end_of_value = *(data->current_position)
