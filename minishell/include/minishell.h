@@ -6,10 +6,9 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/28 02:52:22 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:42:37 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -270,7 +269,6 @@ int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
 //31
-void			heredoc_signal_handler(int signum);
 void			setup_heredoc_signals(void);
 void			reset_signals(void);
 void			handle_heredoc_input(int pipefd[2], char *delimiter);

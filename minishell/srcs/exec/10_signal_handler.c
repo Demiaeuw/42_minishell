@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/28 02:51:05 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:47:24 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,29 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 {
 	(void)siginfo;
 	(void)context;
+
 	if (signum == SIGINT)
 	{
-		if (g_shell_mode == 0)
+		if (g_shell_mode == 0)  // Mode prompt
 		{
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			write(1, "\n", 1);
 			rl_redisplay();
 		}
-		else if (g_shell_mode == 1)
+		else if (g_shell_mode == 1)  // Mode exécution de commande
 		{
 			write(1, "\n", 1);
+		}
+		else if (g_shell_mode == 2)  // Mode heredoc
+		{
+			write(1, "\n", 1);
+			close(STDIN_FILENO);
+			g_shell_mode = 0;
 		}
 	}
 }
 
-/**
- * lance un processus enfant avec fork() et redéfinit les signaux dans le
- * processus enfant.
- */
 pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 {
 	pid_t	pid;
