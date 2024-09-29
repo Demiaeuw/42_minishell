@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/29 19:00:08 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 22:39:34 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 		{
 			write(1, "\n", 1);
 			close(STDIN_FILENO);
-			g_shell_mode = 0;
+			//g_shell_mode = 0;
 		}
 	}
 }
