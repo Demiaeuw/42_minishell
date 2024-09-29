@@ -6,7 +6,11 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/30 00:03:02 by yonieva          ###   ########.fr       */
+=======
+/*   Updated: 2024/09/29 22:39:34 by gaesteve         ###   ########.fr       */
+>>>>>>> 26026b7059bd359696a83a6a5a7510a3f5150ddd
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +63,7 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 		{
 			write(1, "\n", 1);
 			close(STDIN_FILENO);
-			g_shell_mode = 0;
+			//g_shell_mode = 0;
 		}
 	}
 }
