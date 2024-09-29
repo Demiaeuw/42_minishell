@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:08:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/29 22:28:05 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/29 22:30:08 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	parse_after_chevron(t_chevron_data *data)
 	char	*value_part;
 
 	*(data->current_position) = data->chevron + data->token_length;
-	while (**(data->current_position) == ' ')
+	while (*(data->current_position) == ' ')
 		data->current_position++;
 	end_of_value = ft_strchr(*(data->current_position), ' ');
 	if (end_of_value == NULL)
