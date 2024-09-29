@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/29 18:32:47 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 00:04:57 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ char			**convert_token(t_token *token);
 void			init_mask(struct sigaction *sig);
 void			signal_handler(int signum, siginfo_t *siginfo, void *context);
 void			init_sigaction(struct sigaction *sig);
-void			init_signal(void);
+void			init_signal();
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 //20

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_exec_execve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/29 18:54:54 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 23:21:14 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
 	if (execve(cmd_path, split_args, envp->env) == -1)
 	{
 		perror("execve error");
+		envp->status_cmd = 127;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -65,6 +66,7 @@ int	prepare_exec(char **split_args, char **args, char **cmd_path, t_envp *envp)
 		write(2, split_args[0], strlen(split_args[0]));
 		write(2, "\n", 1);
 		handle_memory_error(split_args, args);
+		envp->status_cmd = 127;
 		return (0);
 	}
 	return (1);

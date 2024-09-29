@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/29 19:00:08 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 00:03:02 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_sigaction(struct sigaction *sig)
 	sigaction(SIGQUIT, sig, NULL);
 }
 
-void	init_signal(void)
+void	init_signal()
 {
 	struct sigaction	sig;
 
@@ -54,9 +54,7 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 			rl_redisplay();
 		}
 		else if (g_shell_mode == 1)
-		{
 			write(1, "\n", 1);
-		}
 		else if (g_shell_mode == 2)
 		{
 			write(1, "\n", 1);
@@ -69,6 +67,7 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 {
 	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == 0)
@@ -81,8 +80,12 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 	else if (pid > 0)
 	{
 		g_shell_mode = 1;
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 		g_shell_mode = 0;
+		if (WIFEXITED(status))
+			envp->status_cmd = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			envp->status_cmd = 128 + WTERMSIG(status);
 	}
 	else
 	{
