@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:39:45 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/27 15:37:10 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:11:31 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*allocate_token(const char *start, size_t len)
 	token = (char *)malloc(len + 1);
 	if (token)
 	{
-		strncpy(token, start, len);
+		ft_strncpy(token, start, len);
 		token[len] = '\0';
 	}
 	return (token);

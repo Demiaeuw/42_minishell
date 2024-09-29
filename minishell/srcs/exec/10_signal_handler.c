@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/29 15:47:24 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:00:08 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 
 	if (signum == SIGINT)
 	{
-		if (g_shell_mode == 0)  // Mode prompt
+		if (g_shell_mode == 0)
 		{
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			write(1, "\n", 1);
 			rl_redisplay();
 		}
-		else if (g_shell_mode == 1)  // Mode exécution de commande
+		else if (g_shell_mode == 1)
 		{
 			write(1, "\n", 1);
 		}
-		else if (g_shell_mode == 2)  // Mode heredoc
+		else if (g_shell_mode == 2)
 		{
 			write(1, "\n", 1);
 			close(STDIN_FILENO);
@@ -71,18 +71,18 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 	pid_t	pid;
 
 	pid = fork();
-	if (pid == 0)  // Processus enfant
+	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);  // Réinitialiser SIGINT dans l'enfant
+		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGTERM, SIG_DFL);
 		execute_child_process(cmd_path, split_args, envp);
 	}
-	else if (pid > 0)  // Parent
+	else if (pid > 0)
 	{
-		g_shell_mode = 1;  // Mode exécution
+		g_shell_mode = 1;
 		waitpid(pid, NULL, 0);
-		g_shell_mode = 0;  // Revenir en mode prompt
+		g_shell_mode = 0;
 	}
 	else
 	{

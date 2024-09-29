@@ -6,13 +6,12 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/28 02:50:58 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:00:02 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// Fonction principale de gestion des pipes
 void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 {
 	int pipefd[2];
@@ -35,6 +34,8 @@ void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 			handle_p(&args, &fd_in, pipefd, &last_pid);
 		}
 		token = token->next;
+		if (token && token->type == TOKEN_PIPE)
+			token = token->next;
 	}
 	wait_for_children();
 	g_shell_mode = 0;

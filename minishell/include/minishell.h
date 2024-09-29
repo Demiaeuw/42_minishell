@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/29 15:42:37 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:32:47 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,8 @@ void			setup_heredoc_signals(void);
 void			reset_signals(void);
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 void			handle_heredoc(char *delimiter);
+
+void exec_cmd_with_redirections(t_token *token, t_process_data *args, int *fd_in, int pipefd[2]);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

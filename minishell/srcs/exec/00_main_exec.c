@@ -6,15 +6,11 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/25 16:31:17 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:54:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-//en rapport avec les fork, quand ca merde, j appelle la struct de yoan
-// si y a une erreur en rapport je donne le pid, sinon je renvoie 1 pour autres
-// erreurs.
 
 void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 {
@@ -30,9 +26,9 @@ void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 		if (current->type == TOKEN_PIPE)
 		{
 			pipe = 1;
-			break ;
+			break;
 		}
-		else if (current->file_in_out != NULL)
+		if (current->file_in_out != NULL)
 			redirection = 1;
 		current = current->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/29 15:47:43 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:53:04 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)  // CTRL+D ou fin de fichier
+		if (!line)
 			break;
 		if (strcmp(line, delimiter) == 0)
 		{
@@ -30,7 +30,7 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 		write(pipefd[1], "\n", 1);
 		free(line);
 	}
-	close(pipefd[1]);  // Fermer le pipe d'écriture après l'input
+	close(pipefd[1]);
 }
 
 void	handle_heredoc(char *delimiter)
@@ -42,14 +42,8 @@ void	handle_heredoc(char *delimiter)
 		perror("pipe");
 		return;
 	}
-	g_shell_mode = 2;  // Mode heredoc
-	handle_heredoc_input(pipefd, delimiter);  // Lire le heredoc
-	// Si interrompu par SIGINT, sortir proprement
-	// if (g_shell_mode == 0)
-	// {
-	// 	close(pipefd[0]);
-	// 	return;
-	// }
+	g_shell_mode = 2;
+	handle_heredoc_input(pipefd, delimiter);
 	if (dup2(pipefd[0], STDIN_FILENO) == -1)
 	{
 		perror("dup2 (heredoc redirection)");

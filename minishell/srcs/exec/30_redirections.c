@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/28 02:51:43 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:59:15 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,20 @@ void	handle_redirections(t_chevron *chevron_list)
 	while (current)
 	{
 		if (current->type == IN)
-			redirect_infile(current->value);
+		{
+			if (redirect_infile(current->value) == -1)
+				return;
+		}
 		else if (current->type == OUT)
-			redirect_outfile(current->value, 0);
+		{
+			if (redirect_outfile(current->value, 0) == -1)
+				return;
+		}
 		else if (current->type == DOUBLE_OUT)
-			redirect_outfile(current->value, 1);
+		{
+			if (redirect_outfile(current->value, 1) == -1)
+				return;
+		}
 		else if (current->type == DOUBLE_IN)
 			handle_heredoc(current->value);
 		current = current->next;

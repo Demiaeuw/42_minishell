@@ -6,23 +6,26 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:15:55 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/27 21:06:51 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:59:53 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// Function to configure process arguments, including redirections
-void	setup_process_args(t_process_data *args, int fd_in, int *pipefd)
+void wait_for_children()
 {
-	args->in = fd_in;
-	if (args->token->next && args->token->next->type == TOKEN_PIPE)
-		args->out = pipefd[1];
-	else
-		args->out = STDOUT_FILENO;
+	int status;
+
+	while (waitpid(-1, &status, 0) > 0)
+	{
+		if (WIFEXITED(status))
+		{
+			int exit_status = WEXITSTATUS(status);
+			(void)exit_status;
+		}
+	}
 }
 
-// Fonction pour creer un pipe si necessaire
 void	create_pipe_if_needed(int *pipefd, t_token *token)
 {
 	if (token->next && token->next->type == TOKEN_PIPE)
@@ -40,22 +43,16 @@ void	create_pipe_if_needed(int *pipefd, t_token *token)
 	}
 }
 
-//ON ATTEND QUE LES ENFANTS SOIENT A LA GARDERIE
-void wait_for_children()
+void	setup_process_args(t_process_data *args, int fd_in, int *pipefd)
 {
-	int status;
-
-	while (waitpid(-1, &status, 0) > 0)
-	{
-		if (WIFEXITED(status))
-		{
-			int exit_status = WEXITSTATUS(status);
-			(void)exit_status;
-		}
-	}
+	args->in = fd_in;
+	if (args->token->next && args->token->next->type == TOKEN_PIPE
+			&& !args->token->file_in_out)
+		args->out = pipefd[1];
+	else
+		args->out = STDOUT_FILENO;
 }
 
-// Fonction pour gérer la création et l'exécution des processus
 void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 {
 	pid_t pid;
@@ -78,10 +75,9 @@ void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 			dup2(args->out, STDOUT_FILENO);
 			close(args->out);
 		}
-		if (args->token->next && args->token->next->type == TOKEN_PIPE)
-		{
+		if (pipefd[0] != -1)
 			close(pipefd[0]);
-		}
+		handle_redirections(args->token->file_in_out);
 		if (builtin_check(args->token))
 			builtin_selector(args->token, args->envp);
 		else
@@ -90,11 +86,11 @@ void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 	}
 	else
 	{
-		*last_pid = pid;
 		if (*fd_in != 0)
 			close(*fd_in);
 		if (pipefd[1] != -1)
 			close(pipefd[1]);
 		*fd_in = pipefd[0];
+		*last_pid = pid;
 	}
 }
