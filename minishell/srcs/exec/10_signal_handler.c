@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 17:11:16 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/30 17:14:35 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

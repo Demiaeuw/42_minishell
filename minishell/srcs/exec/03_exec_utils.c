@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 16:08:25 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:12:31 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void handle_parent_process(pid_t pid, t_signal *handler)
 
 	(void)handler;
 	waitpid(pid, &status, WUNTRACED);
-
 	if (WIFSIGNALED(status))
 	{
 		g_global_sig = WTERMSIG(status) + 128;

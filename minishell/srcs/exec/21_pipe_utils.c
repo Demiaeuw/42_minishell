@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:15:55 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 11:14:27 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:12:14 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 	}
 	else if (pid == 0)
 	{
+		handle_redirections(args->token->file_in_out);
 		if (args->in != STDIN_FILENO)
 		{
 			dup2(args->in, STDIN_FILENO);
@@ -77,7 +78,6 @@ void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 		}
 		if (pipefd[0] != -1)
 			close(pipefd[0]);
-		handle_redirections(args->token->file_in_out);
 		if (builtin_check(args->token))
 			builtin_selector(args->token, args->envp);
 		else
