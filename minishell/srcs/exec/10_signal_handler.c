@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 11:39:20 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:57:28 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,17 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 
 	if (signum == SIGINT)
 	{
-		if (g_global_sig == 0)
-		{
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			write(1, "\n", 1);
-			rl_redisplay();
-			g_global_sig = 130;
-		}
-		else if (g_global_sig == 1)
-		{
-			write(1, "\n", 1);
-			g_global_sig = 130;
-		}
-		else if (g_global_sig == 2)
-		{
-			write(1, "\n", 1);
-			close(STDIN_FILENO);
-		}
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		write(1, "\n", 1);
+		rl_redisplay();
+		g_global_sig = 130;
 	}
 }
 
 pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 {
 	pid_t	pid;
-	int		status;
 
 	pid = fork();
 	if (pid == 0)
@@ -81,11 +67,7 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 		execute_child_process(cmd_path, split_args, envp);
 	}
 	else if (pid > 0)
-	{
-		g_global_sig = 1;
 		waitpid(pid, NULL, 0);
-		g_global_sig = 0;
-	}
 	else
 	{
 		perror("fork error");

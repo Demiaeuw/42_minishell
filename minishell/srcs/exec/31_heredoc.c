@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 11:35:32 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:57:33 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	handle_heredoc(char *delimiter)
 		perror("pipe");
 		return;
 	}
-	init_signal_heredoc();
 	handle_heredoc_input(pipefd, delimiter);
 	if (dup2(pipefd[0], STDIN_FILENO) == -1)
 	{
