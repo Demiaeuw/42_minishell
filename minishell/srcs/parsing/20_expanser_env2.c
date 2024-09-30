@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_expanser_env2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:34:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 16:44:39 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:08:38 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	handle_variable_expansion(const char *value,
 	}
 	else if (value[data->i] == '?')
 	{
+		if (g_global_sig == 130)
+		{	
+			envp->status_cmd = 130;
+			g_global_sig = 0;
+		}
 		pid_str = ft_itoa(envp->status_cmd);
 		insert_string_into_result(data, pid_str);
 		free(pid_str);

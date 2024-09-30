@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 16:11:08 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:11:16 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_mask(struct sigaction *sig)
 
 void	init_sigaction(struct sigaction *sig)
 {
+	sig->sa_flags = SA_SIGINFO;
+	sig->sa_sigaction = &signal_handler;
 	sigaction(SIGINT, sig, NULL);
 	sig->sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, sig, NULL);
@@ -34,8 +36,6 @@ void	init_signal()
 
 	ft_memset(&sig, 0, sizeof(struct sigaction));
 	init_mask(&sig);
-	sig.sa_flags = SA_SIGINFO;
-	sig.sa_sigaction = &signal_handler;
 	init_sigaction(&sig);
 }
 

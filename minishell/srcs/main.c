@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 16:08:20 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:08:38 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_FAILURE);
 	(void)av;
 	envp = NULL;
-	init_signal(envp);
+	init_signal();
 	init_minishell(&envp, env);
 	main_loop(envp, &handler);
 	cleanup_and_exit(envp);
