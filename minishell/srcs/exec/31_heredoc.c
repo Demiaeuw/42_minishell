@@ -6,13 +6,11 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 15:57:33 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:13:55 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-//write(1, "Minishell error : here-document (wanted %d)", delimiter);
 
 void	handle_heredoc_input(int pipefd[2], char *delimiter)
 {

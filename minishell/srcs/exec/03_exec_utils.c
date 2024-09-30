@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 11:24:11 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:08:25 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void handle_parent_process(pid_t pid, t_signal *handler)
 	int status;
 
 	(void)handler;
-	waitpid(pid, &status, WUNTRACED);// Attend que le processus enfant termine
+	waitpid(pid, &status, WUNTRACED);
 
-	if (WIFSIGNALED(status))// Si le processus enfant a été tué par un signal
+	if (WIFSIGNALED(status))
 	{
-		g_global_sig = WTERMSIG(status) + 128;// SIGINT = 130, etc.
+		g_global_sig = WTERMSIG(status) + 128;
 	}
-	else if (WIFEXITED(status))// Si le processus enfant s'est terminé normalement
+	else if (WIFEXITED(status))
 	{
-		g_global_sig = WEXITSTATUS(status);// Code de retour de l'enfant
+		g_global_sig = WEXITSTATUS(status);
 	}
 }
 
