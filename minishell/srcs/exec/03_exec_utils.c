@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/29 18:52:06 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:24:11 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,21 @@ void	file_descriptor_handler(int in, int out)
 	}
 }
 
-void	handle_parent_process(pid_t pid, t_signal *handler)
+void handle_parent_process(pid_t pid, t_signal *handler)
 {
+	int status;
+
 	(void)handler;
-	waitpid(pid, &handler->sigterm, WUNTRACED);
-	if (WIFSIGNALED(handler->sigterm))
-		handler->sigterm = WTERMSIG(handler->sigterm) + 128;
-	else if (WIFEXITED(handler->sigterm))
-		handler->sigterm = WEXITSTATUS(handler->sigterm);
+	waitpid(pid, &status, WUNTRACED);// Attend que le processus enfant termine
+
+	if (WIFSIGNALED(status))// Si le processus enfant a été tué par un signal
+	{
+		g_global_sig = WTERMSIG(status) + 128;// SIGINT = 130, etc.
+	}
+	else if (WIFEXITED(status))// Si le processus enfant s'est terminé normalement
+	{
+		g_global_sig = WEXITSTATUS(status);// Code de retour de l'enfant
+	}
 }
 
 void	handle_child_process(t_process_data *args)

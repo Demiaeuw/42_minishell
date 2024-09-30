@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/30 00:03:02 by yonieva          ###   ########.fr       */
-=======
-/*   Updated: 2024/09/29 22:39:34 by gaesteve         ###   ########.fr       */
->>>>>>> 26026b7059bd359696a83a6a5a7510a3f5150ddd
+/*   Updated: 2024/09/30 11:39:20 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	g_shell_mode = 0;
+int	g_global_sig = 0;
 
 void	init_mask(struct sigaction *sig)
 {
@@ -50,20 +46,23 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 
 	if (signum == SIGINT)
 	{
-		if (g_shell_mode == 0)
+		if (g_global_sig == 0)
 		{
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			write(1, "\n", 1);
 			rl_redisplay();
+			g_global_sig = 130;
 		}
-		else if (g_shell_mode == 1)
+		else if (g_global_sig == 1)
+		{
 			write(1, "\n", 1);
-		else if (g_shell_mode == 2)
+			g_global_sig = 130;
+		}
+		else if (g_global_sig == 2)
 		{
 			write(1, "\n", 1);
 			close(STDIN_FILENO);
-			//g_shell_mode = 0;
 		}
 	}
 }
@@ -83,13 +82,9 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 	}
 	else if (pid > 0)
 	{
-		g_shell_mode = 1;
-		waitpid(pid, &status, 0);
-		g_shell_mode = 0;
-		if (WIFEXITED(status))
-			envp->status_cmd = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			envp->status_cmd = 128 + WTERMSIG(status);
+		g_global_sig = 1;
+		waitpid(pid, NULL, 0);
+		g_global_sig = 0;
 	}
 	else
 	{

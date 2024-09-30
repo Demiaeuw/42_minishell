@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/30 00:04:57 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/30 11:36:48 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
-extern int g_shell_mode;
+extern int g_global_sig;
 
 /**
  * Enum pour les liste chainé.
@@ -269,12 +269,10 @@ int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
 //31
-void			setup_heredoc_signals(void);
-void			reset_signals(void);
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 void			handle_heredoc(char *delimiter);
-
-void exec_cmd_with_redirections(t_token *token, t_process_data *args, int *fd_in, int pipefd[2]);
+void			handle_sigint_heredoc(int signum);
+void			reset_signal();
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/27 15:21:29 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/09/30 11:10:47 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 /**
- * Ici ce sont les fonctions qui permettent d'envoyer le programme dans 
+ * Ici ce sont les fonctions qui permettent d'envoyer le programme dans
  * les bonnes parties du code pour les builtins
  */
 int	builtin_check(t_token *token)
