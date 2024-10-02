@@ -6,20 +6,20 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:40:12 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 17:12:31 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:47:40 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	cleanup_execution(char **split_args, char **args, char *cmd_path)
+int	is_redirection(char *arg)
 {
-	if (split_args)
-		free_split_command(split_args);
-	if (args)
-		free_split_command(args);
-	if (cmd_path)
-		free(cmd_path);
+	if (ft_strcmp(arg, "<<") == 0 || ft_strcmp(arg, "<") == 0
+		|| ft_strcmp(arg, ">>") == 0 || ft_strcmp(arg, ">") == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 void	file_descriptor_handler(int in, int out)
@@ -44,9 +44,9 @@ void	file_descriptor_handler(int in, int out)
 	}
 }
 
-void handle_parent_process(pid_t pid, t_signal *handler)
+void	handle_parent_process(pid_t pid, t_signal *handler)
 {
-	int status;
+	int	status;
 
 	(void)handler;
 	waitpid(pid, &status, WUNTRACED);

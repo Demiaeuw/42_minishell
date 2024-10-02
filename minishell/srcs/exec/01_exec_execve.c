@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 16:08:43 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:52:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
-void	execute_child_process(char *cmd_path, char **split_args, t_envp *envp)
+void	execve_error_handling(char *cmd_path, char **split_args, t_envp *envp)
 {
 	if (execve(cmd_path, split_args, envp->env) == -1)
 	{
@@ -40,8 +40,7 @@ int	prepare_command(char ***split_args, char ***args, t_token *token)
 	i = 0;
 	while ((*split_args)[i] != NULL)
 	{
-		if ((ft_strcmp((*split_args)[i], "<<") == 0) ||
-				ft_strcmp((*split_args)[i], "<") == 0)
+		if (is_redirection((*split_args)[i]))
 		{
 			(*split_args)[i] = NULL;
 			break ;
@@ -84,5 +83,10 @@ void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 	if (!prepare_exec(split_args, args, &cmd_path, envp))
 		return ;
 	fork_and_execute(cmd_path, split_args, envp);
-	cleanup_execution(split_args, args, cmd_path);
+	if (split_args)
+		free_split_command(split_args);
+	if (args)
+		free_split_command(args);
+	if (cmd_path)
+		free(cmd_path);
 }

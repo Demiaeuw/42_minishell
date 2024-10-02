@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 17:11:49 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:52:55 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || g_global_sig == 130)
-			break;
+		if (!line)
+		{
+			write(1, "\n", 2);
+			printf("minishell: warning: wanted %s\n", delimiter);
+			break ;
+		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		write(pipefd[1], line, strlen(line));
 		write(pipefd[1], "\n", 1);
 		free(line);
 	}
 	close(pipefd[1]);
-	signal(SIGINT, handle_sigint_heredoc);
 }
 
 void	handle_heredoc(char *delimiter)
@@ -42,7 +45,7 @@ void	handle_heredoc(char *delimiter)
 	if (pipe(pipefd) == -1)
 	{
 		perror("pipe");
-		return;
+		return ;
 	}
 	handle_heredoc_input(pipefd, delimiter);
 	if (dup2(pipefd[0], STDIN_FILENO) == -1)
@@ -64,7 +67,7 @@ void	handle_sigint_heredoc(int signum)
 	}
 }
 
-void	reset_signal()
+void	reset_signal(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/09/30 17:11:40 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:50:51 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	redirect_infile(char *filename)
 {
 	int	fd;
 
+	if (access(filename, F_OK) == -1)
+	{
+		perror("Le fichier n'existe pas");
+		return (-1);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -68,20 +73,18 @@ void	handle_redirections(t_chevron *chevron_list)
 		if (current->type == IN)
 		{
 			if (redirect_infile(current->value) == -1)
-				return;
+				return ;
 		}
-		else if (current->type == OUT)
+		else if (current->type == OUT || current->type == DOUBLE_OUT)
 		{
-			if (redirect_outfile(current->value, 0) == -1)
-				return;
-		}
-		else if (current->type == DOUBLE_OUT)
-		{
-			if (redirect_outfile(current->value, 1) == -1)
-				return;
+			if (redirect_outfile(current->value,
+					current->type == DOUBLE_OUT) == -1)
+				return ;
 		}
 		else if (current->type == DOUBLE_IN)
+		{
 			handle_heredoc(current->value);
+		}
 		current = current->next;
 	}
 }

@@ -6,18 +6,18 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 17:12:10 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:52:57 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
+void	execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 {
-	int pipefd[2];
-	int fd_in;
-	pid_t last_pid;
-	t_process_data args;
+	int				pipefd[2];
+	int				fd_in;
+	pid_t			last_pid;
+	t_process_data	args;
 
 	fd_in = 0;
 	last_pid = 0;

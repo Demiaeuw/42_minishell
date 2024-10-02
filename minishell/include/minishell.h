@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/30 17:15:49 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:52:35 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void			main_command_chevron(t_token *token, t_envp *envp,
 					t_signal *handler);
 //01
 void			handle_memory_error(char **split_args, char **args);
-void			execute_child_process(char *cmd_path,
+void			execve_error_handling(char *cmd_path,
 					char **split_args, t_envp *envp);
 int				prepare_command(char ***split_args, char ***args,
 					t_token *token);
@@ -264,15 +264,20 @@ void			create_pipe_if_needed(int *pipefd, t_token *token);
 void			wait_for_children();
 void			handle_p(t_process_data *args,
 					int *fd_in, int *pipefd, int *last_pid);
+void			execute_child_process(t_process_data *args, int *pipefd);
 //30
 int				redirect_infile(char *filename);
 int				redirect_outfile(char *filename, int append);
+int				handle_input_redirection(t_chevron *current);
+int				handle_output_redirection(t_chevron *current);
 void			handle_redirections(t_chevron *chevron_list);
 //31
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 void			handle_heredoc(char *delimiter);
 void			handle_sigint_heredoc(int signum);
 void			reset_signal();
+
+int				is_redirection(char *arg);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 17:06:41 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/02 13:52:59 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 		if (current->type == TOKEN_PIPE)
 		{
 			pipe = 1;
-			break;
+			break ;
 		}
 		if (current->file_in_out != NULL)
 			redirection = 1;

@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 17:14:35 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:52:37 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_sigaction(struct sigaction *sig)
 	sigaction(SIGQUIT, sig, NULL);
 }
 
-void	init_signal()
+void	init_signal(void)
 {
 	struct sigaction	sig;
 
@@ -43,7 +43,6 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 {
 	(void)siginfo;
 	(void)context;
-
 	if (signum == SIGINT)
 	{
 		rl_on_new_line();
@@ -64,7 +63,7 @@ pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGTERM, SIG_DFL);
-		execute_child_process(cmd_path, split_args, envp);
+		execve_error_handling(cmd_path, split_args, envp);
 	}
 	else if (pid > 0)
 		waitpid(pid, NULL, 0);
