@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/10/02 13:52:35 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:03:02 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # include "../include/utils/ft_printf/includes/ft_printf.h"
 # include "../include/utils/gnl/get_next_line.h"
 
-extern int g_global_sig;
+extern int	g_global_sig;
 
 /**
  * Enum pour les liste chainé.
@@ -252,7 +252,7 @@ char			**convert_token(t_token *token);
 void			init_mask(struct sigaction *sig);
 void			signal_handler(int signum, siginfo_t *siginfo, void *context);
 void			init_sigaction(struct sigaction *sig);
-void			init_signal();
+void			init_signal(void);
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 //20
@@ -261,7 +261,7 @@ void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 void			setup_process_args(t_process_data *args,
 					int fd_in, int *pipefd);
 void			create_pipe_if_needed(int *pipefd, t_token *token);
-void			wait_for_children();
+void			wait_for_children(void);
 void			handle_p(t_process_data *args,
 					int *fd_in, int *pipefd, int *last_pid);
 void			execute_child_process(t_process_data *args, int *pipefd);
@@ -275,7 +275,7 @@ void			handle_redirections(t_chevron *chevron_list);
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 void			handle_heredoc(char *delimiter);
 void			handle_sigint_heredoc(int signum);
-void			reset_signal();
+void			reset_signal(void);
 
 int				is_redirection(char *arg);
 
