@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:15:55 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/02 13:52:52 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:29:44 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	setup_process_args(t_process_data *args, int fd_in, int *pipefd)
 
 void	execute_child_process(t_process_data *args, int *pipefd)
 {
-	handle_redirections(args->token->file_in_out);
 	if (args->in != STDIN_FILENO)
 	{
 		dup2(args->in, STDIN_FILENO);
@@ -69,6 +68,8 @@ void	execute_child_process(t_process_data *args, int *pipefd)
 	}
 	if (pipefd[0] != -1)
 		close(pipefd[0]);
+	if (args->token->file_in_out)
+			handle_redirections(args->token->file_in_out);
 	if (builtin_check(args->token))
 		builtin_selector(args->token, args->envp);
 	else
