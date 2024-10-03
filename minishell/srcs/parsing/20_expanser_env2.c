@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:34:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 17:08:38 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:53:13 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	handle_variable_expansion(const char *value,
 	else if (value[data->i] == '?')
 	{
 		if (g_global_sig == 130)
-		{	
+		{
 			envp->status_cmd = 130;
 			g_global_sig = 0;
 		}

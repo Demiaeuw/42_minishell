@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:05:59 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/02 15:56:19 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:33:10 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ void	parse_chevron_token(char **current_position, t_chevron **head,
 	data.types = types;
 	find_chevron_in_str(*current_position, tokens, &data);
 	if (data.chevron)
+	{
 		parse_before_chevron(&data);
-	parse_after_chevron(&data);
+		parse_after_chevron(&data);
+	}
+	else
+		*current_position += 1;
 }
 
 void	initialize_tokens_types(char **tokens, t_chevron_type *types)

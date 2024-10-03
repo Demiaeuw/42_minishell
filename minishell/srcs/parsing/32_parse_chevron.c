@@ -6,7 +6,7 @@
 /*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:08:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/29 22:40:31 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:54:45 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * il y a des chevrons
  */
 void	find_chevron_in_str(char *current_position, char **tokens,
-			t_chevron_data *data)
+								t_chevron_data *data)
 {
 	int		i;
 	char	*found;
@@ -25,6 +25,11 @@ void	find_chevron_in_str(char *current_position, char **tokens,
 	i = 0;
 	while (i < 4)
 	{
+		if (tokens[i] == NULL)
+		{
+			i++;
+			continue ;
+		}
 		found = strstr(current_position, tokens[i]);
 		if (found && (data->chevron == NULL || found < data->chevron))
 		{
@@ -58,16 +63,26 @@ void	parse_after_chevron(t_chevron_data *data)
 {
 	char	*end_of_value;
 	char	*value_part;
+	char	*current_position;
+	size_t	length;
+	size_t	value_length;
 
+	if (data->chevron == NULL || data->token_length <= 0)
+		return ;
 	*(data->current_position) = data->chevron + data->token_length;
 	while (**(data->current_position) == ' ')
 		(*(data->current_position))++;
 	end_of_value = ft_strchr(*(data->current_position), ' ');
 	if (end_of_value == NULL)
-		end_of_value = *(data->current_position)
-			+ ft_strlen(*(data->current_position));
-	value_part = ft_strndup(*(data->current_position), end_of_value
-			- *(data->current_position));
+	{
+		current_position = *(data->current_position);
+		length = ft_strlen(current_position);
+		end_of_value = current_position + length;
+	}
+	if (end_of_value < *(data->current_position))
+		return ;
+	value_length = end_of_value - *(data->current_position);
+	value_part = ft_strndup(*(data->current_position), value_length);
 	append_chevron(data->head, data->types[data->token_index], value_part);
 	free(value_part);
 	*(data->current_position) = end_of_value;
