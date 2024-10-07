@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   30_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/02 13:50:51 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/08 01:03:25 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	redirect_infile(char *filename)
 	return (0);
 }
 
-int	redirect_outfile(char *filename, int append)
+int	redirect_outfile(const char *filename, int append)
 {
 	int	flags;
 	int	fd;

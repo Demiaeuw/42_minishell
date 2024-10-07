@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/10/03 16:03:02 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/08 00:16:40 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ void			handle_p(t_process_data *args,
 void			execute_child_process(t_process_data *args, int *pipefd);
 //30
 int				redirect_infile(char *filename);
-int				redirect_outfile(char *filename, int append);
+int				redirect_outfile(const char *filename, int append);
 int				handle_input_redirection(t_chevron *current);
 int				handle_output_redirection(t_chevron *current);
 void			handle_redirections(t_chevron *chevron_list);
@@ -278,6 +278,7 @@ void			handle_sigint_heredoc(int signum);
 void			reset_signal(void);
 
 int				is_redirection(char *arg);
+const char 		*get_output_file(t_chevron *file_in_out);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
@@ -291,7 +292,7 @@ int				update_env_variables(t_envp *envp,
 int				handle_new_pwd_error(char *home_path, t_envp *envp);
 char			*get_current_working_directory(char *cwd, size_t size);
 //01
-int				exe_echo(char *str, t_envp *envp);
+int 			exe_echo(char *str, t_envp *envp, const char *output_file);
 void			ft_fflush_stdout(void);
 //02
 void			mini_env(t_envp *envp);

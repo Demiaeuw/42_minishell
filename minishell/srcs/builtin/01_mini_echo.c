@@ -46,30 +46,45 @@ void	ft_fflush_stdout(void)
 	}
 }
 
-int	exe_echo(char *str, t_envp *envp)
-{
-	int	option;
-	int	i;
-	int	start_index;
+int exe_echo(char *str, t_envp *envp, const char *output_file) {
+    int option;
+    int i;
+    int start_index;
 
-	option = 0;
-	i = 0;
-	start_index = 0;
-	str = clean_string(str);
-	i = skip_spaces(str, i);
-	i += 4;
-	i = skip_spaces(str, i);
-	while (check_option_echo(&str[i], &start_index))
-	{
-		option = 1;
-		i += start_index;
-		i = skip_spaces(str, i);
-	}
-	if (str[i] != '\0')
-		printf("%s", &str[i]);
-	if (!option)
-		printf("\n");
-	ft_fflush_stdout();
-	free(str);
-	return (envp->status_cmd = 0, 0);
+    option = 0;
+    i = 0;
+    start_index = 0;
+    str = clean_string(str);
+    i = skip_spaces(str, i);
+    i += 4;  // Passer "echo"
+    i = skip_spaces(str, i);
+
+    // Vérifiez les options de echo
+    while (check_option_echo(&str[i], &start_index)) {
+        option = 1;
+        i += start_index;
+        i = skip_spaces(str, i);
+    }
+
+    // Redirection vers le fichier de sortie, s'il est spécifié
+    if (output_file) {
+        int append = 0; // ou 1 selon si vous souhaitez ajouter
+        if (redirect_outfile(output_file, append) < 0) {
+            perror("Erreur de redirection vers le fichier");
+            free(str);
+            return -1; // Gestion d'erreur
+        }
+    }
+
+    // Imprimez la chaîne dans le fichier de sortie redirigé
+    if (str[i] != '\0') {
+        printf("%s", &str[i]);
+    }
+    if (!option) {
+        printf("\n");
+    }
+
+    ft_fflush_stdout();
+    free(str);
+    return (envp->status_cmd = 0, 0);
 }
