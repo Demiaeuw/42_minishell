@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/10/08 00:16:40 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:44:22 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,14 +266,11 @@ void			handle_p(t_process_data *args,
 					int *fd_in, int *pipefd, int *last_pid);
 void			execute_child_process(t_process_data *args, int *pipefd);
 //30
-int				redirect_infile(char *filename);
 int				redirect_outfile(const char *filename, int append);
-int				handle_input_redirection(t_chevron *current);
-int				handle_output_redirection(t_chevron *current);
 void			handle_redirections(t_chevron *chevron_list);
 //31
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
-void			handle_heredoc(char *delimiter);
+int				handle_heredoc(char *delimiter);
 void			handle_sigint_heredoc(int signum);
 void			reset_signal(void);
 

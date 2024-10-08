@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   30_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/08 01:03:25 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:43:09 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	redirect_infile(char *filename)
-{
-	int	fd;
-
-	if (access(filename, F_OK) == -1)
-	{
-		perror("Le fichier n'existe pas");
-		return (-1);
-	}
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Erreur d'ouverture du fichier");
-		return (-1);
-	}
-	if (dup2(fd, STDIN_FILENO) < 0)
-	{
-		perror("Erreur de dup2 (redirection d'entrée)");
-		close(fd);
-		return (-1);
-	}
-	close(fd);
-	return (0);
-}
 
 int	redirect_outfile(const char *filename, int append)
 {
@@ -65,25 +40,46 @@ int	redirect_outfile(const char *filename, int append)
 
 void	handle_redirections(t_chevron *chevron_list)
 {
-	t_chevron	*current;
+	int fd_in = -1;
+	int fd_out = -1;
+	t_chevron *current = chevron_list;
 
-	current = chevron_list;
 	while (current)
 	{
 		if (current->type == IN)
 		{
-			if (redirect_infile(current->value) == -1)
+			fd_in = open(current->value, O_RDONLY);
+			if (fd_in == -1)
+			{
+				perror("Erreur d'ouverture du fichier d'entrée");
 				return ;
+			}
+			dup2(fd_in, STDIN_FILENO);
+			close(fd_in);
 		}
 		else if (current->type == OUT || current->type == DOUBLE_OUT)
 		{
-			if (redirect_outfile(current->value,
-					current->type == DOUBLE_OUT) == -1)
+			int flags = O_WRONLY | O_CREAT;
+			flags |= (current->type == DOUBLE_OUT) ? O_APPEND : O_TRUNC;
+			fd_out = open(current->value, flags, 0644);
+			if (fd_out == -1)
+			{
+				perror("Erreur d'ouverture du fichier de sortie");
 				return ;
+			}
+			dup2(fd_out, STDOUT_FILENO);
+			close(fd_out);
 		}
 		else if (current->type == DOUBLE_IN)
 		{
-			handle_heredoc(current->value);
+			fd_in = handle_heredoc(current->value);
+			if (fd_in == -1)
+			{
+				perror("Erreur avec le heredoc");
+				return ;
+			}
+			dup2(fd_in, STDIN_FILENO);
+			close(fd_in);
 		}
 		current = current->next;
 	}

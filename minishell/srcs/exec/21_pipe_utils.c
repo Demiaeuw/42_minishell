@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:15:55 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/03 18:29:44 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:44:14 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,16 @@ void	execute_child_process(t_process_data *args, int *pipefd)
 
 void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 {
-	pid_t	pid;
+	pid_t pid;
 
+	if (args->token->file_in_out && args->token->file_in_out->type == DOUBLE_IN)
+	{
+		int heredoc_fd = handle_heredoc(args->token->file_in_out->value);
+		if (heredoc_fd != -1)
+		{
+			*fd_in = heredoc_fd;
+		}
+	}
 	pid = fork();
 	if (pid == -1)
 	{
@@ -88,7 +96,31 @@ void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
-		execute_child_process(args, pipefd);
+	{
+		if (*fd_in != STDIN_FILENO)
+		{
+			dup2(*fd_in, STDIN_FILENO);
+			close(*fd_in);
+		}
+		if (pipefd[1] != STDOUT_FILENO)
+		{
+			dup2(pipefd[1], STDOUT_FILENO);
+			close(pipefd[1]);
+		}
+
+		if (pipefd[0] != -1)
+			close(pipefd[0]);
+		if (args->token->file_in_out && args->token->file_in_out->type != DOUBLE_IN)
+		{
+			handle_redirections(args->token->file_in_out);
+		}
+		if (builtin_check(args->token))
+			builtin_selector(args->token, args->envp);
+		else
+			execute_execve(args->token, args->envp, args->handler);
+
+		exit(EXIT_FAILURE);
+	}
 	else
 	{
 		if (*fd_in != 0)

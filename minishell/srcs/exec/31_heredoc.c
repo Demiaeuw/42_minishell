@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/02 13:52:55 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:41:07 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,18 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 	close(pipefd[1]);
 }
 
-void	handle_heredoc(char *delimiter)
+int	handle_heredoc(char *delimiter)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) == -1)
 	{
 		perror("pipe");
-		return ;
+		return (-1);
 	}
 	handle_heredoc_input(pipefd, delimiter);
-	if (dup2(pipefd[0], STDIN_FILENO) == -1)
-	{
-		perror("dup2 (heredoc redirection)");
-		close(pipefd[0]);
-	}
-	close(pipefd[0]);
-	reset_signal();
+	close(pipefd[1]);
+	return (pipefd[0]);
 }
 
 void	handle_sigint_heredoc(int signum)
