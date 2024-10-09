@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/08 16:41:07 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:25:02 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 		line = readline("> ");
 		if (!line)
 		{
+			if (g_global_sig == 130)
+				break;
 			write(1, "\n", 2);
-			printf("minishell: warning: wanted %s\n", delimiter);
-			break ;
 		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
@@ -56,7 +56,6 @@ void	handle_sigint_heredoc(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(1, "\n", 1);
 		close(STDIN_FILENO);
 		g_global_sig = 130;
 	}

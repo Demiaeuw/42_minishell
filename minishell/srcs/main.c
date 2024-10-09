@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:39:22 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/30 17:08:38 by yonieva          ###   ########.fr       */
+/*   Updated: 2024/10/09 18:17:04 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	main_loop(t_envp *envp, t_signal *handler)
 
 	while (1)
 	{
+		setup_signal_handling();
 		input = readline("minishell> ");
 		if (input == NULL)
 		{
@@ -98,6 +99,7 @@ void	main_loop(t_envp *envp, t_signal *handler)
 		{
 			add_history(input);
 			token_list = main_parsing(input, envp);
+			signal(SIGINT, handle_sigint_cmd);
 			free(input);
 			main_exec(token_list, envp, handler);
 			free_token_list(token_list);

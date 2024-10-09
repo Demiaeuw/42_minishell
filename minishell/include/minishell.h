@@ -6,7 +6,7 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/10/08 16:44:22 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:02:30 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,9 @@ int				count_tokens_before_pipe(t_token *token);
 char			**allocate_and_fill_tokens(t_token *token, int count);
 char			**convert_token(t_token *token);
 //10
+void			setup_signal_handling(void);
 void			init_mask(struct sigaction *sig);
+void			handle_sigint_cmd(int signal);
 void			signal_handler(int signum, siginfo_t *siginfo, void *context);
 void			init_sigaction(struct sigaction *sig);
 void			init_signal(void);

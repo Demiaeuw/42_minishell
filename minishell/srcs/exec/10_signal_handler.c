@@ -6,13 +6,25 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/02 13:52:37 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:25:32 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	g_global_sig = 0;
+int	g_global_sig;
+
+void	setup_signal_handling(void)
+{
+	struct sigaction sa;
+
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = &signal_handler;
+	sigaction(SIGINT, &sa, NULL);
+
+	signal(SIGQUIT, SIG_IGN);
+}
 
 void	init_mask(struct sigaction *sig)
 {
@@ -37,6 +49,15 @@ void	init_signal(void)
 	ft_memset(&sig, 0, sizeof(struct sigaction));
 	init_mask(&sig);
 	init_sigaction(&sig);
+}
+
+void	handle_sigint_cmd(int signal)
+{
+	if (signal == SIGINT)
+	{
+		write(1, "\n", 1);
+		g_global_sig = 130;
+	}
 }
 
 void	signal_handler(int signum, siginfo_t *siginfo, void *context)
