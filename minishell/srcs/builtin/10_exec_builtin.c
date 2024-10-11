@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/11 18:01:17 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:20:28 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,6 @@ void	builtin_selector(t_token *token, t_envp *envp)
 	else if (!ft_strcmp("exit", token->builtin_info))
 		exe_exit(token->value, envp, token);
 }
-/*
-void	builtin_selector_chevron(t_token *token, t_envp *envp)
-{
-	int			saved_stdin;
-	int			saved_stdout;
-	const char	*output_file = NULL;
-
-	saved_stdin = dup(STDIN_FILENO);
-	saved_stdout = dup(STDOUT_FILENO);
-	if (token->file_in_out)
-		handle_redirections(token->file_in_out);
-	if (!ft_strcmp("cd", token->builtin_info))
-		exe_cd(token->file_in_out->value, envp);
-	else if (!ft_strcmp("echo", token->builtin_info))
-	{
-		if (token->file_in_out)
-        		output_file = get_output_file(token->file_in_out);
-    		exe_echo(token->file_in_out->value, envp, output_file);
-	}
-	else if (!ft_strcmp("env", token->builtin_info))
-		mini_env(envp);
-	else if (!ft_strcmp("export", token->builtin_info))
-		exe_export(envp, token->file_in_out->value);
-	else if (!ft_strcmp("unset", token->builtin_info))
-		exe_unset(envp, token->file_in_out->value);
-	else if (!ft_strcmp("pwd", token->builtin_info))
-		exe_pwd(envp);
-	else if (!ft_strcmp("exit", token->builtin_info))
-		exe_exit(token->file_in_out->value, envp, token);
-	dup2(saved_stdin, STDIN_FILENO);
-	dup2(saved_stdout, STDOUT_FILENO);
-	close(saved_stdin);
-	close(saved_stdout);
-}*/
 
 void	execute_builtin(t_token *token, t_envp *envp)
 {

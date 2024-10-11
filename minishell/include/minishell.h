@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:36:21 by kpourcel          #+#    #+#             */
-/*   Updated: 2024/10/11 18:01:20 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:22:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,10 @@ char			*ft_getenv(t_envp *envp, const char *path);
 char			*extract_var_name_env(const char *value, size_t *i);
 void			append_env_value_env(t_exp_data *data,
 					const char *env_value);
+void			start_exp(const char *va, t_exp_data *data, char **env);
 char			*expand_variables_in_value(const char *value,
 					char **env, t_envp *envp);
 char			*clean_string(const char *str);
-void			start_exp(const char *va, t_exp_data *data, char **env);
 void			process_token_values(t_token *token, char **env, t_envp *envp);
 void			insert_string_into_result(t_exp_data *data, const char *str);
 void			is_single_quotes(const char *value, t_exp_data *data);
@@ -236,8 +236,7 @@ char			*get_next_token(const char **str, char delimiter);
 void			free_split_command(char **args);
 char			**split_command(const char *cmd);
 //03
-void			cleanup_execution(char **split_args,
-					char **args, char *cmd_path);
+int				is_redirection(char *arg);
 void			file_descriptor_handler(int in, int out);
 void			handle_parent_process(pid_t pid, t_signal *handler);
 void			handle_child_process(t_process_data *args);
@@ -249,57 +248,55 @@ int				count_tokens_before_pipe(t_token *token);
 char			**allocate_and_fill_tokens(t_token *token, int count);
 char			**convert_token(t_token *token);
 //10
-void			setup_signal_handling(void);
 void			init_mask(struct sigaction *sig);
-void			handle_sigint_cmd(int signal);
-void			signal_handler(int signum, siginfo_t *siginfo, void *context);
 void			init_sigaction(struct sigaction *sig);
 void			init_signal(void);
+void			handle_sigint_cmd(int signal);
+void			signal_handler(int signum, siginfo_t *siginfo, void *context);
+void			setup_signal_handling(void);
 pid_t			fork_and_execute(char *cmd_path,
 					char **split_args, t_envp *envp);
 //20
 void			execute_pipes(t_token *token, t_envp *envp, t_signal *handler);
 //21
+void			wait_for_children(void);
+void			create_pipe_if_needed(int *pipefd, t_token *token);
 void			setup_process_args(t_process_data *args,
 					int fd_in, int *pipefd);
-void			create_pipe_if_needed(int *pipefd, t_token *token);
-void			wait_for_children(void);
-void			handle_p(t_process_data *args,
-					int *fd_in, int *pipefd, int *last_pid);
+void			execute_child_process(t_process_data *args, int *pipefd);
 void			process_heredoc_redirection(t_process_data *args, int *fd_in);
 void			setup_child_execution(int *fd_in, int *pipefd,
 					t_process_data *args);
 void			process_parent_actions(int *fd_in, int *pipefd, pid_t pid,
 					pid_t *last_pid);
+void			handle_p(t_process_data *args,
+					int *fd_in, int *pipefd, int *last_pid);
 //30
-void			handle_redirections(t_chevron *chevron_list);
 int				handle_input_redirection(const char *file);
 int				handle_output_redirection(const char *file, int type);
 int				handle_heredoc_redirection(const char *delimiter);
 int				manage_single_redirection(t_chevron *chevron);
+void			handle_redirections(t_chevron *chevron_list);
 //31
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 int				handle_heredoc(char *delimiter);
 void			handle_sigint_heredoc(int signum);
 void			reset_signal(void);
 
-int				is_redirection(char *arg);
-const char		*get_output_file(t_chevron *file_in_out);
-
 //--------------------------------------------------------------------------//
 //									Builtin									//
 //00
+char			*parse_cd_path(char *input);
+char			*handle_home_path(char *path, t_envp *envp, char **home_path);
+int				check_directory(char *path, char *home_path);
+int				update_pwd_env(t_envp *envp, char *old_pwd,
+					char *new_pwd, char *home_path);
 int				exe_cd(char *input, t_envp *envp);
-char			*parse_input_and_path(char *input);
-char			*handle_home_directory(char *path, t_envp *envp);
-int				change_directory(char *path);
-int				update_env_variables(t_envp *envp,
-					char *old_pwd, char *new_pwd);
 int				handle_new_pwd_error(char *home_path, t_envp *envp);
-char			*get_current_working_directory(char *cwd, size_t size);
 //01
-int				exe_echo(char *str, t_envp *envp);
 void			ft_fflush_stdout(void);
+int				parse_echo_options(char *str, int *option);
+int				exe_echo(char *str, t_envp *envp);
 //02
 void			mini_env(t_envp *envp);
 //03.1
@@ -320,18 +317,14 @@ void			insertion_sort(char **array, int size);
 char			**copy_env(char **env, int size);
 void			print_sorted_env(char **env);
 //04
-// void			exe_unset(t_envp *envp, char *var);
-// void			unset_variable(t_envp *envp, const char *var);
-// void			shift_env_vars(char **env, int start);
-char			**copy_env_without_var(char **env, const char *var);
-void			exe_unset(t_envp *envp, char *args);
-void			free_env(char **env);
 bool			should_copy_env_var(const char *env_var,
 					const char *var, int var_len);
 void			fill_new_env(char **env, char **new_env,
 					const char *var, int var_len);
+char			**copy_env_without_var(char **env, const char *var);
+void			exe_unset(t_envp *envp, char *args);
+void			free_env(char **env);
 //05
-int				string_to_int(const char *str, int *result);
 int				exe_pwd(t_envp *envp);
 //06
 int				string_to_int(const char *str, int *result);
@@ -339,8 +332,9 @@ void			exe_exit(char *str, t_envp *envp, t_token *token);
 //10
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envp *envp);
-void			builtin_selector_chevron(t_token *token, t_envp *envp);
 void			execute_builtin(t_token *token, t_envp *envp);
+void			builtin_selector_chevron(t_token *token, t_envp *envp);
+const char		*get_output_file(t_chevron *file_in_out);
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
@@ -366,9 +360,8 @@ void			free_t_envp(t_envp *envp);
 //--------------------------------------------------------------------------//
 //									MAIN							//
 //00
-
-void			cleanup_and_exit(t_envp *envp);
-void			main_loop(t_envp *envp, t_signal *handler);
 void			init_minishell(t_envp **envp, char **env);
+void			main_loop(t_envp *envp, t_signal *handler);
+void			cleanup_and_exit(t_envp *envp);
 
 #endif
