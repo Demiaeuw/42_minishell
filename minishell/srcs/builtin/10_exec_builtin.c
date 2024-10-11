@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:13:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/10 11:39:51 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:01:17 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,14 @@ int	builtin_check(t_token *token)
 
 void	builtin_selector(t_token *token, t_envp *envp)
 {
-	const char	*output_file = NULL;
-
 	if (!ft_strcmp("cd", token->builtin_info))
 		exe_cd(token->value, envp);
 	if (!ft_strcmp("echo", token->builtin_info))
 	{
 		if (token->file_in_out)
-		{
-			output_file = get_output_file(token-> file_in_out);
-			exe_echo(token->file_in_out->value, envp, output_file);
-		}
+			exe_echo(token->file_in_out->value, envp);
 		else
-			exe_echo(token->value, envp, NULL);
+			exe_echo(token->value, envp);
 	}
 	else if (!ft_strcmp("env", token->builtin_info))
 		mini_env(envp);
@@ -85,16 +80,10 @@ void	builtin_selector_chevron(t_token *token, t_envp *envp)
 
 void	execute_builtin(t_token *token, t_envp *envp)
 {
-	const char	*output_file = NULL;
-
 	if (!ft_strcmp("cd", token->builtin_info))
 		exe_cd(token->file_in_out->value, envp);
 	else if (!ft_strcmp("echo", token->builtin_info))
-	{
-		if (token->file_in_out)
-			output_file = get_output_file(token->file_in_out);
-		exe_echo(token->file_in_out->value, envp, output_file);
-	}
+		exe_echo(token->file_in_out->value, envp);
 	else if (!ft_strcmp("env", token->builtin_info))
 		mini_env(envp);
 	else if (!ft_strcmp("export", token->builtin_info))

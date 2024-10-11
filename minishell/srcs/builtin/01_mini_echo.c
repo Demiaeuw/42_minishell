@@ -45,62 +45,6 @@ void	ft_fflush_stdout(void)
 		stdout->_IO_write_ptr = stdout->_IO_write_base;
 	}
 }
-/*
-int	exe_echo(char *str, t_envp *envp, const char *output_file)
-{
-	int	option;
-	int	i;
-	int	start_index;
-	int	append;
-
-	option = 0;
-	i = 0;
-	start_index = 0;
-	str = clean_string(str);
-	i = skip_spaces(str, i);
-	i += 4;
-	i = skip_spaces(str, i);
-	while (check_option_echo(&str[i], &start_index))
-	{
-		option = 1;
-		i += start_index;
-		i = skip_spaces(str, i);
-	}
-	if (output_file)
-	{
-		int append = 0;
-		if (redirect_outfile(output_file, append) < 0)
-		{
-			perror("Erreur de redirection vers le fichier");
-			free(str);
-			return -1;
-		}
-	}
-	if (str[i] != '\0')
-		printf("%s", &str[i]);
-	if (!option)
-		printf("\n");
-	ft_fflush_stdout();
-	free(str);
-	return (envp->status_cmd = 0, 0);
-}
-*/
-
-int	handle_echo_redirection(const char *output_file)
-{
-	int	append;
-
-	append = 0;
-	if (output_file)
-	{
-		if (redirect_outfile(output_file, append) < 0)
-		{
-			perror("Erreur de redirection vers le fichier");
-			return (-1);
-		}
-	}
-	return (0);
-}
 
 int	parse_echo_options(char *str, int *option)
 {
@@ -121,7 +65,7 @@ int	parse_echo_options(char *str, int *option)
 	return (i);
 }
 
-int	exe_echo(char *str, t_envp *envp, const char *output_file)
+int	exe_echo(char *str, t_envp *envp)
 {
 	int	option;
 	int	i;
@@ -129,11 +73,6 @@ int	exe_echo(char *str, t_envp *envp, const char *output_file)
 	option = 0;
 	str = clean_string(str);
 	i = parse_echo_options(str, &option);
-	if (handle_echo_redirection(output_file) < 0)
-	{
-		free(str);
-		return (-1);
-	}
 	if (str[i] != '\0')
 		printf("%s", &str[i]);
 	if (!option)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:36:21 by kpourcel          #+#    #+#             */
-/*   Updated: 2024/10/10 11:58:11 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:01:20 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,16 +268,16 @@ void			handle_p(t_process_data *args,
 					int *fd_in, int *pipefd, int *last_pid);
 void			process_heredoc_redirection(t_process_data *args, int *fd_in);
 void			setup_child_execution(int *fd_in, int *pipefd,
-					t_process_data *args);				
+					t_process_data *args);
 void			process_parent_actions(int *fd_in, int *pipefd, pid_t pid,
 					pid_t *last_pid);
 //30
-int				redirect_outfile(const char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
 int				handle_input_redirection(const char *file);
 int				handle_output_redirection(const char *file, int type);
 int				handle_heredoc_redirection(const char *delimiter);
 int				manage_single_redirection(t_chevron *chevron);
+//31
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 int				handle_heredoc(char *delimiter);
 void			handle_sigint_heredoc(int signum);
@@ -298,7 +298,7 @@ int				update_env_variables(t_envp *envp,
 int				handle_new_pwd_error(char *home_path, t_envp *envp);
 char			*get_current_working_directory(char *cwd, size_t size);
 //01
-int				exe_echo(char *str, t_envp *envp, const char *output_file);
+int				exe_echo(char *str, t_envp *envp);
 void			ft_fflush_stdout(void);
 //02
 void			mini_env(t_envp *envp);
