@@ -3,28 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/09 18:25:32 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:22:07 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 int	g_global_sig;
-
-void	setup_signal_handling(void)
-{
-	struct sigaction sa;
-
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = &signal_handler;
-	sigaction(SIGINT, &sa, NULL);
-
-	signal(SIGQUIT, SIG_IGN);
-}
 
 void	init_mask(struct sigaction *sig)
 {
@@ -72,26 +60,4 @@ void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 		rl_redisplay();
 		g_global_sig = 130;
 	}
-}
-
-pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGTERM, SIG_DFL);
-		execve_error_handling(cmd_path, split_args, envp);
-	}
-	else if (pid > 0)
-		waitpid(pid, NULL, 0);
-	else
-	{
-		perror("fork error");
-		exit(EXIT_FAILURE);
-	}
-	return (pid);
 }

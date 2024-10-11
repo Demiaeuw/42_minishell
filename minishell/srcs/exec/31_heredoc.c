@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   31_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/09 18:25:02 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:24:05 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 		if (!line)
 		{
 			if (g_global_sig == 130)
-				break;
+				break ;
 			write(1, "\n", 2);
 		}
 		if (ft_strcmp(line, delimiter) == 0)

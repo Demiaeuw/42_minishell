@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/10/09 18:02:30 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/06/09 18:36:21 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/10 11:58:11 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,18 +266,25 @@ void			create_pipe_if_needed(int *pipefd, t_token *token);
 void			wait_for_children(void);
 void			handle_p(t_process_data *args,
 					int *fd_in, int *pipefd, int *last_pid);
-void			execute_child_process(t_process_data *args, int *pipefd);
+void			process_heredoc_redirection(t_process_data *args, int *fd_in);
+void			setup_child_execution(int *fd_in, int *pipefd,
+					t_process_data *args);				
+void			process_parent_actions(int *fd_in, int *pipefd, pid_t pid,
+					pid_t *last_pid);
 //30
 int				redirect_outfile(const char *filename, int append);
 void			handle_redirections(t_chevron *chevron_list);
-//31
+int				handle_input_redirection(const char *file);
+int				handle_output_redirection(const char *file, int type);
+int				handle_heredoc_redirection(const char *delimiter);
+int				manage_single_redirection(t_chevron *chevron);
 void			handle_heredoc_input(int pipefd[2], char *delimiter);
 int				handle_heredoc(char *delimiter);
 void			handle_sigint_heredoc(int signum);
 void			reset_signal(void);
 
 int				is_redirection(char *arg);
-const char 		*get_output_file(t_chevron *file_in_out);
+const char		*get_output_file(t_chevron *file_in_out);
 
 //--------------------------------------------------------------------------//
 //									Builtin									//
@@ -291,7 +298,7 @@ int				update_env_variables(t_envp *envp,
 int				handle_new_pwd_error(char *home_path, t_envp *envp);
 char			*get_current_working_directory(char *cwd, size_t size);
 //01
-int 			exe_echo(char *str, t_envp *envp, const char *output_file);
+int				exe_echo(char *str, t_envp *envp, const char *output_file);
 void			ft_fflush_stdout(void);
 //02
 void			mini_env(t_envp *envp);
@@ -333,6 +340,7 @@ void			exe_exit(char *str, t_envp *envp, t_token *token);
 int				builtin_check(t_token *token);
 void			builtin_selector(t_token *token, t_envp *envp);
 void			builtin_selector_chevron(t_token *token, t_envp *envp);
+void			execute_builtin(t_token *token, t_envp *envp);
 //20
 int				check_word_count(char **cmd_list);
 int				get_env_len(char *line);
