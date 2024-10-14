@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   30_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:45:42 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/10 11:43:15 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:09:02 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Handles input redirection by opening the specified file and redirecting it
+// to stdin.
 int	handle_input_redirection(const char *file)
 {
 	int	fd;
@@ -27,6 +29,8 @@ int	handle_input_redirection(const char *file)
 	return (0);
 }
 
+// Handles output redirection based on the type (OVERWRITE or APPEND).
+// If it's DOUBLE_OUT, it appends to the file, otherwise it overwrites it.
 int	handle_output_redirection(const char *file, int type)
 {
 	int	fd;
@@ -48,6 +52,8 @@ int	handle_output_redirection(const char *file, int type)
 	return (0);
 }
 
+// Handles redirection for heredoc, which is a way to provide multi-line input
+// until a specified delimiter is encountered.
 int	handle_heredoc_redirection(const char *delimiter)
 {
 	int		fd;
@@ -65,6 +71,7 @@ int	handle_heredoc_redirection(const char *delimiter)
 	return (0);
 }
 
+// It calls the appropriate handler based on the type of redirection.
 int	manage_single_redirection(t_chevron *chevron)
 {
 	if (chevron->type == IN)
@@ -76,6 +83,8 @@ int	manage_single_redirection(t_chevron *chevron)
 	return (0);
 }
 
+// Handles all redirections in a list. It loops through the list of redirections
+// and processes each one using manage_single_redirection.
 void	handle_redirections(t_chevron *chevron_list)
 {
 	t_chevron	*current;

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   21_pipe_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:15:55 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/10 11:59:33 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:17:23 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Waits for all child processes to finish execution.
 void	wait_for_children(void)
 {
 	int	status;
@@ -27,6 +28,7 @@ void	wait_for_children(void)
 	}
 }
 
+// Creates a pipe if the current command is followed by another piped command.
 void	create_pipe_if_needed(int *pipefd, t_token *token)
 {
 	if (token->next && token->next->type == TOKEN_PIPE)
@@ -44,6 +46,7 @@ void	create_pipe_if_needed(int *pipefd, t_token *token)
 	}
 }
 
+// Sets up input and output file descriptors for the process based on pipes.
 void	setup_process_args(t_process_data *args, int fd_in, int *pipefd)
 {
 	args->in = fd_in;
@@ -54,6 +57,7 @@ void	setup_process_args(t_process_data *args, int fd_in, int *pipefd)
 		args->out = STDOUT_FILENO;
 }
 
+// Executes a child process by setting up pipes, redirections, and exec the cmd.
 void	execute_child_process(t_process_data *args, int *pipefd)
 {
 	if (args->in != STDIN_FILENO)

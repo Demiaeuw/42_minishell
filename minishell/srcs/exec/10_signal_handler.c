@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:57:36 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/09 19:22:07 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:19:41 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Global variable to store signal status
 int	g_global_sig;
 
+// Initializes a signal mask to block SIGINT and SIGQUIT
 void	init_mask(struct sigaction *sig)
 {
 	sigemptyset(&sig->sa_mask);
@@ -21,6 +23,7 @@ void	init_mask(struct sigaction *sig)
 	sigaddset(&sig->sa_mask, SIGQUIT);
 }
 
+// Configures signal handling for SIGINT and SIGQUIT
 void	init_sigaction(struct sigaction *sig)
 {
 	sig->sa_flags = SA_SIGINFO;
@@ -30,6 +33,7 @@ void	init_sigaction(struct sigaction *sig)
 	sigaction(SIGQUIT, sig, NULL);
 }
 
+// Initializes the signal handling for SIGINT and SIGQUIT
 void	init_signal(void)
 {
 	struct sigaction	sig;
@@ -39,6 +43,7 @@ void	init_signal(void)
 	init_sigaction(&sig);
 }
 
+// Custom handler for SIGINT during command execution
 void	handle_sigint_cmd(int signal)
 {
 	if (signal == SIGINT)
@@ -48,6 +53,7 @@ void	handle_sigint_cmd(int signal)
 	}
 }
 
+// Signal handler for the interactive shell (handles Ctrl+C)
 void	signal_handler(int signum, siginfo_t *siginfo, void *context)
 {
 	(void)siginfo;

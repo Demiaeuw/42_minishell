@@ -6,12 +6,13 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:13:05 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/02 13:52:41 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:22:28 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Frees memory used for args and split command strings if they are allocated
 void	handle_memory_error(char **split_args, char **args)
 {
 	if (split_args)
@@ -20,6 +21,7 @@ void	handle_memory_error(char **split_args, char **args)
 		free(args);
 }
 
+// Handles errors during execve system call.
 void	execve_error_handling(char *cmd_path, char **split_args, t_envp *envp)
 {
 	if (execve(cmd_path, split_args, envp->env) == -1)
@@ -30,6 +32,8 @@ void	execve_error_handling(char *cmd_path, char **split_args, t_envp *envp)
 	}
 }
 
+// Prepares the command by splitting the token into command and arguments,
+// and handling redirections.
 int	prepare_command(char ***split_args, char ***args, t_token *token)
 {
 	int	i;
@@ -56,6 +60,7 @@ int	prepare_command(char ***split_args, char ***args, t_token *token)
 	return (1);
 }
 
+// Prepares the cmd path and checks if the command exists before executing it
 int	prepare_exec(char **split_args, char **args, char **cmd_path, t_envp *envp)
 {
 	*cmd_path = get_command_path(split_args[0], envp);
@@ -71,6 +76,7 @@ int	prepare_exec(char **split_args, char **args, char **cmd_path, t_envp *envp)
 	return (1);
 }
 
+// Executes a cmd using execve, forking a child process and handling cleanup
 void	execute_execve(t_token *token, t_envp *envp, t_signal *handler)
 {
 	char	**args;

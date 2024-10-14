@@ -6,12 +6,13 @@
 /*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:39:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/02 13:52:59 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:23:39 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Choose if the token contains pipes or redir and exec the appropriate logic
 void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 {
 	t_token	*current;
@@ -40,6 +41,7 @@ void	main_exec(t_token *token, t_envp *envp, t_signal *handler)
 		main_command(token, envp, handler);
 }
 
+// Executes commands without pipes or redirection
 void	main_command(t_token *token, t_envp *envp, t_signal *handler)
 {
 	t_token	*current;
@@ -60,6 +62,7 @@ void	main_command(t_token *token, t_envp *envp, t_signal *handler)
 	}
 }
 
+// Handles redirection commands by saving and restoring stdin and stdout
 void	main_command_chevron(t_token *token, t_envp *envp, t_signal *handler)
 {
 	t_token			*current;

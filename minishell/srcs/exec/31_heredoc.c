@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   31_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 01:43:00 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/10/09 19:24:05 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:05:45 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Function to handle heredoc input.
+// Reads user input line by line and writes it to the pipe until the
+// "delimiter" (end word) is reached.
 void	handle_heredoc_input(int pipefd[2], char *delimiter)
 {
 	char	*line;
@@ -38,6 +41,8 @@ void	handle_heredoc_input(int pipefd[2], char *delimiter)
 	close(pipefd[1]);
 }
 
+// Sets up a pipe for handling heredoc, then calls handle_heredoc_input.
+// It returns the read end of the pipe to allow for input redirection.
 int	handle_heredoc(char *delimiter)
 {
 	int	pipefd[2];

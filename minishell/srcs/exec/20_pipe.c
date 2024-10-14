@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   20_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:35:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/10 11:46:24 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:10:51 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Main function to execute a sequence of piped commands.
 void	execute_pipes(t_token *token, t_envp *envp, t_signal *handler)
 {
 	t_process_data	args;

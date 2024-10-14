@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   21_pipe_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpourcel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:58:37 by kpourcel          #+#    #+#             */
-/*   Updated: 2024/10/10 11:59:04 by kpourcel         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:19:56 by gaesteve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Processes heredoc redirection for the command if applicable.
 void	process_heredoc_redirection(t_process_data *args, int *fd_in)
 {
 	int	heredoc_fd;
@@ -24,6 +25,7 @@ void	process_heredoc_redirection(t_process_data *args, int *fd_in)
 	}
 }
 
+// Sets up the fds for the child process, including pipes and redirections.
 void	setup_child_execution(int *fd_in, int *pipefd, t_process_data *args)
 {
 	if (*fd_in != STDIN_FILENO)
@@ -46,6 +48,8 @@ void	setup_child_execution(int *fd_in, int *pipefd, t_process_data *args)
 		execute_execve(args->token, args->envp, args->handler);
 }
 
+// Manages the parent process actions after forking the child,
+// closing necessary file descriptors.
 void	process_parent_actions(int *fd_in, int *pipefd, pid_t pid,
 	pid_t *last_pid)
 {
@@ -57,6 +61,7 @@ void	process_parent_actions(int *fd_in, int *pipefd, pid_t pid,
 	*last_pid = pid;
 }
 
+// Forks a process and handles child/parent process roles.
 void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 {
 	pid_t	pid;
@@ -77,4 +82,27 @@ void	handle_p(t_process_data *args, int *fd_in, int *pipefd, pid_t *last_pid)
 	{
 		process_parent_actions(fd_in, pipefd, pid, last_pid);
 	}
+}
+
+// Forks a new process and executes a cmd, restoring default signal handling
+pid_t	fork_and_execute(char *cmd_path, char **split_args, t_envp *envp)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGTERM, SIG_DFL);
+		execve_error_handling(cmd_path, split_args, envp);
+	}
+	else if (pid > 0)
+		waitpid(pid, NULL, 0);
+	else
+	{
+		perror("fork error");
+		exit(EXIT_FAILURE);
+	}
+	return (pid);
 }
