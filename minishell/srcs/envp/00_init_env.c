@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 12:24:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 18:27:09 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 18:57:58 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

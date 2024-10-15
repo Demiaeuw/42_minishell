@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   21_pipe_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 11:58:37 by kpourcel          #+#    #+#             */
-/*   Updated: 2024/10/15 00:19:56 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 18:59:46 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

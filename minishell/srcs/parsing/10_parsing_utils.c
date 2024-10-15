@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_parsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 13:39:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/23 17:03:40 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 19:01:15 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

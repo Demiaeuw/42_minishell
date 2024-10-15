@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   31_parse_chevron.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 16:05:59 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/03 17:33:10 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 19:02:16 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

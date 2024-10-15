@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_create_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 13:02:28 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/18 01:02:14 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 19:00:38 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

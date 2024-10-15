@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   33_chevron_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 16:09:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/02 16:01:42 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 19:03:46 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_spliting_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 13:59:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/26 14:15:42 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 19:00:30 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

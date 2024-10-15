@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_signal_handler2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 19:21:35 by kpourcel          #+#    #+#             */
-/*   Updated: 2024/10/15 00:19:39 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 18:59:25 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

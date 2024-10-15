@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_expanser_env2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 18:34:04 by acabarba          #+#    #+#             */
-/*   Updated: 2024/10/03 17:53:13 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 19:01:46 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 19:05:25 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
