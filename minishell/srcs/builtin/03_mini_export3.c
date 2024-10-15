@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_mini_export3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 20:07:10 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/19 18:27:08 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 18:37:51 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:57:20 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

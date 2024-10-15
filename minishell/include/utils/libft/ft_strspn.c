@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 12:14:36 by gaesteve          #+#    #+#             */
-/*   Updated: 2024/08/14 12:16:57 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 18:35:31 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:57:20 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

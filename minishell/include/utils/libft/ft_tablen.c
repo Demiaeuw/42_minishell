@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 14:10:00 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/12 16:48:35 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 18:36:03 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:57:20 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_safe_malloc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 14:48:28 by acabarba          #+#    #+#             */
-/*   Updated: 2024/08/13 15:53:02 by gaesteve         ###   ########.fr       */
+/*   Created: 2024/10/15 18:34:23 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:57:20 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "libft.h"
 

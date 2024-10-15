@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_mini_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 22:31:46 by yonieva           #+#    #+#             */
-/*   Updated: 2024/08/12 22:31:46 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 18:36:33 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:36:33 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   05_mini_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 11:13:51 by yonieva           #+#    #+#             */
-/*   Updated: 2024/07/30 11:13:51 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 18:57:01 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:57:01 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/minishell.h"
 

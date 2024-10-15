@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   06_mini_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonieva <yonieva@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: kpourcel <kpourcel@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 12:37:29 by yonieva           #+#    #+#             */
-/*   Updated: 2024/07/30 12:37:29 by yonieva          ###   ########.fr       */
+/*   Created: 2024/10/15 18:57:07 by kpourcel          #+#    #+#             */
+/*   Updated: 2024/10/15 18:57:07 by kpourcel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../include/minishell.h"
 
