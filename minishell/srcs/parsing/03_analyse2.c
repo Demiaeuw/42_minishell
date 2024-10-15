@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_analyse2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaesteve <gaesteve@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: yonieva <yonieva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:33:42 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/20 13:58:03 by gaesteve         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:51:56 by yonieva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,37 @@ char	*close_quotes_if_needed(char *str)
 	return (new_str);
 }
 
-char	*clean_whitespace(char *str)
+char	*clean_whitespace(char *str) 
 {
-	int		i;
-	int		j;
-	char	*cleaned_str;
+    int i = 0, j = 0;
+    char *cleaned_str = safe_malloc(strlen(str) + 1);
+    bool s_q_open = false;
+    bool d_q_open = false;
 
-	i = 0;
-	j = 0;
-	cleaned_str = safe_malloc(ft_strlen(str) + 1);
-	while (str[i] == ' ')
-		i++;
-	while (str[i])
+    while (str[i]) 
 	{
-		cleaned_str[j++] = str[i];
-		if (str[i] == ' ' && str[i + 1] == ' ')
+        if (str[i] == '\'') 
 		{
-			while (str[i] == ' ')
-				i++;
-			continue ;
-		}
-		i++;
-	}
-	if (j > 0 && cleaned_str[j - 1] == ' ')
-		j--;
-	cleaned_str[j] = '\0';
-	return (cleaned_str);
+            s_q_open = !s_q_open;
+        } else if (str[i] == '\"') 
+		{
+            d_q_open = !d_q_open;
+        }
+        if (s_q_open || d_q_open) 
+		{
+            cleaned_str[j++] = str[i];
+        } else 
+		{
+            if (str[i] != ' ' || (j > 0 && cleaned_str[j - 1] != ' ')) 
+			{
+                cleaned_str[j++] = str[i];
+            }
+        }
+        i++;
+    }
+    cleaned_str[j] = '\0';
+
+    return cleaned_str;
 }
 
 void	finalize_parsing(t_token *new_node, char **tokenarray)
