@@ -27,6 +27,7 @@ void	execve_error_handling(char *cmd_path, char **split_args, t_envp *envp)
 	if (execve(cmd_path, split_args, envp->env) == -1)
 	{
 		perror("execve error");
+		g_global_sig = 127;
 		envp->status_cmd = 127;
 		exit(EXIT_FAILURE);
 	}
@@ -70,6 +71,7 @@ int	prepare_exec(char **split_args, char **args, char **cmd_path, t_envp *envp)
 		write(2, split_args[0], strlen(split_args[0]));
 		write(2, "\n", 1);
 		handle_memory_error(split_args, args);
+		g_global_sig = 127;
 		envp->status_cmd = 127;
 		return (0);
 	}

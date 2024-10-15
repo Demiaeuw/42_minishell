@@ -24,6 +24,11 @@ void	mini_env(t_envp *envp)
 	i = 0;
 	while (envp->env[i])
 	{
+		if (get_env_value("PATH", envp->env) == NULL)
+		{
+			printf("minishell: env: No such file or directory\n");
+			return ;
+		}
 		equal_sign = ft_strchr(envp->env[i], '=');
 		if (equal_sign && equal_sign[1] != '\0')
 			printf("%s\n", envp->env[i]);

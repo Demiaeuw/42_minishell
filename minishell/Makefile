@@ -3,16 +3,21 @@ NAME = minishell
 
 # Dossiers des bibliothèques
 LIBFT_DIR = include/utils/libft/
-LIBFT = $(LIBFT_DIR)/libft.a
-LIBFT_INC = -I$(LIBFT_DIR)
-
 FT_PRINTF_DIR = include/utils/ft_printf/
-FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
-FT_PRINTF_INC = -I$(FT_PRINTF_DIR)/includes
-
 GNL_DIR = include/utils/gnl/
-GNL = $(GNL_DIR)/libgnl.a
+
+# Inclus pour les headers
+LIBFT_INC = -I$(LIBFT_DIR)
+FT_PRINTF_INC = -I$(FT_PRINTF_DIR)
 GNL_INC = -I$(GNL_DIR)
+
+# Dossier des fichiers objets
+OBJDIR = obj
+
+# Récupération automatique des fichiers source avec wildcard
+LIBFT_SRCS = $(wildcard $(LIBFT_DIR)/*.c)
+FT_PRINTF_SRCS = $(wildcard $(FT_PRINTF_DIR)/*.c)
+GNL_SRCS = $(wildcard $(GNL_DIR)/*.c)
 
 # Dossier des fichiers objets
 OBJDIR = obj
@@ -58,7 +63,8 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/30_create_chevron.c\
 		srcs/parsing/31_parse_chevron.c\
 		srcs/parsing/32_parse_chevron.c\
-		srcs/parsing/33_chevron_utils.c
+		srcs/parsing/33_chevron_utils.c\
+		$(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS)
 
 
 # Fichiers objets
