@@ -55,39 +55,6 @@ char	*close_quotes_if_needed(char *str)
 	return (new_str);
 }
 
-char	*clean_whitespace(char *str) 
-{
-    int i = 0, j = 0;
-    char *cleaned_str = safe_malloc(strlen(str) + 1);
-    bool s_q_open = false;
-    bool d_q_open = false;
-
-    while (str[i]) 
-	{
-        if (str[i] == '\'') 
-		{
-            s_q_open = !s_q_open;
-        } else if (str[i] == '\"') 
-		{
-            d_q_open = !d_q_open;
-        }
-        if (s_q_open || d_q_open) 
-		{
-            cleaned_str[j++] = str[i];
-        } else 
-		{
-            if (str[i] != ' ' || (j > 0 && cleaned_str[j - 1] != ' ')) 
-			{
-                cleaned_str[j++] = str[i];
-            }
-        }
-        i++;
-    }
-    cleaned_str[j] = '\0';
-
-    return cleaned_str;
-}
-
 void	finalize_parsing(t_token *new_node, char **tokenarray)
 {
 	t_token	*current;

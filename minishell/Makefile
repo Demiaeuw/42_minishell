@@ -55,6 +55,7 @@ SRCS = 	srcs/main.c\
 		srcs/parsing/02_create_node.c\
 		srcs/parsing/03_analyse1.c\
 		srcs/parsing/03_analyse2.c\
+		srcs/parsing/03_analyse3.c\
 		srcs/parsing/10_parsing_utils.c\
 		srcs/parsing/11_pathing_gestion.c\
 		srcs/parsing/20_expanser_env1.c\
